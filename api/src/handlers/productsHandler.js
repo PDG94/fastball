@@ -42,6 +42,26 @@ class ProductsHandler {
             next(error);
         }
     }
+
+    async deleteProduct(req, res, next ){
+        try {
+            const {id} = req.params;
+            const productDeactivated = await service.deleteProduct(id);
+            res.status(200).json(productDeactivated);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async reactivateProduct(req, res, next ){
+        try {
+            const {id} = req.params;
+            const productReactivated = await service.reactivateProduct(id);
+            res.status(200).json(productReactivated);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = ProductsHandler
