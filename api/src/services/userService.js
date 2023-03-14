@@ -22,7 +22,7 @@ class UserService {
         return users
     }
 
-    async getUserByEmail(id) {
+    async getUserByEmail(email) {
         const rta = await User.findOne({
             where: { email }
         });
