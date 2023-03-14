@@ -50,7 +50,7 @@ router.patch('/:id', async (req, res, next )=> {
 router.delete('/:id', async (req,res,next)=>{
     try {
         const {id}= req.params;
-        await service.deleteUser(id);
+        await service.updateUser(id, { active : false});
         res.status(201).json({id});
     } catch (error) {
         next(error);
