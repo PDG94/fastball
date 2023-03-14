@@ -13,9 +13,10 @@ class CategoryService {
         return categories;
     }
     async createCategory(body) {
-        const { Name } = body;
+      console.log(body)
+        const { name } = body;
         const newCategory = await Category.create({
-          Name,
+          name,
         });
         return newCategory;
     }
@@ -33,7 +34,6 @@ class CategoryService {
         return { id };
     }
     async reactivateCategory(id) {
-        console.log(id)
         const category = await this.getCategoryById(id);
         await category.update({ active: true });
         return category;
