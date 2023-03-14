@@ -6,7 +6,7 @@ class ProductService {
     }
 
     async createProduct(body) {
-        const { id, name, image, description, price, stock  } = body;
+        const { id, name, image, description, price, stock, categories } = body;
         const newProduct = await Product.create({
             id,
             name,
@@ -15,6 +15,8 @@ class ProductService {
             price,
             stock
         })
+
+        await newProduct.addCategory(categories)
         return newProduct
     }
 
