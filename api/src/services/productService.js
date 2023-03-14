@@ -6,21 +6,19 @@ class ProductService {
     }
 
     async createProduct(body) {
-        const { id, name, image, description, price, stock, categories } = body;
-        const newProduct = await Product.create({
-            id,
+        const {  name, image, description, price, stock, categories } = body;
+        const newProduct = await Product.create({            
             name,
             image,
             description,
             price,
             stock
         })
-
         await newProduct.addCategory(categories)
         return newProduct
     }
 
-    async getAllProduct() {
+    async getAllProducts() {
         const Products = await Product.findAll({
             where: {
                 active: true
@@ -42,6 +40,19 @@ class ProductService {
         const rta = await prod.update(changes);
         return rta;
     }
+
+    async deleteProduct(id) {
+        const prod = await this.getProductById(id);
+        await prod.update({active:false});
+        return { id };
+    }
+
+    async reactivateProduct(id) {
+        console.log(id)
+        const prod = await this.getProductById(id);
+        await prod.update({ active: true });
+        return prod;
+      }
 }
 
 module.exports = ProductService;
