@@ -5,8 +5,9 @@ module.exports = (sequelize) => {
     "User",
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
+        defaultValue : UUIDV4
       },
       name: {
         type: DataTypes.STRING,
@@ -25,9 +26,6 @@ module.exports = (sequelize) => {
           },
         },
       },
-      username: {
-        type: DataTypes.STRING,
-      },
       profilepic: {
         type: DataTypes.TEXT,
         validate: {
@@ -44,14 +42,14 @@ module.exports = (sequelize) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique : true
+      },
+      password : {
+        type : DataTypes.STRING
       },
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
-      },
-      isBanned: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
