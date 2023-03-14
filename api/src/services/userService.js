@@ -7,9 +7,8 @@ class UserService {
     }
 
     async createUser(body) {
-        const { id, name, username, profilepic, email } = body;
+        const { name, username, profilepic, email } = body;
         const newUser = await User.create({
-            id: user_id,
             name,
             username,
             profilepic,
@@ -34,7 +33,7 @@ class UserService {
         return rta;
     }
 
-    async findOneUser(id) {
+    async getOneUser(id) {
         const user = await User.findByPk(id);
         if (!user) {
             throw boom.notFound('user not found');
@@ -43,13 +42,13 @@ class UserService {
     }
 
     async updateUser(id, changes) {
-        const user = await this.findOne(id);
+        const user = await this.getOneUser(id);
         const rta = await user.update(changes);
         return rta;
     }
 
     async deleteUser(id) {
-        const user = await this.findOne(id);
+        const user = await this.getOneUser(id);
         await user.destroy();
         return { id };
     }
