@@ -1,17 +1,12 @@
 const express = require('express');
 const ProductService = require('./../services/userService');
 
-const router = express.Router();
-const service = new ProductService();
+const productsRouter = express.Router();
 
-router.get('/', async (req,res,next)=>{
-    try {
-        const products = await service.getAllProducts();
-        res.json(products);
-    } catch (error) {
-        next(error.message)
-    }
-})
+const ProductsHandler = require( './../handlers/productsHandler' )
+const { getAllProducts } = new ProductsHandler
+
+productsRouter.get('/', getAllProducts)
 
 module.exports = {
     router
