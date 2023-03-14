@@ -13,21 +13,21 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      Name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Image: {
+      image: {
         type: DataTypes.TEXT,
       },
-      Description: {
+      description: {
         type: DataTypes.TEXT,
       },
-      Price: {
+      price: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      Stock: {
+      stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
