@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const { Product } = require("../bd/db");
+const { Product, Category } = require("../bd/db");
 
 class ProductService {
     constructor() {
@@ -14,7 +14,8 @@ class ProductService {
             price,
             stock
         })
-        await newProduct.addCategory(categories)
+        const cat = await Category.findByPk(categories);
+        await newProduct.setCategory(cat)
         return newProduct
     }
 
@@ -42,14 +43,14 @@ class ProductService {
     }
 
     async deleteProduct(id) {
-        const prod = await this.getProductById(id);
+        const prod = await this.findOneProduct(id);
         await prod.update({active:false});
         return { id };
     }
 
     async reactivateProduct(id) {
         console.log(id)
-        const prod = await this.getProductById(id);
+        const prod = await this.findOneProduct(id);
         await prod.update({ active: true });
         return prod;
       }
