@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
       },
       profilepic: {
         type: DataTypes.TEXT,
+        defaultValue : null,
         validate: {
           notEmpty: {
             args: true,
