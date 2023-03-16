@@ -8,7 +8,26 @@
 @import 'tailwindcss/utilities';
 
 .Home{
+  background-color: #EBEBEB;
   display: flex;
   flex-direction: column;
   gap: 50px;
+}
+.Catalogue{
+  background-color: #EBEBEB;
+}
+.btn{
+  border: none;
+  width: 100px;
+  height:30px;
+  margin-right: 20px;
+}
+.btn-primary{
+  color: black;
+}
+.logo-1{
+  width: 60px;
+  display: flex;
+  margin: 0;
+  background-color: blue;
 }

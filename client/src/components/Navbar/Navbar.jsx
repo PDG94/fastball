@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import logo1 from "../Images/atleta.ico"
+import logo1 from "../Images/fastball.png"
 import logo2 from "../Images/cart.ico"
 import logo3 from "../Images/user.ico"
 
 const Navbar = ()=> {
     return(
-    <nav className="flex items-center justify-between flex-wrap bg-slate-100 p-6">
+    <nav className="flex items-center justify-between flex-wrap bg-white p-6">
     <div className="flex items-center flex-shrink-0 text-white mr-6">
     </div>
     <div className="block lg:hidden">
@@ -17,13 +17,21 @@ const Navbar = ()=> {
         
             <Link to="/">
                 <div className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                     <img src={logo1} alt="cartIcon" width="30" />
+                     <img className='logo-1' src={logo1} alt="cartIcon" width="55" />
                 </div>
             </Link>
         <div className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4 font-bold absolute left-40">
+            <button className='btn btn-primary rounded-lg'>
+        <Link to="/">
+        Home
+        </Link>
+            </button>
+            <button className='btn btn-primary rounded-lg'>
         <Link to="/catalogue">
         Catalogue
         </Link>
+            </button>
+
         </div>
       
       <Link to="/cart">

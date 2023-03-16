@@ -21,18 +21,19 @@ const productSlice = createSlice({
     },
     extraReducers : (builder)=>{
         builder.addCase(fetchProduct.pending, (state, action)=> {
-            state.status = 'pending'
-        }),
+            state.status = 'pending';
+        })
         builder.addCase(fetchProduct.fulfilled, (state,action)=> {
             state.allProducts = action.payload
             state.status = 'success';
-        }),
+        })
         builder.addCase(fetchProduct.rejected, (state,action)=> {
             state.status = 'rejected'
-        }),
+        })
         builder.addCase(fetchCreateProduct.pending, (state,action)=>{
             state.status = 'pending';
-        }),
+        })
+        
         builder.addCase(fetchCreateProduct.fulfilled, (state,action)=> {
             state.status = 'success';
             state.allProducts = state.allProducts.push(action.payload)
