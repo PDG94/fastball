@@ -5,10 +5,10 @@ const {updateProductSchema, createProductSchema, getProductSchema } = require('.
 const {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
 productRouter.get('/',getAllProducts);
-productRouter.get('/:id', validatorHandler(getProductSchema, 'params'), getProductById);
 productRouter.post('/',validatorHandler(createProductSchema, 'body'), createProduct);
-productRouter.patch('/:id', validatorHandler(getProductSchema, 'params'), validatorHandler(updateProductSchema, 'body'), updateProduct);
-productRouter.delete('/:id', validatorHandler(getProductSchema, 'params'), deleteProduct);
-productRouter.put('/:id', reactivateProduct);
+productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'params'), getProductById);
+productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), validatorHandler(updateProductSchema, 'body'), updateProduct);
+productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), deleteProduct);
+productRouter.put('/reactiveProduct/:id', reactivateProduct);
 
 module.exports = productRouter
