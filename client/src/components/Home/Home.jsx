@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar"
 const Home = ()=> {
     return(
         <div>
-            <Navbar></Navbar>
+            <Navbar />
             {/* Aqui ira carrousel */}
             <CategoryButtons></CategoryButtons>
         </div>

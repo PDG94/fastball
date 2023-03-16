@@ -1,48 +1,43 @@
-import { useNavigate } from "react-router-dom";
-import { auth } from "../../components/Firebase/config";
-import { toast } from "react-toastify";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { SearchBar } from "../index";
 import logo1 from "../Images/atleta.ico"
 import logo2 from "../Images/cart.ico"
 import logo3 from "../Images/user.ico"
 
 const Navbar = ()=> {
-    const navigate = useNavigate();
-    
-    
-    const handleRefresh = () => {
-        //dispatch(getProducts());
-      };
     return(
-        <div>
-            <div>
-                <Link to="/">
-                    <div>
-                    <img src={logo1} alt="atletaIcon" width="30" />
-                    </div>
-                </Link>
-                
-                <Link to="/Services" onClick={(e) => handleRefresh(e)}>
-                    CATALOGUE
-                </Link>
-            </div>
-
-            <div>
-                <Link>
-                    <div>
-                    <img src={logo2} alt="cartIcon" width="30" />
-                    </div>
-                </Link>
-                
-                <div>
-                    <img src={logo3} alt="userIcon" width="30" />
+    <nav class="flex items-center justify-between flex-wrap bg-slate-100 p-6">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+    </div>
+    <div class="block lg:hidden">
+    <button id='boton' class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+    </button>
+    </div>
+    <div class="text-sm lg:flex-grow">
+        
+            <Link to="/">
+                <div class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                     <img src={logo1} alt="cartIcon" width="30" />
                 </div>
-            </div>
+            </Link>
+        <div class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4 font-bold absolute left-40">
+        <Link to="/catalogue">
+        Catalogue
+        </Link>
         </div>
+      
+      <Link to="/cart">
+            <div class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 absolute right-20">
+                     <img src={logo2} alt="cartIcon" width="30" />
+                     </div>
+                </Link>
+                
+                <div class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 absolute right-5">
+                     <img src={logo3} alt="userIcon" width="30" />
+                 </div>
+    </div>
+  
+</nav>
     )
 }
 
