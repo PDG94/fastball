@@ -17,15 +17,18 @@ const slides = [
 
 const Home = ()=> {
     return(
-        <div>
+        <div className="Home">
+            <div>
             <Navbar />
-            {/* Aqui ira carrousel */}
+            </div>
             <div className='max-w-fit mx-auto px-12'>
                 <Carousel autoSlide={true}>
                     { slides.map( (slide, ind) =>( <img  className="object-cover" key={ind} src={slide} alt='imgage carousel' /> )) }
                 </Carousel>     
-      </div>
+            </div>
+            <div>
             <CategoryButtons></CategoryButtons>
+            </div>
         </div>
     )
 }
