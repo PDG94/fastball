@@ -18,8 +18,7 @@ const slides = [
 const Home = ()=> {
     return(
         <div>
-            <Navbar></Navbar>
-
+            <Navbar />
             {/* Aqui ira carrousel */}
             <div className='max-w-fit mx-auto px-12'>
                 <Carousel autoSlide={true}>
