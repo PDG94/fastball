@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-const routes = require("./routes/index.js");
+const routerApi = require("./routes/index.js");
 const dotenv = require("dotenv");
 //const passport = require("passport");
 require("./bd/db.js");
@@ -29,7 +29,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/", routes);
+routerApi(server);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
