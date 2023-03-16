@@ -29,7 +29,7 @@ class CategoryHandler {
     }
     async deleteCategory (req,res,next){
         try {
-            const categorys = await service.getCategoryById(req.params.id);
+            const categorys = await service.deleteCategory(req.params.id);
             res.json(categorys);
         } catch (error) {
             next(error.message)
@@ -37,7 +37,7 @@ class CategoryHandler {
     }
     async reactivateCategory (req,res,next){
         try {
-            const categorys = await service.getCategoryById(req.params.id);
+            const categorys = await service.reactivateCategory(req.params.id);
             res.json(categorys);
         } catch (error) {
             next(error.message)
