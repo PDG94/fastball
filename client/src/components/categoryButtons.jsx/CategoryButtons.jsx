@@ -5,7 +5,7 @@ const CategoryButtons = () => {
         alert('prueba de click ',name)
     }
     return (
-        <div style={{padding:'50px', gap:'20px', display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+        <div className="flex flex-row justify-between gap-5 px-12 py-5" >
         <div onClick={pruebaClick} className="max-w-sm bg-gray-100 overflow-hidden drop-shadow-lg">
         <Link>
           <img className="w-full" src='https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80' alt={'title'} />
