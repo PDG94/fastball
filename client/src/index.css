@@ -6,3 +6,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.Home{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
