@@ -1,7 +1,7 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
 
 const initialState = {
-    token : localStorage.getItem('token'),
+    token : localStorage.getItem('tokenAuth'),
     name : "",
     email : "",
     _id : "",
@@ -16,7 +16,7 @@ const userSlice = createSlice({
         
     },
     extraReducers : {
-        
+
     }
 })
 
