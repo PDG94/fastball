@@ -6,7 +6,7 @@ const CategoryButtons = () => {
     }
     return (
       <div>
-        <h1>Categorys</h1>
+        {/* <h1>Categorys</h1> */}
         <div className="flex flex-row justify-between gap-x-5 px-12 pb-10" >
           <div onClick={pruebaClick} className="max-w-sm bg-gray-100 overflow-hidden  rounded-lg drop-shadow-lg">
             <Link>
