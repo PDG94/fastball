@@ -10,17 +10,17 @@ const Catalogue = () => {
     useEffect(() => {
       dispatch(fetchProduct());
     }, [dispatch]);
-    console.log(allProducts)
     return ( 
         <div className='Catalogue'>
             <div className=" py-8">
-            <div className="container mx-auto px-3 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols- gap-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
             {
                 allProducts && allProducts.map((pr)=>{
                     return(
                     <Card
                     key={`pk_${pr.id}`}
+                    id={pr.id}
                     name={pr.name}
                     active={pr.active}
                     image={pr.image}

@@ -3,7 +3,7 @@ const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
 
 export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> {
    try {
-    const products = await axios.get('http://localhost:3001/api/product/')
+    const products = await axios.get('https://fastball-production.up.railway.app/api/product/')
     return products.data
    } catch (error) {
     throw error;
@@ -12,7 +12,7 @@ export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> 
 
 export const fetchProductById = createAsyncThunk('product/fetchProductById', async (productId)=> {
     try {
-     const product = await axios.get('' `http://localhost:3001/api/products/getProductById/%${productId}`);
+     const product = await axios.get(`https://fastball-production.up.railway.app/api/product/getProductById/${productId}`);
      return product.data
     } catch (error) {
      throw error;
