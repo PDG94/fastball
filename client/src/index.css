@@ -3,12 +3,33 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+body{
+  background-color: #EBEBEB;
+}
 
 .Home{
   display: flex;
   flex-direction: column;
   gap: 50px;
+}
+
+.btn{
+  border: none;
+  width: 100px;
+  height:30px;
+  margin-right: 20px;
+}
+.btn-primary{
+  color: black;
+}
+.logo-1{
+  width: 60px;
+  display: flex;
+  margin: 0;
+  background-color: blue;
 }
