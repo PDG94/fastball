@@ -1,5 +1,4 @@
 import Card from "../Card/Card";
-import Navbar from "../Navbar/Navbar";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../reduxToolkit/actions/productAction';
 import { useEffect } from "react";
@@ -14,7 +13,6 @@ const Catalogue = () => {
     console.log(allProducts)
     return ( 
         <div className='Catalogue'>
-            <Navbar />
             <div className=" py-8">
             <div className="container mx-auto px-3 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols- gap-4">
