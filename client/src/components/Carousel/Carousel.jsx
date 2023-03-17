@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
-import Img1 from "./../../images/img1.jpeg" 
-import Img2 from "./../../images/img2.jpeg" 
-import Img3 from "./../../images/img3.jpeg" 
-import Img4 from "./../../images/img4.jpeg" 
-import Img5 from "./../../images/img5.jpeg" 
+import Img1 from "./../../images/img1.jpg" 
+import Img2 from "./../../images/img2.jpg" 
+import Img3 from "./../../images/img3.jpg" 
+import Img4 from "./../../images/img4.jpg" 
+import Img5 from "./../../images/img5.jpg" 
 import { ViewCarousel } from './ViewCarousel'
 
 const slidesCarousel = [

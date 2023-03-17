@@ -3,19 +3,21 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-.Home{
+body{
   background-color: #EBEBEB;
+}
+
+.Home{
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
-.Catalogue{
-  background-color: #EBEBEB;
-}
+
 .btn{
   border: none;
   width: 100px;
