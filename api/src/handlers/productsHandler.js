@@ -15,7 +15,7 @@ class ProductsHandler {
     async getProductById(req,res,next){
         try {
             const {id} = req.params;
-            const product = await service.getOneProduct(id);
+            const product = await service.findOneProduct(id);
             res.json(product);
         } catch (error) {
             next(error);
