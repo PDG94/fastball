@@ -1,34 +1,30 @@
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
+import {setFilter, fetchProduct} from "../../reduxToolkit/actions/productAction"
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination"
 
 const Catalogue = () => {
     const dispatch = useDispatch();
-    const { allProducts } = useSelector((state) => state.product);
-    const [productsPerPage, setProductsPerPage] = useState(9)
-    const [currentPage, setCurrentPage] = useState(1)
-    
-    const pagination = (pageNumber)=>{
-        setCurrentPage(pageNumber)
-    }
-
-import { fetchProduct, setFilter } from '../../reduxToolkit/actions/productAction';
-
-import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
-
-const Catalogue = () => {
-    const dispatch = useDispatch();
+    const [productsPerPage] = useState(6)
+    const [currentPage, setCurrentPage] = useState(1)    
     const { configFilter, filteredProducts } = useSelector((state) => state.product);
     const { allCategories } = useSelector((state) => state.category);
+
+    const indexOfLastProduct = currentPage * productsPerPage
+    const indexOfFirstProduct= indexOfLastProduct - productsPerPage
+    const currentProducts= filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    const pagination = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
 
     useEffect(() => {
       dispatch(fetchProduct());
       dispatch(fetchCategory())
-    }, [dispatch]);
+    }, [dispatch, setCurrentPage]);
 
     const handleChangeCategory = (event)=> {
         const filterCategoryId = event.target.value === 'all' ? '' : event.target.value
@@ -104,11 +100,20 @@ const Catalogue = () => {
                     />
                 </div>
             </div>
+            <br></br>
+            <div>
+                <Pagination
+                    productsPerPage={productsPerPage}
+                    allProducts={filteredProducts.length}
+                    pagination={pagination}
+                />
+            </div>
+
             <div className=" py-8">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
             {
-                filteredProducts && filteredProducts.map((pr)=>{
+                currentProducts && currentProducts.map((pr)=>{
                     return(
                     <Card
                     key={`pk_${pr.id}`}
@@ -127,13 +132,7 @@ const Catalogue = () => {
             </div>
             </div>
 
-            <div>
-                <Pagination
-                    productsPerPage={productsPerPage}
-                    allProducts={allProducts.length}
-                    pagination={pagination}
-                />
-            </div>
+            
         </div>
     );
 }

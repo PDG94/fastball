@@ -1,4 +1,5 @@
 import React from 'react'
+import style from './Paginado.module.css'
 
 export default function Paginado({productsPerPage, allProducts, pagination}){
     const pageNumbers = []
@@ -8,7 +9,7 @@ export default function Paginado({productsPerPage, allProducts, pagination}){
     }
 
     return(
-        <div className="">
+        <div className={style.mainn}>
             <ul>
                 {
                     pageNumbers?.map(number=>{
