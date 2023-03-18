@@ -22,7 +22,7 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
 
  export const fetchCreateProduct = createAsyncThunk('product/fetchCreateProduct', async (product) => {
     try {
-       const productCreated = await axios.post('https://fastball-production.up.railway.app/api/products', product)
+       const productCreated = await axios.post('https://fastball-production.up.railway.app/api/product', product)
        return productCreated 
     } catch (error) {
         throw error
@@ -31,7 +31,7 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
 
 export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct', async (values)=> {
     try {
-     const product = await axios.patch('' `https://fastball-production.up.railway.app/api/products/editProduct/%${values.product._id}`, values );
+     const product = await axios.patch('' `https://fastball-production.up.railway.app/api/product/editProduct/%${values.product._id}`, values );
      return product.data
     } catch (error) {
      throw error;
@@ -40,7 +40,7 @@ export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct',
 
 export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct', async (productId)=> {
     try {
-     const product = await axios.delete('' `https://fastball-production.up.railway.app/api/products/editProduct/%${productId}`,  );
+     const product = await axios.delete('' `https://fastball-production.up.railway.app/api/product/editProduct/%${productId}`,  );
      return product.data
     } catch (error) {
      throw error;

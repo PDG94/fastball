@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Home = ()=> {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(fetchCategory())
         dispatch(setFilter({
             name: '',
             categoryId: '',
