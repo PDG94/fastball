@@ -26,7 +26,10 @@ module.exports = (sequelize) => {
           },
         },
       },
-      profilepic: {
+      lastName : {
+        type: DataTypes.STRING
+      },
+      profilePic: {
         type: DataTypes.TEXT,
         defaultValue : null,
         validate: {
@@ -44,6 +47,18 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique : true
+      },
+      contry : {
+        type : DataTypes.STRING,
+        allowNull : false
+      },
+      city : {
+        type : DataTypes.STRING,
+        allowNull : false
+      },
+      address: {
+        type : DataTypes.STRING,
+        allowNull : false
       },
       password : {
         type : DataTypes.STRING

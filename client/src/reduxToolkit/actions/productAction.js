@@ -1,6 +1,7 @@
 import axios from 'axios';
 const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
 
+
 export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> {
    try {
     const products = await axios.get('https://fastball-production.up.railway.app/api/product/')

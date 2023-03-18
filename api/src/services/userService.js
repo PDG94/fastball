@@ -1,5 +1,7 @@
 const boom = require('@hapi/boom');
 const { User } = require("../bd/db");
+const bcrypt = require('bcrypt');
+const singToken = require('./../utils/jwt/createToken');
 
 class UserService {
     constructor() {
@@ -7,14 +9,44 @@ class UserService {
     }
 
     async createUser(body) {
-        const { name, username, profilepic, email } = body;
-        const newUser = await User.create({
-            name,
-            username,
-            profilepic,
-            email,
-        })
-        return newUser
+        try {
+            const { name, lastName, password, profilePic, address, email, city, contry } = body;
+            const newUser = await User.create({
+                name,
+                lastName,
+                password,
+                profilePic,
+                email,
+                address,
+                city,
+                contry
+            })
+            console.log(newUser)
+            const token = singToken(newUser);
+            return token;
+        } catch (error) {
+            return (error.message);
+        }
+    }
+
+    async loginUser(email, password) {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return "User is not registered"
+        }
+        const validatorPassword = bcrypt.compare(password, user.password, (err, result)=>{
+            if(err){
+                return err
+            }else if(result){
+                return result
+            }else{
+                return 'la contraseña es incorrecta'
+            }
+        });
+        
+        const token = singToken(user);
+
+        return token;
     }
 
     async getAllUsers() {
@@ -48,6 +80,7 @@ class UserService {
         await user.destroy();
         return { id };
     }
+
 }
 
 
