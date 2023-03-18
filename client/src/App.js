@@ -6,8 +6,15 @@ import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Detail from './components/Detail/Detail';
 import RegisterProduct from './components/RegisterProduct/RegisterProduct'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(loadUser())
+  }, [dispatch])
   return (
     <>
       <Navbar />

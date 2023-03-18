@@ -1,104 +1,118 @@
+const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
-const jwtDecode = require("jwt-decode") ;
-const {registerUserAction, loginUserAction} = require('./../actions/userActions')
+// const jwt = require('jwt-simple');
+
+const { registerUserAction, loginUserAction } = require('./../actions/userActions')
 
 
 const initialState = {
-    token : localStorage.getItem('tokenAuth'),
-    name : "",
-    lastName : "",
-    email : "",
-    _id : "",
-    profilePic : "",
-    address : "",
-    contry : "",
-    city : "",
-    isAdmin : false,
-    status : ""
+    token: localStorage.getItem('tokenAuth'),
+    name: "",
+    lastName: "",
+    email: "",
+    _id: "",
+    profilePic: "",
+    address: "",
+    contry: "",
+    city: "",
+    isAdmin: false,
+    status: ""
 }
 
+
 const userSlice = createSlice({
-    name : "user",
+    name: "user",
     initialState,
-    reducers : {
-        loadUser(state,action){
+    reducers: {
+        loadUser(state, action) {
             const token = state.token;
-            if(token){
-                const user = jwtDecode(token);
+            if (token) {
+                const user = decode(token);
                 return {
                     ...state,
                     token,
-                    _id : user._id,
-                    name : user.name,
-                    lastName : user.lastName,
-                    email : user.email,
-                    city : user.city,
-                    contry : user.contry,
-                    address : user.address,
-                    isAdmin : user.isAdmin
+                    _id: user._id,
+                    name: user.name,
+                    profilePic : user.profilePic,
+                    lastName: user.lastName,
+                    email: user.email,
+                    city: user.city,
+                    contry: user.contry,
+                    address: user.address,
+                    isAdmin: user.isAdmin
                 };
-            }else return { ...state};
+            } else return { ...state };
         },
-        logOutUser(state, action){
+        logOutUser(state, action) {
             localStorage.removeItem('tokenAuth');
             return {
                 ...state,
-                name : "",
-                _id : "",
-                email : "",
-                lastName : "",
-                city : "",
-                address : "",
-                contry : "",
-                isAdmin : ""
+                name: "",
+                _id: "",
+                email: "",
+                lastName: "",
+                city: "",
+                address: "",
+                contry: "",
+                isAdmin: ""
             }
         }
 
     },
-    extraReducers : (builder)=>{
-        builder.addCase(registerUserAction.pending, (state,action)=> {
+    extraReducers: (builder) => {
+        builder.addCase(registerUserAction.pending, (state, action) => {
             state.status = 'pending'
         })
-        builder.addCase(registerUserAction.fulfilled, (state, action)=> {
-            if(action.payload){
-                const user = jwtDecode(action.payload);
+        builder.addCase(registerUserAction.fulfilled, (state, action) => {
+            if (action.payload) {
+                const user = decode(action.payload);
+                console.log({ user })
                 return {
                     ...state,
-                    token : action.payload,
-                    name : user.name,
-                    lastName : user.lastName,
-                    email : user.email,
-                    address : user.address,
-                    city : user.city,
-                    contry : user.contry,
-                    isAdmin : user.isAdmin,
-                    status : "fullfilled"
+                    name: user.name,
+                    lastName: user.lastName,
+                    email: user.email,
+                    address: user.address,
+                    city: user.city,
+                    contry: user.contry,
+                    isAdmin: user.isAdmin,
+                    status: "fullfilled"
                 }
-            }else {
+            } else {
                 return state;
             };
         });
-        builder.addCase(registerUserAction.rejected, (state, action)=> {
+        builder.addCase(registerUserAction.rejected, (state, action) => {
             state.status = 'rejected';
         });
-        builder.addCase(loginUserAction.pending, (state,action)=> {
+        builder.addCase(loginUserAction.pending, (state, action) => {
             state.status = "pending";
         });
-        builder.addCase(loginUserAction.fulfilled, (state,action)=>{
-            if(action.payload){
-                const user = jwtDecode(action.payload);
+        builder.addCase(loginUserAction.fulfilled, (state, action) => {
+            console.log("hola este es el extre reducer")
+            console.log(action.payload)
+            if (action.payload) {
+                console.log('dentro del payload')
+                console.log(action.payload)
+                const user = decode(action.payload)
+                console.log(user)
                 return {
-                    ...state,
-                    name : user.name,
-                    lastName : user.Lastnaem,
-
+                    name: user.name,
+                    lastName: user.LastName,
+                    email: user.email,
+                    address: user.address,
+                    city: user.city,
+                    contry: user.contry,
+                    isAdmin: user.isAdmin,
+                    status: 'fullfilled'
 
                 }
-            }else{
+
+            } else {
                 return state;
             }
         });
-        builder.addCase(loginUserAction.rejected, (state, action)=>{
+        builder.addCase(loginUserAction.rejected, (state, action) => {
             state.status = 'rejected';
         });
     }

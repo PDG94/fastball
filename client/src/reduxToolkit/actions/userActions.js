@@ -24,12 +24,13 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 
 })
 
-export const loginUserAction = createAsyncThunk('user/loginUserAction', async (user) => {
+export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
     const token = await axios.post('http://localhost:3001/api/users/loginUser', {
-        email: user.email,
-        password: user.password
+        email,
+        password
     });
     localStorage.setItem('tokenAuth', token.data);
+    return token.data
 });
 
 

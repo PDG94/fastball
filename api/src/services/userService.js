@@ -34,10 +34,16 @@ class UserService {
         if (!user) {
             return "User is not registered"
         }
-        const validatorPassword = bcrypt.compare(password, user.password);
-        if (!validatorPassword) {
-            return "User password is incorrect";
-        };
+        const validatorPassword = bcrypt.compare(password, user.password, (err, result)=>{
+            if(err){
+                return err
+            }else if(result){
+                return result
+            }else{
+                return 'la contraseña es incorrecta'
+            }
+        });
+        
         const token = singToken(user);
 
         return token;

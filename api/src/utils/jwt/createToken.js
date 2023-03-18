@@ -17,4 +17,9 @@ const singToken = (user) => {
 
 }
 
+const decode = (token)=>{
+    const user = jwt.decode(token);
+    return user
+}
+
 module.exports = singToken
