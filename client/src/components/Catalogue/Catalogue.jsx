@@ -1,6 +1,5 @@
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 import { fetchProduct} from "../../reduxToolkit/actions/productAction"
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination"
@@ -24,7 +23,7 @@ const Catalogue = () => {
 
     useEffect(() => {
       dispatch(fetchProduct());
-      dispatch(fetchCategory())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return ( 

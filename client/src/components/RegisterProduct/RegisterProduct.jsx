@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const Register = () => {
     const [submitedForm, setSubmitedForm] = useState(false)
@@ -50,7 +50,6 @@ const Register = () => {
             {( {errors} ) => (
                 <Form className='space-y-1'>
                     <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-3'>
-
                         <div>
                             <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Product Name</label>
                             <Field
