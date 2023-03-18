@@ -5,6 +5,7 @@ import UserConnection from './components/UserConnection/UserConnection'
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Detail from './components/Detail/Detail';
+import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/login' element={<UserConnection />} />
         <Route path='/register' element={<UserConnection isLogin={false} />} />
         <Route path='/details/:id' element={<Detail />} />
+        <Route path='/create' element={<RegisterProduct />} />
       </Routes>
     </>
   );
