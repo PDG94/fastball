@@ -151,13 +151,6 @@ const Register = () => {
                         <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
                         {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>}
                     </div>
-                    <div className='grid grid-cols-2 pt-10 '>
-                        <Link to="/" className=' col-end-3'>
-                            <button className='mt-4 w-full py-3 bg-slate-900 hover:bg-slate-800 text-white' type='button'>
-                                    Home
-                            </button>
-                        </Link>
-                    </div>
                 </Form>
             )}
         </Formik>
