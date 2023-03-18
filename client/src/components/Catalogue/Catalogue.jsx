@@ -1,13 +1,29 @@
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from 'react-redux';
+
+
+import { useEffect, useState } from "react";
+import Pagination from "../Pagination/Pagination"
+
+const Catalogue = () => {
+    const dispatch = useDispatch();
+    const { allProducts } = useSelector((state) => state.product);
+    const [productsPerPage, setProductsPerPage] = useState(9)
+    const [currentPage, setCurrentPage] = useState(1)
+    
+    const pagination = (pageNumber)=>{
+        setCurrentPage(pageNumber)
+    }
+
 import { fetchProduct, setFilter } from '../../reduxToolkit/actions/productAction';
-import { useEffect } from "react";
+
 import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 
 const Catalogue = () => {
     const dispatch = useDispatch();
     const { configFilter, filteredProducts } = useSelector((state) => state.product);
     const { allCategories } = useSelector((state) => state.category);
+
 
     useEffect(() => {
       dispatch(fetchProduct());
@@ -109,6 +125,14 @@ const Catalogue = () => {
             }
             </div>
             </div>
+            </div>
+
+            <div>
+                <Pagination
+                    productsPerPage={productsPerPage}
+                    allProducts={allProducts.length}
+                    pagination={pagination}
+                />
             </div>
         </div>
     );
