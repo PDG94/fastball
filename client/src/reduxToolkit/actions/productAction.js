@@ -1,5 +1,6 @@
 import axios from 'axios';
 const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
+// const { setFilter } = require('./../slices/productSlice').productActions
 
 export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> {
    try {
@@ -45,3 +46,5 @@ export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct',
      throw error;
     }
  });
+
+ export const setFilter = createAsyncThunk('product/setFilter', (filters)=> filters )
