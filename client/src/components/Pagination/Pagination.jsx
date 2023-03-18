@@ -9,13 +9,13 @@ export default function Paginado({productsPerPage, allProducts, pagination}){
     }
 
     return(
-        <div className={style.mainn}>
+        <div className={style.mainn} >
             <ul>
                 {
                     pageNumbers?.map(number=>{
                         return(
-                        <li className='number' key={number}>
-                        <b onClick={()=>pagination(number)} >{number}</b>
+                        <li className='number' key={number} onClick={()=>pagination(number)}>
+                        <b >{number}</b>
                         </li>
                         )                        
                     })

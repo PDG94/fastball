@@ -30,18 +30,21 @@ const Catalogue = () => {
         const filterCategoryId = event.target.value === 'all' ? '' : event.target.value
         const filters = { ...configFilter, categoryId: filterCategoryId}
         dispatch(setFilter(filters))
+        pagination(1)
     }
 
     const handleChangeOrder = (event)=> {
         const filterOrder = [configFilter.order[0], event.target.value]
         const filters = { ...configFilter, order: filterOrder}
         dispatch(setFilter(filters))
+        pagination(1)
     }
 
     const handleChangeTypeOrder = (event)=> {
         const filterOrder = [event.target.value, configFilter.order[1]]
         const filters = { ...configFilter, order: filterOrder}
         dispatch(setFilter(filters))
+        pagination(1)
     }
     
     const handleChangeSearchByName = (event)=> {
