@@ -1,19 +1,56 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const {fetchProductById, fetchProduct, fetchUpdateProduct, fetchDeleteProduct, fetchCreateProduct} = require('./../actions/productAction')
+const {fetchProductById, fetchProduct, fetchCreateProduct} = require('./../actions/productAction')
 
 const initialState = {
     allProducts : [],
+    filteredProducts: [],
+    configFilter: {
+        name: '',
+        categoryId: '',
+        order: ['name', 'asc'],
+    },
     productDetail : {},
     currentPage : 1,
     status : null,
+}
+
+const orderingProducts = (order, products)=>{
+    const typeOrder = [order[0]]
+
+    return order[1] === 'asc'
+      ? [...products.sort( ( product, nextproduct )=> {
+        if( product[ typeOrder ] > nextproduct[ typeOrder ] ) return 1
+        if( product[ typeOrder ] < nextproduct[ typeOrder ] ) return -1
+        return 0
+      })]
+      : [...products.sort( ( product, nextproduct )=> {
+        if( product[ typeOrder ] > nextproduct[ typeOrder ] ) return -1
+        if( product[ typeOrder ] < nextproduct[ typeOrder ] ) return 1
+        return 0
+      })]
+}
+
+const applyFilters = ( filters, products )=> {
+    let filteredProducts = products
+
+    if(filters.name)
+        filteredProducts = filteredProducts.filter( prod => prod.name.toLowerCase().includes(filters.name.toLowerCase()))
+    
+    if(filters.categoryId)
+        filteredProducts = filteredProducts.filter( prod => prod.CategoryId === filters.categoryId )
+    
+    return orderingProducts(filters.order, filteredProducts)
 }
 
 const productSlice = createSlice({
     name : "product",
     initialState,
     reducers : {
-        getAllGames : (state, action) => {
-            state.allProducts = action.payload
+        setFilter : (state, action)=> {
+            state.configFilter = action.payload
+            state.currentPage = 1
+            state.filteredProducts = applyFilters( state.configFilter, state.allProducts )
+            state.status = 'success';
         },
         changePage : (state, action)=> {
             state.currentPage = action.payload
@@ -25,6 +62,7 @@ const productSlice = createSlice({
         })
         builder.addCase(fetchProduct.fulfilled, (state,action)=> {
             state.allProducts = action.payload
+            state.filteredProducts = applyFilters( state.configFilter, state.allProducts )
             state.status = 'success';
         })
         builder.addCase(fetchProduct.rejected, (state,action)=> {
@@ -39,6 +77,18 @@ const productSlice = createSlice({
             state.allProducts = state.allProducts.push(action.payload)
         })
         builder.addCase(fetchCreateProduct.rejected, (state, action)=> {
+            state.status = 'rejected'
+        })
+
+
+        builder.addCase(fetchProductById.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(fetchProductById.fulfilled, (state,action)=> {
+            state.productDetail = action.payload
+            state.status = 'success';
+        })
+        builder.addCase(fetchProductById.rejected, (state,action)=> {
             state.status = 'rejected'
         })
     }
