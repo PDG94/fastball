@@ -5,11 +5,13 @@ import { fetchProduct} from "../../reduxToolkit/actions/productAction"
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination"
 import SearchBar from "../SearchBar/SearchBar";
+const {changePage } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Catalogue = () => {
+    const { currentPage } = useSelector( state => state.product )
+
     const dispatch = useDispatch();
     const [productsPerPage] = useState(6)
-    const [currentPage, setCurrentPage] = useState(1)    
     const { filteredProducts } = useSelector((state) => state.product);
 
     const indexOfLastProduct = currentPage * productsPerPage
@@ -17,14 +19,13 @@ const Catalogue = () => {
     const currentProducts= filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
 
     const pagination = (pageNumber) => {
-        setCurrentPage(pageNumber)
+        dispatch(changePage(pageNumber))
     }
 
     useEffect(() => {
       dispatch(fetchProduct());
       dispatch(fetchCategory())
-
-    }, [dispatch, setCurrentPage]);
+    }, []);
 
     return ( 
         <div className='container mt-2 mx-auto'>

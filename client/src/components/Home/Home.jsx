@@ -3,8 +3,8 @@ import { Carousel } from './../Carousel/Carousel';
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { useEffect } from "react";
-import {setFilter} from "../../reduxToolkit/actions/productAction"
 import { useDispatch } from "react-redux";
+const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Home = ()=> {
     const dispatch = useDispatch()
