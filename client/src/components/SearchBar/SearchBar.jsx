@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import {setFilter} from "../../reduxToolkit/actions/productAction"
 import { useDispatch, useSelector } from 'react-redux';
+const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const SearchBar = () => {
     const dispatch = useDispatch();
