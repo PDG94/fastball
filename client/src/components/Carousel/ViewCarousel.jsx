@@ -14,7 +14,7 @@ export const ViewCarousel = ({ children: slides, coment }) => {
     }, [])
 
     return (
-    <div className='overflow-hidden relative rounded-lg  '>
+    <div className='overflow-hidden relative rounded-lg drop-shadow-lg'>
         <div className='flex max-h-64 transition-transform ease-out duration-500' style={{transform: `translateX(-${curr * 100}%)`}}>
             {slides}
         </div>
