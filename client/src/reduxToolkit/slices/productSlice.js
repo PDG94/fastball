@@ -1,5 +1,5 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const {fetchProductById, fetchProduct, etchCreateProduct, setFilter} = require('./../actions/productAction')
+const {fetchProductById, fetchProduct, fetchCreateProduct, setFilter} = require('./../actions/productAction')
 
 const initialState = {
     allProducts : [],
