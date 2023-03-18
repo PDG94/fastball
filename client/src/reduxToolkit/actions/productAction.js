@@ -45,3 +45,5 @@ export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct',
      throw error;
     }
  });
+
+ export const setFilter = createAsyncThunk('product/setFilter', (filters)=> filters )
