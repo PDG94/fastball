@@ -12,11 +12,7 @@ const Catalogue = () => {
     useEffect(() => {
       dispatch(fetchProduct());
       dispatch(fetchCategory())
-    //   const filters = { ...configFilter, categoryId: '41a77afc-ff57-4e68-80d9-4933c5af506e'}
-    //   dispatch(setFilter(filters))
     }, [dispatch]);
-    // console.log(allProducts)
-    // console.log('Categorias', allCategories)
 
     const handleChangeCategory = (event)=> {
         const filterCategoryId = event.target.value === 'all' ? '' : event.target.value
@@ -93,13 +89,14 @@ const Catalogue = () => {
                 </div>
             </div>
             <div className=" py-8">
-            <div className="container mx-auto px-3 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols- gap-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
             {
                 filteredProducts && filteredProducts.map((pr)=>{
                     return(
                     <Card
                     key={`pk_${pr.id}`}
+                    id={pr.id}
                     name={pr.name}
                     active={pr.active}
                     image={pr.image}
