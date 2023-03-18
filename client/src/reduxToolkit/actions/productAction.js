@@ -1,9 +1,10 @@
 import axios from 'axios';
 const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
+// const { setFilter } = require('./../slices/productSlice').productActions
 
 export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> {
    try {
-    const products = await axios.get('http://localhost:3001/api/product/')
+    const products = await axios.get('https://fastball-production.up.railway.app/api/product/')
     return products.data
    } catch (error) {
     throw error;
@@ -45,3 +46,5 @@ export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct',
      throw error;
     }
  });
+
+ export const setFilter = createAsyncThunk('product/setFilter', (filters)=> filters )
