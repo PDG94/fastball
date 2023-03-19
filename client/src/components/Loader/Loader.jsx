@@ -1,14 +1,12 @@
-import imgBall from '../../../src/components/Images/ball.png';
+import imgBall from '../../../src/components/Images/loading.webp';
 
 const Loader = () => {
-    return ( 
+    return (
         <div className="flex items-center justify-center">
-        <div className="w-12 h-12 relative">
-  <img src={imgBall} alt="Loading" className="animate-spin absolute" />
-</div>
-
-      </div>
-      
+          <div className="img-loading absolute">
+            <img src={imgBall} alt="Loading" className=" absolute" />
+          </div>
+        </div>
      );
 }
  

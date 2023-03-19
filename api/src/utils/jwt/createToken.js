@@ -8,6 +8,7 @@ const singToken = (user) => {
         name: user.name,
         lastName : user.lastName,
         email: user.email,
+        profilePic:user.profilePic,
         city: user.city,
         contry: user.contry,
         address: user.address,
