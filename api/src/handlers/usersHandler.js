@@ -87,6 +87,7 @@ class UsersHandler {
         try {
             const { email, password } = req.body;
             const user = await service.loginUser(email, password);
+            console.log(user)
             //space for email notification
             res.status(200).send(user);
         } catch (error) {

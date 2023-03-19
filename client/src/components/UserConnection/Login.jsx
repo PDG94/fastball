@@ -6,18 +6,15 @@ import { useDispatch, useSelector } from 'react-redux'
 // import {  } from './../../reduxToolkit/actions/userActions';
 import GoogleButton from 'react-google-button';
 import {logOut} from './../../Auth/firebase';
-const {loginUserAction} = require('./../../reduxToolkit/actions/userActions')
+const {loginUserAction} = require('./../../reduxToolkit/actions/userActions');
 
 const Login = () => {
     const dispatch = useDispatch()
     const [submitedForm, setSubmitedForm] = useState(false)
     const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
-
     useEffect(() => {
-      if(user.name){
-        // navigate('/')
-      }
+      
     }, [dispatch])
 
     const handleGoogle = ()=> {
@@ -54,7 +51,7 @@ const Login = () => {
                 dispatch(loginUserAction(email,password));
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)
-
+                navigate('/')
                 setTimeout(() => setSubmitedForm(false), 2000)
             }}
         >
@@ -100,7 +97,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div>
-                        <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Login in</button>
+                        <button   className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Login in</button>
                         {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully logged</p>}
                     </div>
                     {/* <div className='grid grid-cols-4 pt-5 items-center' >

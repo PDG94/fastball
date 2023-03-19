@@ -5,10 +5,13 @@ import { fetchProduct} from "../../reduxToolkit/actions/productAction"
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination"
 import SearchBar from "../SearchBar/SearchBar";
-const {changePage } = require('./../../reduxToolkit/slices/productSlice').productActions
+import Loader from "../Loader/Loader";
+
+const {changePage } = require('./../../reduxToolkit/slices/productSlice').productActions;
 
 const Catalogue = () => {
-    const { currentPage } = useSelector( state => state.product )
+    const [isLoading, setIsLoading] = useState(true);
+    const { currentPage } = useSelector( state => state.product );
 
     const dispatch = useDispatch();
     const [productsPerPage] = useState(6)
@@ -23,8 +26,12 @@ const Catalogue = () => {
     }
 
     useEffect(() => {
-      dispatch(fetchProduct());
-      dispatch(fetchCategory())
+        setIsLoading(true);
+        dispatch(fetchProduct())
+          .then(() => {
+            setIsLoading(false);
+          });
+        dispatch(fetchCategory())
     }, []);
 
     return ( 
@@ -39,26 +46,29 @@ const Catalogue = () => {
             </div>
 
             <div className=" py-8">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
-                    {
-                        currentProducts && currentProducts.map((pr)=>{
-                            return(
-                            <Card
-                            key={`pk_${pr.id}`}
-                            id={pr.id}
-                            name={pr.name}
-                            active={pr.active}
-                            image={pr.image}
-                            description={pr.description}
-                            price={pr.price}
-                            stock={pr.stock}
-                            ></Card>
-                            )
-                        })
-                    }
+                {isLoading ? (
+                    <div className="flex justify-center items-center">
+                        <Loader></Loader>
                     </div>
-                </div>
+                ) : (
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
+                            {currentProducts && currentProducts.map((pr) => (
+                                <Card
+                                    key={`pk_${pr.id}`}
+                                    id={pr.id}
+                                    name={pr.name}
+                                    active={pr.active}
+                                    image={pr.image}
+                                    description={pr.description}
+                                    price={pr.price}
+                                    stock={pr.stock}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )
+                }
             </div>
         </div>
     );

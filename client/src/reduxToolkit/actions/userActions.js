@@ -3,7 +3,6 @@ import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from './../../Auth/firebase'
 
-
 export const registerUserAction = createAsyncThunk('user/registerUserAction', async (user) => {
     try {
         const token = await axios.post('http://localhost:3001/api/users/registerUser', {
@@ -42,3 +41,10 @@ export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async ()
     localStorage.setItem('tokenAuth', credentials.user.accessToken);
     console.log(credentials);
 })
+
+export const logoutUserAction = createAsyncThunk(
+    'user/logoutUserAction',
+    async () => {
+      localStorage.removeItem('tokenAuth');
+    }
+  );
