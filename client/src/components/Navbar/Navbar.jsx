@@ -71,7 +71,7 @@ const Navbar = ()=> {
             </div>
             {
             user && user.name?
-            <div className=" lg:inline-block  mt-0  fixed right-20 rounded-xl m-2 shadow-sm" ref={menuRef}>
+            <div className=" lg:inline-block  mt-0  absolute right-20 rounded-xl m-2 shadow-sm" ref={menuRef}>
             <div className="relative">
             <button onClick={toggleMenu} className="flex border text-sm rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out shadow transform ">
             <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic} alt="Profile" />
