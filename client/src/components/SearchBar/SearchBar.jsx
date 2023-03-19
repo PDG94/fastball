@@ -73,18 +73,7 @@ const SearchBar = () => {
                 />
             </div>
             <div className="ml-4 mr-8">
-                <label htmlFor="order" className="mr-1 text-sm font-medium text-gray-700">Order </label>    
-                <select 
-                    name="order" 
-                    id="order" 
-                    className='shadow  border rounded py-2 px-3 text-slate-900 leading-tight focus:outline-none focus:shadow-outline'
-                    onChange={handleChangeOrder}
-                    value={currentFilter.order[1]}
-                > 
-                    <option value= "asc" >Ascending</option>
-                    <option value= "desc" >Descending</option>
-                </select>
-                <label htmlFor="order" className="mr-1 text-sm font-medium text-gray-700"> by </label>
+                <label htmlFor="order" className="mr-1 text-sm font-medium text-gray-700">Order by </label>
                 <select 
                     name="typeOrder" 
                     id="typeOrder" 
@@ -94,6 +83,16 @@ const SearchBar = () => {
                 > 
                     <option value= "name" >Name</option>
                     <option value= "price" >Price</option>
+                </select> 
+                <select 
+                    name="order" 
+                    id="order" 
+                    className='shadow  border rounded py-2 px-3 text-slate-900 leading-tight focus:outline-none focus:shadow-outline w-36'
+                    onChange={handleChangeOrder}
+                    value={currentFilter.order[1]}
+                > 
+                    <option value= "asc" >{currentFilter.order[0] === 'name'? 'A-Z' : 'Ascending'}</option>
+                    <option value= "desc" >{currentFilter.order[0] === 'name'? 'Z-A' : 'Descending'}</option>
                 </select>
             </div>
         </div>
