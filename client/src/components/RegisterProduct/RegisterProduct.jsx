@@ -5,7 +5,7 @@ import { fetchCreateProduct} from "../../reduxToolkit/actions/productAction"
 import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 import { useNavigate } from 'react-router';
 
-const Register = () => {
+const Register = ({changeCurrentImage}) => {
     const [submitedForm, setSubmitedForm] = useState(false)
     const { allCategories } = useSelector((state) => state.category);
     const dispatch = useDispatch();
@@ -37,6 +37,8 @@ const Register = () => {
                     errors.image = 'Please, input a image'
                 }
 
+                changeCurrentImage(values.image)
+                
                 if( !values.description ){
                     errors.description = 'Please, input a description'
                 }
@@ -68,7 +70,7 @@ const Register = () => {
         >
             {( {errors} ) => (
                 <Form className='space-y-1'>
-                    <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-3'>
+                    <div className='grid grid-cols-1 lg:gap-3 p-8'>
                         <div>
                             <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Product Name</label>
                             <Field
@@ -186,7 +188,7 @@ const Register = () => {
 
                     </div>
                     
-                    <div>
+                    <div className='px-8'>
                         <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
                         {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>}
                     </div>
