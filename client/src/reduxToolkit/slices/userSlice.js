@@ -2,7 +2,7 @@ const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
 // const jwt = require('jwt-simple');
 
-const { registerUserAction, loginUserAction } = require('./../actions/userActions')
+const { registerUserAction, loginUserAction,logoutUserAction } = require('./../actions/userActions')
 
 
 const initialState = {
@@ -89,18 +89,18 @@ const userSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(loginUserAction.fulfilled, (state, action) => {
+            console.log(action.payload)
             console.log("hola este es el extre reducer")
             console.log(action.payload)
             if (action.payload) {
                 console.log('dentro del payload')
                 console.log(action.payload)
                 const user = decode(action.payload)
-                console.log(user)
                 return {
                     name: user.name,
-                    lastName: user.LastName,
+                    lastName: user.Lastname,
                     email: user.email,
-                    profilePic : user.profilePic,
+                    profilePic:user.profilePic,
                     address: user.address,
                     city: user.city,
                     contry: user.contry,
@@ -114,6 +114,29 @@ const userSlice = createSlice({
             }
         });
         builder.addCase(loginUserAction.rejected, (state, action) => {
+            state.status = 'rejected';
+        });
+
+
+
+
+
+        builder.addCase(logoutUserAction.pending, (state, action) => {
+            state.status = 'pending'
+        })
+        builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+            state.token = null;
+            state.name= "";
+            state._id= "";
+            state.email= "";
+            state.lastName= "";
+            state.city= "";
+            state.address= "";
+            state.contry= "";
+            state.isAdmin= "";
+            
+          });
+        builder.addCase(logoutUserAction.rejected, (state, action) => {
             state.status = 'rejected';
         });
     }

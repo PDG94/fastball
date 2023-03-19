@@ -372,13 +372,14 @@ const Register = () => {
                         </div>
                         <div>
                             <label htmlFor='country' className='block text-sm font-medium text-gray-700'>Country</label>
-                            <select 
+                            <Field 
+                                as='select'
                                 name="country" 
                                 id="country"
                                 defaultValue={countries[10]} 
                                 className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
                                 { countries.map( (country, ind) => <option key={ind} value={country}>{country}</option>)}
-                            </select>
+                            </Field>
                         </div>
                         <div>
                             <label htmlFor='city' className='block text-sm font-medium text-gray-700'>City</label>

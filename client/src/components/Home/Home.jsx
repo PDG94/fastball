@@ -1,15 +1,15 @@
 import CategoryButtons from "../categoryButtons.jsx/CategoryButtons"
 import { Carousel } from './../Carousel/Carousel';
 import { Link } from "react-router-dom";
-import Loader from "../Loader/Loader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Home = ()=> {
     const dispatch = useDispatch()
-
+    // const [loader,setLoader]=useState(true);
     useEffect(()=>{
+        // setLoader(true);
         dispatch(setFilter({
             name: '',
             categoryId: '',
@@ -17,10 +17,9 @@ const Home = ()=> {
         }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    
     return(
         <div className="Home">
-            <Loader></Loader>
             <Carousel />
             <CategoryButtons />
             <button className='btn btn-primary rounded-lg'>
