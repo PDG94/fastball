@@ -28,7 +28,7 @@ class ProductsHandler {
             const newProduct = await service.createProduct(body);
             res.status(201).json(newProduct);
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 

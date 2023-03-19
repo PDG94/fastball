@@ -30,7 +30,9 @@ class UserService {
     }
 
     async loginUser(email, password) {
-        const user = await User.findOne({ email });
+        console.log("holaaa",{email,password})
+        const user = await User.findOne({ where : {email : email} });
+        console.log({user})
         if (!user) {
             return "User is not registered"
         }

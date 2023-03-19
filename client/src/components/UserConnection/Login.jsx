@@ -48,6 +48,7 @@ const Login = () => {
                 resetForm()
                 const email = values.email;
                 const password = values.password;
+                console.log("hola",{email,password})
                 dispatch(loginUserAction(email,password));
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)

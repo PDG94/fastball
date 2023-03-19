@@ -14,7 +14,7 @@ const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 function App() {
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(loadUser())
+    // dispatch(loadUser())
   }, [dispatch])
   return (
     <>

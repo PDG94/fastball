@@ -12,6 +12,7 @@ export default function Paginado({productsPerPage, allProducts, pagination}){
 
     const styleButtonNav = (number)=> {
         return currentPage === number
+
                 ? 'rounded-md drop-shadow-lg text-white bg-green-400 py-1.5 px-3 text-xl my-0 mx-2.5 inline cursor-pointer'
                 : 'rounded-md drop-shadow-lg text-white bg-green-300 hover:bg-green-400 py-1.5 px-3 text-xl my-0 mx-2.5 inline cursor-pointer'
     }
