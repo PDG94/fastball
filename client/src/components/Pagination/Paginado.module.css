@@ -1,0 +1,27 @@
+.mainn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainn ul{
+    backdrop-filter: blur(6px);
+    border-radius: 5px;
+}
+
+.mainn ul li{
+    font-size: 20px;
+    user-select: none;
+    cursor: pointer;
+    list-style: none;
+    display: inline;
+    margin: 0px 10px;
+    padding: 5px 10px;
+    background-color: rgb(77, 177, 235);
+    border-radius: 5px;
+    outline: 1px solid white;
+    opacity: 50%;
+}
+.mainn ul li:hover{
+    outline: 1px solid rgb(84, 199, 235);
+    opacity: 110%;
+}
