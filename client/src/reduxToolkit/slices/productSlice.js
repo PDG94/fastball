@@ -74,7 +74,8 @@ const productSlice = createSlice({
         
         builder.addCase(fetchCreateProduct.fulfilled, (state,action)=> {
             state.status = 'success';
-            state.allProducts = state.allProducts.push(action.payload)
+            state.allProducts.push(action.payload)
+            state.filteredProducts = applyFilters( state.configFilter, state.allProducts )
         })
         builder.addCase(fetchCreateProduct.rejected, (state, action)=> {
             state.status = 'rejected'

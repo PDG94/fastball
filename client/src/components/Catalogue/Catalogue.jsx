@@ -1,7 +1,7 @@
 import Card from "../Card/Card";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 import { fetchProduct} from "../../reduxToolkit/actions/productAction"
+import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination"
 import SearchBar from "../SearchBar/SearchBar";

@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link } from 'react-router-dom'
+import { fetchCreateProduct} from "../../reduxToolkit/actions/productAction"
+import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
+import { useNavigate } from 'react-router';
 
 const Register = () => {
     const [submitedForm, setSubmitedForm] = useState(false)
+    const { allCategories } = useSelector((state) => state.category);
+    const dispatch = useDispatch();
+    const navigate = useNavigate
+    useEffect(()=>{
+        dispatch(fetchCategory())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Formik
@@ -13,6 +23,7 @@ const Register = () => {
                 description:'', 
                 price:'', 
                 stock:'',
+                categories:'',
             }}
 
             validate={ (values)=> {
@@ -37,20 +48,27 @@ const Register = () => {
                 if( !values.stock ){
                     errors.stock = 'Please, input a stock'
                 }
+
+                if( !values.categories ){
+                    errors.categories = 'Please, select a category'
+                }
                 return errors
             }}
 
-            onSubmit={ (_,{resetForm})=> {
+            onSubmit={ (values,{resetForm})=> {
                 resetForm()
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)
+                console.log(values)
+                dispatch(fetchCreateProduct(values))
+                console.log('anduvooooooooooooooooooooooooo');
+                navigate('/catalogue')
                 setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
         >
             {( {errors} ) => (
                 <Form className='space-y-1'>
                     <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-3'>
-
                         <div>
                             <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Product Name</label>
                             <Field
@@ -145,6 +163,27 @@ const Register = () => {
                                 )}                                
                             />
                         </div>
+
+                        <div>
+                            <label htmlFor='categories' className='block text-sm font-medium text-gray-700'>Product Category</label>
+                            <Field 
+                                as='select'
+                                type='text'
+                                name="categories" 
+                                id="categories"
+                                className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
+                                { allCategories && allCategories?.map((cat, ind)=> <option key={ind} value={cat.id} >{cat.name}</option>)}
+                            </Field>
+                            <ErrorMessage 
+                                name='categories' 
+                                component={(() => 
+                                    <div className='block text-sm font-medium text-red-700'> 
+                                        {errors.categories}
+                                    </div>
+                                )}                                
+                            />
+                        </div>
+
                     </div>
                     
                     <div>
