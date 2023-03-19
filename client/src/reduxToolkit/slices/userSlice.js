@@ -100,6 +100,7 @@ const userSlice = createSlice({
                     name: user.name,
                     lastName: user.LastName,
                     email: user.email,
+                    profilePic : user.profilePic,
                     address: user.address,
                     city: user.city,
                     contry: user.contry,
