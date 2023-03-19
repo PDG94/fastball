@@ -14,8 +14,7 @@ const singToken = (user) => {
         address: user.address,
         isAdmin: user.isAdmin
     }, jwtSecret);
-    return token
-
+    return token;
 }
 
 const decode = (token)=>{

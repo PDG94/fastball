@@ -62,9 +62,9 @@ const Register = ({changeCurrentImage}) => {
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)
                 console.log(values)
-                dispatch(fetchCreateProduct(values))
+                dispatch(fetchCreateProduct(values)).then(()=> console.log("entró al .then"), navigate('/catalogue'));
                 console.log('anduvooooooooooooooooooooooooo');
-                navigate('/catalogue')
+                
                 setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
         >

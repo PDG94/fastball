@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import {useDispatch} from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Link } from 'react-router-dom'
-import logGoogle from './../../images/google.svg'
+import logGoogle from './../../images/google.svg';
+import {registerUserAction} from './../../reduxToolkit/actions/userActions';
+import {useNavigate} from 'react-router-dom';
+
 
 const countries = [
     'Afghanistan',
@@ -258,7 +262,8 @@ const countries = [
 
 const Register = () => {
     const [submitedForm, setSubmitedForm] = useState(false)
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     return (
         <Formik
             initialValues={{
@@ -275,10 +280,10 @@ const Register = () => {
                 const errors = {}
 
                 if( !values.email ){
-                    errors.email = 'Please, input a email'
-                } else if( !/^[a-zA-ZA-ÿ\s]{1,40}$/.test(values.email) ){
-                    errors.email = 'The email only can characters or spaces'
-                }
+                    errors.email = 'Please, input a email'}
+                // } else if( !/^[a-zA-ZA-ÿ\s]{1,40}$/.test(values.email) ){
+                //     errors.email = 'The email only can characters or spaces'
+                // }
 
                 if( !values.password){
                     errors.password = 'Please, input a password'
@@ -288,9 +293,11 @@ const Register = () => {
                 return errors
             }}
 
-            onSubmit={ (_,{resetForm})=> {
+            onSubmit={ (values,{resetForm})=> {
                 resetForm()
                 console.log('Enviar Formulario');
+                console.log(values)
+                dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
                 setSubmitedForm(true)
                 setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
