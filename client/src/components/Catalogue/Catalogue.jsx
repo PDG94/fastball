@@ -32,6 +32,7 @@ const Catalogue = () => {
             setIsLoading(false);
           });
         dispatch(fetchCategory())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return ( 
