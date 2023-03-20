@@ -6,21 +6,21 @@ import { useDispatch } from "react-redux";
 const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Home = ()=> {
-    // const dispatch = useDispatch()
-    // // const [loader,setLoader]=useState(true);
-    // useEffect(()=>{
-    //     // setLoader(true);
-    //     dispatch(setFilter({
-    //         name: '',
-    //         categoryId: '',
-    //         order: ['name', 'asc'],
-    //     }))
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
+    const dispatch = useDispatch()
+    // const [loader,setLoader]=useState(true);
+    useEffect(()=>{
+        // setLoader(true);
+        dispatch(setFilter({
+            name: '',
+            categoryId: '',
+            order: ['name', 'asc'],
+        }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     return(
         <div className="Home">
-            <Carousel />
+            {/* <Carousel /> */}
             <CategoryButtons />
             <button className='btn btn-primary rounded-lg'>
                     <Link to="/create">
