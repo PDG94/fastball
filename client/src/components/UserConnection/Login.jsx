@@ -11,7 +11,7 @@ const {loginUserAction} = require('./../../reduxToolkit/actions/userActions');
 const Login = () => {
     const dispatch = useDispatch()
     const [submitedForm, setSubmitedForm] = useState(false)
-    const user =useSelector((state)=> state.user)
+    // const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
     useEffect(() => {
       
