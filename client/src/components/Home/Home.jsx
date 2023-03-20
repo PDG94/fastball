@@ -1,7 +1,8 @@
 import CategoryButtons from "../categoryButtons.jsx/CategoryButtons"
-import { Carousel } from './../Carousel/Carousel';
+// import { Carousel } from './../Carousel/Carousel';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+// import {useState } from "react";
 import { useDispatch } from "react-redux";
 const {setFilter } = require('./../../reduxToolkit/slices/productSlice').productActions
 
