@@ -3,11 +3,9 @@ import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from './../../Auth/firebase'
 
-const deploy = "https://fastball-production.up.railway.app/"
-
 export const registerUserAction = createAsyncThunk('user/registerUserAction', async (user) => {
     try {
-        const token = await axios.post('https://fastball-production.up.railway.app/users/registerUser', {
+        const token = await axios.post('/users/registerUser', {
             name: user.name,
             lastName: user.lastName,
             profilePic: user.profilePic,
@@ -27,7 +25,7 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 
 export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
     console.log({email, password});
-    const token = await axios.post('https://fastball-production.up.railway.app/api/users/loginUser', {
+    const token = await axios.post('/users/loginUser', {
         email,
         password
     });
