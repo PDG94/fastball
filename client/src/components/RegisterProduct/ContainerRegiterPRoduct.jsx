@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ImgLogo from './../Images/fastball.png'
-import imgProduct from './../../images/product_image.png'
+import imgProduct from './../../images/product_image.webp'
 import axios from 'axios'
 
 // import imgRegister from './../../images/register.jpg'
