@@ -20,7 +20,7 @@ const Home = ()=> {
     
     return(
         <div className="Home">
-            <Carousel />
+            {/* <Carousel /> */}
             <CategoryButtons />
             <button className='btn btn-primary rounded-lg'>
                     <Link to="/create">
