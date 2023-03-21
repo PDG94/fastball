@@ -40,7 +40,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 const {
-  Category, Product, User
+  Category, Product, User, Cart
 } = sequelize.models;
 
 // Relations

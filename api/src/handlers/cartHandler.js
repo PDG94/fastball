@@ -5,12 +5,12 @@ class cartHandler{
     constructor(){
 
     }
-
     async getAllProductsOnCart(req,res,next){
         try {
            const {idProduct, idUser, stock}=req.body; 
-           const createCart = service.addProductInCart(idProduct, idUser, stock);
-           res.status(200).send(createCart);
+           const createCart = await service.addProductInCart(idProduct, idUser, stock);
+           console.log(createCart)
+           res.status(200).json(createCart);
         } catch (error) {
             res.send(error);
         }
