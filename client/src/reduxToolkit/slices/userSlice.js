@@ -1,9 +1,12 @@
-const { decode } = require('./../../Auth/jwt')
+// const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
 // const jwt = require('jwt-simple');
 
 const { registerUserAction, loginUserAction,logoutUserAction } = require('./../actions/userActions')
 
+const decode = ()=>{
+    
+}
 
 const initialState = {
     token: localStorage.getItem('tokenAuth'),

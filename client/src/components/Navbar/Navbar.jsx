@@ -34,8 +34,9 @@ const Navbar = ()=> {
     }
 
     document.addEventListener('mousedown', handleOutsideClick); 
-
+    console.log("navbar")
     return () => {
+        console.log("navbar")
       document.removeEventListener('mousedown', handleOutsideClick);
     }
   }, [menuRef,user,perfil]);

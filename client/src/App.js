@@ -13,9 +13,9 @@ const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
   const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(loadUser())
-  }, [dispatch])
+  // useEffect(()=>{
+  //   // dispatch(loadUser())
+  // }, [dispatch])
   return (
     <>
       <Navbar />
