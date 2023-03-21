@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 // import logGoogle from './../../images/google.svg'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // import {  } from './../../reduxToolkit/actions/userActions';
 import GoogleButton from 'react-google-button';
 import {logOut} from './../../Auth/firebase';
@@ -11,7 +11,7 @@ const {loginUserAction} = require('./../../reduxToolkit/actions/userActions');
 const Login = () => {
     const dispatch = useDispatch()
     const [submitedForm, setSubmitedForm] = useState(false)
-    const user =useSelector((state)=> state.user)
+    // const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
     useEffect(() => {
       
