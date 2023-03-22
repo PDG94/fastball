@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { fetchCreateProduct} from "../../reduxToolkit/actions/productAction"
 import { fetchCategory } from "../../reduxToolkit/actions/categoryAction";
 import { useNavigate } from 'react-router';
-
+import { uploadImage } from '../../utils';
 const Register = ({changeCurrentImage}) => {
     const [submitedForm, setSubmitedForm] = useState(false)
     const { allCategories } = useSelector((state) => state.category);
@@ -51,9 +51,9 @@ const Register = ({changeCurrentImage}) => {
                     errors.stock = 'Please, input a stock'
                 }
 
-                if( !values.categories ){
-                    errors.categories = 'Please, select a category'
-                }
+                // if( !values.categories ){
+                //     errors.categories = 'Please, select a category'
+                // }
                 return errors
             }}
 
@@ -61,11 +61,14 @@ const Register = ({changeCurrentImage}) => {
                 resetForm()
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)
-                console.log(values)
-                dispatch(fetchCreateProduct(values)).then(()=> console.log("entró al .then"), navigate('/catalogue'));
-                console.log('anduvooooooooooooooooooooooooo');
-                
-                setTimeout( ()=> setSubmitedForm(false), 2000)
+                uploadImage(values.image)
+                    .then( newURL => {
+                        values = { ...values, image: newURL}
+                        dispatch(fetchCreateProduct(values)).then(()=> console.log("entró al .then"), navigate('/catalogue'));
+                        console.log('anduvooooooooooooooooooooooooo');
+                        setTimeout( ()=> setSubmitedForm(false), 2000)
+                    })
+                return
             }}
         >
             {( {errors} ) => (
@@ -174,6 +177,7 @@ const Register = ({changeCurrentImage}) => {
                                 name="categories" 
                                 id="categories"
                                 className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
+                                <option value='7aa8e1e3-a08a-40bf-8216-afd26c525259' >FUTBOL</option>
                                 { allCategories && allCategories?.map((cat, ind)=> <option key={ind} value={cat.id} >{cat.name}</option>)}
                             </Field>
                             <ErrorMessage 
