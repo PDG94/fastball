@@ -74,14 +74,14 @@ const Navbar = () => {
                 </div>
                 {/* && user.name */}
                 {
-                    user && user.name ?
+                    user  && user.name?
                         <div className="lg:inline-block   items-center mt-0 absolute right-20 rounded-xl m-2 " ref={menuRef}>
                             <div className="relative  gap-4 flex flex-row">
                                 <button className="flex items-center justify-center  border:none text-sm w-10 transition duration-150 ease-in-out  transform ">
-                                    {/* <CartIcon /> */}
+                                    <CartIcon user={user} />
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
-                                    <img className="h-11 w-11 rounded-full border-gray" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Profile" />
+                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic} alt="Profile" />
                                 </button>
                                 {showMenu ? (
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>
