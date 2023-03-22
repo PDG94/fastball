@@ -11,11 +11,11 @@ axios.defaults.baseURL = 'https://fastball-production.up.railway.app/api'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>
 );
