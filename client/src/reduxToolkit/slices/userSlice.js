@@ -29,6 +29,7 @@ const userSlice = createSlice({
             const token = state.token;
             if (token) {
                 const user = decode(token);
+                console.log(user.profilePic);
                 return {
                     ...state,
                     token,

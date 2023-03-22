@@ -9,13 +9,14 @@ import Detail from './components/Detail/Detail';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
+import CartDetail from './components/Cart/CartDetails';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
   const dispatch = useDispatch()
-  // useEffect(()=>{
-  //   // dispatch(loadUser())
-  // }, [dispatch])
+  useEffect(()=>{
+     dispatch(loadUser())
+  }, [dispatch])
   return (
     <>
       <Navbar />
@@ -26,6 +27,8 @@ function App() {
         <Route path='/register' element={<UserConnection isLogin={false} />} />
         <Route path='/details/:id' element={<Detail />} />
         <Route path='/create' element={<ContainerRegiterPRoduct />} />
+        <Route path='/cardDetail' element={<CartDetail/>} />
+
       </Routes>
     </>
   );
