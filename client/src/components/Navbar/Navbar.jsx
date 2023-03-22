@@ -4,7 +4,7 @@ import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
 import { useEffect, useRef, useState } from "react";
 import { logoutUserAction } from '../../reduxToolkit/actions/userActions';
-import CartIcon from "../Cart/CartIcon";
+// import CartIcon from "../Cart/CartIcon";
 
 const Navbar = () => {
     const user = useSelector((state) => state.user) //Para comprobar si hay usaurio logeado
@@ -78,7 +78,7 @@ const Navbar = () => {
                         <div className="lg:inline-block   items-center mt-0 absolute right-20 rounded-xl m-2 " ref={menuRef}>
                             <div className="relative  gap-4 flex flex-row">
                                 <button className="flex items-center justify-center  border:none text-sm w-10 transition duration-150 ease-in-out  transform ">
-                                    <CartIcon />
+                                    {/* <CartIcon /> */}
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
                                     <img className="h-11 w-11 rounded-full border-gray" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHBlcmZpbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="Profile" />
