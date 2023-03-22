@@ -3,23 +3,23 @@ const nodemailer = require("nodemailer");
 const transport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: "simple.service.pf@gmail.com",
-    pass: "wvsmorpxwlaxrdmk"
+    user: "fastball.pf@gmail.com",
+    pass: "xjglbexuejzggbhj"
   }
 });
 
 const mailActivateAccount = async (name, email) => {
   await transport.sendMail({
-    from: "Simple Service <simple.service.pf@gmail.com>",
+    from: "FastBall <fastball.pf@gmail.com>",
     to: email,
-    subject: "Account activated at Simple Service ",
+    subject: "Account activated at FastBall ",
     html: `
             <h2>Hi! ${name}</h2>
             <h4>Thank you for registering.</h4>
             <hr />            
             <div>                        
               <p>Regards,</p>
-              <p>Your friends at Simple Service</p>
+              <p>Your friends at FastBall</p>
             </div>        
           `,
   });
@@ -27,7 +27,7 @@ const mailActivateAccount = async (name, email) => {
 
 const pago = async (name, email, amount, items) => {
   await transport.sendMail({
-    from: "Simple Service <simple.service.pf@gmail.com>",
+    from: "FastBall <fastball.pf@gmail.com>",
     to: email,
     subject: "Succesful Payment",
     html: `
@@ -36,7 +36,7 @@ const pago = async (name, email, amount, items) => {
             <hr />            
             <div>                        
               <p>Regards,</p>
-              <p>Your friends at Simple Service</p>
+              <p>Your friends at FastBall</p>
             </div>        
          `,
   });
@@ -44,7 +44,7 @@ const pago = async (name, email, amount, items) => {
 
 const datos = async (name, email) => {
   await transport.sendMail({
-    from: "Simple Service <simple.service.pf@gmail.com>",
+    from: "FastBall <fastball.pf@gmail.com>",
     to: email,
     subject: "Information Updated",
     html: `
@@ -53,7 +53,7 @@ const datos = async (name, email) => {
             <hr />            
             <div>                        
               <p>Regards,</p>
-              <p>Your friends at Simple Service</p>
+              <p>Your friends at FastBall</p>
             </div>        
          `,
   });
@@ -62,7 +62,7 @@ const datos = async (name, email) => {
 
 const baja = async (name, email) => {
   await transport.sendMail({
-    from: "Simple Service <simple.service.pf@gmail.com>",
+    from: "FastBall <fastball.pf@gmail.com>",
     to: email,
     subject: "Account Cancelled",
     html: `
@@ -71,7 +71,7 @@ const baja = async (name, email) => {
             <hr />            
             <div>                        
               <p>Regards,</p>
-              <p>Your friends at Simple Service</p>
+              <p>Your friends at FastBall</p>
             </div>        
          `,
   });
@@ -79,16 +79,16 @@ const baja = async (name, email) => {
 
 const active = async (name, email) => {
   await transport.sendMail({
-    from: "Simple Service <simple.service.pf@gmail.com>",
+    from: "FastBall <fastball.pf@gmail.com>",
     to: email,
-    subject: "Account Activated",
+    subject: "Account Re-Activated",
     html: `
             <h2>Hi! ${name}, we are glad to see you back.</h2>
             <h1>Your account has been successfully activated.</h1>
             <hr />            
             <div>                        
               <p>Regards,</p>
-              <p>Your friends at Simple Service</p>
+              <p>Your friends at FastBall</p>
             </div>        
          `,
   });

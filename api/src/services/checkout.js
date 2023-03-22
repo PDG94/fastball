@@ -1,7 +1,7 @@
 const Stripe = require("stripe");
 
 const stripe = new Stripe(
-  "sk_test_51MeScXEohVMDTuBfmBYJyc74gdooLuzF08J56gwYME95LaznIe4WTjNuSsBhGqPdZq8vEw42aTvM1mD9gKpTv3Jb007xOADlTp"
+  "sk_test_51MoJENC4TeWDJRMMGy5uUuK0SRJsk6FS9zQHTvdUXowy4D8gztl4PDeR8VokUZX9YwlwBZhdAObq86wGvq7GtSam00NFZes1Dw"
 );
 const checkOut = async (req, res) => {
   const { id, amount, desc } = req.body;

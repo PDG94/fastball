@@ -1,18 +1,34 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductById } from '../../reduxToolkit/actions/productAction';
-import { useEffect } from "react";
+
 import AddCart from "../Cart/AddCart";
+import { useEffect, useState } from "react";
+import Loader from "../Loader/Loader";
+const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
+
 
 const Detail = () => {
+  const [isLoading, setIsLoading] = useState(true);
     const {id}=useParams();
     const dispatch=useDispatch();
     const { productDetail } = useSelector((state) => state.product);
 
     useEffect(() => {
-        dispatch(fetchProductById(id));
+        dispatch(fetchProductById(id))
+          .then(() => {
+            setIsLoading(false);
+          });
+        return () => dispatch(clearProductDetail)
     }, [dispatch,id])
     return ( 
+      <>
+        {isLoading ? (
+            <div className="flex justify-center items-center">
+                <Loader />
+            </div>
+        ) : (
+
         <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
@@ -90,6 +106,8 @@ const Detail = () => {
         </div>
 
         </div>
+        )}
+      </>
 
      );
 }

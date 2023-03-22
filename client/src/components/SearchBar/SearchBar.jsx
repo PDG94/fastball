@@ -9,7 +9,7 @@ const SearchBar = () => {
     const [ currentFilter, setCurrentFilter ] = useState({
         name: '',
         categoryId: '',
-        order: ['name', 'asc'],
+        order: 'LPrice',
     })
 
     const handleChangeCategory = (event)=> {
@@ -20,18 +20,17 @@ const SearchBar = () => {
     }
 
     const handleChangeOrder = (event)=> {
-        const filterOrder = [configFilter.order[0], event.target.value]
-        const filters = { ...configFilter, order: filterOrder}
+        const filters = { ...configFilter, order: event.target.value }
         dispatch(setFilter(filters))
         setCurrentFilter(filters)
     }
 
-    const handleChangeTypeOrder = (event)=> {
-        const filterOrder = [event.target.value, configFilter.order[1]]
-        const filters = { ...configFilter, order: filterOrder}
-        dispatch(setFilter(filters))
-        setCurrentFilter(filters)
-    }
+    // const handleChangeTypeOrder = (event)=> {
+    //     const filterOrder = [event.target.value, configFilter.order[1]]
+    //     const filters = { ...configFilter, order: filterOrder}
+    //     dispatch(setFilter(filters))
+    //     setCurrentFilter(filters)
+    // }
     
     const handleChangeSearchByName = (event)=> {
         const filterName = event.target.value
@@ -41,8 +40,7 @@ const SearchBar = () => {
     }
 
     useEffect(()=>{
-        setCurrentFilter(configFilter)
-        console.log("Holaaaa")
+        setCurrentFilter({...configFilter})
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
@@ -75,7 +73,7 @@ const SearchBar = () => {
             </div>
             <div className="ml-4 mr-8">
                 <label htmlFor="order" className="mr-1 text-sm font-medium text-gray-700">Order by </label>
-                <select 
+                {/* <select 
                     name="typeOrder" 
                     id="typeOrder" 
                     className='shadow  border rounded py-2 px-3 text-slate-900 leading-tight focus:outline-none focus:shadow-outline'
@@ -84,16 +82,19 @@ const SearchBar = () => {
                 > 
                     <option value= "name" >Name</option>
                     <option value= "price" >Price</option>
-                </select> 
+                </select>  */}
                 <select 
                     name="order" 
                     id="order" 
                     className='shadow  border rounded py-2 px-3 text-slate-900 leading-tight focus:outline-none focus:shadow-outline w-36'
                     onChange={handleChangeOrder}
-                    value={currentFilter.order[1]}
+                    value={currentFilter.order}
                 > 
-                    <option value= "asc" >{currentFilter.order[0] === 'name'? 'A-Z' : 'Ascending'}</option>
-                    <option value= "desc" >{currentFilter.order[0] === 'name'? 'Z-A' : 'Descending'}</option>
+                    <option value= "LPrice" >Lower price</option>
+                    <option value= "HPrice" >Higher price</option>
+                    {/* <option value= "Relevant" >Most relevant</option> */}
+                    <option value= "AZ" >A-Z</option>
+                    <option value= "ZA" >Z-A</option>
                 </select>
             </div>
         </div>
