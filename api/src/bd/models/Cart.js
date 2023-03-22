@@ -7,24 +7,8 @@ module.exports = (sequelize) => {
             primaryKey:true,
             autoIncrement : true
         },
-        UserId:{
-            type : DataTypes.UUID,
-            allowNull : false,
-            references : {
-                model : "User",
-                key : "id"
-            }
-        },
-        ProductId : {
-            type : DataTypes.UUID,
-            allowNull : false,
-            references : {
-                model : "Product",
-                id : "id"
-            }
-        },
         stock : {
-            type : DataTypes.STRING,
+            type : DataTypes.INTEGER,
             allowNull : false,
             defaultValue : 1
         }

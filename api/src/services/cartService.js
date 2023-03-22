@@ -1,4 +1,4 @@
-const { Product, User } = require("../bd/db");
+const { Product, User, Cart } = require("../bd/db");
 
 
 
@@ -7,14 +7,14 @@ class CartService {
 
     }
     async addProductInCart(idProduct, idUser, stock) {
-       const stockValidated = !stock ? 1 : stock 
+
         const user = await User.findByPk(idUser);
         const product = await Product.findByPk(idProduct);
         if (!user || !product) {
             return !user ? "user not found" : "Product not found";
         };
         const obj = product.dataValues;
-        await user.addProducts(obj.id, {through : {stock} });
+        await user.addProduct(obj.id, { through: { stock } });
         return "relation created"
     }
     // async valitadorStock(idProduct, stock){
@@ -26,15 +26,34 @@ class CartService {
     //         }
     //     }
     // }
-    async getAllProductsOnCart() {
+    async getAllProductsOnCart(idUser) {
 
+        const user = await User.findByPk(idUser);
+        const products = await user.getProducts();
+        console.log(products);
+        if (!products) return "No hay productos agregados al carrito";
+        return products
     }
-    async updateCart(idproduct, idUser) {
-
-    }
+    async updateCart(idProduct, idUser, newStock) {
+        try {
+            await Cart.update({ stock : newStock }, {
+                where: {
+                    UserId: idUser,
+                    ProductId: idProduct
+                },
+            })
+            
+            return "Product updated"
+        } catch (error) {
+            return error
+        }
+    };
     async deleteCart(idProduct, idUser) {
-
-    }
+        const user = await User.findByPk(idUser);
+        console.log(user)
+        await user.removeProduct(idProduct);
+        return `Product  ${idProduct} eliminado del carrito del usuario ${idUser}`;
+    };
 }
 
 module.exports = CartService;
