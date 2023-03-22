@@ -3,6 +3,9 @@ const express = require('express');
 const userRouter = require('./userRoute')
 const categoryRouter = require('./categoryRoute')
 const productRouter = require('./productRoute')
+
+const cartRouter = require('./../routes/cartRoute');
+
 const checkout = require('../services/checkout')
 const alta = require("../utils/notifications/altaMail")
 const pago = require("../utils/notifications/pagoMail");
@@ -17,6 +20,9 @@ function routerApi(app){
     router.use('/category', categoryRouter);
     router.use('/product', productRouter);
     router.use('/checkout', checkout);
+
+    router.use('/cart', cartRouter);
+
     router.use("/alta", alta);
     router.use("/pago", pago);
     router.use("/baja", baja);
