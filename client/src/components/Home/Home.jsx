@@ -24,10 +24,10 @@ const Home = ()=> {
             {/* <Carousel /> */}
             <CategoryButtons />
             <button className='btn btn-primary rounded-lg'>
-                    <Link to="/create">
-                        temportal Create Product
-                    </Link>
-                </button>
+                <Link to="/create">
+                    temportal Create Product
+                </Link>
+            </button>
         </div>
     )
 }
