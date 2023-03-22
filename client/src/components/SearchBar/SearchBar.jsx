@@ -40,12 +40,7 @@ const SearchBar = () => {
     }
 
     useEffect(()=>{
-<<<<<<< HEAD
-        setCurrentFilter(configFilter)
-        console.log("Holaaaa")
-=======
         setCurrentFilter({...configFilter})
->>>>>>> 85803e626359dbb13c3ecf9975ee62d097b7392d
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
