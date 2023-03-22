@@ -70,7 +70,7 @@ const Register = ({changeCurrentImage}) => {
         >
             {( {errors} ) => (
                 <Form className='space-y-1'>
-                    <div className='grid grid-cols-1 lg:gap-3 p-8'>
+                    <div className='grid grid-cols-1 lg:gap-3 pt-8'>
                         <div>
                             <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Product Name</label>
                             <Field

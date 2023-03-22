@@ -7,7 +7,7 @@ const initialState = {
     configFilter: {
         name: '',
         categoryId: '',
-        order: ['name', 'asc'],
+        order: 'LPrice',
     },
     productDetail : {},
     currentPage : 1,
@@ -15,9 +15,36 @@ const initialState = {
 }
 
 const orderingProducts = (order, products)=>{
-    const typeOrder = [order[0]]
+    let typeOrder = '', dirOrder = ''
 
-    return order[1] === 'asc'
+    switch( order ){
+        case 'LPrice': {
+            typeOrder = 'price'
+            dirOrder = 'asc'
+            break
+        }
+        case 'HPrice': {
+            typeOrder = 'price'
+            dirOrder = 'desc'
+            break
+        }
+        case 'AZ': {
+            typeOrder = 'name'
+            dirOrder = 'asc'
+            break
+        }
+        case 'ZA': {
+            typeOrder = 'name'
+            dirOrder = 'desc'
+            break
+        }
+        default:{
+            typeOrder = 'price'
+            dirOrder = 'asc'
+        }
+    }
+
+    return dirOrder === 'asc'
       ? [...products.sort( ( product, nextproduct )=> {
         if( product[ typeOrder ] > nextproduct[ typeOrder ] ) return 1
         if( product[ typeOrder ] < nextproduct[ typeOrder ] ) return -1
@@ -54,6 +81,9 @@ const productSlice = createSlice({
         },
         changePage : (state, action)=> {
             state.currentPage = action.payload
+        },
+        clearProductDetail : (state, action)=> {
+            state.productDetail = {}
         }
     },
     extraReducers : (builder)=>{

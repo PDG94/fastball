@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const router = Router()
-const { pago } = require("../controllers/mailer.js")
+const { pago } = require("../../services/mailer")
 
 
 router.post('/', async (req, res) => {  

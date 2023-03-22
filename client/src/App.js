@@ -9,6 +9,7 @@ import Detail from './components/Detail/Detail';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
+import Error404 from './components/Error404/Error404';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -20,12 +21,13 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/catalogue' element={<Catalogue />} />
-        <Route path='/login' element={<UserConnection />} />
-        <Route path='/register' element={<UserConnection isLogin={false} />} />
-        <Route path='/details/:id' element={<Detail />} />
-        <Route path='/create' element={<ContainerRegiterPRoduct />} />
+        <Route exact path='/' element={<Home />} />
+        <Route exact path='/catalogue' element={<Catalogue />} />
+        <Route exact path='/login' element={<UserConnection />} />
+        <Route exact path='/register' element={<UserConnection isLogin={false} />} />
+        <Route exact path='/details/:id' element={<Detail />} />
+        <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
+        <Route path= '*' element= { <Error404 /> } /> 
       </Routes>
     </>
   );
