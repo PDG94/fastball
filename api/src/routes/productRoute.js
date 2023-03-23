@@ -1,6 +1,7 @@
 const productRouter = require('express').Router();
 const validatorHandler = require('./../middleware/validatorHandler');
 const productHandler = require('./../handlers/productsHandler')
+
 const {updateProductSchema, createProductSchema, getProductSchema } = require('./../schemas/productSchema');
 const {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
