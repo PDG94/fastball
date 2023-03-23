@@ -40,7 +40,7 @@ export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (u
     const provider = new GoogleAuthProvider();
 
     const result = await signInWithPopup(auth, provider)
-    const credentials = await GoogleAuthProvider.credentialFromResult(result);
+    // const credentials = await GoogleAuthProvider.credentialFromResult(result);
     console.log({result})
     //Guardar en local storage
     localStorage.setItem('tokenAuth', result.user.accessToken);
