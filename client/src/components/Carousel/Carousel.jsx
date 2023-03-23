@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { ViewCarousel } from './ViewCarousel'
-// https://res.cloudinary.com/dviri5ov1/image/upload/c_scale,h_280,w_1300/v1679507441/fastball/system/img1_dba101.webp
+
 const slidesCarousel = [
     {   
         img: 'https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,h_280,w_1500/v1679507441/fastball/system/img1_dba101.webp', 
