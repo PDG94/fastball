@@ -64,10 +64,10 @@ class UsersHandler {
             const userExisted = await User.findOne({
                 where: { email }
             })
-            if(userExisted) throw new Error('User already exist!');
+            if (userExisted) throw new Error('User already exist!');
             const userTemplate = {
                 name,
-                lastName : lastName,
+                lastName: lastName,
                 profilePic,
                 email,
                 password,
@@ -94,6 +94,13 @@ class UsersHandler {
             res.status(400).send(error);
         }
     }
+    async loginAndRegisterGoogle(req, res, next) {
+        const credentials = req.body;
+        const user = credentials.user
+        console.log("handler")
+        const loginandRegister = await service.loginAndRegisterGoogle(user)
+        res.status(200).send(loginandRegister)
+    };
 }
 
 module.exports = UsersHandler
