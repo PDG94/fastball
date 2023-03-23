@@ -29,12 +29,12 @@ class CategoryService {
         }
     }
     async deleteCategory(id) {
-        const category = await this.getCategoryById(id);
+        const category = await this.findByPk(id);
         await category.update({active:false});
         return { id };
     }
     async reactivateCategory(id) {
-        const category = await this.getCategoryById(id);
+        const category = await this.findByPk(id);
         await category.update({ active: true });
         return category;
       }
