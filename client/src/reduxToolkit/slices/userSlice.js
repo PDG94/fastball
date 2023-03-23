@@ -142,6 +142,7 @@ const userSlice = createSlice({
         builder.addCase(loginUserGoogleAction.fulfilled, (state,action)=>{
             if(action.payload){
                 const user = decode(action.payload)
+        
                 console.log({user})
                 return {
                     ...state,
