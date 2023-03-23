@@ -16,7 +16,7 @@ class ProductService {
         })
         const cat = await Category.findByPk(categories);
         await newProduct.setCategory(cat)
-        return newProduct
+        return newProduct;
     }
 
     async getAllProducts() {

@@ -13,9 +13,6 @@ const Login = () => {
     const [submitedForm, setSubmitedForm] = useState(false)
     // const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
-    useEffect(() => {
-      
-    }, [dispatch])
 
     const handleGoogle = ()=> {
         

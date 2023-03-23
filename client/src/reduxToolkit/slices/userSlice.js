@@ -5,6 +5,7 @@ const createSlice = require('@reduxjs/toolkit').createSlice
 const { registerUserAction, loginUserAction,logoutUserAction } = require('./../actions/userActions')
 
 
+
 const initialState = {
     token: localStorage.getItem('tokenAuth'),
     name: "",
@@ -28,6 +29,7 @@ const userSlice = createSlice({
             const token = state.token;
             if (token) {
                 const user = decode(token);
+                console.log(user.profilePic);
                 return {
                     ...state,
                     token,
@@ -90,12 +92,13 @@ const userSlice = createSlice({
         });
         builder.addCase(loginUserAction.fulfilled, (state, action) => {
             console.log(action.payload)
-            console.log("hola este es el extre reducer")
-            console.log(action.payload)
+            // console.log("hola este es el extre reducer")
+            // console.log(action.payload)
             if (action.payload) {
                 console.log('dentro del payload')
                 console.log(action.payload)
                 const user = decode(action.payload)
+                console.log(user,'Este es el usuario');
                 return {
                     name: user.name,
                     lastName: user.Lastname,
