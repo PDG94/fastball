@@ -1,0 +1,153 @@
+.container {
+    border-radius: 0.5rem;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    height: 75vh;
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background-color: white;
+}
+
+.ring
+{
+  position:absolute;
+  top:54%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100px;
+  height:100px;
+  background:transparent;
+  border:3px solid #3c3c3c;
+  border-radius:50%;
+  text-align:center;
+  line-height:100px;
+  font-family:sans-serif;
+  font-size:20px;
+  color:#000;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  text-shadow:0 0 10px #777;
+  box-shadow:0 0 20px rgba(0,0,0,.5);
+  animation:animateT 2s linear infinite;
+}
+/* .ring:before
+{
+  content:'';
+  position:absolute;
+  top:-3px;
+  left:-3px;
+  width:100%;
+  height:100%;
+  border:3px solid transparent;
+  border-top:3px solid #000;
+  border-right:3px solid #000;
+  border-radius:50%;
+  animation:animateC 2s linear infinite;
+}
+.span
+{
+  display:block;
+  position:absolute;
+  top:calc(50% - 2px);
+  left:50%;
+  width:50%;
+  height:4px;
+  background:transparent;
+  transform-origin:left;
+  animation:animate 2s linear infinite;
+}
+.span:before
+{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#000;
+  top:-6px;
+  right:-8px;
+  box-shadow:0 0 20px #aaa;
+} */
+@keyframes animateT
+{
+  0%
+  {
+    width: 150px;
+  }
+  50% {
+    width: 0px;
+  }
+  100%
+  {
+    width: 150px;
+  }
+}
+@keyframes animateC
+{
+  0%
+  {
+    transform:rotate(0deg);
+  }
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
+@keyframes animate
+{
+  0%
+  {
+    transform:rotate(45deg);
+  }
+  100%
+  {
+    transform:rotate(405deg);
+  }
+}
+
+.soccerBall {
+    top: 0%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    background: url('https://raw.githubusercontent.com/Yousuke777/texture/main/soccer-ball-02.png') repeat;
+    background-size: 200%;
+    box-shadow: -10px -5px 15px rgba(0, 0, 0, .75) inset;
+    animation: rotate-anim 2s linear infinite;
+  }
+  
+  .soccerBall:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0;
+    bottom: -5px;
+    margin: auto;
+    width: 80px;
+    height: 5px;
+    border-radius: 50%;
+    background: #000;
+    filter: blur(5px);
+    z-index: -1;
+  }
+  
+  @keyframes rotate-anim {
+    0% {
+        left: 45%;
+        /* top: 0px; */
+    }
+    50% {
+        left: 70%;
+        /* top: 100px; */
+    }
+    100% {
+        /* top: 0px; */
+        left: 45%;
+        background-position: -800% 0;
+    }
+  }
