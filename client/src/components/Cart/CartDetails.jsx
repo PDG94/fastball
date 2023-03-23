@@ -18,7 +18,7 @@ const CartDetails = () => {
   // Actualizar el estado local del componente cuando cambie el estado del carrito
   useEffect(() => {
     let suma = 0;
-    cartProducts.forEach(element => {
+    cartProducts && cartProducts.forEach(element => {
       suma = suma + element.price*(element.Cart.stock);
     });
     setProducts({
