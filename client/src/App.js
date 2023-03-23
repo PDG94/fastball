@@ -8,16 +8,16 @@ import Detail from './components/Detail/Detail';
 import Profile from './components/UserDashboard/Profile'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(()=>{
-     dispatch(loadUser())
+     dispatch(loadUser());
   }, [dispatch])
   return (
     <>

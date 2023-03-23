@@ -4,7 +4,7 @@ const router = express();
 const {addProductInCart, getAllProductsOnCard, updateCart, deleteProductsOnCart}=new cartHandler();
 
 
-router.get('/getCart', getAllProductsOnCard);
+router.get('/getCart/:idUser', getAllProductsOnCard);
 router.post('/createCart', addProductInCart);
 router.post('/updateCart', updateCart);
 router.post('/deleteCart', deleteProductsOnCart);
