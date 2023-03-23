@@ -10,7 +10,7 @@ export const getAllProductsOnCart = createAsyncThunk('cart/getAllProductsOnCart'
     }
 });
 
-// El argumento objeto debe contener {idUser, idProduct, sotck}
+// El argumento objeto debe contener {idUser, idProduct, stock}
 export const addProductInCart = createAsyncThunk('cart/addProductInCart', async (objeto)=> {
     try {
         const productsOnCart = await axios.post('http://localhost:3001/api/cart/createCart', objeto);
@@ -20,7 +20,7 @@ export const addProductInCart = createAsyncThunk('cart/addProductInCart', async 
     }
 });
 
-// El argumento objeto debe contener {idUser, idProduct, sotck}
+// El argumento objeto debe contener {idUser, idProduct, stock}
 export const updateCart = createAsyncThunk('cart/updateCart', async (objeto)=> {
     try {
         const productsOnCart = await axios.post('http://localhost:3001/api/cart/updateCart', objeto);

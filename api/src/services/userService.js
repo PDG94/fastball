@@ -30,25 +30,47 @@ class UserService {
     }
 
     async loginUser(email, password) {
-        console.log("holaaa",{email,password})
-        const user = await User.findOne({ where : {email : email} });
-        console.log({user})
+        console.log("holaaa", { email, password })
+        const user = await User.findOne({ where: { email: email } });
+        console.log({ user })
         if (!user) {
             return "User is not registered"
         }
-        const validatorPassword = bcrypt.compare(password, user.password, (err, result)=>{
-            if(err){
+        const validatorPassword = bcrypt.compare(password, user.password, (err, result) => {
+            if (err) {
                 return err
-            }else if(result){
+            } else if (result) {
                 return result
-            }else{
+            } else {
                 return 'la contraseña es incorrecta'
             }
         });
-        
+
         const token = singToken(user);
 
         return token;
+    }
+
+    async loginAndRegisterGoogle(user) {
+       
+        const userFound = await User.findOne({ where: { email: user.email } });
+        if (!userFound) {
+            const name = user.displayName.split(" ")
+            console.log("en Servicio")
+            
+            const newUser = await User.create({
+                name: name[0],
+                lastName: name[1],
+                profilePic: user.photoUrl,
+                email: user.email,
+            });
+            const token = singToken(newUser);
+            //Verificar qué trae en newUser, para el userSlice
+            return token
+        }
+        const token = singToken(userFound.dataValues);
+        return token
+       
     }
 
     async getAllUsers() {
