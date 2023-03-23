@@ -49,7 +49,7 @@ const Detail = () => {
               </ul>
             </div> */}
             <div>
-            <AddCart idProduct={productDetail.id}></AddCart>
+            <AddCart productDetail={productDetail}></AddCart>
             </div>
           </div>
         </div>

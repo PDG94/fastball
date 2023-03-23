@@ -86,7 +86,7 @@ const Navbar = () => {
                                 {showMenu ? (
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>
                                         <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
-                                        <Link Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                                        <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
                                         <div className="border-t border-gray-100"></div>
                                         <button onClick={logOutt} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</button>
                                     </div>

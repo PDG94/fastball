@@ -7,15 +7,15 @@ import Navbar from './components/Navbar/Navbar';
 import Detail from './components/Detail/Detail';
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(()=>{
-     dispatch(loadUser())
+     dispatch(loadUser());
   }, [dispatch])
   return (
     <>
