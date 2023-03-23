@@ -28,15 +28,15 @@ const AddCart = (props) => {
             setQuantityToAdd(1);
         }
     }
-    const addCart=()=>{
-        return new Promise((resolve,reject)=>{
-            try {
+    // const addCart=()=>{
+    //     return new Promise((resolve,reject)=>{
+    //         try {
                 
-            } catch (error) {
+    //         } catch (error) {
                 
-            }
-        })
-    }
+    //         }
+    //     })
+    // }
     const handleQuantityChange = (event) => {
         /////enviaremos al action cuando esté disponible
         // user.id y el id del producto que viene por mis propss
