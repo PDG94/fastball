@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut} from "firebase/auth";
 import { auth } from './../../Auth/firebase'
+
 
 export const registerUserAction = createAsyncThunk('user/registerUserAction', async (user) => {
     try {
@@ -35,18 +36,22 @@ export const loginUserAction = createAsyncThunk('user/loginUserAction', async (e
 });
 
 
-export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async () => {
+export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (user) => {
     const provider = new GoogleAuthProvider();
 
-    const credentials = await signInWithPopup(auth, provider)
+    const result = await signInWithPopup(auth, provider)
+    const credentials = await GoogleAuthProvider.credentialFromResult(result);
+    console.log({result})
     //Guardar en local storage
-    localStorage.setItem('tokenAuth', credentials.user.accessToken);
-    console.log(credentials);
+    localStorage.setItem('tokenAuth', result.user.accessToken);
+    const response = await axios.post("http://localhost:3001/api/users/loginAndRegisterGoogle", result); 
+    return response.data
 })
 
 export const logoutUserAction = createAsyncThunk(
     'user/logoutUserAction',
     async () => {
       localStorage.removeItem('tokenAuth');
+      await signOut()
     }
   );

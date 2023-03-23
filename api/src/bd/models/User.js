@@ -50,15 +50,15 @@ module.exports = (sequelize) => {
       },
       contry : {
         type : DataTypes.STRING,
-        allowNull : false
+       
       },
       city : {
         type : DataTypes.STRING,
-        allowNull : false
+        
       },
       address: {
         type : DataTypes.STRING,
-        allowNull : false
+       
       },
       password : {
         type : DataTypes.STRING

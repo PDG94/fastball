@@ -4,7 +4,7 @@ import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
 import { useEffect, useRef, useState } from "react";
 import { logoutUserAction } from '../../reduxToolkit/actions/userActions';
-// import CartIcon from "../Cart/CartIcon";
+import CartIcon from "../Cart/CartIcon";
 
 const Navbar = () => {
     const user = useSelector((state) => state.user) //Para comprobar si hay usaurio logeado
