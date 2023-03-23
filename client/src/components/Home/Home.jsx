@@ -1,5 +1,5 @@
 import CategoryButtons from "../categoryButtons.jsx/CategoryButtons"
-// import { Carousel } from './../Carousel/Carousel';
+import { Carousel } from './../Carousel/Carousel';
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 // import {useState } from "react";
@@ -21,13 +21,13 @@ const Home = ()=> {
     
     return(
         <div className="Home">
-            {/* <Carousel /> */}
+            <Carousel />
             <CategoryButtons />
             <button className='btn btn-primary rounded-lg'>
-                    <Link to="/create">
-                        temportal Create Product
-                    </Link>
-                </button>
+                <Link to="/create">
+                    temportal Create Product
+                </Link>
+            </button>
         </div>
     )
 }

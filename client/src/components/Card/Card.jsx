@@ -30,10 +30,10 @@ const Card = (props) => {
                 </div>
                 <div className="flex items-center justify-between">
                 <span className="text-3xl font-bold text-gray-900 dark:text-black" title="Price">${props.price}</span>
-                <button className="cursor-pointer text-white bg-green-500 hover:bg-gray-500 rounded focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" title="Add to cart shopping">
+                {/* <button className="cursor-pointer text-white bg-green-500 hover:bg-gray-500 rounded focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" title="Add to cart shopping">
                 {"Add to cart  "}
                 <i className="fa-solid fa-cart-shopping"></i>
-                </button>
+                </button> */}
               </div>
             </div>
       </div>

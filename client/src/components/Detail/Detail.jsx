@@ -1,18 +1,32 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductById } from '../../reduxToolkit/actions/productAction';
-import { useEffect } from "react";
+import AddCart from "../Cart/AddCart";
+import { useEffect, useState } from "react";
+import Loader from "../Loader/Loader";
+const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Detail = () => {
+  const [isLoading, setIsLoading] = useState(true);
     const {id}=useParams();
     const dispatch=useDispatch();
     const { productDetail } = useSelector((state) => state.product);
 
     useEffect(() => {
-        dispatch(fetchProductById(id));
+        dispatch(fetchProductById(id))
+          .then(() => {
+            setIsLoading(false);
+          });
+        return () => dispatch(clearProductDetail)
     }, [dispatch,id])
-    console.log(productDetail)
     return ( 
+      <>
+        {isLoading ? (
+            <div className="flex justify-center items-center">
+                <Loader />
+            </div>
+        ) : (
+
         <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
@@ -49,10 +63,7 @@ const Detail = () => {
               </ul>
             </div> */}
             <div>
-            <button className="cursor-pointer text-white bg-green-500 hover:bg-gray-500 rounded focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" title="Add to cart shopping">
-            {"Add to cart  "}
-            <i className="fa-solid fa-cart-shopping"></i>
-            </button>
+            <AddCart idProduct={productDetail.id}></AddCart>
             </div>
           </div>
         </div>
@@ -93,6 +104,8 @@ const Detail = () => {
         </div>
 
         </div>
+        )}
+      </>
 
      );
 }
