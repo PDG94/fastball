@@ -74,7 +74,7 @@ const Navbar = () => {
                 </div>
                 {/* && user.name */}
                 {
-                    user  && user.name?
+                    user  && user.name ?
                         <div className="lg:inline-block   items-center mt-0 absolute right-20 rounded-xl m-2 " ref={menuRef}>
                             <div className="relative  gap-4 flex flex-row">
                                 <button className="flex items-center justify-center  border:none text-sm w-10 transition duration-150 ease-in-out  transform ">
