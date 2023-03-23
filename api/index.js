@@ -2,7 +2,7 @@ const server = require("./src/app");
 const {conn} = require("./src/bd/db");
 require ('dotenv').config()
 const {PORT} = process.env
-const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./../api/src/middleware/errorHandler');
+const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./src/middleware/errorHandler');
 
 //Middlewares
 server.use(logErrors);

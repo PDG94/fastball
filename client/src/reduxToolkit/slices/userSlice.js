@@ -2,7 +2,7 @@ const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
 // const jwt = require('jwt-simple');
 
-const { registerUserAction, loginUserAction,logoutUserAction } = require('./../actions/userActions')
+const { registerUserAction, loginUserAction,logoutUserAction, loginUserGoogleAction } = require('./../actions/userActions')
 
 
 
@@ -29,13 +29,12 @@ const userSlice = createSlice({
             const token = state.token;
             if (token) {
                 const user = decode(token);
-                console.log(user.profilePic);
                 return {
                     ...state,
                     token,
                     _id: user._id,
                     name: user.name,
-                    profilePic : user.profilePic,
+                    profilePic : user.profilePic ? user.profilePic: user.profile ,
                     lastName: user.lastName,
                     email: user.email,
                     city: user.city,
@@ -119,11 +118,6 @@ const userSlice = createSlice({
         builder.addCase(loginUserAction.rejected, (state, action) => {
             state.status = 'rejected';
         });
-
-
-
-
-
         builder.addCase(logoutUserAction.pending, (state, action) => {
             state.status = 'pending'
         })
@@ -142,6 +136,32 @@ const userSlice = createSlice({
         builder.addCase(logoutUserAction.rejected, (state, action) => {
             state.status = 'rejected';
         });
+        builder.addCase(loginUserGoogleAction.pending, (state,action)=> {
+            state.status = "pending"
+        });
+        builder.addCase(loginUserGoogleAction.fulfilled, (state,action)=>{
+            if(action.payload){
+                const user = decode(action.payload)
+                console.log({user})
+                return {
+                    ...state,
+                    token : action.payload,
+                    _id : user._id,
+                    name : user.name,
+                    lastName : user.LastName,
+                    profilePic : user.profilePic,
+                    email : user.email,
+                    address : user.address,
+                    contry : user.contry,
+                    city : user.city,
+                    isAdmin : user.isAdmin,
+                    status : "fullfilled"
+                }
+            }
+        });
+        builder.addCase(loginUserGoogleAction.rejected, (state,action)=>{
+            state.status = "rejected"
+        })
     }
 });
 

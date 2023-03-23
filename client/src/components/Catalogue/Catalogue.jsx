@@ -27,51 +27,54 @@ const Catalogue = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        dispatch(fetchProduct())
-          .then(() => {
-            setIsLoading(false);
-          });
         dispatch(fetchCategory())
+            .then(() => {
+                dispatch(fetchProduct())
+                  .then(() => {
+                    setIsLoading(false);
+                  });
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return ( 
-        <div className='container mt-2 mx-auto'>
-            <SearchBar />
-            <div>
-                <Pagination
-                    productsPerPage={productsPerPage}
-                    allProducts={filteredProducts.length}
-                    pagination={pagination}
-                />
-            </div>
-
-            <div className=" py-8">
+            <>
                 {isLoading ? (
                     <div className="flex justify-center items-center">
-                        <Loader></Loader>
+                        <Loader />
                     </div>
                 ) : (
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
-                            {currentProducts && currentProducts.map((pr) => (
-                                <Card
-                                    key={`pk_${pr.id}`}
-                                    id={pr.id}
-                                    name={pr.name}
-                                    active={pr.active}
-                                    image={pr.image}
-                                    description={pr.description}
-                                    price={pr.price}
-                                    stock={pr.stock}
-                                />
-                            ))}
+                <div className='container mt-2 mx-auto'>
+                    <SearchBar />
+                    <div>
+                        <Pagination
+                            productsPerPage={productsPerPage}
+                            allProducts={filteredProducts.length}
+                            pagination={pagination}
+                        />
+                    </div>
+
+                    <div className=" py-8">
+                        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
+                                {currentProducts && currentProducts.map((pr) => (
+                                    <Card
+                                        key={`pk_${pr.id}`}
+                                        id={pr.id}
+                                        name={pr.name}
+                                        active={pr.active}
+                                        image={pr.image}
+                                        description={pr.description}
+                                        price={pr.price}
+                                        stock={pr.stock}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
-                )
-                }
-            </div>
-        </div>
+                </div>
+                )}
+            </>
     );
 }
  
