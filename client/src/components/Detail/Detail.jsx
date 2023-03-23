@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductById } from '../../reduxToolkit/actions/productAction';
-
 import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
-
 
 const Detail = () => {
   const [isLoading, setIsLoading] = useState(true);

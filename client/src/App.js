@@ -30,7 +30,6 @@ function App() {
         <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
         <Route path= '*' element= { <Error404 /> } /> 
         <Route path='/cardDetail' element={<CartDetail/>} />
-
       </Routes>
     </>
   );
