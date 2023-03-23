@@ -1,5 +1,6 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const { getAllProductsOnCart,addProductInCart,updateCart,deleteCart } = require('./../actions/cartAction')
+const { getAllProductsOnCart } = require('./../actions/cartAction')
+// const { getAllProductsOnCart,addProductInCart,updateCart,deleteCart } = require('./../actions/cartAction')
 
 const initialState = {
     allProducts : []

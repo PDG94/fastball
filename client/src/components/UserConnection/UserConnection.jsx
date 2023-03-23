@@ -1,7 +1,5 @@
 import React from 'react'
 import ImgLogo from './../Images/fastball.png'
-import imgLogin from './../../images/login.webp'
-import imgRegister from './../../images/register.webp'
 import Login from './Login'
 import { Link } from 'react-router-dom'
 import Register from './Register'
@@ -10,8 +8,8 @@ const UserConnection = ( {isLogin=true} ) => {
 
     return (
         <div className='container mx-auto mt-8 min-height-full flex'>
-            <div className='hidden lg:block relative flex-1'>
-                <img src={isLogin? imgLogin : imgRegister} alt="loginImage" className='w-3/2' />
+            <div className='hidden lg:block relative flex-1 mb-8'>
+                <img src={isLogin? 'https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_570,q_auto,w_700/v1679507441/fastball/system/login_lcywpk.webp' : 'https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_710,q_auto,w_700/v1679507442/fastball/system/register_gpmyxn.webp'} alt="loginImage" className='w-3/2' />
             </div>
             <div className='flex-1 flex flex-col px-4 sm:px-6 lg:flex-none'>
                 <div className='mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]'>
