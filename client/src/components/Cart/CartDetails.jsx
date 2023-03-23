@@ -6,12 +6,14 @@ import { getAllProductsOnCart } from '../../reduxToolkit/actions/cartAction';
 const CartDetails = () => {
     const dispatch=useDispatch();
     const user= useSelector((state) => state.user);
+
     // const [setProducts]=useState([]); 
     useEffect(()=>{
       const product=dispatch(getAllProductsOnCart(user.id))
       console.log("Data products"+product.data);
       // setProducts(product.data);
   },[dispatch, user.id])
+  
   return (
     <div class="flex flex-col md:flex-row">
   <div class="md:w-2/3 p-4">
