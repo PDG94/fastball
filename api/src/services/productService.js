@@ -12,7 +12,7 @@ class ProductService {
             image,
             description,
             price,
-            stock
+            stock,
         })
         const cat = await Category.findByPk(categories);
         await newProduct.setCategory(cat)
@@ -37,7 +37,7 @@ class ProductService {
     }
 
     async updateProduct(id, changes) {
-        const prod = await Product.findOne(id);
+        const prod = await Product.findByPk(id);
         const rta = await prod.update(changes);
         return rta;
     }

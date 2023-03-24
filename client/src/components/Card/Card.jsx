@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
+    const formatImage = `${props.image.slice(0,50)}c_limit,f_auto,h_400,q_auto,w_400/${props.image.slice(50)}`
+    
     return ( 
       <div className="border max-w-sm bg-gray-100 overflow-hidden rounded-lg drop-shadow-lg hov-cart pb-1.5"
       style={{height: '390px', padding: '5 px'}}
       title="Banner to product"
       >
+        <div className="w-full h-64 bg-white">
            <Link to={`/details/${props.id}`} >
-            <img className="w-full h-64 scale-down" src={props.image} alt={'title'} />
+            <img className="w-full h-64 object-contain" src={formatImage} alt={'title'} />
            </Link >
+        </div>
+        <hr />
               <div className="px-6 pb-py-2">
               <div className="font-bold text-xl mb-1 card-name" title="Name product">{props.name}</div>
               <div className="flex items-center">
