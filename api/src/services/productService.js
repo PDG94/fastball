@@ -12,7 +12,7 @@ class ProductService {
             image,
             description,
             price,
-            stock
+            stock,
         })
         const cat = await Category.findByPk(categories);
         await newProduct.setCategory(cat)
