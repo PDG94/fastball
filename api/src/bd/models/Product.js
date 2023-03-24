@@ -33,11 +33,11 @@ module.exports = (sequelize) => {
       },
       soldAmount: {
         type: DataTypes.INTEGER,
-        defaultValue : 0
+        defaultValue : 0,
       },
       visits: {
         type: DataTypes.INTEGER,
-        defaultValue: 0
+        defaultValue: 0,
       }
     },
     {

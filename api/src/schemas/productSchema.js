@@ -33,7 +33,7 @@ const updateProductSchema = Joi.object({
   image: image,
   description: description,
   visits: visits,
-  soldAmount: soldAmount
+  soldAmount: soldAmount,
 });
 
 const getProductSchema = Joi.object({
