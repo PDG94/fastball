@@ -4,7 +4,7 @@ import { fetchProductById } from '../../reduxToolkit/actions/productAction';
 import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
-import ImageViewer from "../ImageViewer/ImageViewer";
+import ImageViewer from "../imageViewer/ImageViewer";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Detail = () => {

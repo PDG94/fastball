@@ -27,6 +27,7 @@ const Navbar = () => {
     const menuRef = useRef(null);
 
     useEffect(() => {
+        console.log("navbar")
         if (user.name) {
             setPerfil(true);
         }
@@ -42,7 +43,7 @@ const Navbar = () => {
             console.log("navbar")
             document.removeEventListener('mousedown', handleOutsideClick);
         }
-    }, [menuRef, user, perfil]);
+    }, [menuRef, user, perfil,setPerfil]);
     return (
         <nav className="flex items-center justify-between flex-wrap bg-white p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">

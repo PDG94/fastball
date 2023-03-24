@@ -15,7 +15,7 @@ const CartDetails = () => {
     await dispatch(deleteCart({idUser:user._id, idProduct:idProduct}));
   }
    
-  const updateTotalMountSum=async(idUser,idProduct,stock,price)=>{
+  const updateTotalMountSum=async(idUser,idProduct,stock,price)=>{ //no borrar por favor
       //console.log(products.totalPrice)
       // let suma = 0;
       // cartProducts && cartProducts.forEach(element => {
@@ -42,20 +42,21 @@ const CartDetails = () => {
     const updateMount = async (suma) => {
       await dispatch(totalMountProducts(suma));
     };
-    
+  
     let suma = 0;
     cartProducts && cartProducts.forEach(element => {
       suma = suma + element.price*(element.Cart.stock);
     });
-    
-    setProducts({
-      ...products,  
-      prod:cartProducts,
-      totalPrice:suma
-    });
-    
+  
+    const updatedProducts = {
+      prod: cartProducts,
+      totalPrice: suma
+    };
+  
+    setProducts(updatedProducts);
+  
     updateMount(suma);
-  }, [cartProducts, dispatch, products]);
+  }, [cartProducts, dispatch]);
   return (
     <div className="flex flex-col md:w-full">
     <div className="cart-container flex flex-row">

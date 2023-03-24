@@ -6,7 +6,7 @@ import { auth } from './../../Auth/firebase'
 
 export const registerUserAction = createAsyncThunk('user/registerUserAction', async (user) => {
     try {
-        const token = await axios.post('http://localhost:3001/api/users/registerUser', {
+        const token = await axios.post('/users/registerUser', {
             name: user.name,
             lastName: user.lastName,
             profilePic: user.profilePic,
@@ -26,7 +26,7 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 
 export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
     console.log({email, password});
-    const token = await axios.post('http://localhost:3001/api/users/loginUser', {
+    const token = await axios.post('users/loginUser', {
         email,
         password
     });
@@ -37,15 +37,19 @@ export const loginUserAction = createAsyncThunk('user/loginUserAction', async (e
 
 
 export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (user) => {
-    const provider = new GoogleAuthProvider();
+    try {
+        const provider = new GoogleAuthProvider();
 
     const result = await signInWithPopup(auth, provider)
     // const credentials = await GoogleAuthProvider.credentialFromResult(result);
     console.log({result})
     //Guardar en local storage
     localStorage.setItem('tokenAuth', result.user.accessToken);
-    const response = await axios.post("http://localhost:3001/api/users/loginAndRegisterGoogle", result); 
-    return response.data
+    const response = await axios.post("/users/loginAndRegisterGoogle", result); 
+    return response.data}
+    catch (err) {
+        return err.message
+    }
 })
 
 export const logoutUserAction = createAsyncThunk(
