@@ -43,14 +43,14 @@ class ProductService {
     }
 
     async deleteProduct(id) {
-        const prod = await this.findOneProduct(id);
+        const prod = await this.findByPk(id);
         await prod.update({active:false});
         return { id };
     }
 
     async reactivateProduct(id) {
         console.log(id)
-        const prod = await this.findOneProduct(id);
+        const prod = await this.findByPk(id);
         await prod.update({ active: true });
         return prod;
       }

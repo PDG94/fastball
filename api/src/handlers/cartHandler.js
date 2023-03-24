@@ -9,15 +9,14 @@ class cartHandler{
         try {
            const {idProduct, idUser, stock}=req.body; 
            const createCart = await service.addProductInCart(idProduct, idUser, stock);
-           console.log(createCart)
-           res.status(200).json(createCart);
+           res.status(200).send(createCart);
         } catch (error) {
             res.send(error);
         };
     };
     async getAllProductsOnCard(req,res,next){
         try {
-            const {idUser} = req.body;
+            const {idUser} = req.params;
             const products = await service.getAllProductsOnCart(idUser);
             res.status(200).send(products); 
         } catch (error) {
@@ -37,6 +36,7 @@ class cartHandler{
         try {
             const {idUser, idProduct}= req.body;
             const productDeleted = await service.deleteCart(idProduct,idUser);
+            console.log("awdawdaaaaaaaaaaa",productDeleted)
             res.status(200).send(productDeleted);
         } catch (error) {
             res.send(error);
