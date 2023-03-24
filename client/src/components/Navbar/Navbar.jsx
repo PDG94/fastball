@@ -91,7 +91,8 @@ const Navbar = () => {
                                     <CartIcon user={user} />
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
-                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic} alt="Profile" />
+                                    <img className="h-11 w-11 rounded-full border-gray object-cover" src={
+                                        `${user.profilePic.slice(0,50)}c_fill,f_auto,h_50,q_auto,w_50/${user.profilePic.slice(50)}`} alt="Profile" />
                                 </button>
                                 {showMenu ? (
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>

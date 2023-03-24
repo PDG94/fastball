@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {useDispatch} from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Link } from 'react-router-dom'
 import logGoogle from './../../images/google.svg';
 import {registerUserAction} from './../../reduxToolkit/actions/userActions';
 import {useNavigate} from 'react-router-dom';
+import { uploadImage } from '../../utils';
 
 
 const countries = [
@@ -260,7 +261,7 @@ const countries = [
     'Zimbabwe',    
   ]
 
-const Register = () => {
+const Register = ({image}) => {
     // const [submitedForm, setSubmitedForm] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -280,24 +281,30 @@ const Register = () => {
                 const errors = {}
 
                 if( !values.email ){
-                    errors.email = 'Please, input a email'}
+                    errors.email = 'Please, input a email'
                 // } else if( !/^[a-zA-ZA-ÿ\s]{1,40}$/.test(values.email) ){
                 //     errors.email = 'The email only can characters or spaces'
-                // }
+                }
 
                 if( !values.password){
                     errors.password = 'Please, input a password'
-                } else if( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.password) ){
-                    errors.password = 'The password not is valid'
+                // } else if( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.password) ){
+                //     errors.password = 'The password not is valid'
                 }
                 return errors
             }}
 
             onSubmit={ (values,{resetForm})=> {
                 resetForm()
-                // console.log('Enviar Formulario');
-                // console.log(values)
-                dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
+                console.log('Enviar Formulario');
+                uploadImage(image, 'users')
+                .then( newURL => {
+                        values = { ...values, profilePic: newURL}
+                        console.log('VALORES A SUBMITEAR !!!!!! ', values);
+                        dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
+                    }
+                )
+                .catch( error => alert(error))
                 // setSubmitedForm(true)
                 // setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
@@ -453,13 +460,13 @@ const Register = () => {
                             <img  className='col-end-4 w-12' src={logGoogle} alt="google" />
                         </Link>
                     </div>
-                    <div className='grid grid-cols-2 pt-10 '>
+                    {/* <div className='grid grid-cols-2 pt-10 '>
                         <Link to="/" className=' col-end-3'>
                             <button className='mt-4 w-full py-3 bg-slate-900 hover:bg-slate-800 text-white' type='button'>
                                     Home
                             </button>
                         </Link>
-                    </div>
+                    </div> */}
                 </Form>
             )}
         </Formik>

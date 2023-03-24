@@ -67,7 +67,7 @@ const userSlice = createSlice({
         builder.addCase(registerUserAction.fulfilled, (state, action) => {
             if (action.payload) {
                 const user = decode(action.payload);
-                console.log({ user })
+                console.log( 'ESTE ES EL USUARIO EN REDUX!!!!!', user )
                 return {
                     ...state,
                     name: user.name,
@@ -77,6 +77,7 @@ const userSlice = createSlice({
                     city: user.city,
                     contry: user.contry,
                     isAdmin: user.isAdmin,
+                    profilePic: user.profilePic,
                     status: "fullfilled"
                 }
             } else {
