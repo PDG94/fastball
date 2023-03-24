@@ -1,4 +1,4 @@
-import { updateCart,deleteCart } from '../../reduxToolkit/actions/cartAction';
+import { updateCart,deleteCart,totalMountProducts } from '../../reduxToolkit/actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState,useEffect } from 'react';
 
@@ -14,20 +14,48 @@ const CartDetails = () => {
   const deleteProductCart=async(idProduct)=>{
     await dispatch(deleteCart({idUser:user._id, idProduct:idProduct}));
   }
+   
+  const updateTotalMountSum=async(idUser,idProduct,stock,price)=>{
+      //console.log(products.totalPrice)
+      // let suma = 0;
+      // cartProducts && cartProducts.forEach(element => {
+      // suma = suma + element.price*(element.Cart.stock);
+      // });
+      // let sumas=stock*price;
+      // console.log(suma)
+      // console.log(sumas)
+      // await dispatch(totalMountProducts(products.totalPrice));
+      await dispatch(updateCart({idUser:idUser, idProduct:idProduct, stock:stock}))
+  }
+  const updateTotalMountRes=async(idUser,idProduct,stock)=>{
+    //console.log(products.totalPrice)
+    // let suma = 0;
+    // cartProducts && cartProducts.forEach(element => {
+    //   suma = suma + element.price*(element.Cart.stock);
+    // });
+    // await dispatch(totalMountProducts(suma));
+    await dispatch(updateCart({idUser:idUser, idProduct:idProduct, stock:stock}))
+    }
 
   // Actualizar el estado local del componente cuando cambie el estado del carrito
   useEffect(() => {
+    const updateMount = async (suma) => {
+      await dispatch(totalMountProducts(suma));
+    };
+    
     let suma = 0;
     cartProducts && cartProducts.forEach(element => {
       suma = suma + element.price*(element.Cart.stock);
     });
+    
     setProducts({
       ...products,  
       prod:cartProducts,
       totalPrice:suma
     });
-  }, [cartProducts]);
-
+    
+    updateMount(suma);
+  }, [cartProducts, dispatch, products]);
   return (
     <div className="flex flex-col md:w-full">
     <div className="cart-container flex flex-row">
@@ -49,11 +77,15 @@ const CartDetails = () => {
               <div className="p-4 pz4">
 
                 <button name='aumentar'
-                onClick={()=>dispatch(updateCart({idUser:user._id, idProduct:product.id, stock:product.Cart.stock+1}))}>
+                onClick={()=>updateTotalMountSum(user._id,product.id,product.Cart.stock+1,product.price)}
+                disabled={product.Cart.stock===product.stock}
+                >
                 <i className="fa-sharp fa-solid fa-arrow-up"></i></button>
                 <label className="font-semibold text-lg mb-2">{product.Cart.stock}</label>
                 <button name='disminuir'
-                onClick={()=>dispatch(updateCart({idUser:user._id, idProduct:product.id, stock:product.Cart.stock-1}))}>
+                onClick={()=>updateTotalMountRes(user._id,product.id,product.Cart.stock-1)}
+                disabled={product.Cart.stock===1}
+                >
                 <i className="fa-solid fa-arrow-down"></i></button>
               </div>
               <div className="p-4 pz4 font-semibold text-lg mb-2">
