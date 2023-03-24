@@ -7,7 +7,7 @@ class CartService {
 
     }
     async addProductInCart(idProduct, idUser, stock) {
-
+        
         const user = await User.findByPk(idUser);
         const product = await Product.findByPk(idProduct);
         if (!user || !product) {
@@ -15,7 +15,8 @@ class CartService {
         };
         const obj = product.dataValues;
         await user.addProduct(obj.id, { through: { stock } });
-        return "relation created"
+        const products = await user.getProducts();
+        return products;
     }
     // async valitadorStock(idProduct, stock){
     //     const product = await Product.findByPk(idProduct);
@@ -27,10 +28,8 @@ class CartService {
     //     }
     // }
     async getAllProductsOnCart(idUser) {
-
         const user = await User.findByPk(idUser);
         const products = await user.getProducts();
-        console.log(products);
         if (!products) return "No hay productos agregados al carrito";
         return products
     }
@@ -42,17 +41,18 @@ class CartService {
                     ProductId: idProduct
                 },
             })
-            
-            return "Product updated"
+            const user = await User.findByPk(idUser);
+            const products = await user.getProducts();
+            return products;
         } catch (error) {
             return error
         }
     };
     async deleteCart(idProduct, idUser) {
         const user = await User.findByPk(idUser);
-        console.log(user)
         await user.removeProduct(idProduct);
-        return `Product  ${idProduct} eliminado del carrito del usuario ${idUser}`;
+        const products = await user.getProducts();
+        return products;
     };
 }
 

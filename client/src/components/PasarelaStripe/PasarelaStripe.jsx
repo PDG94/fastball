@@ -1,7 +1,6 @@
-import React from "react";
+// import React from "react";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
-import "../Checkout/checkoutDetails.css";
 import {
   Elements,
   useStripe,
@@ -11,9 +10,9 @@ import {
   CardCvcElement,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import cardis from "../../Imagenes/cards.png";
-import { emptyCart } from "../../reduxToolkit/actions/";
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
   `pk_test_51MeScXEohVMDTuBfkv6jlBnpXq6EN6W0vJs3bFlepyOusbfYEuIAhoOXcsYFGgcDcOqwJLAqYL4qqNegKOdGJOvE00lBepiZlb`
@@ -21,7 +20,7 @@ const stripePromise = loadStripe(
 
 const CheckOutForm = () => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   
   const stripe = useStripe();
@@ -30,12 +29,12 @@ const CheckOutForm = () => {
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
   const cartItems1 = useSelector((state) => state.cart.cartItems);
-  const userID1 = useSelector((state) => state.users.userID);
-  const customerEmail = useSelector((state) => state.users.email);
-  const customerName = useSelector((state) => state.users.useName);
+  const userID1 = useSelector((state) => state.user._id);
+  const customerEmail = useSelector((state) => state.user.email);
+  const customerName = useSelector((state) => state.user.name);
 
   const clearCart1 = () => {
-    dispatch(emptyCart());
+    // dispatch(emptyCart());
     navigate("/home");
   };
 
@@ -106,7 +105,6 @@ const CheckOutForm = () => {
             {/* aca podria ir un resumen de lo comprado, que compro, cuantos, que tanto sale (cantidad*cuantos) y una sumatoria total */}
           </div>
           <div className="" style={{ height: 550 }}>
-            <img src={cardis} alt="cardis" className="" />
             <div className="">
               <span>Number Card</span>
               <div className="">

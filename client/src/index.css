@@ -72,3 +72,40 @@ body{
   border-radius: 0.375rem; /* opcional, para redondear las esquinas */
   padding: 1rem; /* opcional, para agregar relleno alrededor del contenido */
 }
+.cart-comp{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  padding: 10px;
+}
+.cart-comp h3{
+  text-align: center;
+}
+.cart-comp p{
+  font-size: 12px;
+  text-align: left;
+}
+.cart-comp button i{
+  transition: .5ms;
+  color: #22C55E;
+}
+.cart-comp button:hover i{
+  color: #86EFAC;
+}
+.pz4{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  gap: 10px;
+}
+.cart-comp img{
+  max-width: 100%;
+  height: auto;
+}
+.fa-trash{
+  cursor: pointer;
+  color:rgb(211, 30, 30);
+}
+.fa-trash:hover{
+  color:rgba(211, 10, 10, 0.651);
+}
