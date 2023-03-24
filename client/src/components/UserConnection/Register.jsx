@@ -261,7 +261,7 @@ const countries = [
   ]
 
 const Register = () => {
-    const [submitedForm, setSubmitedForm] = useState(false)
+    // const [submitedForm, setSubmitedForm] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (
@@ -295,11 +295,11 @@ const Register = () => {
 
             onSubmit={ (values,{resetForm})=> {
                 resetForm()
-                console.log('Enviar Formulario');
-                console.log(values)
+                // console.log('Enviar Formulario');
+                // console.log(values)
                 dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
-                setSubmitedForm(true)
-                setTimeout( ()=> setSubmitedForm(false), 2000)
+                // setSubmitedForm(true)
+                // setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
         >
             {( {errors} ) => (
@@ -383,7 +383,7 @@ const Register = () => {
                                 as='select'
                                 name="country" 
                                 id="country"
-                                defaultValue={countries[10]} 
+                                // defaultValue={countries[10]} 
                                 className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
                                 { countries.map( (country, ind) => <option key={ind} value={country}>{country}</option>)}
                             </Field>
@@ -445,7 +445,7 @@ const Register = () => {
                     </div>
                     <div>
                         <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
-                        {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>}
+                        {/* {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>} */}
                     </div>
                     <div  className='grid grid-cols-4 pt-5 items-center' >
                         <span className='col-end-3'>-or register with-</span>

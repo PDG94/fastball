@@ -8,7 +8,7 @@ import Detail from './components/Detail/Detail';
 import Profile from './components/UserDashboard/Profile'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';

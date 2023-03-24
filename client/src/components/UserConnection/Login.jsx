@@ -46,11 +46,11 @@ const Login = () => {
                 const email = values.email;
                 const password = values.password;
                 console.log("hola",{email,password})
-                dispatch(loginUserAction(email,password));
+                dispatch(loginUserAction(email,password)).then(()=> navigate('/'));
                 console.log('Enviar Formulario');
-                setSubmitedForm(true)
-                navigate('/')
-                setTimeout(() => setSubmitedForm(false), 2000)
+                // setSubmitedForm(true)
+                // navigate('/')
+                // setTimeout(() => setSubmitedForm(false), 2000)
             }}
         >
             {({ errors }) => (

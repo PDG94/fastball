@@ -90,29 +90,30 @@ const userSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(loginUserAction.fulfilled, (state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             // console.log("hola este es el extre reducer")
             // console.log(action.payload)
             if (action.payload) {
-                console.log('dentro del payload')
-                console.log(action.payload)
+                // console.log('dentro del payload')
+                // console.log(action.payload)
                 const user = decode(action.payload)
-                console.log(user,'Este es el usuario');
+                // console.log(user,'Este es el usuario');
                 return {
-                    name: user.name,
-                    lastName: user.Lastname,
-                    email: user.email,
-                    profilePic:user.profilePic,
-                    address: user.address,
-                    city: user.city,
-                    contry: user.contry,
-                    isAdmin: user.isAdmin,
-                    status: 'fullfilled'
-
+                    ...state,
+                    token : action.payload,
+                    _id : user._id,
+                    name : user.name,
+                    lastName : user.LastName,
+                    profilePic : user.profilePic,
+                    email : user.email,
+                    address : user.address,
+                    contry : user.contry,
+                    city : user.city,
+                    isAdmin : user.isAdmin,
+                    status : "fullfilled"
                 }
-
             } else {
-                return state;
+                return {...state};
             }
         });
         builder.addCase(loginUserAction.rejected, (state, action) => {
