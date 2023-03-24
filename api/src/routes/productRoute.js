@@ -1,16 +1,17 @@
 const productRouter = require('express').Router();
 const validatorHandler = require('./../middleware/validatorHandler');
 const productHandler = require('./../handlers/productsHandler')
+const {isAdmin} = require('./../middleware/authValidator');
 
 const {updateProductSchema, createProductSchema, getProductSchema } = require('./../schemas/productSchema');
 const {getAllProducts, getProductById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
 productRouter.get('/',getAllProducts);
-productRouter.post('/',validatorHandler(createProductSchema, 'body'), createProduct);
+productRouter.post('/',validatorHandler(createProductSchema, 'body'), isAdmin, createProduct);
 productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'params'), getProductById);
-productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), validatorHandler(updateProductSchema, 'body'), updateProduct);
-productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), deleteProduct);
-productRouter.put('/reactiveProduct/:id', reactivateProduct);
+productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, validatorHandler(updateProductSchema, 'body'), updateProduct);
+productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, deleteProduct);
+productRouter.put('/reactiveProduct/:id', isAdmin, reactivateProduct);
 
 // productRouter.get('/',getAllProducts);
 // productRouter.post('/', createProduct);
