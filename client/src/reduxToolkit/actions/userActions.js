@@ -27,7 +27,7 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
 
     console.log({ email, password });
-    const token = await axios.post('http://localhost:3001/api/users/loginUser', {
+    const token = await axios.post('/users/loginUser', {
 
         email,
         password
@@ -46,7 +46,7 @@ export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (u
         const credentials = await GoogleAuthProvider.credentialFromResult(result);
         //Guardar en local storage
         localStorage.setItem('tokenAuth', result.user.accessToken);
-        const response = await axios.post("http://localhost:3001/api/users/loginAndRegisterGoogle", result);
+        const response = await axios.post("/users/loginAndRegisterGoogle", result);
         return response.data
     } catch (error) {
         console.log(error)

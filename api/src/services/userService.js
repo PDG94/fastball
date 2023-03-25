@@ -94,13 +94,13 @@ class UserService {
     }
 
     async updateUser(id, changes) {
-        const user = await this.getOneUser(id);
+        const user = await this.findByPk(id);
         const rta = await user.update(changes);
         return rta;
     }
 
     async deleteUser(id) {
-        const user = await this.getOneUser(id);
+        const user = await this.findByPk(id);
         await user.destroy();
         return { id };
     }
