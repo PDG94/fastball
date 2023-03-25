@@ -23,11 +23,6 @@ const Home = ()=> {
         <div className="Home">
             <Carousel />
             <CategoryButtons />
-            <button className='btn btn-primary rounded-lg'>
-                <Link to="/create">
-                    temportal Create Product
-                </Link>
-            </button>
         </div>
     )
 }
