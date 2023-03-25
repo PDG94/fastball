@@ -16,8 +16,9 @@ const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
   const dispatch = useDispatch();
+  const token = localStorage.getItem('tokenAuth')
   useEffect(()=>{
-     dispatch(loadUser());
+     dispatch(loadUser(token));
   }, [dispatch])
   return (
     <>

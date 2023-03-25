@@ -73,7 +73,6 @@ onAuthStateChanged(auth, async (user) => {
 
 export const logOut = async ()=> {
     await signOut(auth)
-    localStorage.removeItem('tokenAuth')
     console.log('user sing out')
 }
 

@@ -31,8 +31,6 @@ const Navbar = () => {
     const menuRef = useRef(null);
 
     useEffect(() => {
-
-        console.log("navbar")
         if (user.name) {
             setPerfil(true);
         }
@@ -44,9 +42,9 @@ const Navbar = () => {
         }
 
         document.addEventListener('mousedown', handleOutsideClick);
-        // console.log("navbar")
+      
         return () => {
-            // console.log("navbar")
+         
             document.removeEventListener('mousedown', handleOutsideClick);
         }
     }, [menuRef, user, perfil,setPerfil]);
@@ -81,7 +79,7 @@ const Navbar = () => {
                         </Link>
                     </button>
                 </div>
-                { console.log("perfil !!!!!!!!!!!!!!!!!!!!!", perfil)}
+               
                 {/* && user.name */}
                 {
                     perfil ?

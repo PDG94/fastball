@@ -12,7 +12,7 @@ const CartDetails = () => {
     totalPrice:0
   });
   const deleteProductCart=async(idProduct)=>{
-    await dispatch(deleteCart({idUser:user._id, idProduct:idProduct}));
+     dispatch(deleteCart({idUser:user._id, idProduct:idProduct}));
   }
    
   const updateTotalMountSum=async(idUser,idProduct,stock,price)=>{ //no borrar por favor
