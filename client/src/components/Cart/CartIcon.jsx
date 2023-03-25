@@ -7,14 +7,13 @@ import { decode } from '../../Auth/jwt';
 function CartIcon() {
   const dispatch = useDispatch();
   const user = useSelector((state)=> state.user)
-  const cartProducts = useSelector(state => state.cart.allProductsCart);
-  
+ const cartProducts = useSelector(state => state.cart.allProductsCart);
   useEffect(() => {
     if(user){
       dispatch(getAllProductsOnCart(user._id));
     }
-  }, [dispatch, token]);
-  
+  }, [dispatch]);
+    
  
 
   return (
