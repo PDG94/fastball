@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { auth } from './../../Auth/firebase'
-
+import {logOut} from './../../Auth/firebase'
 
 export const registerUserAction = createAsyncThunk('user/registerUserAction', async (user) => {
     try {
@@ -54,6 +54,6 @@ export const logoutUserAction = createAsyncThunk(
     'user/logoutUserAction',
     async () => {
       localStorage.removeItem('tokenAuth');
-      
+      await logOut()
     }
   );
