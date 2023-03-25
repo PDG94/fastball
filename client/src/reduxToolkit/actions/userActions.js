@@ -25,8 +25,10 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 })
 
 export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
+
     console.log({ email, password });
     const token = await axios.post('/users/loginUser', {
+
         email,
         password
     });

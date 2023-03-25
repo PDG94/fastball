@@ -3,8 +3,10 @@ const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
 const { createAction }= require ('@reduxjs/toolkit');
 export const getAllProductsOnCart = createAsyncThunk('cart/getAllProductsOnCart', async (idUser)=> {
     try {
+
         //alert(idUser,"Usuario id");
         const productsOnCart = await axios.get(`/cart/getCart/${idUser}`);
+
         return productsOnCart.data;
     } catch (error) {
         return error.message
