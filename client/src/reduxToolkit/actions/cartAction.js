@@ -13,6 +13,15 @@ export const getAllProductsOnCart = createAsyncThunk('cart/getAllProductsOnCart'
     }
 });
 export const updateCartProducts = createAction('cart/updateCartProducts');
+
+export const totalMountProducts = createAsyncThunk('cart/totalMountProducts',(monto) => {
+    // Lógica para obtener el monto total de productos
+    console.log("sumando "+monto)
+    return monto;
+});
+//export const selectedProducts=createAction('cart/selectedProducts');
+
+
 // El argumento objeto debe contener {idUser, idProduct, sotck}
 export const addProductInCart = createAsyncThunk('cart/addProductInCart', async (objeto)=> {
     try {

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
+import profile from "../Images/profile.png";
 import { useEffect, useRef, useState } from "react";
 import { logoutUserAction } from '../../reduxToolkit/actions/userActions';
 import CartIcon from "../Cart/CartIcon";
@@ -31,6 +32,11 @@ const Navbar = () => {
 
     useEffect(() => {
 
+        console.log("navbar")
+        if (user.name) {
+            setPerfil(true);
+        }
+
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) { //Para poder cerrar el dropdown cuando demos click en otra parte
                 setShowMenu(false);
@@ -43,14 +49,8 @@ const Navbar = () => {
             // console.log("navbar")
             document.removeEventListener('mousedown', handleOutsideClick);
         }
-    }, [menuRef]);
+    }, [menuRef, user, perfil,setPerfil]);
 
-    useEffect(()=>{
-        if (user.name) {
-            setPerfil(true);
-        }
-    },[user.name])
-    
     return (
         <nav className="flex items-center justify-between flex-wrap bg-white p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -91,11 +91,13 @@ const Navbar = () => {
                                     <CartIcon user={user} />
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
-                                    <img className="h-11 w-11 rounded-full border-gray object-cover" src={
-                                        `${user.profilePic.slice(0,50)}c_fill,f_auto,h_50,q_auto,w_50/${user.profilePic.slice(50)}`} alt="Profile" />
+
+                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic?user.profilePic:profile} alt="Profile" />
+
                                 </button>
                                 {showMenu ? (
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>
+                                        <p disable className="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100">{user.name}</p>
                                         <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
                                         <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
                                         <div className="border-t border-gray-100"></div>

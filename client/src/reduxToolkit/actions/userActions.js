@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { auth } from './../../Auth/firebase'
 
 
@@ -25,14 +25,12 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 })
 
 export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
-
-    console.log({ email, password });
-    const token = await axios.post('/users/loginUser', {
-
+    console.log({email, password});
+    const token = await axios.post('users/loginUser', {
         email,
         password
     });
-    console.log({ email, password });
+    console.log({email,password});
     localStorage.setItem('tokenAuth', token.data);
     return token.data
 });
@@ -42,22 +40,22 @@ export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (u
     try {
         const provider = new GoogleAuthProvider();
 
-        const result = await signInWithPopup(auth, provider)
-        const credentials = await GoogleAuthProvider.credentialFromResult(result);
-        //Guardar en local storage
-        localStorage.setItem('tokenAuth', result.user.accessToken);
-        const response = await axios.post("/users/loginAndRegisterGoogle", result);
-        return response.data
-    } catch (error) {
-        console.log(error)
+    const result = await signInWithPopup(auth, provider)
+    // const credentials = await GoogleAuthProvider.credentialFromResult(result);
+    console.log({result})
+    //Guardar en local storage
+    localStorage.setItem('tokenAuth', result.user.accessToken);
+    const response = await axios.post("/users/loginAndRegisterGoogle", result); 
+    return response.data}
+    catch (err) {
+        return err.message
     }
 })
 
 export const logoutUserAction = createAsyncThunk(
     'user/logoutUserAction',
     async () => {
-        localStorage.removeItem('tokenAuth');
-        await signOut()
-        window.location.reload()
+      localStorage.removeItem('tokenAuth');
+      
     }
-);
+  );

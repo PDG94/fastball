@@ -27,6 +27,7 @@ const userSlice = createSlice({
     reducers: {
         loadUser(state, action) {
             const token = state.token;
+            console.log("Se")
             if (token) {
                 const user = decode(token);
                 return {
@@ -101,17 +102,17 @@ const userSlice = createSlice({
                 // console.log(user,'Este es el usuario');
                 return {
                     ...state,
-                    token : action.payload,
-                    _id : user._id,
-                    name : user.name,
-                    lastName : user.LastName,
-                    profilePic : user.profilePic,
-                    email : user.email,
-                    address : user.address,
-                    contry : user.contry,
-                    city : user.city,
-                    isAdmin : user.isAdmin,
-                    status : "fullfilled"
+                    token:action.payload,
+                    name: user.name,
+                    lastName: user.Lastname,
+                    email: user.email,
+                    _id:user._id,
+                    profilePic:user.profilePic,
+                    address: user.address,
+                    city: user.city,
+                    contry: user.contry,
+                    isAdmin: user.isAdmin,
+                    status: 'fullfilled'
                 }
             } else {
                 return {...state};
@@ -124,9 +125,11 @@ const userSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+            console.log("logout")
             state.token = null;
             state.name= "";
             state._id= "";
+            state.profilePic="";
             state.email= "";
             state.lastName= "";
             state.city= "";

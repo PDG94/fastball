@@ -9,6 +9,8 @@ function CartIcon() {
   const token = localStorage.getItem('tokenAuth');
   
   useEffect(() => {
+    console.log("cart icon 1")
+    
     if(token){
       const decodedToken = decode(token);
       dispatch(getAllProductsOnCart(decodedToken._id));
@@ -19,6 +21,8 @@ function CartIcon() {
 
   // Aquí actualizamos el estado del carrito con los productos actualizados
   useEffect(() => {
+    console.log("cart icn¿on 2")
+
     dispatch(updateCartProducts(cartProducts));
   }, [dispatch, cartProducts]);
 
