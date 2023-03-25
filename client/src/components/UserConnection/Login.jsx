@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import GoogleButton from 'react-google-button';
-import {logOut} from './../../Auth/firebase';
+// import {logOut} from './../../Auth/firebase';
 
 const {loginUserAction, loginUserGoogleAction} = require('./../../reduxToolkit/actions/userActions');
 
 const Login = () => {
     const dispatch = useDispatch()
-    const [submitedForm, setSubmitedForm] = useState(false)
+    // const [submitedForm, setSubmitedForm] = useState(false)
     // const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
 
@@ -46,11 +46,11 @@ const Login = () => {
                 const email = values.email;
                 const password = values.password;
                 console.log("hola",{email,password})
-                dispatch(loginUserAction(email,password));
+                dispatch(loginUserAction(email,password)).then(()=> navigate('/'));
                 console.log('Enviar Formulario');
-                setSubmitedForm(true)
-                navigate('/')
-                setTimeout(() => setSubmitedForm(false), 2000)
+                // setSubmitedForm(true)
+                // navigate('/')
+                // setTimeout(() => setSubmitedForm(false), 2000)
             }}
         >
             {({ errors }) => (
@@ -96,7 +96,7 @@ const Login = () => {
                     </div>
                     <div>
                         <button   className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Login in</button>
-                        {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully logged</p>}
+                        {/* {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully logged</p>} */}
                     </div>
                     {/* <div className='grid grid-cols-4 pt-5 items-center' >
                         <span className='col-end-3'>-or login with-</span>
@@ -107,16 +107,16 @@ const Login = () => {
                     <div>
                         <GoogleButton onClick={handleGoogle}/>
                     </div>
-                    <div>
+                    {/* <div>
                         <button onClick={logOut}>Logout</button>
-                    </div>
-                    <div className='grid grid-cols-2 pt-10 '>
+                    </div> */}
+                    {/* <div className='grid grid-cols-2 pt-10 '>
                         <Link to="/" className=' col-end-3'>
                             <button className='mt-4 w-full py-3 bg-slate-900 hover:bg-slate-800 text-white' type='button'>
                                 Home
                             </button>
                         </Link>
-                    </div>
+                    </div> */}
                 </Form>
             )}
         </Formik>
