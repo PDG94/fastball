@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navbar } from "../Navbar/Navbar";
-import { getServiceUser } from "../../../redux/actions/usersActions";
+// import { getServiceUser } from "../../../redux/actions/usersActions";
 
 export default function DashboardUser() {
   const dispatch = useDispatch();
@@ -13,14 +12,12 @@ export default function DashboardUser() {
     (state) => state.user
   );
 
-  useEffect(() => {
-    dispatch(getServiceUser(id, token));
-  }, [dispatch, id, token]);
+  // useEffect(() => {
+  //   dispatch(getServiceUser(id, token));
+  // }, [dispatch, id, token]);
 
   return (
     <div className="">
-      <Navbar/>
-
       <div className="">
         <div className="">
           <img

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Navbar } from "../Navbar/Navbar";
 
 export default function UpdateInfoUser() {
   const navigate = useNavigate();
@@ -105,7 +104,6 @@ export default function UpdateInfoUser() {
 
   return (
     <div className="">
-      <Navbar />
       <form className="" onSubmit={submitHandler}>
         <Link to={"/profile"}>
           <button className="">Back</button>
