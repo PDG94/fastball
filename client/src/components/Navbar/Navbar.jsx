@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
+import profile from "../Images/profile.png";
 import { useEffect, useRef, useState } from "react";
 import { logoutUserAction } from '../../reduxToolkit/actions/userActions';
 import CartIcon from "../Cart/CartIcon";
@@ -11,17 +12,21 @@ const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false); //Nuestro estado del menu
     const [perfil, setPerfil] = useState(false);
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const toggleMenu = () => {
         setShowMenu(!showMenu); //Para poder desplegar nuestro menu
     }
     const logOutt = async () => {
-        await logOut();
-        dispatch(logoutUserAction());
-        setShowMenu(false);
-        navigate('/')
+        await logOut()
+            .then(()=>{
+                setShowMenu(false)
+                setPerfil(false)
+                dispatch(logoutUserAction())
+            }
+        );
+        // navigate('/')
     }
     const menuRef = useRef(null);
 
@@ -29,6 +34,7 @@ const Navbar = () => {
         if (user.name) {
             setPerfil(true);
         }
+
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) { //Para poder cerrar el dropdown cuando demos click en otra parte
                 setShowMenu(false);
@@ -36,12 +42,13 @@ const Navbar = () => {
         }
 
         document.addEventListener('mousedown', handleOutsideClick);
-        console.log("navbar")
+      
         return () => {
-            console.log("navbar")
+         
             document.removeEventListener('mousedown', handleOutsideClick);
         }
-    }, [menuRef, user, perfil]);
+    }, [menuRef, user, perfil,setPerfil]);
+
     return (
         <nav className="flex items-center justify-between flex-wrap bg-white p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -72,19 +79,23 @@ const Navbar = () => {
                         </Link>
                     </button>
                 </div>
+               
                 {/* && user.name */}
                 {
-                    user  && user.name ?
+                    perfil ?
                         <div className="lg:inline-block   items-center mt-0 absolute right-20 rounded-xl m-2 " ref={menuRef}>
                             <div className="relative  gap-4 flex flex-row">
                                 <button className="flex items-center justify-center  border:none text-sm w-10 transition duration-150 ease-in-out  transform ">
                                     <CartIcon user={user} />
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
-                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic} alt="Profile" />
+
+                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic?user.profilePic:profile} alt="Profile" />
+
                                 </button>
                                 {showMenu ? (
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>
+                                        <p disable className="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100">{user.name}</p>
                                         <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
                                         <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
                                         <div className="border-t border-gray-100"></div>

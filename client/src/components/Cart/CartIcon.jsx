@@ -6,21 +6,15 @@ import { decode } from '../../Auth/jwt';
 
 function CartIcon() {
   const dispatch = useDispatch();
-  const token = localStorage.getItem('tokenAuth');
-  
+  const user = useSelector((state)=> state.user)
+ const cartProducts = useSelector(state => state.cart.allProductsCart);
   useEffect(() => {
-    if(token){
-      const decodedToken = decode(token);
-      dispatch(getAllProductsOnCart(decodedToken._id));
+    if(user){
+      dispatch(getAllProductsOnCart(user._id));
     }
-  }, [dispatch, token]);
-  
-  const cartProducts = useSelector(state => state.cart.allProductsCart);
-
-  // Aquí actualizamos el estado del carrito con los productos actualizados
-  useEffect(() => {
-    dispatch(updateCartProducts(cartProducts));
-  }, [dispatch, cartProducts]);
+  }, [dispatch]);
+    
+ 
 
   return (
     <div id="cart">

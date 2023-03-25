@@ -61,7 +61,7 @@ const Register = ({changeCurrentImage}) => {
                 resetForm()
                 console.log('Enviar Formulario');
                 setSubmitedForm(true)
-                uploadImage(values.image)
+                uploadImage(values.image, 'products')
                     .then( newURL => {
                         values = { ...values, image: newURL}
                         dispatch(fetchCreateProduct(values)).then(()=> console.log("entró al .then"), navigate('/catalogue'));

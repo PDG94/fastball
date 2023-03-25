@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import {addProductInCart} from '../../reduxToolkit/actions/cartAction'
+import { useDispatch } from 'react-redux'
+import {addProductInCart} from '../../reduxToolkit/actions/cartAction';
+import { decode } from '../../Auth/jwt';
+
 const AddCart = ({productDetail}) => {
-    const user = useSelector((state) => state.user);
+    const token = localStorage.getItem('tokenAuth');
+    //const user = useSelector((state) => state.user);
+
     const dispatch=useDispatch();
     const [stock,setStock]=useState(1);
     const handleQuantityChange = (event) => {
-        // console.log(user._id);
-        //console.log(productDetail.idProduct);
         const value = parseInt(event.target.value);
         setStock(value);
     }
     const handleAddToCart=async()=>{
-        // {idUser, idProduct, sotck}
-        await dispatch(addProductInCart({idUser:user._id, idProduct:productDetail.id, stock}));
+        if(token){
+        const decodedToken = decode(token);
+        dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
         console.log("agregado con exito");
+        }
     }
     return ( 
         <div className="flex flex-col  gap-4 p-4  ">

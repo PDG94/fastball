@@ -1,5 +1,7 @@
 import axios from 'axios';
+import {headers} from './../../Auth/headers';
 const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
+
 
 
 export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> {
@@ -22,7 +24,7 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
 
  export const fetchCreateProduct = createAsyncThunk('product/fetchCreateProduct', async (product) => {
     try {
-       const productCreated = await axios.post('/product', product)
+       const productCreated = await axios.post('/product', product, headers())
        return productCreated 
     } catch (error) {
         throw error
@@ -31,7 +33,7 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
 
 export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct', async (values)=> {
     try {
-     const product = await axios.patch(`/product/editProduct/%${values.product._id}`, values );
+     const product = await axios.patch(`/product/editProduct/%${values.product._id}`, values , headers());
      return product.data
     } catch (error) {
      throw error;
@@ -40,7 +42,7 @@ export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct',
 
 export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct', async (productId)=> {
     try {
-     const product = await axios.delete(`/product/editProduct/%${productId}`,  );
+     const product = await axios.delete(`/product/editProduct/%${productId}`, headers() );
      return product.data
     } catch (error) {
      throw error;
