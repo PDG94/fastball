@@ -4,6 +4,7 @@ import { fetchProductById } from '../../reduxToolkit/actions/productAction';
 import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
+import ImageViewer from "../imageViewer/ImageViewer";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 const Detail = () => {
@@ -17,8 +18,11 @@ const Detail = () => {
           .then(() => {
             setIsLoading(false);
           });
-        return () => dispatch(clearProductDetail)
-    }, [dispatch,id])
+        return () => {
+          dispatch(clearProductDetail())
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return ( 
       <>
         {isLoading ? (
@@ -29,12 +33,10 @@ const Detail = () => {
 
         <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <img
-              src={productDetail.image}
-              alt="Product"
-              className="w-full"
-            />
+
+          <div className="cont-imageviewer">
+           <ImageViewer image={productDetail.image}></ImageViewer>
+
           </div>
           <div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">

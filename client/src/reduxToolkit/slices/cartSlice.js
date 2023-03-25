@@ -1,8 +1,10 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const { getAllProductsOnCart,addProductInCart,updateCart,deleteCart } = require('./../actions/cartAction')
+const { getAllProductsOnCart,addProductInCart,updateCart,deleteCart,totalMountProducts } = require('./../actions/cartAction')
 
 const initialState = {
-    allProductsCart : []
+    allProductsCart : [],
+    totalMount:0,
+    selectedProducts:[]
 }
 
 const cartSlice = createSlice({
@@ -20,16 +22,32 @@ const cartSlice = createSlice({
         builder.addCase(addProductInCart.fulfilled, (state,action)=> {
             state.allProductsCart = [];
             state.allProductsCart = action.payload;
-            console.log(action.payload)
+            
+            state.totalMount = 0;
+            state.allProductsCart.forEach((element) => {
+            state.totalMount += element.price * element.Cart.stock;}) // sum the price of each element in the cart
             state.status = 'success';
         })
         builder.addCase(addProductInCart.rejected, (state,action)=> {
             state.status = 'rejected'
         })
 
+        //para los checkouts
+        builder.addCase(totalMountProducts.fulfilled, (state, action) => {
+            if(state.totalMount===0){
+                console.log(action.payload)
+                state.totalMount=action.payload;   
+            }
+            state.status = 'success';
+        }) 
+        // builder.addCase(selectedProducts.fulfilled, (state,action)=> {
+        //     state.allProductsCart = action.payload
+        //     state.status = 'success';
+        // })
+
 
         builder.addCase(getAllProductsOnCart.pending, (state, action)=> {
-            state.status = 'pending';
+            state.status = 'success';
         })
         builder.addCase(getAllProductsOnCart.fulfilled, (state,action)=> {
             state.allProductsCart = action.payload
@@ -45,7 +63,7 @@ const cartSlice = createSlice({
         builder.addCase(deleteCart.fulfilled, (state,action)=> {
             state.allProductsCart = [];
             state.allProductsCart = action.payload;
-            console.log(action.payload)
+            state.totalMount=0;
             state.status = 'success';
         })
         builder.addCase(deleteCart.rejected, (state,action)=> {
@@ -59,7 +77,10 @@ const cartSlice = createSlice({
         builder.addCase(updateCart.fulfilled, (state,action)=> {
             state.allProductsCart = [];
             state.allProductsCart = action.payload;
-            console.log(action.payload)
+            state.totalMount = 0;
+            state.allProductsCart.forEach((element) => {
+            state.totalMount += element.price * element.Cart.stock; // sum the price of each element in the cart
+        });
             state.status = 'success';
         })
         builder.addCase(updateCart.rejected, (state,action)=> {

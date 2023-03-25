@@ -17,8 +17,8 @@ const ContainerRegiterPRoduct = ( ) => {
 
     return (
         <div className='container mx-auto mt-8 min-height-full flex m-0'>
-            <div className='hidden lg:block relative flex-1 mb-8'>
-                <img src={!currentImage? 'https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_750,q_auto,w_700/v1679507441/fastball/system/product_image_d3cm5a.webp': currentImage} alt="loginImage" className='w-full h-full object-cover' />
+            <div className='flex w-4/5 items-center justify-center mb-8 drop-shadow-lg bg-white '>
+                { !currentImage? <h1 className='w-fit bg-blue-600 px-5 py-3 font-bold text-white'>Product image</h1> : <img src={ currentImage } alt="loginImage" className='object-cover h-full' />}
             </div>
             <div className='flex-1 flex flex-col'>
                 <div className='ml-8 w-full max-w-sm lg:max-w-lg lg:w-[100rem]'>
