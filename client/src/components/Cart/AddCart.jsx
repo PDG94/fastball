@@ -16,7 +16,8 @@ const AddCart = ({productDetail}) => {
     const handleAddToCart=async()=>{
         if(token){
         const decodedToken = decode(token);
-        await dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
+       
+        dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
         console.log("agregado con exito");
         }
     }

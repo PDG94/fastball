@@ -40,12 +40,10 @@ export const loginUserGoogleAction = createAsyncThunk('user/loginUser', async (u
     try {
         const provider = new GoogleAuthProvider();
 
-    const result = await signInWithPopup(auth, provider)
-    // const credentials = await GoogleAuthProvider.credentialFromResult(result);
-    console.log({result})
+    const result = await signInWithPopup(auth, provider);
+    const response = await axios.post("/users/loginAndRegisterGoogle", result);
     //Guardar en local storage
-    localStorage.setItem('tokenAuth', result.user.accessToken);
-    const response = await axios.post("/users/loginAndRegisterGoogle", result); 
+    localStorage.setItem('tokenAuth', response.data); 
     return response.data}
     catch (err) {
         return err.message

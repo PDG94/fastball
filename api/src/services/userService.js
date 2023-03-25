@@ -56,7 +56,7 @@ class UserService {
         if (!userFound) {
             const name = user.displayName.split(" ")
             console.log("en Servicio")
-            
+            console.log(user)
             const newUser = await User.create({
                 name: name[0],
                 lastName: name[1],
@@ -68,6 +68,7 @@ class UserService {
             console.log(newUser)
             return token
         }
+        console.log(userFound.dataValues);
         const token = singToken(userFound.dataValues);
         return token
        
