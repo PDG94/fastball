@@ -3,6 +3,7 @@ const express = require('express');
 const userRouter = require('./userRoute')
 const categoryRouter = require('./categoryRoute')
 const productRouter = require('./productRoute')
+const orderRoute = require('./orderRoute');
 const cartRouter = require('./../routes/cartRoute');
 const checkout = require('../services/checkout')
 const alta = require("../utils/notifications/altaMail")
@@ -19,6 +20,7 @@ function routerApi(app){
     router.use('/product', productRouter);
     router.use('/checkout', checkout);
     router.use('/cart', cartRouter);
+    router.use('/order', orderRoute);
     router.use("/alta", alta);
     router.use("/pago", pago);
     router.use("/baja", baja);

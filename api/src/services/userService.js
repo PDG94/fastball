@@ -30,7 +30,6 @@ class UserService {
     }
 
     async loginUser(email, password) {
-        console.log("holaaa", { email, password })
         const user = await User.findOne({ where: { email: email } });
         console.log({ user })
         if (!user) {
@@ -66,6 +65,7 @@ class UserService {
             });
             const token = singToken(newUser);
             //Verificar qué trae en newUser, para el userSlice
+            console.log(newUser)
             return token
         }
         const token = singToken(userFound.dataValues);
