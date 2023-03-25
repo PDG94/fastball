@@ -23,7 +23,6 @@ class CartService {
     //     if(product.dataValues){
     //         const productDetail = product.dataValues;
     //         if(productDetail.stock > stock){
-
     //         }
     //     }
     // }

@@ -5,8 +5,9 @@ export const getAllProductsOnCart = createAsyncThunk('cart/getAllProductsOnCart'
     try {
 
         //alert(idUser,"Usuario id");
+        console.log({idUser})
         const productsOnCart = await axios.get(`/cart/getCart/${idUser}`);
-
+        console.log(productsOnCart)
         return productsOnCart.data;
     } catch (error) {
         return error.message

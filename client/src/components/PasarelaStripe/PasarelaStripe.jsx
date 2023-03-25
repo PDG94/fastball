@@ -26,7 +26,7 @@ const CheckOutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount);
+  const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
   const cartItems1 = useSelector((state) => state.cart.cartItems);
   const userID1 = useSelector((state) => state.user._id);

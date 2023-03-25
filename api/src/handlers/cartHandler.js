@@ -20,7 +20,7 @@ class cartHandler{
             const products = await service.getAllProductsOnCart(idUser);
             res.status(200).send(products); 
         } catch (error) {
-            res.send(error)
+            res.json(error.message);
         };
     };
     async updateCart(req, res, next){

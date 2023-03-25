@@ -26,13 +26,13 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         loadUser(state, action) {
-            const token = state.token;
-            console.log("Se")
-            if (token) {
-                const user = decode(token);
+       
+            if (state.token) {
+                const user = decode(state.token);
+                console.log({user})
                 return {
                     ...state,
-                    token,
+                    token : action.payload,
                     _id: user._id,
                     name: user.name,
                     profilePic : user.profilePic ? user.profilePic: user.profile ,
@@ -43,7 +43,7 @@ const userSlice = createSlice({
                     address: user.address,
                     isAdmin: user.isAdmin
                 };
-            } else return { ...state };
+            }else return {...state}
         },
         logOutUser(state, action) {
             localStorage.removeItem('tokenAuth');
@@ -68,7 +68,6 @@ const userSlice = createSlice({
         builder.addCase(registerUserAction.fulfilled, (state, action) => {
             if (action.payload) {
                 const user = decode(action.payload);
-                console.log( 'ESTE ES EL USUARIO EN REDUX!!!!!', user )
                 return {
                     ...state,
                     name: user.name,
@@ -92,14 +91,10 @@ const userSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(loginUserAction.fulfilled, (state, action) => {
-            // console.log(action.payload)
-            // console.log("hola este es el extre reducer")
-            // console.log(action.payload)
+         
             if (action.payload) {
-                // console.log('dentro del payload')
-                // console.log(action.payload)
                 const user = decode(action.payload)
-                // console.log(user,'Este es el usuario');
+            
                 return {
                     ...state,
                     token:action.payload,
@@ -125,7 +120,7 @@ const userSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(logoutUserAction.fulfilled, (state, action) => {
-            console.log("logout")
+            
             state.token = null;
             state.name= "";
             state._id= "";
@@ -148,7 +143,7 @@ const userSlice = createSlice({
             if(action.payload){
                 const user = decode(action.payload)
         
-                console.log({user})
+                
                 return {
                     ...state,
                     token : action.payload,
