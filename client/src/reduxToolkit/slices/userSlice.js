@@ -27,6 +27,7 @@ const userSlice = createSlice({
     reducers: {
         loadUser(state, action) {
             const token = state.token;
+            console.log("Se")
             if (token) {
                 const user = decode(token);
                 return {
@@ -67,7 +68,7 @@ const userSlice = createSlice({
         builder.addCase(registerUserAction.fulfilled, (state, action) => {
             if (action.payload) {
                 const user = decode(action.payload);
-                console.log({ user })
+                console.log( 'ESTE ES EL USUARIO EN REDUX!!!!!', user )
                 return {
                     ...state,
                     name: user.name,
@@ -77,6 +78,7 @@ const userSlice = createSlice({
                     city: user.city,
                     contry: user.contry,
                     isAdmin: user.isAdmin,
+                    profilePic: user.profilePic,
                     status: "fullfilled"
                 }
             } else {
@@ -90,29 +92,30 @@ const userSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(loginUserAction.fulfilled, (state, action) => {
-            console.log(action.payload)
+            // console.log(action.payload)
             // console.log("hola este es el extre reducer")
             // console.log(action.payload)
             if (action.payload) {
-                console.log('dentro del payload')
-                console.log(action.payload)
+                // console.log('dentro del payload')
+                // console.log(action.payload)
                 const user = decode(action.payload)
-                console.log(user,'Este es el usuario');
+                // console.log(user,'Este es el usuario');
                 return {
+                    ...state,
+                    token:action.payload,
                     name: user.name,
                     lastName: user.Lastname,
                     email: user.email,
+                    _id:user._id,
                     profilePic:user.profilePic,
                     address: user.address,
                     city: user.city,
                     contry: user.contry,
                     isAdmin: user.isAdmin,
                     status: 'fullfilled'
-
                 }
-
             } else {
-                return state;
+                return {...state};
             }
         });
         builder.addCase(loginUserAction.rejected, (state, action) => {
@@ -122,9 +125,11 @@ const userSlice = createSlice({
             state.status = 'pending'
         })
         builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+            console.log("logout")
             state.token = null;
             state.name= "";
             state._id= "";
+            state.profilePic="";
             state.email= "";
             state.lastName= "";
             state.city= "";

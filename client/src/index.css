@@ -109,3 +109,28 @@ body{
 .fa-trash:hover{
   color:rgba(211, 10, 10, 0.651);
 }
+
+
+
+.cont-imageviewer {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden; 
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.img-connntt{
+  cursor:zoom-in ;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
