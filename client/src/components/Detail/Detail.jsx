@@ -17,8 +17,11 @@ const Detail = () => {
           .then(() => {
             setIsLoading(false);
           });
-        return () => dispatch(clearProductDetail)
-    }, [dispatch,id])
+        return () => {
+          dispatch(clearProductDetail())
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return ( 
       <>
         {isLoading ? (
@@ -29,11 +32,11 @@ const Detail = () => {
 
         <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
+          <div className="w-full h-96 bg-white drop-shadow-lg rounded-lg">
             <img
               src={productDetail.image}
               alt="Product"
-              className="w-full"
+              className="h-full object-contain w-full"
             />
           </div>
           <div>
