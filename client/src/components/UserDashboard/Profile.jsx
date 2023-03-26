@@ -51,13 +51,6 @@ export default function DashboardUser() {
                               <br />
 
                               <p className="">
-                                Surname
-                                <br />
-                                <b>{lastname}</b>
-                              </p>
-                              <br />
-
-                              <p className="">
                                 E-mail
                                 <br /> 
                                 <b>{email}</b>
