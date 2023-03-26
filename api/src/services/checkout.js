@@ -3,7 +3,7 @@ require("dotenv").config();
 const { STRIPE_SK } = process.env;
 
 const stripe = new Stripe(
-  STRIPE_SK
+  "sk_test_51MoJENC4TeWDJRMMGy5uUuK0SRJsk6FS9zQHTvdUXowy4D8gztl4PDeR8VokUZX9YwlwBZhdAObq86wGvq7GtSam00NFZes1Dw"
 );
 const checkOut = async (req, res) => {
   const { id, amount, desc } = req.body;

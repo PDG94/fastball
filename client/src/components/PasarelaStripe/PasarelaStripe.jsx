@@ -24,6 +24,9 @@ const CheckOutForm = () => {
 
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
+
+  const totalPayment1= 200;
+  const itemsDesc1= "[testing, for, stripe]"
   
   const stripe = useStripe();
   const elements = useElements();
@@ -35,8 +38,11 @@ const CheckOutForm = () => {
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
 
+  const items = cartItems1.map(element => element.name)
+  const itemsDesc = JSON.stringify(items)
+  
   const log =()=>{
-    console.log({cartTotalAmount,cartItems1,userID1})
+    console.log("testttt",totalPayment,itemsDesc)
   }
 
   const clearCart1 = () => {
@@ -59,16 +65,15 @@ const CheckOutForm = () => {
 
     if (!error) {
       const { id } = paymentMethod;
-
-      const items = cartItems1.map(element => element.name)
-      const itemsDesc = JSON.stringify(items)
+      console.log("esto es id de transaccion", id)
+      
       try {
         await axios.post(
           "https://fastball-production.up.railway.app/api/checkout",
           {
-            amount: totalPayment,
+            amount: totalPayment1,
             id,
-            desc: itemsDesc,
+            desc: itemsDesc1,
           }
         );
 
@@ -77,7 +82,7 @@ const CheckOutForm = () => {
           {
             name: customerName,
             email: customerEmail,
-            amount: (totalPayment) / 100,
+            amount: (totalPayment1) / 100,
             items: items,
           }
         );
@@ -86,6 +91,7 @@ const CheckOutForm = () => {
         const order = {orderNumber : id, totalAmount: cartTotalAmount, products:cartItems1, userId:userID1 }
         const orderCreated = await axios.post('/order/create', order);
         console.log(orderCreated)
+        
 
         toast.success("Payment Succesful!");
       } catch (error) {
