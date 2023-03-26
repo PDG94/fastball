@@ -45,7 +45,7 @@ const CheckOutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error, paymentMethod} = await stripe.createPaymentMethod({
       // esto es para configurar el recuadro donde se pone la tarjeta de credito y los datos
       type: "card",
       card: elements.getElement(CardNumberElement),
