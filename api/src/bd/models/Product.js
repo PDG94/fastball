@@ -31,14 +31,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      soldAmount: {
-        type: DataTypes.INTEGER,
-        defaultValue : 0,
-      },
-      visits: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      }
     },
     {
       timestamps: true,

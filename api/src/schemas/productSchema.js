@@ -14,6 +14,8 @@ const price_max = Joi.number().integer();
 const stock = Joi.number().integer();
 const categories = Joi.any();
 
+const isAdmin = Joi.string();
+const isActUsrOnline = Joi.string();
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
@@ -36,7 +38,16 @@ const updateProductSchema = Joi.object({
   soldAmount: soldAmount,
 });
 
+const updateProductStatsSchema = Joi.object({
+  isa: isAdmin,
+  isauo: isActUsrOnline
+});
+
 const getProductSchema = Joi.object({
+  id: id.required(),
+});
+
+const getProductStatsSchema = Joi.object({
   id: id.required(),
 });
 
@@ -51,4 +62,4 @@ const queryProductSchema = Joi.object({
   })
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema }
+module.exports = { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema, getProductStatsSchema, updateProductStatsSchema }

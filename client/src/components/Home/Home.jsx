@@ -1,6 +1,6 @@
 import CategoryButtons from "../categoryButtons.jsx/CategoryButtons"
 import { Carousel } from './../Carousel/Carousel';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useEffect } from "react";
 // import {useState } from "react";
 import { useDispatch } from "react-redux";

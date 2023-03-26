@@ -83,7 +83,7 @@ const CheckOutForm = () => {
   };
   return (
     <div className="flex mt-12 justify-center h-screen">
-      <div className="container bg-white flex rounded-lg w-[50%] h-[55%] ">
+      <div className="container bg-white flex rounded-lg drop-shadow-lg w-[50%] h-[55%] ">
         <form className="h-full w-full flex flex-col" onSubmit={handleSubmit}>
           <div className="flex items-center">
             <Link
