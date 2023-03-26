@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
-  `pk_test_51MeScXEohVMDTuBfkv6jlBnpXq6EN6W0vJs3bFlepyOusbfYEuIAhoOXcsYFGgcDcOqwJLAqYL4qqNegKOdGJOvE00lBepiZlb`
+  `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
 
 const CheckOutForm = () => {
@@ -35,7 +35,7 @@ const CheckOutForm = () => {
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
-    navigate("/home");
+    // navigate("/home");
   };
 
   const clearAndBack = () => {
@@ -62,9 +62,6 @@ const CheckOutForm = () => {
           {
             amount: totalPayment,
             id,
-            userID1,
-            userEmail: customerEmail,
-            items: cartItems1,
             desc: itemsDesc,
           }
         );
