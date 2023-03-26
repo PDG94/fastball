@@ -78,6 +78,16 @@ const Navbar = () => {
                             Catalogue
                         </Link>
                     </button>
+                    <button className='btn btn-primary rounded-lg    '>
+                        <Link to="/create">
+                            Create
+                        </Link>
+                    </button>
+                    <button className='btn btn-primary rounded-lg    '>
+                        <Link to="/payment">
+                            Pay
+                        </Link>
+                    </button>
                 </div>
                
                 {/* && user.name */}

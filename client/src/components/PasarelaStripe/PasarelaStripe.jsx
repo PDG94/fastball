@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
-  `pk_test_51MeScXEohVMDTuBfkv6jlBnpXq6EN6W0vJs3bFlepyOusbfYEuIAhoOXcsYFGgcDcOqwJLAqYL4qqNegKOdGJOvE00lBepiZlb`
+  `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
 
 const CheckOutForm = () => {
@@ -28,14 +28,14 @@ const CheckOutForm = () => {
 
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
-  const cartItems1 = useSelector((state) => state.cart.cartItems);
+  const cartItems1 = useSelector((state) => state.cart.allProductsCart);
   const userID1 = useSelector((state) => state.user._id);
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
-    navigate("/home");
+    // navigate("/home");
   };
 
   const clearAndBack = () => {
@@ -54,7 +54,7 @@ const CheckOutForm = () => {
     if (!error) {
       const { id } = paymentMethod;
 
-      const items = cartItems1.map(element =>element.servicename)
+      const items = cartItems1.map(element =>element.name)
       const itemsDesc = JSON.stringify(items)
       try {
         await axios.post(
@@ -62,9 +62,6 @@ const CheckOutForm = () => {
           {
             amount: totalPayment,
             id,
-            userID1,
-            userEmail: customerEmail,
-            items: cartItems1,
             desc: itemsDesc,
           }
         );
