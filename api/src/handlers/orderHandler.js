@@ -4,7 +4,14 @@ const service = new orderService();
 
 class orderHandler{
     constructor(){}
-    
+    async getAllOrders(req,res,next){
+        try {
+            const orders = await service.getAllOrders();
+            res.status(200).send(orders);
+        } catch (error) {
+            res.send(error);
+        }
+    }
     async getOrderById(req,res,next){  
         try {
             const {id} = req.params;

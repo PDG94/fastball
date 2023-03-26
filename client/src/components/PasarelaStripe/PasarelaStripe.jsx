@@ -11,6 +11,8 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createOrderAction } from './../../reduxToolkit/actions/orderAction'
 // import { useDispatch } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,10 +24,10 @@ const CheckOutForm = () => {
 
   // const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const stripe = useStripe();
   const elements = useElements();
-
+  const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
   const cartItems1 = useSelector((state) => state.cart.allProductsCart);
@@ -45,7 +47,7 @@ const CheckOutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error, paymentMethod} = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       // esto es para configurar el recuadro donde se pone la tarjeta de credito y los datos
       type: "card",
       card: elements.getElement(CardNumberElement),
@@ -54,7 +56,7 @@ const CheckOutForm = () => {
     if (!error) {
       const { id } = paymentMethod;
 
-      const items = cartItems1.map(element =>element.name)
+      const items = cartItems1.map(element => element.name)
       const itemsDesc = JSON.stringify(items)
       try {
         await axios.post(
@@ -65,16 +67,21 @@ const CheckOutForm = () => {
             desc: itemsDesc,
           }
         );
-                
+
         await axios.post(
           "https://fastball-production.up.railway.app/api/pago",
           {
             name: customerName,
             email: customerEmail,
-            amount: (totalPayment)/100,
+            amount: (totalPayment) / 100,
             items: items,
           }
         );
+        //Recibe por body orderNumber, totalAmount, products, userId, quantity
+        //Hay que ver cómo se le manda el stock de cada producto
+        const order = {id, cartTotalAmount, cartItems1, userID1 }
+        dispatch(createOrderAction(order))
+
         toast.success("Payment Succesful!");
       } catch (error) {
         console.log(error);
@@ -85,7 +92,7 @@ const CheckOutForm = () => {
     <div className="">
       <div className="">
         <form className="" onSubmit={handleSubmit}>
-        
+
           <Link
             className=""
             to="/cart"
@@ -95,7 +102,7 @@ const CheckOutForm = () => {
           >
             <button className="">Go Back</button>
           </Link>
-          
+
           <h2 className="">Enter your payment method</h2>
 
           <div className="">
@@ -125,7 +132,7 @@ const CheckOutForm = () => {
                 style={{ width: "400px", height: "55px" }}
               >
                 Pay
-              </button>              
+              </button>
             </div>
           </div>
         </form>
