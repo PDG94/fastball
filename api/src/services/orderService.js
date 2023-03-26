@@ -13,9 +13,9 @@ class orderService {
         })
         await orderCreated.setUser(userId);
         await products.map(async(product) => {
-            await orderCreated.addProduct(product.id, { through: { quantity } } );
+            await orderCreated.addProduct(product.id, { through: { quantity : product.Cart.stock } } );
         });
-        return orderCreated;
+        return "Order created"
     }
     async getAllOrders(){
         const orders = await Order.findAll({

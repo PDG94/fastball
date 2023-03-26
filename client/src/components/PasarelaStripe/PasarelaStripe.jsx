@@ -30,10 +30,14 @@ const CheckOutForm = () => {
   const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
-  const cartItems1 = useSelector((state) => state.cart.allProductsCart);
+  const cartItems1 = useSelector((state) => state.cart.allProductsCart); 
   const userID1 = useSelector((state) => state.user._id);
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
+
+  const log =()=>{
+    console.log({cartTotalAmount,cartItems1,userID1})
+  }
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
@@ -79,8 +83,9 @@ const CheckOutForm = () => {
         );
         //Recibe por body orderNumber, totalAmount, products, userId, quantity
         //Hay que ver cómo se le manda el stock de cada producto
-        const order = {id, cartTotalAmount, cartItems1, userID1 }
-        dispatch(createOrderAction(order))
+        const order = {orderNumber : id, totalAmount: cartTotalAmount, products:cartItems1, userId:userID1 }
+        const orderCreated = await axios.post('/order/create', order);
+        console.log(orderCreated)
 
         toast.success("Payment Succesful!");
       } catch (error) {
@@ -140,6 +145,9 @@ const CheckOutForm = () => {
                   >
                     Pay
                   </button>              
+                </div>
+                <div>
+                  <button onClick={log}>Loguea</button>
                 </div>
               </div>
             </div>
