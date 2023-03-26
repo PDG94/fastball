@@ -3,7 +3,7 @@ const { DataTypes, UUIDV4 } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define('order', {
         orderNumber : {
-            type : DataTypes.INTEGER,
+            type : DataTypes.TEXT,
             allowNull: false
         },
         totalAmount: {

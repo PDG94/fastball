@@ -11,6 +11,8 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createOrderAction } from './../../reduxToolkit/actions/orderAction'
 // import { useDispatch } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link } from "react-router-dom";
@@ -25,13 +27,17 @@ const CheckOutForm = () => {
   
   const stripe = useStripe();
   const elements = useElements();
-
+  const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
-  const cartItems1 = useSelector((state) => state.cart.allProductsCart);
-  // const userID1 = useSelector((state) => state.user._id);
+  const cartItems1 = useSelector((state) => state.cart.allProductsCart); 
+  const userID1 = useSelector((state) => state.user._id);
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
+
+  const log =()=>{
+    console.log({cartTotalAmount,cartItems1,userID1})
+  }
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
@@ -54,7 +60,7 @@ const CheckOutForm = () => {
     if (!error) {
       const { id } = paymentMethod;
 
-      const items = cartItems1.map(element =>element.name)
+      const items = cartItems1.map(element => element.name)
       const itemsDesc = JSON.stringify(items)
       try {
         await axios.post(
@@ -65,16 +71,22 @@ const CheckOutForm = () => {
             desc: itemsDesc,
           }
         );
-                
+
         await axios.post(
           "https://fastball-production.up.railway.app/api/pago",
           {
             name: customerName,
             email: customerEmail,
-            amount: (totalPayment)/100,
+            amount: (totalPayment) / 100,
             items: items,
           }
         );
+        //Recibe por body orderNumber, totalAmount, products, userId, quantity
+        //Hay que ver cómo se le manda el stock de cada producto
+        const order = {orderNumber : id, totalAmount: cartTotalAmount, products:cartItems1, userId:userID1 }
+        const orderCreated = await axios.post('/order/create', order);
+        console.log(orderCreated)
+
         toast.success("Payment Succesful!");
       } catch (error) {
         console.log(error);
@@ -133,6 +145,9 @@ const CheckOutForm = () => {
                   >
                     Pay
                   </button>              
+                </div>
+                <div>
+                  <button onClick={log}>Loguea</button>
                 </div>
               </div>
             </div>
