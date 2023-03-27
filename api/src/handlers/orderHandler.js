@@ -4,11 +4,18 @@ const service = new orderService();
 
 class orderHandler{
     constructor(){}
-    
-    async getAllOrders(req,res,next){  
+    async getAllOrders(req,res,next){
         try {
-            const {idUser} = req.params;
-            const orders = await service.getAllOrders(idUser);
+            const orders = await service.getAllOrders();
+            res.status(200).send(orders);
+        } catch (error) {
+            res.send(error);
+        }
+    }
+    async getOrderById(req,res,next){  
+        try {
+            const {id} = req.params;
+            const orders = await service.getOrderById(id);
             res.status(200).send(orders);
         } catch (error) {
             res.send(error.message);
@@ -16,10 +23,10 @@ class orderHandler{
     }
     async createOrder(req,res,next){
         try {
-            const orderCreated = await service.createOrder(req.body) // debe venir por body orderNumber, totalAmount, products, userId en ese orden
+            const orderCreated = await service.createOrder(req.body) // debe venir por body orderNumber, totalAmount, products, userId, quantity en ese orden
             res.status(200).send(orderCreated);
         } catch (error) {
-            res.send(error.message);
+            res.send(error);
         }
     }
     async updateOrder(req,res,next){

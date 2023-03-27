@@ -5,17 +5,44 @@ class orderService {
 
     }
     async createOrder(order){
-        const {orderNumber, totalAmount, products, userId} = order //products es una lista de productos con su detalle 
-        const orderCreated = await Order.create({
+        const {orderNumber, totalAmount, products, userId, quantity} = order //products es una lista de productos con su detalle 
+        
+        const orderCreated= await Order.create({
             orderNumber,
-            totalAmount,
-            userId
+            totalAmount
         })
-        await order.addProducts(products);
-        return orderCreated;
+        await orderCreated.setUser(userId);
+        await products.map(async(product) => {
+            await orderCreated.addProduct(product.id, { through: { quantity : product.Cart.stock } } );
+        });
+        return "Order created"
     }
-    async getAllOrders(idUser){
-        const orders = await Order.findAll({where : idUser});
+    async getAllOrders(){
+        const orders = await Order.findAll({
+            include : [
+                {
+                    model : Product,
+                    attributes : ['name', 'description', "image", "price"]
+                }
+            ]
+            });
+        
+            if(!orders){
+                throw new Error("No se encontraron ordenes del usuario");
+            }
+        return orders;
+    }
+    async getOrderById(idUser){
+        const  UserId = idUser
+        const orders = await Order.findAll({where : {UserId},
+        include : [
+            {
+                model : Product,
+                attributes : ['name', 'description', "image", "price"]
+            }
+        ]
+        });
+    
         if(!orders){
             throw new Error("No se encontraron ordenes del usuario");
         }

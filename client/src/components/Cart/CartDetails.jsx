@@ -1,6 +1,7 @@
 import { updateCart,deleteCart,totalMountProducts } from '../../reduxToolkit/actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState,useEffect } from 'react';
+import {Link} from 'react-router-dom'
 
 const CartDetails = () => {
   // Suscribirse al estado del carrito utilizando el selector de Redux
@@ -123,7 +124,7 @@ const CartDetails = () => {
           </p>
           <div className="flex flex-row items-center gap-2">
             <button className="px-4 py-2 text-white bg-green-500 hover:bg-gray-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
-              Comprar todo
+             <Link to={'/payment'}> Comprar todo</Link>
             </button>
           </div>
         </div>
