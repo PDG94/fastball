@@ -105,7 +105,7 @@ const CheckOutForm = () => {
         <div className="flex items-center">
           <Link
             className=""
-            to="/cardDetail"
+            to="/cartDetail"
             style={{
               textDecoration: "none",
             }}>
