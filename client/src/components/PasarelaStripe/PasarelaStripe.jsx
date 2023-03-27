@@ -11,8 +11,8 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { createOrderAction } from './../../reduxToolkit/actions/orderAction'
+// import { useDispatch } from "react-redux";
+// import { createOrderAction } from './../../reduxToolkit/actions/orderAction'
 // import { useDispatch } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,20 +30,20 @@ const CheckOutForm = () => {
   
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
-  const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
+  // const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
   const cartItems1 = useSelector((state) => state.cart.allProductsCart); 
   const userID1 = useSelector((state) => state.user._id);
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
 
   const items = cartItems1.map(element => element.name)
-  const itemsDesc = JSON.stringify(items)
+  // const itemsDesc = JSON.stringify(items)
   
-  const log =()=>{
-    console.log("testttt",totalPayment,itemsDesc)
-  }
+  // const log =()=>{
+  //   console.log("testttt",totalPayment,itemsDesc)
+  // }
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
@@ -106,7 +106,7 @@ const CheckOutForm = () => {
           <div className="flex items-center">
             <Link
               className=""
-              to="/cart"
+              to="/cardDetail"
               style={{
                 textDecoration: "none",
               }}
@@ -152,9 +152,9 @@ const CheckOutForm = () => {
                     Pay
                   </button>              
                 </div>
-                <div>
+                {/* <div>
                   <button onClick={log}>Loguea</button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

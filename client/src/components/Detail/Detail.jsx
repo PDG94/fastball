@@ -60,8 +60,8 @@ const Detail = () => {
               {productDetail.name}
             </h1>
             <div className="mb-4">
-              <span>{`${currentProdStats.usersVisits} ${currentProdStats.usersVisits ===1? 'user has': 'users have'} seen this product ` }</span>
-              <span>{`( ${currentProdStats.soldAmount} sold )`}</span>
+              <span>{`${currentProdStats.usersVisits? currentProdStats.usersVisits : 0} ${currentProdStats.usersVisits ===1? 'user has': 'users have'} seen this product ` }</span>
+              <span>{`( ${currentProdStats.soldAmount? currentProdStats.soldAmount : 0} sold )`}</span>
             </div>
 
             <div className="mb-4">
