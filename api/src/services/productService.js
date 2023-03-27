@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const { Product, Category } = require("../bd/db");
+const { Product, Category, ProductStats } = require("../bd/db");
 
 class ProductService {
     constructor() {
@@ -34,6 +34,37 @@ class ProductService {
             throw boom.notFound('product not found');
         }
         return prod;
+    }
+
+    async findProductStats(id, isa) {
+        if( isa !== '04536' && isa !== '02838')
+            throw Error('Incorrect parameters')
+
+        const isAdmin = (isa === '02838')
+
+        let prodStats = await ProductStats.findOne({where : {ProductId: id}});
+
+        if(!isAdmin){
+            if (!prodStats) {
+                prodStats = await ProductStats.create({
+                    ProductId: id
+                })
+            }else {
+                prodStats = await prodStats.update( {
+                    usersVisits: prodStats.usersVisits + 1,
+                })
+            }
+        }else {
+            if (!prodStats) {
+                prodStats = {
+                    soldAmount: 0,
+                    usersVisits: 0,
+                    score: 0
+                }
+            }
+        }
+        
+        return prodStats;
     }
 
     async updateProduct(id, changes) {

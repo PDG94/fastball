@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import GoogleButton from 'react-google-button';
 // import {logOut} from './../../Auth/firebase';
+import { toast } from "react-toastify";
 
 const {loginUserAction, loginUserGoogleAction} = require('./../../reduxToolkit/actions/userActions');
 
@@ -15,7 +16,7 @@ const Login = () => {
 
     const handleGoogle = async ()=> {
         dispatch(loginUserGoogleAction()).then(()=> navigate('/'));
-     
+        toast.success("Welcome!");
     }
     return (
         <Formik
@@ -51,6 +52,7 @@ const Login = () => {
                 // setSubmitedForm(true)
                 // navigate('/')
                 // setTimeout(() => setSubmitedForm(false), 2000)
+                toast.success("Welcome!");
             }}
         >
             {({ errors }) => (

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductById } from '../../reduxToolkit/actions/productAction';
+import { fetchProductById, fetchProductStatsById } from '../../reduxToolkit/actions/productAction';
 import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
@@ -11,18 +11,37 @@ const Detail = () => {
   const [isLoading, setIsLoading] = useState(true);
     const {id}=useParams();
     const dispatch=useDispatch();
-    const { productDetail } = useSelector((state) => state.product);
+    const { productDetail, productStats } = useSelector((state) => state.product);
+    let startDetail = true
+    let startStats = true
+    const [currentProdStats, setcurrentProdStats] = useState({});
 
     useEffect(() => {
+      if(startDetail){
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        startDetail = false
         dispatch(fetchProductById(id))
           .then(() => {
-            setIsLoading(false);
+            dispatch(fetchProductStatsById({productId: id, valIsa: '04536'}))
+              .then( ()=> setIsLoading(false) )
           });
+      }
         return () => {
-          dispatch(clearProductDetail())
+            setcurrentProdStats({})
+            dispatch(clearProductDetail())
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+      if(startStats && productStats.usersVisits > 0){
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        startStats = false
+        setcurrentProdStats(productStats)
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [productStats.usersVisits])
+
     return ( 
       <>
         {isLoading ? (
@@ -33,15 +52,18 @@ const Detail = () => {
 
         <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
           <div className="cont-imageviewer">
            <ImageViewer image={productDetail.image}></ImageViewer>
-
           </div>
           <div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {productDetail.name}
             </h1>
+            <div className="mb-4">
+              <span>{`${currentProdStats.usersVisits? currentProdStats.usersVisits : 0} ${currentProdStats.usersVisits ===1? 'user has': 'users have'} seen this product ` }</span>
+              <span>{`( ${currentProdStats.soldAmount? currentProdStats.soldAmount : 0} sold )`}</span>
+            </div>
+
             <div className="mb-4">
               <span className="text-2xl md:text-3xl lg:text-4xl font-bold mr-4">
               ${productDetail.price}

@@ -1,6 +1,7 @@
 import { updateCart,deleteCart,totalMountProducts } from '../../reduxToolkit/actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState,useEffect } from 'react';
+import {Link} from 'react-router-dom'
 
 const CartDetails = () => {
   // Suscribirse al estado del carrito utilizando el selector de Redux
@@ -91,11 +92,12 @@ const CartDetails = () => {
               </div>
               <div className="p-4 pz4 font-semibold text-lg mb-2">
                     
-                    <i  onClick={() => deleteProductCart(product.id)} className="fa-solid fa-trash"></i>
+                  <i  onClick={() => deleteProductCart(product.id)} className="fa-solid fa-trash"></i>
                     
                   $ {product.Cart.stock*product.price}
+                  
                   <button className="px-4 py-2 text-white bg-yellow-400 hover:bg-gray-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
-                  Comprar
+                  Buy
                   </button>
               </div>
             </div>
@@ -105,7 +107,10 @@ const CartDetails = () => {
         <div className="mb-4 bg-white shadow rounded-lg overflow-hidden">
           <div className="p-4">
             <h3 className="font-semibold text-lg mb-2">
-              Aún no agregaste productos al carrito?
+            Still haven't added products to cart? Let's get to it! 
+            </h3>
+            <h3 className="font-semibold text-sky-700 mb-2 underline">
+              <Link to="/catalogue">Catalogue</Link>
             </h3>
           </div>
         </div>
@@ -114,17 +119,21 @@ const CartDetails = () => {
     <div className="summary-container flex-0 md:w-1/3 p-3 mt-4 mr-4">
       <div className="bg-white shadow rounded-lg overflow-hidden p-4">
         <h3 className="font-semibold text-lg mb-2">
-          Aqui todo el resumen las sumas de todo el carrito y eso
+          Resumen
         </h3>
         <div className="flex justify-between items-center mb-2">
-          <p className="text-gray-700">Subtotal:</p>
+          <p className="text-gray-700">Total:</p>
           <p className="text-gray-900 font-semibold">
             $ {products.totalPrice} 
           </p>
           <div className="flex flex-row items-center gap-2">
-            <button className="px-4 py-2 text-white bg-green-500 hover:bg-gray-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
-              Comprar todo
-            </button>
+            { 
+              products.totalPrice > 0
+              ? <button className="px-4 py-2 text-white bg-green-500 hover:bg-gray-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
+              <Link to={'/payment'}>Buy all</Link>
+              </button>
+              : <p className="px-4 py-2 text-white bg-gray-500 rounded-md font-medium text-sm">Buy all</p>
+            }
           </div>
         </div>
       </div>
