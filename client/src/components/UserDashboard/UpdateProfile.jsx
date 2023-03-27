@@ -407,7 +407,7 @@ export default function UpdateInfoUser() {
                               <span className="">Update Country</span>
                               <label className="">
                               </label>
-                              <select name="contry" onChange={(e) => handlerChange(e)}>
+                              <select name="contry" onChange={(e) => handlerChange(e)} className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                                 {
                                   countries.map((e, i)=>{
                                     return(
