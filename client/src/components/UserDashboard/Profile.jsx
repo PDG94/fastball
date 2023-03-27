@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { getServiceUser } from "../../../redux/actions/usersActions";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function DashboardUser() {
   // const dispatch = useDispatch();
   // const token = localStorage.getItem("token");
 
-  const { _id, name, lastname, email, profilePic, address, contry, city } =
+  const { name, email, profilePic, address, contry, city } =
     useSelector((state) => state.user);
 
   // useEffect(() => {
@@ -32,47 +34,47 @@ export default function DashboardUser() {
               {/* <img src={ImgLogo} alt="LogoFastBall" className='bg-blue-700 h-12 w-auto m-auto lg:m-0' />                           */}
             </div>
 
-            <div className="">
+            <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
               <div className="">
                 <div className="">
                   <img className="" src={profilePic} alt="" />
                 </div>
 
-                <div className="">
+                <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                   <span className="">
                     <b>My Info</b>
                   </span>
                   <br />
 
-                  <p className="">
+                  <p className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                     Name
                     <br />
                     <b>{name}</b>
                   </p>
                   <br />
 
-                  <p className="">
+                  <p className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                     E-mail
                     <br />
                     <b>{email}</b>
                   </p>
                   <br />
 
-                  <p className="">
+                  <p className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                     Adress
                     <br />
                     <b>{address}</b>
                   </p>
                   <br />
 
-                  <p className="">
+                  <p className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                     Country
                     <br />
                     <b>{contry}</b>
                   </p>
                   <br />
 
-                  <p className="">
+                  <p className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                     City
                     <br />
                     <b>{city}</b>

@@ -12,17 +12,23 @@ import UpdateProfile from './components/UserDashboard/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
-  const dispatch = useDispatch();
-  const token = localStorage.getItem('tokenAuth')
   let flag=false;
-  if(token)flag=true;
+  
+  const dispatch = useDispatch();
+
+  const { email } = useSelector((state) => state.user);
+
+  const token = localStorage.getItem('tokenAuth')  
+
+  if(email)flag=true;
+  
   useEffect(()=>{
      dispatch(loadUser(token));
      // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +45,11 @@ function App() {
         <Route exact path='/details/:id' element={<Detail />} />
         <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
         <Route path= '*' element= { <Error404 /> } /> 
-        
+
+        {/* <Route exact path='/profile' element={<Profile />} /> 
+        <Route exact path='/profile/update' element={<UpdateProfile />} />
+        <Route exact path='/payment' element={<Payment />} />
+        <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
         {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          

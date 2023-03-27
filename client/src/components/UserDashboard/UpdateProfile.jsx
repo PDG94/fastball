@@ -367,15 +367,15 @@ export default function UpdateInfoUser() {
                     {/* <img src={ImgLogo} alt="LogoFastBall" className='bg-blue-700 h-12 w-auto m-auto lg:m-0' />                           */}
                 </div>
 
-                      <div className="">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
                         <form className="" onSubmit={submitHandler}>
                           <Link to={"/profile"}>
                             <button className="">Back</button>
                           </Link>
-                          <div className="">
+                          <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-lg leading-tight focus:outline-none focus:shadow-outline">
                             <h1 className="">Update User</h1>
 
-                            <div className="">
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                               <span className="">Update Name</span>
                               <label className="">
                               </label>
@@ -389,7 +389,7 @@ export default function UpdateInfoUser() {
                               />
                             </div>
 
-                            <div className="">
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                               <span className="">Update Surname</span>
                               <label className="">
                               </label>
@@ -403,11 +403,11 @@ export default function UpdateInfoUser() {
                               />
                             </div>
 
-                            <div className="">
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                               <span className="">Update Country</span>
                               <label className="">
                               </label>
-                              <select name="contry" onChange={(e) => handlerChange(e)}>
+                              <select name="contry" onChange={(e) => handlerChange(e)} className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                                 {
                                   countries.map((e, i)=>{
                                     return(
@@ -418,12 +418,12 @@ export default function UpdateInfoUser() {
                               </select>
                             </div>
 
-                            <div className="">
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                               <span className="">Update City</span>
                               <label className="">
                               </label>
                               <input
-                                className=""
+                                className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
                                 placeholder="New City"
                                 value={form.city}
@@ -432,7 +432,7 @@ export default function UpdateInfoUser() {
                               />
                             </div>         
 
-                            <div className="">
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
                               <span className="">Update Address</span>
                               <label className="">
                               </label>
@@ -448,8 +448,8 @@ export default function UpdateInfoUser() {
 
 
 
-                            <div className="">
-                              <span className="">Update profile image</span>
+                            <div className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline">
+                              <span className="">Updload new profile image</span>
                               {/* <input
                                 id="file-up"
                                 onChange={(e) => changing(e)}
@@ -458,8 +458,8 @@ export default function UpdateInfoUser() {
                               />
                               <div id="infoUp"></div> */}
                             </div>
-
-                            <button type="submit" className="">
+                                <br/>
+                            <button type="submit" className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                               SUBMIT
                             </button>
                           </div>
