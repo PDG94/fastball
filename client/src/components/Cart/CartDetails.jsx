@@ -107,7 +107,10 @@ const CartDetails = () => {
         <div className="mb-4 bg-white shadow rounded-lg overflow-hidden">
           <div className="p-4">
             <h3 className="font-semibold text-lg mb-2">
-            Still haven't added products to cart?
+            Still haven't added products to cart? Let's get to it! 
+            </h3>
+            <h3 className="font-semibold text-sky-700 mb-2 underline">
+              <Link to="/catalogue">Catalogue</Link>
             </h3>
           </div>
         </div>

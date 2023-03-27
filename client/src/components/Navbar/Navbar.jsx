@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
@@ -6,13 +6,14 @@ import profile from "../Images/profile.png";
 import { useEffect, useRef, useState } from "react";
 import { logoutUserAction } from '../../reduxToolkit/actions/userActions';
 import CartIcon from "../Cart/CartIcon";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
     const user = useSelector((state) => state.user) //Para comprobar si hay usaurio logeado
     const [showMenu, setShowMenu] = useState(false); //Nuestro estado del menu
     const [perfil, setPerfil] = useState(false);
     const dispatch = useDispatch()
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const toggleMenu = () => {
@@ -24,9 +25,10 @@ const Navbar = () => {
                 setShowMenu(false)
                 setPerfil(false)
                 dispatch(logoutUserAction())
+                toast.success("You have successfully logged out");
             }
         );
-        // navigate('/')
+        navigate('/')
     }
     const menuRef = useRef(null);
 
@@ -107,7 +109,7 @@ const Navbar = () => {
                                     <div className="absolute right-2 mt-2 border-2  py-2 w-36 bg-white rounded-lg shadow-xl " style={{ zIndex: "999" }}>
                                         <p disable className="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100">{user.name}</p>
                                         <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
-                                        <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                                        <Link to="/profile/update" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
                                         <div className="border-t border-gray-100"></div>
                                         <button onClick={logOutt} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</button>
                                     </div>

@@ -10,15 +10,16 @@ function CartIcon() {
  const cartProducts = useSelector(state => state.cart.allProductsCart);
   useEffect(() => {
     if(user){
-      dispatch(getAllProductsOnCart(user._id));
+      dispatch(getAllProductsOnCart(user._id));      
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
     
- 
+  
 
   return (
     <div id="cart">
-      <Link to={`/cardDetail`} >
+      <Link to={`/cartDetail`} >
         <span id="cart-count">{cartProducts.length}</span>
         <i className="fas fa-shopping-cart"></i>
       </Link>
