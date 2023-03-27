@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux'
 import {addProductInCart} from '../../reduxToolkit/actions/cartAction';
 import { decode } from '../../Auth/jwt';
+import { toast } from "react-toastify";
 
 const AddCart = ({productDetail}) => {
     const token = localStorage.getItem('tokenAuth');
@@ -18,7 +19,8 @@ const AddCart = ({productDetail}) => {
         const decodedToken = decode(token);
         dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
         console.log("agregado con exito");
-        }
+        toast.success(`${productDetail.name} (${stock}) Added Successfully!`);
+        }        
     }
     return ( 
         <div className="flex flex-col  gap-4 p-4  ">

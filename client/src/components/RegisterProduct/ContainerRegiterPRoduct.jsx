@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ImgLogo from './../Images/fastball.png'
 import axios from 'axios'
-
+import { toast } from "react-toastify";
 import RegisterProduct from './RegisterProduct'
 
 const ContainerRegiterPRoduct = ( ) => {
@@ -10,6 +10,7 @@ const ContainerRegiterPRoduct = ( ) => {
         try { 
             await axios(urlImage)
             setCurrentImage( urlImage )
+            toast.success("Product Created Succesfully!");
         } catch (error) {
             setCurrentImage( '' )
         }
