@@ -21,8 +21,8 @@ const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem('tokenAuth')
-  let flag=false;
-  if(token)flag=true;
+  // let flag=false;
+  // if(token)flag=true;
   useEffect(()=>{
      dispatch(loadUser(token));
      // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,9 +39,13 @@ function App() {
         <Route exact path='/details/:id' element={<Detail />} />
         <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
         <Route path= '*' element= { <Error404 /> } /> 
+
+        <Route exact path='/profile' element={<Profile />} /> 
+        <Route exact path='/profile/update' element={<UpdateProfile />} />
+        <Route exact path='/payment' element={<Payment />} />
+        <Route path='/cartDetail' element={<CartDetail/>} />
         
-        
-        {
+        {/* {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          
           :<Route path= '*' element= { <Error404 /> } /> 
         }
@@ -56,7 +60,7 @@ function App() {
         {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 
-        }        
+        }         */}
         
       </Routes>
     </>
