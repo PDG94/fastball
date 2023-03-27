@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { createOrderAction } from './../../reduxToolkit/actions/orderAction'
 // import { useDispatch } from "react-redux";
 // import { emptyCart } from "../../reduxToolkit/actions/";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
   `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
@@ -23,10 +23,10 @@ const stripePromise = loadStripe(
 const CheckOutForm = () => {
 
   // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const totalPayment1= 200;
-  const itemsDesc1= "[testing, for, stripe]"
+  // const totalPayment1= 200;
+  // const itemsDesc1= "[testing, for, stripe]"
   
   const stripe = useStripe();
   const elements = useElements();
@@ -47,7 +47,7 @@ const CheckOutForm = () => {
 
   const clearCart1 = () => {
     // dispatch(emptyCart());
-    // navigate("/home");
+    navigate("/");
   };
 
   const clearAndBack = () => {
@@ -71,9 +71,9 @@ const CheckOutForm = () => {
         await axios.post(
           "https://fastball-production.up.railway.app/api/checkout",
           {
-            amount: totalPayment1,
+            amount: totalPayment,
             id,
-            desc: itemsDesc1,
+            desc: itemsDesc,
           }
         );
 
@@ -82,7 +82,7 @@ const CheckOutForm = () => {
           {
             name: customerName,
             email: customerEmail,
-            amount: (totalPayment1) / 100,
+            amount: (totalPayment) / 100,
             items: items,
           }
         );
