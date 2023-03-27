@@ -454,10 +454,10 @@ const Register = ({image}) => {
                         <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
                         {/* {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>} */}
                     </div>
-                    <div  className='grid grid-cols-4 pt-5 items-center' >
-                        <span className='col-end-3'>-or register with-</span>
+                    <div  className='flex relative left-[12%] lg:left-[21%] pt-5 items-center' >
+                        <span className='col-end-4'>-or register with-</span>
                         <Link to='/'>
-                            <img  className='col-end-4 w-12' src={logGoogle} alt="google" />
+                            <img  className='col-end-5 w-12' src={logGoogle} alt="google" />
                         </Link>
                     </div>
                     {/* <div className='grid grid-cols-2 pt-10 '>

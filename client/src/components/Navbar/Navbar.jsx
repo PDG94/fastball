@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './../../Auth/firebase';
 import logo1 from "../Images/fastball.png";
@@ -100,7 +100,7 @@ const Navbar = () => {
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
 
-                                    <img className="h-11 w-11 rounded-full border-gray" src={user.profilePic?user.profilePic:profile} alt="Profile" />
+                                    <img className="object-cover h-11 w-11 rounded-full border-gray" src={user.profilePic?user.profilePic:profile} alt="Profile" />
 
                                 </button>
                                 {showMenu ? (
