@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
+import OrderHistory from './components/UserDashboard/OrderHistory';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -55,14 +56,22 @@ function App() {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+        
         {
           flag&&flag?<Route exact path='/profile/update' element={<UpdateProfile />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+
+        {
+          flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
         {
           flag&&flag?<Route exact path='/payment' element={<Payment />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+
         {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 
