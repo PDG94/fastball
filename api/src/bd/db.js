@@ -41,16 +41,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 const {
-  Category, Product, User, Cart, Order, ProductStats
+  Category, Product, User, Cart, Order
 } = sequelize.models;
 
 // Relations of products
 Category.hasMany(Product);
 Product.belongsTo(Category);
-
-// Relations of products with Stats
-// Product.belongsTo(ProductStats)
-ProductStats.belongsTo(Product)
 
 //Relation cart between users and products
 User.belongsToMany(Product, { through: "Cart" });

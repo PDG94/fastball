@@ -95,7 +95,7 @@ class UserService {
     }
 
     async updateUser(id, changes) {
-        const user = await this.findByPk(id);
+        const user = await User.findByPk(id);
         const rta = await user.update(changes);
         return rta;
     }

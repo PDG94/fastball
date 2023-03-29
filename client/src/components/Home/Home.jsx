@@ -14,13 +14,13 @@ const Home = ()=> {
         dispatch(setFilter({
             name: '',
             categoryId: '',
-            order: ['name', 'asc'],
+            order: ['AZ'],
         }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     return(
-        <div className="Home">
+        <div className="flex flex-col justify-center">
             <Carousel />
             <CategoryButtons />
         </div>

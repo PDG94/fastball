@@ -45,7 +45,7 @@ const SearchBar = () => {
     }, [])
     
     return (
-        <div className="flex mx-auto my-8 w-full bg-gray-100 px-5 py-5 rounded-lg justify-between drop-shadow-lg ">
+        <div className="fixed z-50 top-[10%] left-[5%] flex mx-auto my-8 w-[90%] bg-gray-100 px-5 py-5 rounded-lg justify-between drop-shadow-lg ">
             <div>
                 <label htmlFor="filter" className="mr-1 text-sm font-medium text-gray-700">Catalogs </label>
                 <select 

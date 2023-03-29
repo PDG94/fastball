@@ -13,20 +13,11 @@ export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> 
    }
 });
 
-export const fetchProductById = createAsyncThunk('product/fetchProductById', async (productId)=> {
+export const fetchProductById = createAsyncThunk('product/fetchProductById', async ({productId, userId})=> {
     try {
-     const product = await axios.get(`/product/getProductById/${productId}`);
-     return product.data
-    } catch (error) {
-     throw error;
-    }
- });
-
-export const fetchProductStatsById = createAsyncThunk('product/getProductStatsById', async ({productId, valIsa})=> {
-    try {
-      console.log("valIsa: ", valIsa);
-
-     const product = await axios.get(`/product/getProductStatsById/${productId}?isa=${valIsa}`);
+      console.log("productId", productId);
+      console.log("userId", userId);
+     const product = await axios.get(`/product/getProductById/${productId}${userId?'?userId='+ userId : ''}`);
      return product.data
     } catch (error) {
      throw error;
