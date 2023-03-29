@@ -14,7 +14,7 @@ const Catalogue = () => {
     const { currentPage } = useSelector( state => state.product );
 
     const dispatch = useDispatch();
-    const [productsPerPage] = useState(6)
+    const [productsPerPage] = useState(12)
     const { filteredProducts } = useSelector((state) => state.product);
 
     const indexOfLastProduct = currentPage * productsPerPage
@@ -40,21 +40,20 @@ const Catalogue = () => {
     return ( 
             <>
                 {isLoading ? (
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center w-[92%]">
                         <Loader />
                     </div>
                 ) : (
-                <div className='container mt-2 mx-auto'>
+                <div className='container mt-2 mx-auto mb-8'>
                     <SearchBar />
-                    <div>
+                    <div className="my-8 mt-[16.3%]">
                         <Pagination
                             productsPerPage={productsPerPage}
                             allProducts={filteredProducts.length}
                             pagination={pagination}
                         />
                     </div>
-
-                    <div className=" py-8">
+                    <div>
                         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
                                 {currentProducts && currentProducts.map((pr) => (
@@ -67,11 +66,22 @@ const Catalogue = () => {
                                         description={pr.description}
                                         price={pr.price}
                                         stock={pr.stock}
+                                        score={pr.score}
+                                        cantReviews={pr.cantReviews}
+                                        discount={pr.discount}
                                     />
                                 ))}
                             </div>
                         </div>
                     </div>
+                    
+                    {currentProducts.length > 6 && <div className="my-8">
+                        <Pagination
+                            productsPerPage={productsPerPage}
+                            allProducts={filteredProducts.length}
+                            pagination={pagination}
+                        />
+                    </div>}
                 </div>
                 )}
             </>

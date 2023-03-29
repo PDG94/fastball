@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const { Product, Category, ProductStats,Size,Color } = require("../bd/db");
+const { Product, Category,Size,Color } = require("../bd/db");
 
 class ProductService {
     constructor() {
@@ -36,43 +36,28 @@ class ProductService {
         return Products
     }
 
-    async findOneProduct(id) {
-        const prod = await Product.findByPk(id);
+    async findOneProduct(id, userId) {
+        let isAdminUsr = false;
+        if(userId){
+            const usr = await User.findByPk(userId);
+            if( usr ) isAdminUsr = usr.isAdmin
+        }
+
+        let prod = await Product.findByPk(id);
+
         if (!prod) {
             throw boom.notFound('product not found');
         }
-        return prod;
-    }
 
-    async findProductStats(id, isa) {
-        if( isa !== '04536' && isa !== '02838')
-            throw Error('Incorrect parameters')
-
-        const isAdmin = (isa === '02838')
-
-        let prodStats = await ProductStats.findOne({where : {ProductId: id}});
-
-        if(!isAdmin){
-            if (!prodStats) {
-                prodStats = await ProductStats.create({
-                    ProductId: id
-                })
-            }else {
-                prodStats = await prodStats.update( {
-                    usersVisits: prodStats.usersVisits + 1,
-                })
-            }
-        }else {
-            if (!prodStats) {
-                prodStats = {
-                    soldAmount: 0,
-                    usersVisits: 0,
-                    score: 0
-                }
-            }
+        if(!isAdminUsr){
+            prod = await prod.update( {
+                usersVisits: prod.usersVisits + 1,
+                // score: 3.5
+                // cantReviews: 4
+            })
         }
         
-        return prodStats;
+        return prod;
     }
 
     async updateProduct(id, changes) {

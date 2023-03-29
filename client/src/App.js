@@ -35,7 +35,7 @@ function App() {
   }, [dispatch])
   return (
     <>
-    <ToastContainer />
+      <ToastContainer autoClose={1500} />
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
