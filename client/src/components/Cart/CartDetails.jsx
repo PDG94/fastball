@@ -59,7 +59,7 @@ const CartDetails = () => {
     updateMount(suma);
   }, [cartProducts, dispatch]);
   return (
-    <div className="flex flex-col md:w-full">
+    <div className="flex flex-col md:w-full mt-20">
     <div className="cart-container flex flex-row">
     <div className="products-container flex-1 md:w-2/3 p-4">
       {products.prod.length !== 0 ? (
@@ -116,7 +116,7 @@ const CartDetails = () => {
         </div>
       )}
     </div>
-    <div className="summary-container flex-0 md:w-1/3 p-3 mt-4 mr-4">
+    <div className="summary-container flex-0 md:w-1/3 p-3 mr-4">
       <div className="bg-white shadow rounded-lg overflow-hidden p-4">
         <h3 className="font-semibold text-lg mb-2">
           Resumen
@@ -130,9 +130,9 @@ const CartDetails = () => {
             { 
               products.totalPrice > 0
               ? <button className="px-4 py-2 text-white bg-green-500 hover:bg-gray-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
-              <Link to={'/payment'}>Buy all</Link>
+              <Link to={'/payment'}>Buy</Link>
               </button>
-              : <p className="px-4 py-2 text-white bg-gray-500 rounded-md font-medium text-sm">Buy all</p>
+              : <p className="px-4 py-2 text-white bg-gray-500 rounded-md font-medium text-sm">Buy</p>
             }
           </div>
         </div>

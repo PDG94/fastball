@@ -5,17 +5,15 @@ const name = Joi.string().min(3).max(25);
 const price = Joi.number().integer().min(10);
 const description = Joi.string().min(10);
 const image = Joi.string().uri();
-const visits = Joi.any();
+const usersVisits = Joi.any();
 const soldAmount = Joi.any();
-
+const discount = Joi.number().integer();
+const score = Joi.number();
 const price_min = Joi.number().integer();
 const price_max = Joi.number().integer();
 
 const stock = Joi.number().integer();
 const categories = Joi.any();
-
-const isAdmin = Joi.string();
-const isActUsrOnline = Joi.string();
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
@@ -34,21 +32,18 @@ const updateProductSchema = Joi.object({
   price: price,
   image: image,
   description: description,
-  visits: visits,
+  discount: discount,
   soldAmount: soldAmount,
-});
-
-const updateProductStatsSchema = Joi.object({
-  isa: isAdmin,
-  isauo: isActUsrOnline
+  usersVisits: usersVisits,
+  score: score
 });
 
 const getProductSchema = Joi.object({
   id: id.required(),
 });
 
-const getProductStatsSchema = Joi.object({
-  id: id.required(),
+const getQueryProductSchema = Joi.object({
+  userId: id
 });
 
 const queryProductSchema = Joi.object({
@@ -62,4 +57,4 @@ const queryProductSchema = Joi.object({
   })
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema, getProductStatsSchema, updateProductStatsSchema }
+module.exports = { createProductSchema, updateProductSchema, getProductSchema, getQueryProductSchema, queryProductSchema  }

@@ -75,7 +75,7 @@ const Register = ({changeCurrentImage}) => {
                 <Form className='space-y-1'>
                     <div className='grid grid-cols-1 lg:gap-3 pt-8'>
                         <div>
-                            <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Product Name</label>
+                            <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Name</label>
                             <Field
                                 type='text'
                                 id='name'
@@ -113,8 +113,9 @@ const Register = ({changeCurrentImage}) => {
                         </div>
 
                         <div>
-                            <label htmlFor='description' className='block text-sm font-medium text-gray-700'>Product Description</label>
+                            <label htmlFor='description' className='block text-sm font-medium text-gray-700'>Description</label>
                             <Field
+                                as='textarea'
                                 type='text'
                                 id='description'
                                 name='description'
@@ -132,7 +133,7 @@ const Register = ({changeCurrentImage}) => {
                         </div>
 
                         <div>
-                            <label htmlFor='price' className='block text-sm font-medium text-gray-700'>Product Price</label>
+                            <label htmlFor='price' className='block text-sm font-medium text-gray-700'>Price</label>
                             <Field
                                 type='number'
                                 id='price'
@@ -151,7 +152,7 @@ const Register = ({changeCurrentImage}) => {
                         </div>
 
                         <div>
-                            <label htmlFor='stock' className='block text-sm font-medium text-gray-700'>Product Stock</label>
+                            <label htmlFor='stock' className='block text-sm font-medium text-gray-700'>Initial stock</label>
                             <Field
                                 type='number'
                                 id='stock'
@@ -170,14 +171,14 @@ const Register = ({changeCurrentImage}) => {
                         </div>
 
                         <div>
-                            <label htmlFor='categories' className='block text-sm font-medium text-gray-700'>Product Category</label>
+                            <label htmlFor='categories' className='block text-sm font-medium text-gray-700'>Category</label>
                             <Field 
                                 as='select'
                                 type='text'
                                 name="categories" 
                                 id="categories"
                                 className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
-                                <option value='7aa8e1e3-a08a-40bf-8216-afd26c525259' >FUTBOL</option>
+                                {/* <option value='7aa8e1e3-a08a-40bf-8216-afd26c525259' >FUTBOL</option> */}
                                 { allCategories && allCategories?.map((cat, ind)=> <option key={ind} value={cat.id} >{cat.name}</option>)}
                             </Field>
                             <ErrorMessage 
@@ -193,7 +194,7 @@ const Register = ({changeCurrentImage}) => {
                     </div>
                     
                     <div className='px-8'>
-                        <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
+                        <button className='absolute left-28 mt-4 w-[85.5vw] py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
                         {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>}
                     </div>
                 </Form>
