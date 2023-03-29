@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const { Product, Category, ProductStats } = require("../bd/db");
+const { Product, Category, ProductStats,Size,Color } = require("../bd/db");
 
 class ProductService {
     constructor() {
@@ -24,6 +24,14 @@ class ProductService {
             where: {
                 active: true
             },
+            include: [
+                {
+                  model: Color
+                },
+                {
+                  model: Size,
+                }
+            ]
         })
         return Products
     }

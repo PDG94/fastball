@@ -7,7 +7,7 @@ const {updateProductSchema, createProductSchema, getProductSchema, getProductSta
 const {getAllProducts, getProductById, getProductStatsById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
 productRouter.get('/',getAllProducts);
-productRouter.post('/',validatorHandler(createProductSchema, 'body'), isAdmin, createProduct);
+productRouter.post('/',  isAdmin,createProduct);
 productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'params'), getProductById);
 productRouter.get('/getProductStatsById/:id', validatorHandler(getProductStatsSchema, 'params'), validatorHandler(updateProductStatsSchema, 'query'), getProductStatsById);
 productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, validatorHandler(updateProductSchema, 'body'), updateProduct);

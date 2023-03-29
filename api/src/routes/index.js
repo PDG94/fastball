@@ -11,7 +11,8 @@ const pago = require("../utils/notifications/pagoMail");
 const data = require("../utils/notifications/updateDataMail");
 const baja = require("../utils/notifications/bajaMail");
 const active = require("../utils/notifications/activeMail");
-
+const colors=require("./colorRoute")
+const sizes=require("./sizeRoute")
 function routerApi(app){
     const router = express.Router();
     app.use('/api/', router);
@@ -26,6 +27,8 @@ function routerApi(app){
     router.use("/baja", baja);
     router.use("/data", data);
     router.use("/active", active);
+    router.use("/colors", colors);
+    router.use("/sizes", sizes);
 
 };
 
