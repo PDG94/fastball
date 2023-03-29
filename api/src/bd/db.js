@@ -56,7 +56,7 @@ Size.belongsToMany(Product, { through: "ProductSize" });
 
 // Relations of products with Stats
 // Product.belongsTo(ProductStats)
-ProductStats.belongsTo(Product)
+// ProductStats.belongsTo(Product)
 
 //Relation cart between users and products
 User.belongsToMany(Product, { through: "Cart" });

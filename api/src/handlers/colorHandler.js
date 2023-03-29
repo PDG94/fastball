@@ -10,6 +10,23 @@ class ColorHandler {
             next(error.message)
         }
     }
+    async createColors (req,res,next){
+        try {
+            const colors = await service.createColors(req.body);
+            res.json(colors);
+        } catch (error) {
+            next(error.message)
+        }
+    }
+
+    async updateColors (req,res,next){
+        try {
+            const colors = await service.updateColors(req.params.id,req.body);
+            res.json(colors);
+        } catch (error) {
+            next(error.message)
+        }
+    }
 }
 
 module.exports = ColorHandler

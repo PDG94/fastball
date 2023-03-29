@@ -25,7 +25,7 @@ const cartSlice = createSlice({
             
             state.totalMount = 0;
             state.allProductsCart.forEach((element) => {
-            state.totalMount += element.price * element.Cart.stock;}) // sum the price of each element in the cart
+            state.totalMount += element.price * element.Cart.stock;}) 
             state.status = 'success';
         })
         builder.addCase(addProductInCart.rejected, (state,action)=> {
@@ -79,7 +79,7 @@ const cartSlice = createSlice({
             state.allProductsCart = action.payload;
             state.totalMount = 0;
             state.allProductsCart.forEach((element) => {
-            state.totalMount += element.price * element.Cart.stock; // sum the price of each element in the cart
+            state.totalMount += element.price * element.Cart.stock; 
         });
             state.status = 'success';
         })
