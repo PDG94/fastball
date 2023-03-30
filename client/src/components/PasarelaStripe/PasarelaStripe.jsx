@@ -144,7 +144,7 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
-                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-500 transition"
+                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
                   onClick={clearAndBack}>
                   Pay
                 </button>              

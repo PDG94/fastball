@@ -23,7 +23,7 @@ const AddCart = ({productDetail}) => {
             console.log("agregado con exito");
             toast.success(`${productDetail.name} (${stock}) Added to cart Successfully!`);
         } else {
-            toast.success(`You must log in to use the cart`, { type: 'info'});
+            toast.info(`You must log in to use the cart`);
             navigate('/login')
         }
     }
