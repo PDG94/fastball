@@ -194,8 +194,8 @@ const Register = ({changeCurrentImage}) => {
                     </div>
                     
                     <div className='px-8'>
-                        <button className='absolute left-28 mt-4 w-[85.5vw] py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
-                        {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>}
+                        <button className='w-full my-4 py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Create product</button>
+                        {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully created</p>}
                     </div>
                 </Form>
             )}

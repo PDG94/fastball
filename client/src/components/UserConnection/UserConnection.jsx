@@ -28,6 +28,7 @@ const UserConnection = ( {isLogin=true} ) => {
     useEffect(()=> {
         setImage(null)
     },[])
+    
     const handleChangeUserImage = (event)=> {
         const file = event.target.files[0]
         if(file && file.type.substring(0,5)==='image'){
