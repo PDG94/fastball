@@ -26,6 +26,7 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
 
  export const fetchCreateProduct = createAsyncThunk('product/fetchCreateProduct', async (product) => {
     try {
+      console.log(product);
        const productCreated = await axios.post('/product', product, headers())
        return productCreated 
     } catch (error) {

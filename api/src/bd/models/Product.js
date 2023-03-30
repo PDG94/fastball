@@ -30,6 +30,13 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      }
+      //modificado abajo
+      ,
+      isClothing: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,  
       },
       discount: {
         type: DataTypes.INTEGER,
