@@ -10,7 +10,10 @@ const initialState = {
 const orderSlice = createSlice({
     name : "order",
     initialState,
-    reducers : (builder)=>{
+    reducers:{
+        
+    },
+    extraReducers : (builder)=>{
 
         builder.addCase(fetchOrder.pending, (state, action)=>{
             state.status = 'pending';

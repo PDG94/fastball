@@ -9,7 +9,7 @@ const {getAllProducts, getProductById, getProductStatsById, createProduct, updat
 productRouter.get('/',getAllProducts);
 productRouter.post('/',  isAdmin,createProduct);
 productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'params'), getProductById);
-productRouter.get('/getProductStatsById/:id', validatorHandler(getProductStatsSchema, 'params'), validatorHandler(updateProductStatsSchema, 'query'), getProductStatsById);
+// productRouter.get('/getProductStatsById/:id', validatorHandler(getProductStatsSchema, 'params'), validatorHandler(updateProductStatsSchema, 'query'), getProductStatsById);
 productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, validatorHandler(updateProductSchema, 'body'), updateProduct);
 productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, deleteProduct);
 productRouter.put('/reactiveProduct/:id', isAdmin, reactivateProduct);

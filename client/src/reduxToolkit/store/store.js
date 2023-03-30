@@ -18,7 +18,7 @@ const store = configureStore({
         category: categoryReducer,
         cart:cartReducer,
         size:sizeReducer,
-        color:colorReducer
+        color:colorReducer,
         order: orderReducer,
     },
     middleware : (getDefaultMiddleware)=> getDefaultMiddleware().concat()
