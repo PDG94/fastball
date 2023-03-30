@@ -85,6 +85,12 @@ const Navbar = () => {
                             Create
                         </Link>
                     </button>
+
+                    <button className='btn btn-primary rounded-lg    '>
+                        <Link to="/admin">
+                            Andmin
+                        </Link>
+                    </button>
                     {/* <button className='btn btn-primary rounded-lg    '>
                         <Link to="/payment">
                             Pay
