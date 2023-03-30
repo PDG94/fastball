@@ -146,8 +146,8 @@ const CartDetails = () => {
           );
         })
       ) : (
-        <div className="mb-4 bg-white shadow rounded-lg overflow-hidden">
-          <div className="p-4">
+        <div className="mb-4 bg-white shadow rounded-lg overflow-hidden cart-comp flex items-center">
+          <div className="p-4 w-[59.8vw]">
             <h3 className="font-semibold text-lg mb-2">
             Still haven't added products to cart? Let's get to it! 
             </h3>

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductById } from '../../reduxToolkit/actions/productAction';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductById } from "../../reduxToolkit/actions/productAction";
 import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
@@ -22,20 +22,22 @@ const Detail = () => {
     // }
   ])
   const [isLoading, setIsLoading] = useState(true);
-  const {id}=useParams();
-  const dispatch=useDispatch();
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const { productDetail } = useSelector((state) => state.product);
   const { _id } = useSelector((state) => state.user);
   const [showAddReview, setShowAddReview] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [isAddReview, setIsAddReview] = useState(true);
   let startDetail = true
 
   useEffect(() => {
-    if(startDetail){
+    if (startDetail) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      startDetail = false
-      dispatch(fetchProductById({productId: id, userId: _id}))
-        .then( ()=> setIsLoading(false) )
+      startDetail = false;
+      dispatch(fetchProductById({ productId: id, userId: _id })).then(() =>
+        setIsLoading(false)
+      );
     }
 
     return () => {
@@ -73,46 +75,71 @@ const Detail = () => {
               </h1>
               <div className="mb-4">
                 <span>
-                  {`have visited this product ${productDetail.usersVisits? productDetail.usersVisits : 0} time${productDetail.usersVisits ===1? '': 's'} ` }
+                  {`have visited this product ${
+                    productDetail.usersVisits ? productDetail.usersVisits : 0
+                  } time${productDetail.usersVisits === 1 ? "" : "s"} `}
                 </span>
                 <span>
-                  {`( ${productDetail.soldAmount? productDetail.soldAmount : 0} sold )`}
+                  {`( ${
+                    productDetail.soldAmount ? productDetail.soldAmount : 0
+                  } sold )`}
                 </span>
               </div>
 
               <div className="mb-4 flex items-center">
                 <span className="text-2xl text-blue-800 md:text-3xl lg:text-4xl font-bold mr-4">
-                  ${(productDetail.price - (productDetail.price*(productDetail.discount/100))).toFixed(2)}
+                  $
+                  {(
+                    productDetail.price -
+                    productDetail.price * (productDetail.discount / 100)
+                  ).toFixed(2)}
                 </span>
-                {
-                  productDetail.discount > 0 &&
+                {productDetail.discount > 0 && (
                   <>
-                    <span className="text-green-500 font-semibold">{productDetail.discount}% OFF</span> 
+                    <span className="text-green-500 font-semibold">
+                      {productDetail.discount}% OFF
+                    </span>
                     <span className="ml-4 text-lg md:text-2lg lg:text-3lg font-light line-through">
-                       ${productDetail.price.toFixed(2)}
+                      ${productDetail.price.toFixed(2)}
                     </span>
                   </>
-                }
+                )}
                 {/* <span className="text-gray-600 text-lg line-through"></span> */}
               </div>
               <div className="mb-4">
                 <h2 className="text-lg md:text-xl font-medium mb-2">
                   Description
                 </h2>
-                <p className="text-gray-600">
-                  {productDetail.description}
-                </p>
+                <p className="text-gray-600">{productDetail.description}</p>
               </div>
-              {/* <div className="mb-4">
+              <div className="mb-4">
                 <h2 className="text-lg md:text-xl font-medium mb-2">Details</h2>
                 <ul className="text-gray-600">
-                  <li>Detail 1</li>
-                  <li>Detail 2</li>
-                  <li>Detail 3</li>
+                {productDetail.Colors[0]? 
+                  <li>
+                    Color
+                    <div
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        backgroundColor: productDetail.Colors[0].codigo,
+                        borderRadius: "50%",
+                        border: "none",
+                      }}
+                    />
+                  </li>:<li>{"No more details!"}</li>
+                  }
+                  {productDetail.Sizes[0] ? (
+                    <li>
+                      Talla
+                      <div>{productDetail.Sizes[0].name}</div>
+                    </li>
+                  ) : <li>{"No more details!"}</li>
+                  }
                 </ul>
-              </div> */}
+              </div>
               <div>
-                <hr className="my-4 border border-slate-300"/>
+                <hr className="my-4 border border-slate-300" />
                 <AddCart productDetail={productDetail}></AddCart>
               </div>
             </div>
@@ -159,6 +186,6 @@ const Detail = () => {
       }
     </>
   );
-}
- 
+};
+
 export default Detail;

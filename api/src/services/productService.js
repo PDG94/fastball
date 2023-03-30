@@ -1,12 +1,12 @@
 const boom = require('@hapi/boom');
-const { Product, Category, User } = require("../bd/db");
+const { Product, Category,Size,Color,User } = require("../bd/db");
 
 class ProductService {
     constructor() {
     }
 
     async createProduct(body) {
-        const {  name, image, description, price, stock, categories } = body;
+        const {  name, image, description, price, stock, categories,isClothing, colors, size } = body;
         const newProduct = await Product.create({            
             name,
             image,
@@ -16,6 +16,22 @@ class ProductService {
         })
         const cat = await Category.findByPk(categories);
         await newProduct.setCategory(cat)
+        if (colors) {
+            console.log("color id") 
+            const colorD = await Color.findByPk(colors);
+            await newProduct.addColor(colorD.id);
+          }
+        if (isClothing) {
+          console.log("is cloting ")
+
+          if (size) {
+          console.log("sized")
+
+            const sizeD = await Size.findByPk(size);
+            await newProduct.addSize(sizeD.id);
+          }
+        }
+      
         return newProduct;
     }
 
@@ -24,6 +40,14 @@ class ProductService {
             where: {
                 active: true
             },
+            include: [
+                {
+                  model: Color
+                },
+                {
+                  model: Size,
+                }
+            ]
         })
         return Products
     }
@@ -35,7 +59,16 @@ class ProductService {
             if( usr ) isAdminUsr = usr.isAdmin
         }
 
-        let prod = await Product.findByPk(id);
+        let prod = await Product.findByPk(id,{
+            include: [
+                {
+                  model: Color
+                },
+                {
+                  model: Size,
+                }
+            ]
+        });
 
         if (!prod) {
             throw boom.notFound('product not found');
