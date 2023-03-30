@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import { toast } from "react-toastify";
-import DeleteItem from './DeleteItem';
+import ModalYesNo from '../ModalYesNo/ModalYesNo';
 
 const CartDetails = () => {
   // Suscribirse al estado del carrito utilizando el selector de Redux
@@ -19,17 +19,16 @@ const CartDetails = () => {
   });
 
   const showModalDeleteProductCart = (idProduct, productImage)=>{ 
-    setproductDeleted({idProduct, productImage})
+    setproductDeleted({idProduct, image: productImage, text: 'Are you sure you want to remove this product from the cart?'})
     setshowModal( true )
   }
-
-  const deleteProductCart=async(idProduct)=>{
-    dispatch(deleteCart({idUser:user._id, idProduct:idProduct}));
+  
+  const handleClickDeleteCart = async(object)=>{
+    if(object.action){
+      await dispatch(deleteCart({idUser:user._id, idProduct:productDeleted.idProduct}));
+    }
     setshowModal( false )
   }
-
-  const notDeleteProductCart=()=> setshowModal( false )
-   
   // const updateTotalMountSum=async(idUser,idProduct,stock,price)=>{ //no borrar por favor
       //console.log(products.totalPrice)
       // let suma = 0;
@@ -131,10 +130,9 @@ const CartDetails = () => {
                   {/* (props.price - (props.price*(props.discount/100))).toFixed(2) */}
                     {
                       showModal &&
-                      <DeleteItem 
-                        productDeleted={productDeleted}
-                        deleteProductCart={deleteProductCart}
-                        notDeleteProductCart={notDeleteProductCart}
+                      <ModalYesNo
+                        objectModal={productDeleted}
+                        functionModal={handleClickDeleteCart}
                       />
                     }
                     $ {(product.Cart.stock*(product.price-(product.price*(product.discount/100)))).toFixed(2)}
