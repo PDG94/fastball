@@ -86,6 +86,7 @@ class ProductService {
     }
 
     async updateProduct(id, changes) {
+        console.log("estamos descontando!")
         const prod = await Product.findByPk(id);
         const rta = await prod.update(changes);
         return rta;
@@ -102,7 +103,13 @@ class ProductService {
         const prod = await this.findByPk(id);
         await prod.update({ active: true });
         return prod;
-      }
+    }
+    async updateStockProduct(product){
+        const prod = await Product.findByPk(product.id);
+        prod.stock = product.stock;
+        await prod.save();
+        return prod;
+    }
 }
 
 module.exports = ProductService;

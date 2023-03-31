@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader/Loader";
+import { updateStockProduct } from "../../reduxToolkit/actions/productAction";
 const stripePromise = loadStripe(
   `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
@@ -37,10 +38,15 @@ const CheckOutForm = () => {
   const itemsDesc = JSON.stringify(items)
   const [isLoading, setIsLoading] = useState(false);
   
-  const clearCart = async() => {    
+  const clearCart = async() => {
     await cartItems1.forEach(element=>{
       dispatch(deleteCart({idUser:userID1, idProduct:element.id}))
+      dispatch(updateStockProduct({
+        ...element,
+        stock:element.stock-element.Cart.stock
+      }));
     })
+
     setIsLoading(false)
     navigate("/");
     toast.success("Payment Succesful!");
