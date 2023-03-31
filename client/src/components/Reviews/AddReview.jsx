@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import ModalYesNo from '../ModalYesNo/ModalYesNo';
 
 const AddReview = ({productDetail, clickAccept, clickClose}) => {
-  const formatImage = `${productDetail.image.slice(0,50)}c_limit,f_auto,h_200,q_auto,w_200/${productDetail.image.slice(50)}`
+  const formatImage = `${productDetail.image.slice(0,50)}c_fill,f_auto,h_200,q_auto,w_200/${productDetail.image.slice(50)}`
   const { name, profilePic} = useSelector((state) => state.user);
   const stars = ['Very bad', 'Bad', 'Good', 'Very good', 'Excellent']
   const [currentValue, setCurrentValue] = useState(0);

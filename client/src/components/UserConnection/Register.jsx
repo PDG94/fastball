@@ -296,15 +296,15 @@ const Register = ({image}) => {
 
             onSubmit={ (values,{resetForm})=> {
                 resetForm()
-                console.log('Enviar Formulario');
-                uploadImage(image, 'users')
-                .then( newURL => {
-                        values = { ...values, profilePic: newURL}
-                        console.log('VALORES A SUBMITEAR !!!!!! ', values);
+                // console.log('Enviar Formulario');
+                // uploadImage(image, 'users')
+                // .then( newURL => {
+                //         values = { ...values, profilePic: newURL}
+                //         console.log('VALORES A SUBMITEAR !!!!!! ', values);
                         dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
-                    }
-                )
-                .catch( error => alert(error))
+                //     }
+                // )
+                // .catch( error => alert(error))
                 // setSubmitedForm(true)
                 // setTimeout( ()=> setSubmitedForm(false), 2000)
             }}

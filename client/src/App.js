@@ -44,7 +44,7 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
+        <Route exact path='/create' element={<CartDetail />} />
         <Route path= '*' element= { <Error404 /> } /> 
 
         {/* <Route exact path='/profile' element={<Profile />} /> 
@@ -52,30 +52,18 @@ function App() {
         <Route exact path='/payment' element={<Payment />} />
         <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
-        {
-          flag&&flag?<Route exact path='/profile' element={<Profile />} />          
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
+        <Route exact path='/profile' element={<Profile />} />          
         
-        {
-          flag&&flag?<Route exact path='/profile/update' element={<UpdateProfile />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
+        
+       <Route exact path='/profile/update' element={<UpdateProfile />} />
+         
+       <Route exact path='/profile/orders' element={<OrderHistory />} />
+      
 
-        {
-          flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/payment' element={<Payment />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }        
+        <Route exact path='/payment' element={<Payment />} />
+        
+        <Route path='/cartDetail' element={<CartDetail/>} />
+            
         
       </Routes>
     </>

@@ -19,7 +19,7 @@ const AddCart = ({productDetail}) => {
     const handleAddToCart=async()=>{
         if(token){
             const decodedToken = decode(token);
-            dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
+            await dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
             console.log("agregado con exito");
             toast.success(`${productDetail.name} (${stock}) Added to cart Successfully!`);
         } else {
