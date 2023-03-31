@@ -18,6 +18,7 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
             city: user.city
         })
         localStorage.setItem('tokenAuth', token.data);
+        console.log(token.data)
         return token.data;
     } catch (error) {
         return error.message
@@ -25,13 +26,12 @@ export const registerUserAction = createAsyncThunk('user/registerUserAction', as
 
 })
 
-export const loginUserAction = createAsyncThunk('user/loginUserAction', async (email, password) => {
-    console.log({ email, password });
+export const loginUserAction = createAsyncThunk('user/loginUserAction', async (user) => {
+    const { email, password } = user
     const token = await axios.post('users/loginUser', {
         email,
         password
     });
-    console.log({ email, password });
     localStorage.setItem('tokenAuth', token.data);
     return token.data
 });

@@ -21,13 +21,22 @@ const Navbar = () => {
     }
     const logOutt = async () => {
         await logOut()
-            .then(()=>{
+            .then(() => {
                 setShowMenu(false)
                 setPerfil(false)
                 dispatch(logoutUserAction())
-                toast.success("You have successfully logged out");
+                toast.success("You have successfully logged out", {
+                    position: "bottom-center",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             }
-        );
+            );
         navigate('/')
     }
     const menuRef = useRef(null);
@@ -44,12 +53,12 @@ const Navbar = () => {
         }
 
         document.addEventListener('mousedown', handleOutsideClick);
-      
+
         return () => {
-         
+
             document.removeEventListener('mousedown', handleOutsideClick);
         }
-    }, [menuRef, user, perfil,setPerfil]);
+    }, [menuRef, user, perfil, setPerfil]);
 
     return (
         <nav className="fixed z-50 w-full top-0 flex items-center justify-between flex-wrap bg-white p-6">
@@ -97,10 +106,10 @@ const Navbar = () => {
                         </Link>
                     </button> */}
                 </div>
-               
+
                 {/* && user.name */}
                 {
-                    user.name && user.name ? 
+                    user.name && user.name ?
                         <div className="lg:inline-block   items-center mt-0 absolute right-20 rounded-xl m-2 " ref={menuRef}>
                             <div className="relative  gap-4 flex flex-row">
                                 <button className="flex items-center justify-center  border:none text-sm w-10 transition duration-150 ease-in-out  transform ">
@@ -108,7 +117,7 @@ const Navbar = () => {
                                 </button>
                                 <button onClick={toggleMenu} className="flex  text-sm rounded-full focus:outline-none focus: transition duration-150 ease-in-out shadow transform ">
 
-                                    <img className="object-cover h-11 w-11 rounded-full border-gray" src={user.profilePic?user.profilePic:profile} alt="Profile" />
+                                    <img className="object-cover h-11 w-11 rounded-full border-gray" src={user.profilePic ? user.profilePic : profile} alt="Profile" />
 
                                 </button>
                                 {showMenu ? (

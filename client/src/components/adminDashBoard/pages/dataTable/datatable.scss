@@ -3,6 +3,55 @@
     color: black;
     padding: 20px;
     .grid{
-        font-weight: bold;    
+        font-weight: bold;
+        
     }
+
+    .cellWithImg{
+        display: flex;
+        align-items: center;
+        
+        .cellImg{
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+    }
+    
+    .cellWithStatus{
+        padding: 5px;
+        border-radius: 5px;
+
+        &.true{
+            background-color: rgba(0,128,0,0.05);
+            color: green;
+        }
+        &.false{
+            background-color: rgba(0,128,0,0.05);
+            color: red;
+        }
+    }
+
+    .cellAction{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .viewButton{
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: darkblue;
+            border: 1px solid rgba(0, 0, 139, 0.427);
+            cursor: pointer;
+        }
+        .deleteButton{
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: crimson;
+            border: 1px solid rgba(220, 20, 60, 0.6);
+            cursor: pointer;
+        }
+    }
+    
 }

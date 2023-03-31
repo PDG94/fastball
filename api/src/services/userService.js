@@ -9,49 +9,46 @@ class UserService {
     }
 
     async createUser(body) {
-        try {
-            const { name, lastName, password, profilePic, address, email, city, contry } = body;
-            const newUser = await User.create({
-                name,
-                lastName,
-                password,
-                profilePic,
-                email,
-                address,
-                city,
-                contry
-            })
-            console.log(newUser)
-            const token = singToken(newUser);
-            return token;
-        } catch (error) {
-            return (error.message);
+
+        const { name, lastName, password, profilePic, address, email, city, contry } = body;
+        const user = await User.findOne({ where: { email: email } });
+        if (user) {
+            throw new Error("User already exist");
         }
+        const newUser = await User.create({
+            name,
+            lastName,
+            password,
+            profilePic,
+            email,
+            address,
+            city,
+            contry
+        })
+        console.log(newUser)
+        const token = singToken(newUser);
+        return token;
+
     }
 
     async loginUser(email, password) {
         const user = await User.findOne({ where: { email: email } });
-        console.log({ user })
+
         if (!user) {
-            return "User is not registered"
+            throw new Error("User is not registered")
         }
-        const validatorPassword = bcrypt.compare(password, user.password, (err, result) => {
-            if (err) {
-                return err
-            } else if (result) {
-                return result
-            } else {
-                return 'la contraseña es incorrecta'
-            }
-        });
-
+        console.log({ user })
+        const validatorPassword = await bcrypt.compare(password, user.password);
+        console.log(validatorPassword)
+        if (!validatorPassword) {
+            throw new Error("Contraseña incorrecta");
+        }
         const token = singToken(user);
-
         return token;
     }
 
     async loginAndRegisterGoogle(user) {
-       
+
         const userFound = await User.findOne({ where: { email: user.email } });
         if (!userFound) {
             const name = user.displayName.split(" ")
@@ -71,7 +68,7 @@ class UserService {
         console.log(userFound.dataValues);
         const token = singToken(userFound.dataValues);
         return token
-       
+
     }
 
     async getAllUsers() {
