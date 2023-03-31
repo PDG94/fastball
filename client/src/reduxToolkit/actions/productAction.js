@@ -35,6 +35,9 @@ export const fetchProductById = createAsyncThunk('product/fetchProductById', asy
  });
 
 export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct', async (values)=> {
+   console.log("stock menos")
+   console.log(values)
+
     try {
      const product = await axios.patch(`/product/editProduct/%${values.product._id}`, values , headers());
      return product.data
@@ -50,5 +53,14 @@ export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct',
     } catch (error) {
      throw error;
     }
- });
+});
+export const updateStockProduct = createAsyncThunk('product/updateStockProduct', async (prod)=> {
+   console.log(prod)
+   try {
+    const product = await axios.put(`product/update/stock/`,prod);
+    return product.data
+   } catch (error) {
+    throw error;
+   }
+});
 
