@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { fetchOrder } from "../../reduxToolkit/actions/orderAction";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const userID1 = useSelector((state) => state.user._id);
-  const orders = useSelector((state) => state.order.allOrders);
+  // const userID1 = useSelector((state) => state.user._id);
+  // const orders = useSelector((state) => state.order.allOrders);
 
   useEffect(() => {
     dispatch(fetchOrder());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const filteredOrders = orders.filter((order) => order.userID1 === userID1);
+  // const filteredOrders = orders.filter((order) => order.userID1 === userID1);
 
   return (
     <div className="">

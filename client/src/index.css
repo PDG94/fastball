@@ -27,12 +27,12 @@ body{
 .btn-primary{
   color: black;
 }
-.logo-1{
+/* .logo-1{
   width: 60px;
   display: flex;
   margin: 0;
   background-color: blue;
-}
+} */
 .hov-cart:hover {
   transition: 0.3s;
   box-shadow: 0 0 0 1px blue;
