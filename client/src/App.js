@@ -20,6 +20,7 @@ import DashBoard from './components/adminDashBoard/DashBoard'
 import List from './components/adminDashBoard/pages/list/List';
 
 
+import OrderHistory from './components/UserDashboard/OrderHistory';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
   }, [dispatch])
   return (
     <>
-    <ToastContainer />
+      <ToastContainer autoClose={1500} />
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
@@ -62,14 +63,22 @@ function App() {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+        
         {
           flag&&flag?<Route exact path='/profile/update' element={<UpdateProfile />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+
+        {
+          flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
         {
           flag&&flag?<Route exact path='/payment' element={<Payment />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
+
         {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 

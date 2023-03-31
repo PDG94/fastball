@@ -99,7 +99,7 @@ const CheckOutForm = () => {
   return (
     <>
     {!isLoading ? (
-    <div className="flex mt-12 justify-center h-screen">
+    <div className="flex mt-12 justify-center h-screen mt-24">
     <div className="container bg-white flex rounded-lg drop-shadow-lg w-[50%] h-[55%] ">
       <form className="h-full w-full flex flex-col" onSubmit={handleSubmit}>
         <div className="flex items-center">
@@ -144,7 +144,7 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
-                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-500 transition"
+                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
                   onClick={clearAndBack}>
                   Pay
                 </button>              
@@ -156,7 +156,7 @@ const CheckOutForm = () => {
     </div>
   </div>
   ) : (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-cente mt-24">
         <Loader />
     </div>
 )}

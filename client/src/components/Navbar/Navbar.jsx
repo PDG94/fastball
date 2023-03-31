@@ -52,7 +52,7 @@ const Navbar = () => {
     }, [menuRef, user, perfil,setPerfil]);
 
     return (
-        <nav className="flex items-center justify-between flex-wrap bg-white p-6">
+        <nav className="fixed z-50 w-full top-0 flex items-center justify-between flex-wrap bg-white p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
             </div>
             <div className="block lg:hidden">
