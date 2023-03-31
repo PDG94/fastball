@@ -3,6 +3,7 @@ import Sidebar from './../sidebar/Sidebar';
 import Widget from './../widget/Widget';
 import Featured from '../featured/Featured';
 import Chart from '../chart/Chart';
+import Table from '../table/Table';
 
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
         </div>
         <div className="listContainer">
           <div className="listTitle">Latest transactions</div>
+          <Table/>
         </div>
       </div>
     </div>

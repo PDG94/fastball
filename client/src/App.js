@@ -17,6 +17,7 @@ import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegit
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 import DashBoard from './components/adminDashBoard/DashBoard'
+import List from './components/adminDashBoard/pages/list/List';
 
 
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
@@ -48,6 +49,7 @@ function App() {
         <Route exact path='/details/:id' element={<Detail />} />
         <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
         <Route exact path='/admin' element={<DashBoard/>}/>
+        <Route exact path='/admin/users' element={<List/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
 
 
