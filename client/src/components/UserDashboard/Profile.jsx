@@ -17,7 +17,7 @@ export default function DashboardUser() {
   // }, [dispatch, id, token]);
 
   return (
-    <div className="mx-auto min-height-full flex">
+    <div className="mx-auto min-height-full flex mt-20">
       <div className="hidden lg:block relative flex-1 h-full">
         <img
           src={

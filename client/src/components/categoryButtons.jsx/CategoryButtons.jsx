@@ -11,9 +11,9 @@ const CategoryButtons = () => {
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 flex justify-center">
       {/* <div className="flex flex-row justify-between gap-x-5 px-12 pb-10" > */}
-      <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-between gap-x-5 px-12 pb-10" >
+      <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-between  px-12 pb-10" >
         <div className="max-w-sm bg-gray-100 overflow-hidden  rounded-lg drop-shadow-lg">
           <Link to='/catalogue' onClick={()=>handleClickCard('7aa8e1e3-a08a-40bf-8216-afd26c525259')}>
             <img className="w-full" src='https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_270,q_auto,w_400/v1679508397/fastball/system/FootBall_q6zis6.avif' alt={'title'} />

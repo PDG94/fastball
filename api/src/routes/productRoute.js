@@ -4,15 +4,16 @@ const productHandler = require('./../handlers/productsHandler')
 const {isAdmin} = require('./../middleware/authValidator');
 
 const {updateProductSchema, createProductSchema, getProductSchema, getProductStatsSchema, updateProductStatsSchema } = require('./../schemas/productSchema');
-const {getAllProducts, getProductById, getProductStatsById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
+const {getAllProducts,updateStockProduct, getProductById, getProductStatsById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
 productRouter.get('/',getAllProducts);
-productRouter.post('/',validatorHandler(createProductSchema, 'body'), isAdmin, createProduct);
+productRouter.post('/',  isAdmin,createProduct);
 productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'params'), getProductById);
-productRouter.get('/getProductStatsById/:id', validatorHandler(getProductStatsSchema, 'params'), validatorHandler(updateProductStatsSchema, 'query'), getProductStatsById);
-productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, validatorHandler(updateProductSchema, 'body'), updateProduct);
+// productRouter.get('/getProductStatsById/:id', validatorHandler(getProductStatsSchema, 'params'), validatorHandler(updateProductStatsSchema, 'query'), getProductStatsById);
+productRouter.patch('/editProduct/:id', updateProduct);
 productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, deleteProduct);
 productRouter.put('/reactiveProduct/:id', isAdmin, reactivateProduct);
+productRouter.put('/update/stock/',updateStockProduct);
 
 // productRouter.get('/',getAllProducts);
 // productRouter.post('/', createProduct);

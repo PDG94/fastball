@@ -12,7 +12,7 @@ const ImageViewer = ({ image }) => {
         <img
           src={image}
           alt="Product"
-          className=" "
+          className='cursor-zoom-in'
           draggable="false"
         />
       </Panzoom>

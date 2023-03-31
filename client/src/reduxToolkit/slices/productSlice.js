@@ -1,5 +1,5 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const {fetchProductById, fetchProduct, fetchCreateProduct, fetchProductStatsById} = require('./../actions/productAction')
+const {fetchProductById, fetchProduct, fetchCreateProduct,updateStockProduct} = require('./../actions/productAction')
 
 const initialState = {
     allProducts : [],
@@ -7,10 +7,9 @@ const initialState = {
     configFilter: {
         name: '',
         categoryId: '',
-        order: 'LPrice',
+        order: 'AZ',
     },
     productDetail : {},
-    productStats : {},
     currentPage : 1,
     status : null,
 }
@@ -85,7 +84,6 @@ const productSlice = createSlice({
         },
         clearProductDetail : (state, action)=> {
             state.productDetail = {}
-            state.productStats = {}
         }
     },
     extraReducers : (builder)=>{
@@ -125,15 +123,14 @@ const productSlice = createSlice({
             state.status = 'rejected'
         })
 
-        builder.addCase(fetchProductStatsById.pending, (state, action)=> {
+
+        builder.addCase(updateStockProduct.pending, (state, action)=> {
             state.status = 'pending';
         })
-        builder.addCase(fetchProductStatsById.fulfilled, (state,action)=> {
-            console.log('Products Stats en reducer', action.payload);
-            state.productStats = action.payload
+        builder.addCase(updateStockProduct.fulfilled, (state,action)=> {
             state.status = 'success';
         })
-        builder.addCase(fetchProductStatsById.rejected, (state,action)=> {
+        builder.addCase(updateStockProduct.rejected, (state,action)=> {
             state.status = 'rejected'
         })
     }

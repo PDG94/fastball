@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader/Loader";
+import { updateStockProduct } from "../../reduxToolkit/actions/productAction";
 const stripePromise = loadStripe(
   `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
@@ -37,10 +38,15 @@ const CheckOutForm = () => {
   const itemsDesc = JSON.stringify(items)
   const [isLoading, setIsLoading] = useState(false);
   
-  const clearCart = async() => {    
+  const clearCart = async() => {
     await cartItems1.forEach(element=>{
       dispatch(deleteCart({idUser:userID1, idProduct:element.id}))
+      dispatch(updateStockProduct({
+        ...element,
+        stock:element.stock-element.Cart.stock
+      }));
     })
+
     setIsLoading(false)
     navigate("/");
     toast.success("Payment Succesful!");
@@ -99,7 +105,7 @@ const CheckOutForm = () => {
   return (
     <>
     {!isLoading ? (
-    <div className="flex mt-12 justify-center h-screen">
+    <div className="flex mt-12 justify-center h-screen mt-24">
     <div className="container bg-white flex rounded-lg drop-shadow-lg w-[50%] h-[55%] ">
       <form className="h-full w-full flex flex-col" onSubmit={handleSubmit}>
         <div className="flex items-center">
@@ -144,7 +150,7 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
-                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-500 transition"
+                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
                   onClick={clearAndBack}>
                   Pay
                 </button>              
@@ -156,7 +162,7 @@ const CheckOutForm = () => {
     </div>
   </div>
   ) : (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-cente mt-24">
         <Loader />
     </div>
 )}

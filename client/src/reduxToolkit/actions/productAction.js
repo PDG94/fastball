@@ -13,20 +13,11 @@ export const fetchProduct = createAsyncThunk('product/fetchProduct', async ()=> 
    }
 });
 
-export const fetchProductById = createAsyncThunk('product/fetchProductById', async (productId)=> {
+export const fetchProductById = createAsyncThunk('product/fetchProductById', async ({productId, userId})=> {
     try {
-     const product = await axios.get(`/product/getProductById/${productId}`);
-     return product.data
-    } catch (error) {
-     throw error;
-    }
- });
-
-export const fetchProductStatsById = createAsyncThunk('product/getProductStatsById', async ({productId, valIsa})=> {
-    try {
-      console.log("valIsa: ", valIsa);
-
-     const product = await axios.get(`/product/getProductStatsById/${productId}?isa=${valIsa}`);
+      console.log("productId", productId);
+      console.log("userId", userId);
+     const product = await axios.get(`/product/getProductById/${productId}${userId?'?userId='+ userId : ''}`);
      return product.data
     } catch (error) {
      throw error;
@@ -35,6 +26,7 @@ export const fetchProductStatsById = createAsyncThunk('product/getProductStatsBy
 
  export const fetchCreateProduct = createAsyncThunk('product/fetchCreateProduct', async (product) => {
     try {
+      console.log(product);
        const productCreated = await axios.post('/product', product, headers())
        return productCreated 
     } catch (error) {
@@ -43,6 +35,9 @@ export const fetchProductStatsById = createAsyncThunk('product/getProductStatsBy
  });
 
 export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct', async (values)=> {
+   console.log("stock menos")
+   console.log(values)
+
     try {
      const product = await axios.patch(`/product/editProduct/%${values.product._id}`, values , headers());
      return product.data
@@ -58,5 +53,14 @@ export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct',
     } catch (error) {
      throw error;
     }
- });
+});
+export const updateStockProduct = createAsyncThunk('product/updateStockProduct', async (prod)=> {
+   console.log(prod)
+   try {
+    const product = await axios.put(`product/update/stock/`,prod);
+    return product.data
+   } catch (error) {
+    throw error;
+   }
+});
 

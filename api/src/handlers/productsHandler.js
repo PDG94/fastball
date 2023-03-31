@@ -16,19 +16,9 @@ class ProductsHandler {
     async getProductById(req,res,next){
         try {
             const {id} = req.params;
-            const product = await service.findOneProduct(id);
+            const {userId} = req.query;
+            const product = await service.findOneProduct(id, userId);
             res.json(product);
-        } catch (error) {
-            next(error);
-        }
-    }
-
-    async getProductStatsById(req,res,next){
-        try {
-            const {id} = req.params;
-            const {isa, isauo} = req.query
-            const productStats = await service.findProductStats(id, isa, isauo);
-            res.json(productStats);
         } catch (error) {
             next(error);
         }
@@ -72,6 +62,14 @@ class ProductsHandler {
             res.status(200).json(productReactivated);
         } catch (error) {
             next(error);
+        }
+    }
+    async updateStockProduct(req, res, next ){
+        try {
+            const product=req.body;
+            const result=await service.updateStockProduct(product);
+        } catch (error) {
+            
         }
     }
 }

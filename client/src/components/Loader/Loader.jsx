@@ -8,7 +8,7 @@ const Loader = () => {
         //   </div>
         // </div>
 
-        <div className='container'>
+        <div className='container mt-16'>
             <div className={styles.container}>
               <div className='relative left-[45%] h- w-[30%]'>
                 <div className={styles.ring}>Loading
