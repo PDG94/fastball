@@ -70,6 +70,8 @@ const userSlice = createSlice({
                 const user = decode(action.payload);
                 return {
                     ...state,
+                    token : action.payload,
+                    _id : user._id,
                     name: user.name,
                     lastName: user.lastName,
                     email: user.email,

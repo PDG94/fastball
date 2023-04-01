@@ -1,270 +1,63 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Link } from 'react-router-dom'
 import logGoogle from './../../images/google.svg';
-import {registerUserAction} from './../../reduxToolkit/actions/userActions';
-import {useNavigate} from 'react-router-dom';
+import { registerUserAction } from './../../reduxToolkit/actions/userActions';
+import { useNavigate } from 'react-router-dom';
 import { uploadImage } from '../../utils';
+import GoogleButton from 'react-google-button';
+import axios from 'axios';
+import { toast } from "react-toastify";
+import { useState } from 'react';
+const { loginUserAction, loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
 
 
-const countries = [
-    'Afghanistan',
-    'Åland Islands',
-    'Albania',
-    'Algeria',
-    'American Samoa',
-    'Andorra',
-    'Angola',
-    'Anguilla',
-    'Antarctica',
-    'Antigua and Barbuda',
-    'Argentina',
-    'Armenia',
-    'Aruba',
-    'Australia',
-    'Austria',
-    'Azerbaijan',
-    'Bahamas',
-    'Bahrain',
-    'Bangladesh',
-    'Barbados',
-    'Belarus',
-    'Belgium',
-    'Belize',
-    'Benin',
-    'Bermuda',
-    'Bhutan',
-    'Bolivia',
-    'Bosnia and Herzegovina',
-    'Botswana',
-    'Bouvet Island',
-    'Brazil',
-    'British Indian Ocean Territory',
-    'British Virgin Islands',
-    'Brunei',
-    'Bulgaria',
-    'Burkina Faso',
-    'Burundi',
-    'Cambodia',
-    'Cameroon',
-    'Canada',
-    'Cape Verde',
-    'Caribbean Netherlands',
-    'Cayman Islands',
-    'Central African Republic',
-    'Chad',
-    'Chile',
-    'China',
-    'Christmas Island',
-    'Cocos (Keeling) Islands',
-    'Colombia',
-    'Comoros',
-    'Cook Islands',
-    'Costa Rica',
-    'Croatia',
-    'Cuba',
-    'Curaçao',
-    'Cyprus',
-    'Czechia',
-    'Denmark',
-    'Djibouti',
-    'Dominica',
-    'Dominican Republic',
-    'DR Congo',
-    'Ecuador',
-    'Egypt',
-    'El Salvador',
-    'Equatorial Guinea',
-    'Eritrea',
-    'Estonia',
-    'Eswatini',
-    'Ethiopia',
-    'Falkland Islands',
-    'Faroe Islands',
-    'Fiji',
-    'Finland',
-    'France',
-    'French Guiana',
-    'French Polynesia',
-    'French Southern and Antarctic Lands',
-    'Gabon',
-    'Gambia',
-    'Georgia',
-    'Germany',
-    'Ghana',
-    'Gibraltar',
-    'Greece',
-    'Greenland',
-    'Grenada',
-    'Guadeloupe',
-    'Guam',
-    'Guatemala',
-    'Guernsey',
-    'Guinea',
-    'Guinea-Bissau',
-    'Guyana',
-    'Haiti',
-    'Heard Island and McDonald Islands',
-    'Honduras',
-    'Hong Kong',
-    'Hungary',
-    'Iceland',
-    'India',
-    'Indonesia',
-    'Iran',
-    'Iraq',
-    'Ireland',
-    'Isle of Man',
-    'Israel',
-    'Italy',
-    'Ivory Coast',
-    'Jamaica',
-    'Japan',
-    'Jersey',
-    'Jordan',
-    'Kazakhstan',
-    'Kenya',
-    'Kiribati',
-    'Kosovo',
-    'Kuwait',
-    'Kyrgyzstan',
-    'Laos',
-    'Latvia',
-    'Lebanon',
-    'Lesotho',
-    'Liberia',
-    'Libya',
-    'Liechtenstein',
-    'Lithuania',
-    'Luxembourg',
-    'Macau',
-    'Madagascar',
-    'Malawi',
-    'Malaysia',
-    'Maldives',
-    'Mali',
-    'Malta',
-    'Marshall Islands',
-    'Martinique',
-    'Mauritania',
-    'Mauritius',
-    'Mayotte',
-    'Mexico',
-    'Micronesia',
-    'Moldova',
-    'Monaco',
-    'Mongolia',
-    'Montenegro',
-    'Montserrat',
-    'Morocco',
-    'Mozambique',
-    'Myanmar',
-    'Namibia',
-    'Nauru',
-    'Nepal',
-    'Netherlands',
-    'New Caledonia',
-    'New Zealand',
-    'Nicaragua',
-    'Niger',
-    'Nigeria',
-    'Niue',
-    'Norfolk Island',
-    'North Korea',
-    'North Macedonia',
-    'Northern Mariana Islands',
-    'Norway',
-    'Oman',
-    'Pakistan',
-    'Palau',
-    'Palestine',
-    'Panama',
-    'Papua New Guinea',
-    'Paraguay',
-    'Peru',
-    'Philippines',
-    'Pitcairn Islands',
-    'Poland',
-    'Portugal',
-    'Puerto Rico',
-    'Qatar',
-    'Republic of the Congo',
-    'Réunion',
-    'Romania',
-    'Russia',
-    'Rwanda',
-    'Saint Barthélemy',
-    'Saint Helena, Ascension and Tristan da Cunha',
-    'Saint Kitts and Nevis',
-    'Saint Lucia',
-    'Saint Martin',
-    'Saint Pierre and Miquelon',
-    'Saint Vincent and the Grenadines',
-    'Samoa',
-    'San Marino',
-    'São Tomé and Príncipe',
-    'Saudi Arabia',
-    'Senegal',
-    'Serbia',
-    'Seychelles',
-    'Sierra Leone',
-    'Singapore',
-    'Sint Maarten',
-    'Slovakia',
-    'Slovenia',
-    'Solomon Islands',
-    'Somalia',
-    'South Africa',
-    'South Georgia',
-    'South Korea',
-    'South Sudan',
-    'Spain',
-    'Sri Lanka',
-    'Sudan',
-    'Suriname',
-    'Svalbard and Jan Mayen',
-    'Sweden',
-    'Switzerland',
-    'Syria',
-    'Taiwan',
-    'Tajikistan',
-    'Tanzania',
-    'Thailand',
-    'Timor-Leste',
-    'Togo',
-    'Tokelau',
-    'Tonga',
-    'Trinidad and Tobago',
-    'Tunisia',
-    'Turkey',
-    'Turkmenistan',
-    'Turks and Caicos Islands',
-    'Tuvalu',
-    'Uganda',
-    'Ukraine',
-    'United Arab Emirates',
-    'United Kingdom',
-    'United States Minor Outlying Islands',
-    'United States Virgin Islands',
-    'United States',
-    'Uruguay',
-    'Uzbekistan',
-    'Vanuatu',
-    'Vatican City',
-    'Venezuela',
-    'Vietnam',
-    'Wallis and Futuna',
-    'Western Sahara',
-    'Yemen',
-    'Zambia',
-    'Zimbabwe',    
-  ]
-
-const Register = ({image}) => {
+const Register = ({ image }) => {
     // const [submitedForm, setSubmitedForm] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [countrys, setCountrys] = useState([])
+
+
+    const options = async () => {
+        const list = []
+        const option = await axios.get("https://restcountries.com/v3.1/all");
+        option.data && option.data.map((prod, i) => {
+            list.push(prod.name.common)
+        })
+        function comparar(a, b) {
+            if (a < b) return -1;
+            if (a > b) return 1;
+            return 0;
+        }
+
+        // Ordenar la lista alfabéticamente
+        list.sort(comparar);
+        setCountrys(list)
+    }
+
+    useEffect(() => {
+        options()
+    }, [])
+
+
+    const handleGoogle = async () => {
+        dispatch(loginUserGoogleAction()).then(() => {
+            navigate('/').then(() => toast.success("Welcome!", {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            }))
+        });
+
+    }
+
     return (
         <Formik
             initialValues={{
@@ -275,41 +68,71 @@ const Register = ({image}) => {
                 country: '',
                 city: '',
                 password: '',
+                rePassword: ""
             }}
 
-            validate={ (values)=> {
+            validate={(values) => {
                 const errors = {}
-
-                if( !values.email ){
+                if (!values.name) {
+                    errors.name = "Please, input a name"
+                }
+                if (!values.email) {
                     errors.email = 'Please, input a email'
-                // } else if( !/^[a-zA-ZA-ÿ\s]{1,40}$/.test(values.email) ){
-                //     errors.email = 'The email only can characters or spaces'
+                    // } else if( !/^[a-zA-ZA-ÿ\s]{1,40}$/.test(values.email) ){
+                    //     errors.email = 'The email only can characters or spaces'
                 }
 
-                if( !values.password){
+                if (!values.password) {
                     errors.password = 'Please, input a password'
-                // } else if( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.password) ){
-                //     errors.password = 'The password not is valid'
+                    // } else if( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.password) ){
+                    //     errors.password = 'The password not is valid'
+                }
+                if (values.password != values.rePassword) {
+                    errors.password = 'Passwords do not match'
+                    errors.rePassword = 'Passwords do not match'
                 }
                 return errors
             }}
 
-            onSubmit={ (values,{resetForm})=> {
+            onSubmit={(values, { resetForm }) => {
                 resetForm()
+
                 console.log('Enviar Formulario');
-                uploadImage(image, 'users')
-                .then( newURL => {
-                        values = { ...values, profilePic: newURL}
-                        console.log('VALORES A SUBMITEAR !!!!!! ', values);
-                        dispatch(registerUserAction(values)).then(()=> navigate('/')).catch((err)=>{})
+                // dispatch(registerUserAction(values))
+                if (image.length > 1) {
+                    uploadImage(image, 'users').then(newURL => {
+                        values = { ...values, profilePic: newURL }
+
+                        dispatch(registerUserAction(values)).then(() => navigate('/'), (err) => toast.error("Email already registered", {
+                            position: "bottom-center",
+                            autoClose: 1000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        }))
                     }
-                )
-                .catch( error => alert(error))
+                    )
+
+                } else {
+                    dispatch(registerUserAction(values)).then(() => navigate('/'), (err) => toast.error("Email already registered", {
+                        position: "bottom-center",
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    }))
+                }
                 // setSubmitedForm(true)
                 // setTimeout( ()=> setSubmitedForm(false), 2000)
             }}
         >
-            {( {errors} ) => (
+            {({ errors }) => (
                 <Form className='space-y-1'>
                     <div className='grid grid-cols-1 lg:grid-cols-2 lg:gap-3'>
                         <div>
@@ -321,10 +144,10 @@ const Register = ({image}) => {
                                 placeholder='enter your name ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='name' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='name'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.name}
                                     </div>
                                 )}
@@ -333,16 +156,16 @@ const Register = ({image}) => {
                         <div>
                             <label htmlFor='lastName' className='block text-sm font-medium text-gray-700'>Last name</label>
                             <Field
-                                type='text'n
+                                type='text' n
                                 id='lastName'
                                 name='lastName'
                                 placeholder='enter your last name ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='lastName' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='lastName'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.lastName}
                                     </div>
                                 )}
@@ -357,10 +180,10 @@ const Register = ({image}) => {
                                 placeholder='enter your email ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='email' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='email'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.email}
                                     </div>
                                 )}
@@ -369,16 +192,16 @@ const Register = ({image}) => {
                         <div>
                             <label htmlFor='address' className='block text-sm font-medium text-gray-700'>Address</label>
                             <Field
-                                type='text'n
+                                type='text' n
                                 id='address'
                                 name='address'
                                 placeholder='enter your address ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='address' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='address'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.address}
                                     </div>
                                 )}
@@ -386,28 +209,28 @@ const Register = ({image}) => {
                         </div>
                         <div>
                             <label htmlFor='country' className='block text-sm font-medium text-gray-700'>Country</label>
-                            <Field 
+                            <Field
                                 as='select'
-                                name="country" 
+                                name="country"
                                 id="country"
                                 // defaultValue={countries[10]} 
                                 className='text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'>
-                                { countries.map( (country, ind) => <option key={ind} value={country}>{country}</option>)}
+                                {countrys && countrys.map((country, ind) => <option key={ind} value={country}>{country}</option>)}
                             </Field>
                         </div>
                         <div>
                             <label htmlFor='city' className='block text-sm font-medium text-gray-700'>City</label>
                             <Field
-                                type='text'n
+                                type='text' n
                                 id='city'
                                 name='city'
                                 placeholder='enter your city ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='address' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='address'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.address}
                                     </div>
                                 )}
@@ -422,10 +245,10 @@ const Register = ({image}) => {
                                 placeholder='enter your password ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='password' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='password'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.password}
                                     </div>
                                 )}
@@ -440,10 +263,10 @@ const Register = ({image}) => {
                                 placeholder='re enter your password ...'
                                 className='mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline'
                             />
-                            <ErrorMessage 
-                                name='rePassword' 
-                                component={(() => 
-                                    <div className='block text-sm font-medium text-red-700'> 
+                            <ErrorMessage
+                                name='rePassword'
+                                component={(() =>
+                                    <div className='block text-sm font-medium text-red-700'>
                                         {errors.rePassword}
                                     </div>
                                 )}
@@ -454,11 +277,8 @@ const Register = ({image}) => {
                         <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Register</button>
                         {/* {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully registered</p>} */}
                     </div>
-                    <div  className='flex relative left-[12%] lg:left-[21%] pt-5 items-center' >
-                        <span className='col-end-4'>-or register with-</span>
-                        <Link to='/'>
-                            <img  className='col-end-5 w-12' src={logGoogle} alt="google" />
-                        </Link>
+                    <div className='flex justify-center p-4'>
+                        <GoogleButton onClick={handleGoogle} />
                     </div>
                     {/* <div className='grid grid-cols-2 pt-10 '>
                         <Link to="/" className=' col-end-3'>
