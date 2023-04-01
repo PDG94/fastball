@@ -10,7 +10,7 @@ import Detail from './components/Detail/Detail';
 import Profile from './components/UserDashboard/Profile'
 import UpdateProfile from './components/UserDashboard/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
-// import RegisterProduct from './components/RegisterProduct/RegisterProduct'
+import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
@@ -44,7 +44,7 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        <Route exact path='/create' element={<CartDetail />} />
+        <Route exact path='/create' element={<RegisterProduct />} />
         <Route path= '*' element= { <Error404 /> } /> 
 
         {/* <Route exact path='/profile' element={<Profile />} /> 
@@ -52,18 +52,30 @@ function App() {
         <Route exact path='/payment' element={<Payment />} />
         <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
-        <Route exact path='/profile' element={<Profile />} />          
+        {
+          flag&&flag?<Route exact path='/profile' element={<Profile />} />          
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
         
-        
-       <Route exact path='/profile/update' element={<UpdateProfile />} />
-         
-       <Route exact path='/profile/orders' element={<OrderHistory />} />
-      
+        {
+          flag&&flag?<Route exact path='/profile/update' element={<UpdateProfile />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
 
-        <Route exact path='/payment' element={<Payment />} />
-        
-        <Route path='/cartDetail' element={<CartDetail/>} />
-            
+        {
+          flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/payment' element={<Payment />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }        
         
       </Routes>
     </>

@@ -8,7 +8,7 @@ import ModalYesNo from '../ModalYesNo/ModalYesNo';
 const CartDetails = () => {
   // Suscribirse al estado del carrito utilizando el selector de Redux
   const cartProducts = useSelector(state => state.cart.allProductsCart);
-  const user = {_id: '8fe4ff1b-3968-44ae-a282-05a18be922c4'} 
+  const user = useSelector(state => state.user)
   // useSelector(state => state.user);
   const dispatch=useDispatch();
   const [showModal, setshowModal] = useState();
