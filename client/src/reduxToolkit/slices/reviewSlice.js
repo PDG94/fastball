@@ -57,11 +57,12 @@ const reviewSlice = createSlice({
             if(action.payload.status === 'Declined'){
                 if(state.reviewsUsr.length)
                     state.reviewsUsr = state.reviewsUsr.filter( rev => rev.id !== action.payload.id)   
-            }else {
+            }
+            else {
                 if(state.reviewsUsr.length)
                     state.reviewsUsr = state.reviewsUsr.map( rev => (rev.id === action.payload.id)? action.payload : rev)
 
-                if(state.reviewsProduct.length)
+                // if(state.reviewsProduct.length)
                     state.reviewsProduct.push(action.payload)
             }
             state.status = 'success';

@@ -19,18 +19,20 @@ export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId'
     }
  });
 
- export const fetchReviewsPending = createAsyncThunk('review/fetchReviewsPending', async (userId, productId)=> {
+ export const fetchReviewsPending = createAsyncThunk('review/fetchReviewsPending', async ({userId, productId})=> {
     try {
-     const reviews = await axios.get(`/review/getReviewsPending/${userId}${productId?`?idProduct${productId}`:''}`);
+     const reviews = await axios.get(`/review/getReviewsPending/${userId}${productId?`?idProduct=${productId}`:''}`);
      return reviews.data
     } catch (error) {
      throw error;
     }
  });
 
- export const updateReview = createAsyncThunk('review/updateReview', async (reviewId, changes)=> {
+ export const updateReview = createAsyncThunk('review/updateReview', async ({reviewId, changes, user})=> {
     try {
      const review = await axios.patch(`/review//updateReview/${reviewId}`, changes)
+     console.log('user de reviews update:', user);
+     review.data.User = user
      return review.data
     } catch (error) {
      throw error;
