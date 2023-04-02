@@ -54,16 +54,6 @@ const AddReview = ({reviewId, productDetail, called, clickClose}) => {
       })
     )
     toast.info(`Review successfully posted`);
-    // .then(()=>{
-    //   dispatch(fetchReviewsPending({ productId: productDetail.id, userId: _id })).then(
-    //     ()=>{
-    //       called==='Product'
-    //         ? dispatch(fetchReviewsByProductId( productDetail.id )).then(()=>clickClose())
-    //         : dispatch(fetchReviewsByUsrId({userId: _id })).then(()=>clickClose())
-    //     }
-    //   )
-    // })
-
   }
 
   const handleClickDecline = () =>{
