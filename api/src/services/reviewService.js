@@ -56,10 +56,28 @@ class reviewService {
     }
 // ok
     async updateReview(idReview, changes){ 
-        const reviewUpdated = await  Review.findOne({where : {id: idReview}});
-        if(!reviewUpdated){
-            throw new Error("Review not found");
-        };
+        // if(changes.status !== 'Done' && changes.status !== 'Declined')
+        //     throw new Error("The status is wrong")
+
+        const reviewUpdated = await  Review.findOne({where : {id: idReview}})
+        
+        if(!reviewUpdated) 
+            throw new Error("Review not found")
+        
+        if(changes.status==='Done'){
+            console.log('Review Update', reviewUpdated);
+            const product = await Product.findByPk(reviewUpdated.ProductId)
+            console.log('PRODUCT Update review', product);
+            const newCantReviews = product.cantReviews + 1
+            const newPromScore = (((product.cantReviews * product.score) + changes.score) / (newCantReviews)).toFixed(2)
+            await product.update( 
+                { 
+                    cantReviews: newCantReviews,
+                    score: newPromScore
+                }
+            )
+        }
+
         await reviewUpdated.update(changes);
         return reviewUpdated;
     }

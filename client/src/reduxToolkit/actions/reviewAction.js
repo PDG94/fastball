@@ -31,7 +31,6 @@ export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId'
  export const updateReview = createAsyncThunk('review/updateReview', async ({reviewId, changes, user})=> {
     try {
      const review = await axios.patch(`/review//updateReview/${reviewId}`, changes)
-     console.log('user de reviews update:', user);
      review.data.User = user
      return review.data
     } catch (error) {
