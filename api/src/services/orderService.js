@@ -1,4 +1,4 @@
-const { Order, Product, Reviews } = require("../bd/db");
+const { Order, Product, Review } = require("../bd/db");
 
 class orderService {
     constructor(){
@@ -14,7 +14,11 @@ class orderService {
 
         await orderCreated.setUser(userId);
         await products.map(async(product) => {
-            const review = await Reviews.create({
+            const review = await Review.create({
+                score: 0,
+                description: '',
+                status: 'Pending',
+                active: true,
                 UserId: userId,
                 ProductId: product.id
             })

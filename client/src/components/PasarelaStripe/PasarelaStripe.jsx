@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader/Loader";
+import { updateStockProduct } from "../../reduxToolkit/actions/productAction";
 const stripePromise = loadStripe(
   `pk_test_51MoJENC4TeWDJRMMK38M9pOQjCxPmBJf2gznJMe8DMkAu6W5y6lHpMd6E0BMSkfAIDJkAiv1yg4rI6b02n1WRQi4008rXBu5yH`
 );
@@ -37,22 +38,31 @@ const CheckOutForm = () => {
   const itemsDesc = JSON.stringify(items)
   const [isLoading, setIsLoading] = useState(false);
   
-  const clearCart = async() => {    
+  const clearCart = async() => {
+    console.log('En Clear Cart');
     await cartItems1.forEach(element=>{
       dispatch(deleteCart({idUser:userID1, idProduct:element.id}))
+      dispatch(updateStockProduct({
+        ...element,
+        stock:element.stock-element.Cart.stock
+      }));
     })
+
     setIsLoading(false)
     navigate("/");
     toast.success("Payment Succesful!");
   };
 
   const clearAndBack = () => {
+    console.log('En Clear AND bACK');
+
     setIsLoading(true)
     setTimeout(clearCart, 3000);    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('En SUBMIT');
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       // esto es para configurar el recuadro donde se pone la tarjeta de credito y los datos
@@ -89,7 +99,7 @@ const CheckOutForm = () => {
         const orderCreated = await axios.post('/order/create', order);
         console.log(orderCreated)
         
-
+        clearAndBack()
         
       } catch (error) {
         console.log(error);
@@ -109,7 +119,9 @@ const CheckOutForm = () => {
             style={{
               textDecoration: "none",
             }}>
-            <button className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
+            <button 
+              type='button'
+              className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
           </Link>
           <h1 className="ml-8 text-3xl font-extrabold text-gray-900'">Enter your payment method</h1>
         </div>
@@ -144,8 +156,10 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
+                  type='submit'
                   className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
-                  onClick={clearAndBack}>
+                  // onClick={clearAndBack}
+                  >
                   Pay
                 </button>              
               </div>

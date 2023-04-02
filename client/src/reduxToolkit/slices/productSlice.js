@@ -1,5 +1,5 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const {fetchProductById, fetchProduct, fetchCreateProduct} = require('./../actions/productAction')
+const {fetchProductById, fetchProduct, fetchCreateProduct,updateStockProduct} = require('./../actions/productAction')
 
 const initialState = {
     allProducts : [],
@@ -120,6 +120,17 @@ const productSlice = createSlice({
             state.status = 'success';
         })
         builder.addCase(fetchProductById.rejected, (state,action)=> {
+            state.status = 'rejected'
+        })
+
+
+        builder.addCase(updateStockProduct.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(updateStockProduct.fulfilled, (state,action)=> {
+            state.status = 'success';
+        })
+        builder.addCase(updateStockProduct.rejected, (state,action)=> {
             state.status = 'rejected'
         })
     }

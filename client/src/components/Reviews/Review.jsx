@@ -11,7 +11,7 @@ const Review = ({rev}) => {
     />
     <div>
       <span>{rev.date} -</span>
-      <span className="ml-2 text-lg font-medium">{rev.name}</span>
+      <span className="ml-2 text-lg font-medium font-semibold">{rev.name}</span>
       <div className="flex items-center">
         <span className="text-sm text-gray-600 mr-2">{`${rev.score} ${rev.score ===1?'star':'stars'}`}</span>
         <div className="flex items-center">

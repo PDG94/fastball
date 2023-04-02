@@ -5,6 +5,7 @@ const categoryRouter = require('./categoryRoute')
 const productRouter = require('./productRoute')
 const orderRoute = require('./orderRoute');
 const cartRouter = require('./../routes/cartRoute');
+const reviewRouter = require('./../routes/reviewRoute')
 const checkout = require('../services/checkout')
 const alta = require("../utils/notifications/altaMail")
 const pago = require("../utils/notifications/pagoMail");
@@ -22,6 +23,7 @@ function routerApi(app){
     router.use('/checkout', checkout);
     router.use('/cart', cartRouter);
     router.use('/order', orderRoute);
+    router.use('/review', reviewRouter);
     router.use("/alta", alta);
     router.use("/pago", pago);
     router.use("/baja", baja);

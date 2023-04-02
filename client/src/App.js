@@ -16,6 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
+import DashBoard from './components/adminDashBoard/DashBoard'
+import List from './components/adminDashBoard/pages/list/List';
+
+
 import OrderHistory from './components/UserDashboard/OrderHistory';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
@@ -44,8 +48,11 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        <Route exact path='/create' element={<RegisterProduct />} />
+        <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
+        <Route exact path='/admin' element={<DashBoard/>}/>
+        <Route exact path='/admin/users' element={<List/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
+
 
         {/* <Route exact path='/profile' element={<Profile />} /> 
         <Route exact path='/profile/update' element={<UpdateProfile />} />

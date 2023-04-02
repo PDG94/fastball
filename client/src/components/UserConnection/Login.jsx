@@ -6,7 +6,7 @@ import GoogleButton from 'react-google-button';
 // import {logOut} from './../../Auth/firebase';
 import { toast } from "react-toastify";
 
-const {loginUserAction, loginUserGoogleAction} = require('./../../reduxToolkit/actions/userActions');
+const { loginUserAction, loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -14,9 +14,19 @@ const Login = () => {
     // const user =useSelector((state)=> state.user)
     const navigate = useNavigate();
 
-    const handleGoogle = async ()=> {
-        dispatch(loginUserGoogleAction()).then(()=> navigate('/'));
-        toast.success("Welcome!");
+    const handleGoogle = async () => {
+        dispatch(loginUserGoogleAction()).then(() => {navigate('/').then(()=> toast.success("Welcome!", {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        }))
+         });
+        
     }
     return (
         <Formik
@@ -42,21 +52,38 @@ const Login = () => {
                 return errors
             }}
 
-            onSubmit={async(values, { resetForm }) => {
+            onSubmit={(values, { resetForm }) => {
                 resetForm()
-                const email = values.email;
-                const password = values.password;
-                console.log("hola",{email,password})
-                dispatch(loginUserAction(email,password)).then(()=> navigate('/'));
-                console.log('Enviar Formulario');
-                // setSubmitedForm(true)
-                // navigate('/')
-                // setTimeout(() => setSubmitedForm(false), 2000)
-                toast.success("Welcome!");
+                const user = { email: values.email, password: values.password };
+
+                dispatch(loginUserAction(user)).then((response) => {
+                    if (!response.error) {
+                        navigate("/"); toast.success("Welcome!", {
+                            position: "bottom-center",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                    } else toast.error("The username or password is incorrect", {
+                        position: "bottom-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                })
+
             }}
         >
             {({ errors }) => (
-                <Form className='space-y-1'>
+                <Form className='space-y-1 '>
                     <div className='grid grid-cols-1 lg:gap-3'>
                         <div>
                             <label htmlFor='email' className='block text-sm font-medium text-gray-700'>Email</label>
@@ -97,7 +124,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div>
-                        <button   className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Login in</button>
+                        <button className='mt-4 w-full py-3 bg-blue-800 hover:bg-blue-700 text-white' type='submit'>Login in</button>
                         {/* {submitedForm && <p className='block text-sm font-medium text-green-700'>Successfully logged</p>} */}
                     </div>
                     {/* <div className='grid grid-cols-4 pt-5 items-center' >
@@ -106,8 +133,8 @@ const Login = () => {
                             <img className='col-end-4 w-12' src={logGoogle} alt="google" />
                         </Link>
                     </div> */}
-                    <div>
-                        <GoogleButton onClick={handleGoogle}/>
+                    <div className='flex justify-center p-4'>
+                        <GoogleButton onClick={handleGoogle} />
                     </div>
                     {/* <div>
                         <button onClick={logOut}>Logout</button>

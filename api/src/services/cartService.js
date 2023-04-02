@@ -18,18 +18,11 @@ class CartService {
         const products = await user.getProducts();
         return products;
     }
-    // async valitadorStock(idProduct, stock){
-    //     const product = await Product.findByPk(idProduct);
-    //     if(product.dataValues){
-    //         const productDetail = product.dataValues;
-    //         if(productDetail.stock > stock){
-    //         }
-    //     }
-    // }
+    
     async getAllProductsOnCart(idUser) {
         const user = await User.findByPk(idUser);
         const products = await user.getProducts();
-        if (!products) return "No hay productos agregados al carrito";
+        if (!products) throw new Error( "No hay productos agregados al carrito");
         return products
     }
     async updateCart(idProduct, idUser, newStock) {
