@@ -40,6 +40,7 @@ const CheckOutForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   const clearCart = async() => {
+    console.log('En Clear Cart');
     await cartItems1.forEach(element=>{
       dispatch(deleteCart({idUser:userID1, idProduct:element.id}))
       dispatch(updateStockProduct({
@@ -54,12 +55,15 @@ const CheckOutForm = () => {
   };
 
   const clearAndBack = () => {
+    console.log('En Clear AND bACK');
+
     setIsLoading(true)
     setTimeout(clearCart, 3000);    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('En SUBMIT');
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       // esto es para configurar el recuadro donde se pone la tarjeta de credito y los datos
@@ -97,7 +101,7 @@ const CheckOutForm = () => {
         const orderCreated = await axios.post('/order/create', order);
         console.log(orderCreated)
         
-        clearAndBack ();
+        clearAndBack()
         
       } catch (error) {
         console.log(error);
@@ -117,7 +121,9 @@ const CheckOutForm = () => {
             style={{
               textDecoration: "none",
             }}>
-            <button className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
+            <button 
+              type='button'
+              className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
           </Link>
           <h1 className="ml-8 text-3xl font-extrabold text-gray-900">Enter your payment method</h1>
         </div>
@@ -153,7 +159,8 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
-                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-blue-600 hover:bg-blue-500 transition">
+                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
+                  >
                   Pay
                 </button>              
               </div>

@@ -4,7 +4,7 @@ const userReducer = require('./../slices/userSlice');
 const categoryReducer = require('./../slices/categorySlice')
 const cartReducer = require('./../slices/cartSlice')
 const orderReducer = require('./../slices/orderSlice')
-
+const reviewReducer = require('./../slices/reviewSlice')
 const sizeReducer = require('./../slices/sizeSlice')
 const colorReducer = require('./../slices/colorSlice')
 
@@ -20,6 +20,7 @@ const store = configureStore({
         size:sizeReducer,
         color:colorReducer,
         order: orderReducer,
+        review: reviewReducer
     },
     middleware : (getDefaultMiddleware)=> getDefaultMiddleware().concat()
 });
