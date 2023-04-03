@@ -31,7 +31,7 @@ class UsersHandler {
             const newUser = await service.createUser(body);
             res.status(201).json(newUser);
         } catch (error) {
-            next(error)
+            res.send(error)
         }
     }
 
@@ -61,6 +61,7 @@ class UsersHandler {
             if (!name || !lastName || !email || !password || !address || !city || !contry) {
                 throw new Error('Missing Data');
             }
+            console.log('pasó')
             const userExisted = await User.findOne({
                 where: { email }
             })
@@ -79,7 +80,7 @@ class UsersHandler {
             const user = await service.createUser(userTemplate);
             res.status(200).json(user);
         } catch (error) {
-            res.status(400).send(error)
+            res.status(400).send(error.message);
         }
 
     }
@@ -87,7 +88,6 @@ class UsersHandler {
         try {
             const { email, password } = req.body;
             const user = await service.loginUser(email, password);
-            console.log(user)
             //space for email notification
             res.status(200).send(user);
         } catch (error) {

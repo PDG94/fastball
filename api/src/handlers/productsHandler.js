@@ -64,6 +64,14 @@ class ProductsHandler {
             next(error);
         }
     }
+    async updateStockProduct(req, res, next ){
+        try {
+            const product=req.body;
+            const result=await service.updateStockProduct(product);
+        } catch (error) {
+            
+        }
+    }
 }
 
 module.exports = ProductsHandler

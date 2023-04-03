@@ -14,16 +14,27 @@ const AddCart = ({productDetail}) => {
     const [stock,setStock]=useState(1);
     const handleQuantityChange = (event) => {
         const value = parseInt(event.target.value);
-        setStock(value);
+        if(value>productDetail.stock){
+            setStock(productDetail.stock);
+        }else if(value<=1){
+            setStock(1);
+        }else{
+            setStock(value);
+        }
     }
     const handleAddToCart=async()=>{
         if(token){
-            const decodedToken = decode(token);
-            dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
-            console.log("agregado con exito");
-            toast.success(`${productDetail.name} (${stock}) Added to cart Successfully!`);
+            if(stock>0){
+                const decodedToken = decode(token);
+                dispatch(addProductInCart({idUser:decodedToken._id, idProduct:productDetail.id, stock}));
+                console.log("agregado con exito");
+                toast.success(`${productDetail.name} (${stock}) Added to cart Successfully!`);
+            }else{
+                toast.info(`You must add at least 1 product`);
+                setStock(1);
+            }
         } else {
-            toast.success(`You must log in to use the cart`, { type: 'info'});
+            toast.info(`You must log in to use the cart`);
             navigate('/login')
         }
     }

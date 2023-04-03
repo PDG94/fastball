@@ -5,56 +5,31 @@ import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import ImageViewer from "../imageViewer/ImageViewer";
-import Stars from "../Stars/Stars";
-const { clearProductDetail } =
-  require("./../../reduxToolkit/slices/productSlice").productActions;
+// import Stars from "../Stars/Stars"
+import Review from "../Reviews/Review";
+import AddReview from "../Reviews/AddReview";
+const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
-const arrayReviews = [
-  {
-    date: "01/03/23",
-    image:
-      "https://res.cloudinary.com/dviri5ov1/image/upload/v1679684756/fastball/users/nvi27adeg2okkldkan6y.jpg",
-    name: "Jon Doe",
-    score: 3,
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam",
-  },
-  {
-    date: "18/12/22",
-    image:
-      "https://res.cloudinary.com/dviri5ov1/image/upload/v1679864238/fastball/users/xzucp3lkoin6nnw08fwz.jpg",
-    name: "Jon Doe 1",
-    score: 5,
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam",
-  },
-  {
-    date: "21/09/22",
-    image:
-      "https://res.cloudinary.com/dviri5ov1/image/upload/v1679778324/fastball/users/jxnnp9chnxs4pzo9fdyu.png",
-    name: "Jon Doe 2",
-    score: 2,
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam",
-  },
-  {
-    date: "31/05/22",
-    image:
-      "https://res.cloudinary.com/dviri5ov1/image/upload/v1679926570/fastball/users/rjs98aaposywuw5ybrgm.png",
-    name: "Jon Doe 3",
-    score: 4,
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam",
-  },
-];
 
 const Detail = () => {
+  const [arrayReviews, setArrayReviews] = useState([
+    // {
+    //   date: '01/03/23',
+    //   image: 'https://res.cloudinary.com/dviri5ov1/image/upload/v1679684756/fastball/users/nvi27adeg2okkldkan6y.jpg',
+    //   name: 'Jon Doe',
+    //   score: 3,
+    //   description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam'
+    // }
+  ])
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const dispatch = useDispatch();
   const { productDetail } = useSelector((state) => state.product);
-  const { _id } = useSelector((state) => state.user); 
-  let startDetail = true;
+  const { _id } = useSelector((state) => state.user);
+  const [showAddReview, setShowAddReview] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isAddReview, setIsAddReview] = useState(true);
+  let startDetail = true
 
   useEffect(() => {
     if (startDetail) {
@@ -66,21 +41,33 @@ const Detail = () => {
     }
 
     return () => {
-      dispatch(clearProductDetail());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return (
+        dispatch(clearProductDetail())
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleAcceptReview = (review)=>{
+    arrayReviews.unshift(review)
+    setArrayReviews(arrayReviews)
+  }
+
+  return ( 
     <>
       {isLoading ? (
         <div className="flex justify-center items-center">
           <Loader />
         </div>
-      ) : (
-        <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
+      ) : showAddReview
+          ? <AddReview 
+              productDetail={productDetail}
+              clickAccept={handleAcceptReview}
+              clickClose={()=>setShowAddReview(false)}
+            />
+          : <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="cont-imageviewer">
-              <ImageViewer image={productDetail.image}></ImageViewer>
+              {productDetail.image && <ImageViewer image={productDetail.image}/>}
             </div>
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -157,38 +144,22 @@ const Detail = () => {
               </div>
             </div>
           </div>
-          <div className="mt-8">
-            <h2 className="text-xl md:text-2xl font-medium mb-4">Reviews</h2>
-
-            {arrayReviews.map((rev) => (
-              <div className="flex items-center mb-4">
-                <img
-                  src={`${rev.image.slice(
-                    0,
-                    50
-                  )}c_fill,f_auto,h_50,q_auto,w_50/${rev.image.slice(50)}`}
-                  alt="Avatar"
-                  className="rounded-full mr-4 border border-solid border-slate-400"
-                />
-                <div>
-                  <span>{rev.date} -</span>
-                  <span className="ml-2 text-lg font-medium">{rev.name}</span>
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-600 mr-2">{`${
-                      rev.score
-                    } ${rev.score === 1 ? "star" : "stars"}`}</span>
-                    <div className="flex items-center">
-                      <Stars score={rev.score} />
-                    </div>
-                  </div>
-                  <p className="text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Morbi consectetur sit amet massa ac bibendum.
-                  </p>
-                </div>
-              </div>
-            ))}
-
+          <div className="mt-12">
+            <div className="flex mb-4 gap-8">
+              <h2 className="text-xl md:text-2xl font-medium mb-4">Reviews</h2>
+              {isAddReview &&
+                <button 
+                  type="button" 
+                  className='px-4 py-1 text-white bg-green-600 hover:bg-green-500 
+                  rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm'
+                  onClick={()=>setShowAddReview(true)}
+                >
+                  Add review
+                </button>
+              }
+            </div>
+            {arrayReviews.map( rev => <Review rev={rev} />)}
+            
             {/* <div className="flex items-center mb-4">
               <img
                 src="https://via.placeholder.com/50x50"
@@ -212,7 +183,7 @@ const Detail = () => {
             </div> */}
           </div>
         </div>
-      )}
+      }
     </>
   );
 };

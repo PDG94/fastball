@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchOrder } from "../../reduxToolkit/actions/orderAction";
 
 const OrderHistory = () => {
@@ -15,16 +17,8 @@ const OrderHistory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const filteredOrders = orders.filter((order) => order.UserId === userID1);
+  const filteredOrders = orders.filter((order) => order.userID1 === userID1);
 
-  const info = () => {
-    console.log("111", orders);
-    console.log("222", filteredOrders);
-    console.log("333", userID1);
-  };
-  const fecha = () => {
-    console.log(filteredOrders.createdAt);
-  };
   const Clickk = (id) => {
 
     navigate(`/profile/orders/${id}`);
@@ -94,12 +88,6 @@ const OrderHistory = () => {
                 Back
               </button>
             </Link>
-            <button
-              onClick={info}
-              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-            >
-              info
-            </button>
           </div>
         {/* )} */}
       </div>

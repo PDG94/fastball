@@ -79,8 +79,9 @@ const cartSlice = createSlice({
             state.allProductsCart = action.payload;
             state.totalMount = 0;
             state.allProductsCart.forEach((element) => {
-            state.totalMount += element.price * element.Cart.stock; 
-        });
+            state.totalMount += (element.price-(element.price*(element.discount/100))) * element.Cart.stock; // sum the price of each element in the cart
+            });
+
             state.status = 'success';
         })
         builder.addCase(updateCart.rejected, (state,action)=> {

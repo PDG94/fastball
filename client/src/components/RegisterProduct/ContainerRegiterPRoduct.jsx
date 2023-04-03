@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ImgLogo from './../Images/fastball.png'
+// import ImgLogo from './../Images/fastball.png'
 import axios from 'axios'
 import { toast } from "react-toastify";
 import RegisterProduct from './RegisterProduct'
@@ -18,7 +18,7 @@ const ContainerRegiterPRoduct = ( ) => {
 
     return (
         <div className='container mx-auto mt-24 min-height-full flex mb-12'>
-            <div className='flex w-4/5 h-[78vh] items-center justify-center mb-8 drop-shadow-lg bg-white '>
+            <div className='flex w-4/5 h-[100vh] items-center justify-center mb-8 drop-shadow-lg bg-white '>
                 { !currentImage? <h1 className='w-fit bg-blue-600 px-5 py-3 font-bold text-white'>Product image</h1> : <img src={ currentImage } alt="loginImage" className='object-cover h-full' />}
             </div>
             <div className='flex-1 flex flex-col'>

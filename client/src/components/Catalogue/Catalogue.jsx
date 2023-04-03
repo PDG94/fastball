@@ -44,9 +44,9 @@ const Catalogue = () => {
                         <Loader />
                     </div>
                 ) : (
-                <div className='container mt-2 mx-auto mb-8'>
+                <div className='container mt-2 mx-auto mb-8 flex flex-col items-center'>
                     <SearchBar />
-                    <div className="my-8 mt-[16.3%]">
+                    <div className="my-8">
                         <Pagination
                             productsPerPage={productsPerPage}
                             allProducts={filteredProducts.length}

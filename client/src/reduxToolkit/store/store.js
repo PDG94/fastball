@@ -8,8 +8,8 @@ const orderReducer = require('./../slices/orderSlice')
 const sizeReducer = require('./../slices/sizeSlice')
 const colorReducer = require('./../slices/colorSlice')
 
-const reduxLogger = require('redux-logger');
-const logger = reduxLogger.createLogger()
+// const reduxLogger = require('redux-logger');
+// const logger = reduxLogger.createLogger()
 
 const store = configureStore({
     reducer: {
