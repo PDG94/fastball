@@ -86,7 +86,7 @@ class ProductService {
     }
 
     async updateProduct(id, changes) {
-        console.log("estamos descontando!")
+        console.log("estamos descontando!", changes)
         const prod = await Product.findByPk(id);
         const rta = await prod.update(changes);
         return rta;

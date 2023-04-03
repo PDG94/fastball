@@ -10,7 +10,7 @@ import Detail from './components/Detail/Detail';
 import Profile from './components/UserDashboard/Profile'
 import UpdateProfile from './components/UserDashboard/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
-// import RegisterProduct from './components/RegisterProduct/RegisterProduct'
+import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
@@ -21,6 +21,7 @@ import List from './components/adminDashBoard/pages/list/List';
 
 
 import OrderHistory from './components/UserDashboard/OrderHistory';
+import OrderDetails from './components/UserDashboard/OrderDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -71,6 +72,11 @@ function App() {
 
         {
           flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
 
