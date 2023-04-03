@@ -8,6 +8,7 @@ import ImageViewer from "../imageViewer/ImageViewer";
 // import Stars from "../Stars/Stars"
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
+import RandomCarousel from "../categoryButtons.jsx/RandomCarousel";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 
@@ -182,6 +183,7 @@ const Detail = () => {
               </div>
             </div> */}
           </div>
+          <RandomCarousel></RandomCarousel>
         </div>
       }
     </>

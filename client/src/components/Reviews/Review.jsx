@@ -3,7 +3,7 @@ import Stars from "../Stars/Stars"
 
 const Review = ({rev}) => {
   return (
-    <div className="flex items-center mb-2 bg-white rounded-lg drop-shadow-lg p-4 ">
+    <div className="flex items-center mb-2 bg-white shad border-all p-4 ">
     <img
       src={`${rev.image.slice(0,50)}c_fill,f_auto,h_50,q_auto,w_50/${rev.image.slice(50)}`}
       alt="Avatar"

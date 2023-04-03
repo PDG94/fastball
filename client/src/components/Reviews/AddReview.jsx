@@ -69,7 +69,7 @@ const AddReview = ({productDetail, clickAccept, clickClose}) => {
                   <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
             {/* <div className='relative z-10 container h-[85vh] w-full flex items-center justify-center fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'> */}
-                    <div className='mt-20 flex flex-col items-center bg-white rounded-lg w-[50%] p-8 drop-shadow-lg'>
+                    <div className='mt-20 flex flex-col items-center bg-white border-all w-[50%] p-8 drop-shadow-lg'>
                         <img src={formatImage} alt="product review" className='w-24 h-24 mb-2' />
                         <h1 className='mb-4 text-2xl font-medium'>{productDetail.name}</h1>
                         <div className='flex'>

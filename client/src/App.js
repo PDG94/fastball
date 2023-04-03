@@ -21,6 +21,8 @@ import List from './components/adminDashBoard/pages/list/List';
 
 
 import OrderHistory from './components/UserDashboard/OrderHistory';
+import About from './components/About/About';
+import Footer from './components/Footer/Footer';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/about' element={<About />} />
         <Route exact path='/catalogue' element={<Catalogue />} />
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
@@ -83,8 +86,8 @@ function App() {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }        
-        
       </Routes>
+        <Footer></Footer>
     </>
   );
 }
