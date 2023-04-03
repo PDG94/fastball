@@ -125,6 +125,7 @@ const Navbar = () => {
                                         <p disable className="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100">{user.name}</p>
                                         <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
                                         <Link to="/profile/update" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+                                        <Link to="/userdashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">User Dashboard</Link>
                                         <div className="border-t border-gray-100"></div>
                                         <button onClick={logOutt} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</button>
                                     </div>

@@ -7,8 +7,8 @@ import UserConnection from './components/UserConnection/UserConnection'
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Detail from './components/Detail/Detail';
-import Profile from './components/UserDashboard/Profile'
-import UpdateProfile from './components/UserDashboard/UpdateProfile'
+import Profile from './components/UserDashboard/profile/Profile'
+import UpdateProfile from './components/UserDashboard/profile/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
@@ -18,10 +18,11 @@ import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 import DashBoard from './components/adminDashBoard/DashBoard'
 import List from './components/adminDashBoard/pages/list/List';
+import UserDashboard from './components/UserDashboard/UserDashboard'
 
 
-import OrderHistory from './components/UserDashboard/OrderHistory';
-import OrderDetails from './components/UserDashboard/OrderDetails'
+import OrderHistory from './components/UserDashboard/orders/OrderHistory';
+import OrderDetails from './components/UserDashboard/orders/OrderDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -60,6 +61,11 @@ function App() {
         <Route exact path='/payment' element={<Payment />} />
         <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
+        {
+          flag&&flag?<Route exact path='/userdashboard' element={<UserDashboard />} />          
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
         {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          
           :<Route path= '*' element= { <Error404 /> } /> 

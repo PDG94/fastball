@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchOrderById } from "../../reduxToolkit/actions/orderAction";
+import { fetchOrderById } from "../../../reduxToolkit/actions/orderAction";
 const orderExample = {
   id: 3,
   orderNumber: "123",

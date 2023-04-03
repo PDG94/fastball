@@ -356,10 +356,11 @@ export default function UpdateInfoUser() {
   };
 
   return (
-    <div className='mx-auto min-height-full flex mt-20'>
-    <div className='hidden lg:block relative flex-1 h-full'>
-        <img src={'https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_710,q_auto,w_700/v1679507442/fastball/system/register_gpmyxn.webp'} alt="loginImage" className='w-[99%] h-full' />
-    </div>
+    <div >
+      <br />
+      <br />
+      <br />
+      <br />
     <div className='flex-1 flex flex-col px-4 sm:px-6 lg:flex-none mt-8'>
         <div className='mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]'>
             <div className='flex items-center'>

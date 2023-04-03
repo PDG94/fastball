@@ -9,24 +9,20 @@ export default function DashboardUser() {
   // const dispatch = useDispatch();
   // const token = localStorage.getItem("token");
 
-  const { name, email, profilePic, address, contry, city } =
-    useSelector((state) => state.user);
+  const { name, email, profilePic, address, contry, city } = useSelector(
+    (state) => state.user
+  );
 
   // useEffect(() => {
   // dispatch(getServiceUser(_id, token));
   // }, [dispatch, id, token]);
 
   return (
-    <div className="mx-auto min-height-full flex mt-20">
-      <div className="hidden lg:block relative flex-1 h-full">
-        <img
-          src={
-            "https://res.cloudinary.com/dviri5ov1/image/upload/c_fill,f_auto,h_570,q_auto,w_700/v1679507441/fastball/system/login_lcywpk.webp"
-          }
-          alt="loginImage"
-          className="w-[99%] h-full"
-        />
-      </div>
+    <div>
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="flex-1 flex flex-col px-4 sm:px-6 lg:flex-none mt-8">
         <div className="mx-auto w-full max-w-sm lg:max-w-lg lg:w-[100rem]">
           <div className="flex items-center">
@@ -84,14 +80,14 @@ export default function DashboardUser() {
               </div>
 
               <div>
-                
                 <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                <Link to="/profile/orders"> {"---> My orders <---"}</Link>
+                  <Link to="/profile/orders"> {"---> My orders <---"}</Link>
                 </button>
               </div>
               <br />
               <br />
             </div>
+            
           </div>
         </div>
       </div>
