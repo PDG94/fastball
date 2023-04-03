@@ -14,15 +14,6 @@ const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice
 
 
 const Detail = () => {
-  // const [arrayReviews, setArrayReviews] = useState([
-  //   {
-  //     date: '01/03/23',
-  //     image: 'https://res.cloudinary.com/dviri5ov1/image/upload/v1679684756/fastball/users/nvi27adeg2okkldkan6y.jpg',
-  //     name: 'Jon Doe',
-  //     score: 3,
-  //     description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam'
-  //   }
-  // ])
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,8 +21,6 @@ const Detail = () => {
   const { _id } = useSelector((state) => state.user);
   const { reviewsProduct, reviewsPending } = useSelector((state) => state.review);
   const [showAddReview, setShowAddReview] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  // const [isAddReview, setIsAddReview] = useState(true);
   let startDetail = true
 
   useEffect(() => {
@@ -52,11 +41,6 @@ const Detail = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  // const handleAcceptReview = (review)=>{
-  //   arrayReviews.unshift(review)
-  //   setArrayReviews(arrayReviews)
-  // }
 
   return ( 
     <>
@@ -112,7 +96,6 @@ const Detail = () => {
                     </span>
                   </>
                 )}
-                {/* <span className="text-gray-600 text-lg line-through"></span> */}
               </div>
               <div className="mb-4">
                 <h2 className="text-lg md:text-xl font-medium mb-2">
@@ -156,8 +139,6 @@ const Detail = () => {
             <div className="flex mb-4 gap-8 justify-center">
               <div>
                 <ResumeReviews 
-                  // scoreProm={productDetail.score} 
-                  // cantReviews={productDetail.cantReviews}
                   reviewsProduct={reviewsProduct}
                 />
               </div>

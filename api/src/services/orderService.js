@@ -20,7 +20,8 @@ class orderService {
                 status: 'Pending',
                 active: true,
                 UserId: userId,
-                ProductId: product.id
+                ProductId: product.id,
+                OderProductOrderId: orderCreated.id
             })
             await orderCreated.addProduct(product.id, { through: { quantity : product.Cart.stock, ReviewId: review.id } } );
         });
