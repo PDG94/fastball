@@ -56,8 +56,8 @@ class reviewService {
     }
 // ok
     async updateReview(idReview, changes){ 
-        // if(changes.status !== 'Done' && changes.status !== 'Declined')
-        //     throw new Error("The status is wrong")
+        if(changes.status !== 'Done' && changes.status !== 'Declined')
+            throw new Error("The status is wrong")
 
         const reviewUpdated = await  Review.findOne({where : {id: idReview}})
         
