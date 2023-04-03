@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchOrderById } from "../../reduxToolkit/actions/orderAction";
 const orderExample = {
   id: 3,
@@ -57,7 +57,6 @@ const orderExample = {
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { id } = useParams();
   const orderNumber = "pm_1Mq7UYC4TeWDJRMMd1foU2Er";
@@ -67,17 +66,9 @@ const OrderDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const orderDetails = useSelector((state) => state.order.orderDetail);
-  const userID1 = useSelector((state) => state.user._id);
-  const allOrders = useSelector((state) => state.order.allOrders);
-
-  const info = () => {
-    console.log("id params: ", id);
-    console.log("allOrders: ", allOrders);
-    console.log("orderDetails: ", orderDetails);
-    console.log("333", userID1);
-    console.log("1111", orderExample.UserId);
-  };
+  // const orderDetails = useSelector((state) => state.order.orderDetail);
+  // const userID1 = useSelector((state) => state.user._id);
+  // const allOrders = useSelector((state) => state.order.allOrders);
 
   return (
     <div>
