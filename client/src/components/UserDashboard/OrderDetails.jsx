@@ -11,7 +11,7 @@ const orderExample = {
   UserId: "f286901a-262c-4a28-af5a-ca5a73716496",
   Products: [
     {
-      name: "qwe",
+      name: "qwerty",
       description: "Buen producto",
       image:
         "https://media.istockphoto.com/id/175005911/es/foto/pelotas-aislado-en-blanco.jpg?s=612x612&w=0&k=20&c=Iw-CwMf_Xm53_rpO0IKLeTOtKU0Bwn6NTTygy8NuSz0=",
