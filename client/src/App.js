@@ -23,6 +23,7 @@ import List from './components/adminDashBoard/pages/list/List';
 import OrderHistory from './components/UserDashboard/OrderHistory';
 import About from './components/About/About';
 import Footer from './components/Footer/Footer';
+import OrderDetails from './components/UserDashboard/OrderDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -74,6 +75,11 @@ function App() {
 
         {
           flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
 

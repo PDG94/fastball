@@ -9,36 +9,32 @@ import ImageViewer from "../imageViewer/ImageViewer";
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
 import RandomCarousel from "../categoryButtons.jsx/RandomCarousel";
+import { fetchReviewsByProductId, fetchReviewsPending } from "../../reduxToolkit/actions/reviewAction";
+import ResumeReviews from "../Reviews/ResumeReviews";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 
 const Detail = () => {
-  const [arrayReviews, setArrayReviews] = useState([
-    // {
-    //   date: '01/03/23',
-    //   image: 'https://res.cloudinary.com/dviri5ov1/image/upload/v1679684756/fastball/users/nvi27adeg2okkldkan6y.jpg',
-    //   name: 'Jon Doe',
-    //   score: 3,
-    //   description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque in veritatis omnis maiores, dolorem doloremque libero vel perferendis ipsum tempore modi, hic sed rem harum accusamus consequatur reiciendis tempora quam'
-    // }
-  ])
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const dispatch = useDispatch();
   const { productDetail } = useSelector((state) => state.product);
   const { _id } = useSelector((state) => state.user);
+  const { reviewsProduct, reviewsPending } = useSelector((state) => state.review);
   const [showAddReview, setShowAddReview] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [isAddReview, setIsAddReview] = useState(true);
   let startDetail = true
 
   useEffect(() => {
     if (startDetail) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       startDetail = false;
-      dispatch(fetchProductById({ productId: id, userId: _id })).then(() =>
-        setIsLoading(false)
-      );
+      dispatch(fetchProductById({ productId: id, userId: _id })).then(() =>{
+        dispatch(fetchReviewsByProductId(id)).then(() =>{
+          dispatch(fetchReviewsPending({ productId: id, userId: _id })).then(()=>
+            setIsLoading(false)
+          )
+        })
+      });
     }
 
     return () => {
@@ -46,11 +42,6 @@ const Detail = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const handleAcceptReview = (review)=>{
-    arrayReviews.unshift(review)
-    setArrayReviews(arrayReviews)
-  }
 
   return ( 
     <>
@@ -61,11 +52,12 @@ const Detail = () => {
       ) : showAddReview
           ? <AddReview 
               productDetail={productDetail}
-              clickAccept={handleAcceptReview}
+              reviewId={reviewsPending[0].id}
+              called={'Product'}
               clickClose={()=>setShowAddReview(false)}
             />
           : <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
-          
+            {console.log('REviewes Pending',reviewsPending )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="cont-imageviewer">
               {productDetail.image && <ImageViewer image={productDetail.image}/>}
@@ -105,7 +97,6 @@ const Detail = () => {
                     </span>
                   </>
                 )}
-                {/* <span className="text-gray-600 text-lg line-through"></span> */}
               </div>
               <div className="mb-4">
                 <h2 className="text-lg md:text-xl font-medium mb-2">
@@ -146,12 +137,18 @@ const Detail = () => {
             </div>
           </div>
           <div className="mt-12">
-            <div className="flex mb-4 gap-8">
-              <h2 className="text-xl md:text-2xl font-medium mb-4">Reviews</h2>
-              {isAddReview &&
+            <div className="flex mb-4 gap-8 justify-center">
+              <div>
+                <ResumeReviews 
+                  reviewsProduct={reviewsProduct}
+                />
+              </div>
+            </div>
+            <div>
+              {(reviewsPending.length > 0) &&
                 <button 
                   type="button" 
-                  className='px-4 py-1 text-white bg-green-600 hover:bg-green-500 
+                  className='mb-4 px-4 py-2 text-white bg-green-600 hover:bg-green-500 
                   rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm'
                   onClick={()=>setShowAddReview(true)}
                 >
@@ -159,29 +156,7 @@ const Detail = () => {
                 </button>
               }
             </div>
-            {arrayReviews.map( rev => <Review rev={rev} />)}
-            
-            {/* <div className="flex items-center mb-4">
-              <img
-                src="https://via.placeholder.com/50x50"
-                alt="Avatar"
-                className="rounded-full mr-4"
-              />
-              <div>
-                <span className="text-lg font-medium">John Doe</span>
-                <span className="ml-2">- 02/08/22</span>
-                <div className="flex items-center">
-                  <span className="text-sm text-gray-600 mr-2">4 stars</span>
-                  <div className="flex items-center">
-                    <Stars score={4} />
-                  </div>
-                </div>
-                <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                  consectetur sit amet massa ac bibendum.
-                </p>
-              </div>
-            </div> */}
+            {(reviewsProduct.length>0) && reviewsProduct.map( rev => <Review key={rev.id} rev={rev} />)}
           </div>
           <RandomCarousel></RandomCarousel>
         </div>

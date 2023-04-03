@@ -21,13 +21,13 @@ export const fetchOrder = createAsyncThunk('order/fetchOrder', async ()=> {
     }
  });
 
- export const fetchOrderById = createAsyncThunk('product/fetchOrderById', async ({orderId, userId})=> {
+ export const fetchOrderById = createAsyncThunk('order/fetchOrderById', async (orderNumber)=> {
     try {
-      console.log("orderId", orderId);
-      console.log("userId", userId);
-     const order = await axios.get(`/order/getOrderById/${orderId}${userId?'?userId='+ userId : ''}`);
+      console.log("orderId", orderNumber);
+     const order = await axios.get(`/order/${orderNumber}`);
      return order.data
     } catch (error) {
+        console.log("error",error)
      throw error;
     }
  });
