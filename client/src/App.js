@@ -10,7 +10,7 @@ import Detail from './components/Detail/Detail';
 import Profile from './components/UserDashboard/Profile'
 import UpdateProfile from './components/UserDashboard/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
-// import RegisterProduct from './components/RegisterProduct/RegisterProduct'
+import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';

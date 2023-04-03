@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { FaStar } from 'react-icons/fa'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import ModalYesNo from '../ModalYesNo/ModalYesNo';
+import { updateReview } from '../../reduxToolkit/actions/reviewAction';
+import { fetchProductById } from '../../reduxToolkit/actions/productAction';
 
-const AddReview = ({productDetail, clickAccept, clickClose}) => {
-  const formatImage = `${productDetail.image.slice(0,50)}c_limit,f_auto,h_200,q_auto,w_200/${productDetail.image.slice(50)}`
-  const { name, profilePic} = useSelector((state) => state.user);
+const AddReview = ({reviewId, productDetail, clickClose}) => {
+  const dispatch = useDispatch()
+  const formatImage = `${productDetail.image.slice(0,50)}c_fill,f_auto,h_200,q_auto,w_200/${productDetail.image.slice(50)}`
+  const { _id, name, profilePic} = useSelector((state) => state.user);
   const stars = ['Very bad', 'Bad', 'Good', 'Very good', 'Excellent']
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
@@ -31,17 +34,28 @@ const AddReview = ({productDetail, clickAccept, clickClose}) => {
     if(!currentValue) return toast.info(`You must rate the product with stars`);
     if(!descriptionRev) return toast.info(`You must put a comment about the product`);
 
+    clickClose()
+
     const date = new Date(Date.now())
    
-    const review = {
-             date: date.toLocaleDateString(),
-            image: profilePic? profilePic : 'https://res.cloudinary.com/dviri5ov1/image/upload/v1680200389/fastball/system/profile_cgemsd.png',
-             name: name,
-            score: currentValue,
-      description: descriptionRev
-    }
-    clickAccept(review)
-    clickClose()
+    dispatch(
+      updateReview({
+        reviewId, 
+        changes: 
+        {
+          date: date.toLocaleDateString(),
+          score: currentValue,
+          description: descriptionRev,
+          status: 'Done'
+        },
+        user: {
+          name,
+          profilePic
+        }
+      })
+    )
+    dispatch(fetchProductById({ productId: productDetail.id, userId: _id }))
+    toast.info(`Review successfully posted`);
   }
 
   const handleClickDecline = () =>{
@@ -49,7 +63,7 @@ const AddReview = ({productDetail, clickAccept, clickClose}) => {
   }
   const handleClickDeclineQuestion = (object) =>{
     if(object.action){
-      console.log('BORRAR la review');
+      dispatch(updateReview({reviewId, changes: {status: 'Declined'}}))
       clickClose()
     }
     setShowQuestionDecline(false)
@@ -63,10 +77,10 @@ const AddReview = ({productDetail, clickAccept, clickClose}) => {
               objectModal={{text: 'Are you sure to decline the review? You will not be able to give your opinion of this product'}}
               functionModal={handleClickDeclineQuestion}
             />
-          : <div class="relative z-10">
-              <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-              <div class="fixed inset-0 z-10 overflow-y-auto">
-                  <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          : <div className="relative z-10">
+              <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+              <div className="fixed inset-0 z-10 overflow-y-auto">
+                  <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
             {/* <div className='relative z-10 container h-[85vh] w-full flex items-center justify-center fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'> */}
                     <div className='mt-20 flex flex-col items-center bg-white rounded-lg w-[50%] p-8 drop-shadow-lg'>
