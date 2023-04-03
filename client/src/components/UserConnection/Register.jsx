@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link } from 'react-router-dom'
-import logGoogle from './../../images/google.svg';
 import { registerUserAction } from './../../reduxToolkit/actions/userActions';
 import { useNavigate } from 'react-router-dom';
 import { uploadImage } from '../../utils';
@@ -10,7 +8,7 @@ import GoogleButton from 'react-google-button';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { useState } from 'react';
-const { loginUserAction, loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
+const { loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
 
 
 const Register = ({ image }) => {

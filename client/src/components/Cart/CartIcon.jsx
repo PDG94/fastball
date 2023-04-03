@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllProductsOnCart,updateCartProducts } from '../../reduxToolkit/actions/cartAction';
+import { getAllProductsOnCart } from '../../reduxToolkit/actions/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { decode } from '../../Auth/jwt';
+// import { decode } from '../../Auth/jwt';
 
 function CartIcon() {
   const dispatch = useDispatch();
