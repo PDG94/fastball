@@ -101,7 +101,7 @@ const CheckOutForm = () => {
         const orderCreated = await axios.post('/order/create', order);
         console.log(orderCreated)
         
-        clearAndBack()
+        clearAndBack();
         
       } catch (error) {
         console.log(error);
