@@ -9,6 +9,7 @@ import ImageViewer from "../imageViewer/ImageViewer";
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
 import { fetchReviewsByProductId, fetchReviewsPending } from "../../reduxToolkit/actions/reviewAction";
+import ResumeReviews from "../Reviews/ResumeReviews";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
 
 
@@ -152,12 +153,20 @@ const Detail = () => {
             </div>
           </div>
           <div className="mt-12">
-            <div className="flex mb-4 gap-8">
-              <h2 className="text-xl md:text-2xl font-medium mb-4">Reviews</h2>
+            <div className="flex mb-4 gap-8 justify-center">
+              <div>
+                <ResumeReviews 
+                  // scoreProm={productDetail.score} 
+                  // cantReviews={productDetail.cantReviews}
+                  reviewsProduct={reviewsProduct}
+                />
+              </div>
+            </div>
+            <div>
               {(reviewsPending.length > 0) &&
                 <button 
                   type="button" 
-                  className='px-4 py-1 text-white bg-green-600 hover:bg-green-500 
+                  className='mb-4 px-4 py-2 text-white bg-green-600 hover:bg-green-500 
                   rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm'
                   onClick={()=>setShowAddReview(true)}
                 >
@@ -165,7 +174,6 @@ const Detail = () => {
                 </button>
               }
             </div>
-            {console.log('REVIEWS PRODUCTS', reviewsProduct)}
             {(reviewsProduct.length>0) && reviewsProduct.map( rev => <Review key={rev.id} rev={rev} />)}
           </div>
         </div>

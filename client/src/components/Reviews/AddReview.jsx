@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import ModalYesNo from '../ModalYesNo/ModalYesNo';
 import { updateReview } from '../../reduxToolkit/actions/reviewAction';
+import { fetchProductById } from '../../reduxToolkit/actions/productAction';
 
-const AddReview = ({reviewId, productDetail, called, clickClose}) => {
+const AddReview = ({reviewId, productDetail, clickClose}) => {
   const dispatch = useDispatch()
   const formatImage = `${productDetail.image.slice(0,50)}c_fill,f_auto,h_200,q_auto,w_200/${productDetail.image.slice(50)}`
-  const { name, profilePic} = useSelector((state) => state.user);
+  const { _id, name, profilePic} = useSelector((state) => state.user);
   const stars = ['Very bad', 'Bad', 'Good', 'Very good', 'Excellent']
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
@@ -53,6 +54,7 @@ const AddReview = ({reviewId, productDetail, called, clickClose}) => {
         }
       })
     )
+    dispatch(fetchProductById({ productId: productDetail.id, userId: _id }))
     toast.info(`Review successfully posted`);
   }
 
