@@ -14,6 +14,7 @@ const Home = ()=> {
     // const [loader,setLoader]=useState(true);
     useEffect(()=>{
         // setLoader(true);
+        window.scroll(0,0)
         dispatch(setFilter({
             name: '',
             categoryId: '',

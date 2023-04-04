@@ -1,42 +1,39 @@
 import './chart.scss';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A',
-    total : 1200
-  },
-  {
-    name: 'Page B',
-    total : 1200
-  },
-  {
-    name: 'Page C',
-    total : 1500
-  },
-  {
-    name: 'Page D',
-    total : 1700
-  },
-  {
-    name: 'Page E',
-    total : 100
-  },
-  {
-    name: 'Page F',
-    total : 1800
-  },
-  {
-    name: 'Page G',
-    total : 1200
-  },
-];
 
-function Chart() {
+
+function Chart({aspect, title}) {
+  const data = [
+    {
+      name: 'Mes 6',
+      total : 0
+    },
+    {
+      name: 'Mes 5',
+      total : 10
+    },
+    {
+      name: 'Mes 4',
+      total : 15
+    },
+    {
+      name: 'Mes 3',
+      total : 17
+    },
+    {
+      name: 'Mes 2',
+      total : 10
+    },
+    {
+      name: 'Actual',
+      total : 18
+    }
+  ];
   return (
     <div className='chart'>
-      <div className="title">Last 6 Months (Revenue)</div>
-      <ResponsiveContainer width="100%" aspect={2/1}>
+      <div className="title">{title}</div>
+      <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart width={730} height={250} data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>

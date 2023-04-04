@@ -58,6 +58,7 @@ class orderService {
         }
         return orders;
     }
+
     async updateOrder(id, orderNumber, totalAmount){ //id es el id de la orden a actualizar
         const orderUpdated = await  Order.findOne({where : {id}});
         if(orderUpdated){

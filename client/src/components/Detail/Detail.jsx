@@ -5,7 +5,6 @@ import AddCart from "../Cart/AddCart";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import ImageViewer from "../imageViewer/ImageViewer";
-// import Stars from "../Stars/Stars"
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
 import RandomCarousel from "../categoryButtons.jsx/RandomCarousel";
@@ -26,13 +25,12 @@ const Detail = () => {
 
   useEffect(() => {
     if (startDetail) {
+      window.scroll(0,0)
       // eslint-disable-next-line react-hooks/exhaustive-deps
       startDetail = false;
       dispatch(fetchProductById({ productId: id, userId: _id })).then(() =>{
         dispatch(fetchReviewsByProductId(id)).then(() =>{
-          dispatch(fetchReviewsPending({ productId: id, userId: _id })).then(()=>
-            setIsLoading(false)
-          )
+          setIsLoading(false)
         })
       });
     }
@@ -42,6 +40,11 @@ const Detail = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(()=> {
+    _id && id && dispatch(fetchReviewsPending({ productId: id, userId: _id }))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id])
 
   return ( 
     <>
@@ -54,10 +57,11 @@ const Detail = () => {
               productDetail={productDetail}
               reviewId={reviewsPending[0].id}
               called={'Product'}
+              clickAcept={()=>{setShowAddReview(false); window.location.reload()}}
               clickClose={()=>setShowAddReview(false)}
             />
           : <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
-            {console.log('REviewes Pending',reviewsPending )}
+            {/* {console.log('REviewes Pending',reviewsPending )} */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="cont-imageviewer">
               {productDetail.image && <ImageViewer image={productDetail.image}/>}
@@ -156,6 +160,7 @@ const Detail = () => {
                 </button>
               }
             </div>
+            {console.log(reviewsProduct)}
             {(reviewsProduct.length>0) && reviewsProduct.map( rev => <Review key={rev.id} rev={rev} />)}
           </div>
           <RandomCarousel></RandomCarousel>

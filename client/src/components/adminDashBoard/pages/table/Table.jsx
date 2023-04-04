@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 function createData(id,name, img, customer, date, amount) {
   return { id, name, img, customer, date, amount };
@@ -21,9 +22,14 @@ const rows = [
   createData(5,'Gingerbread', "https://deportesregol.com/wp-content/uploads/2018/05/0761_Balon_Golty_MicroFutbol_Pro_Dorado_-247x247.jpg","Joe", "1 march", 740),
 ];
 
-function List() {
+function List({products, customer}) {
 
-
+  if(products.length === 0){
+    return (<div className='notFound'>
+      <div><AddShoppingCartIcon className='icon'/></div>
+      <h2 className='text'>You have not bought products yet, go ahead!</h2>
+    </div>)
+  }
 
   return (
     <TableContainer component={Paper} className="table">
@@ -34,11 +40,11 @@ function List() {
             <TableCell className="tableCell">Product</TableCell>
             <TableCell className="tableCell">Customer</TableCell>
             <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
+            <TableCell className="tableCell">Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {products.map((row, i) => (
             <TableRow
               key={row.id}
             >
@@ -47,13 +53,13 @@ function List() {
               </TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
+                  <img src={row.image} alt="" className="image" />
                   {row.name}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
+              <TableCell className="tableCell">{customer ? customer.name : ""}</TableCell>
+              <TableCell className="tableCell">{row.createdAt}</TableCell>
+              <TableCell className="tableCell">{row.price}</TableCell>
             </TableRow>
           ))}
         </TableBody>

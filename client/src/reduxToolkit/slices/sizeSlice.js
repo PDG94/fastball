@@ -1,5 +1,5 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const { getAllSizes } = require('./../actions/sizeAction')
+const { getAllSizes, createSizes, updateSizes } = require('./../actions/sizeAction')
 
 const initialState = {
     allSizes : [],
@@ -23,6 +23,17 @@ const sizeSlice = createSlice({
             state.status = 'fulfilled';
         })
         builder.addCase(getAllSizes.rejected, (state,action)=> {
+            state.status = 'rejected'
+        })
+
+        //create 
+        builder.addCase(updateSizes.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(updateSizes.fulfilled, (state,action)=> {
+            state.status = 'fulfilled';
+        })
+        builder.addCase(updateSizes.rejected, (state,action)=> {
             state.status = 'rejected'
         })
 
