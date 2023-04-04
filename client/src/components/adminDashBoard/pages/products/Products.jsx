@@ -4,20 +4,22 @@ import './products.scss'
 import DataTable from "../dataTable/DataTable"
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { fetchProduct } from '../../../../reduxToolkit/actions/productAction';
 import { fetchDeleteProduct } from './../../../../reduxToolkit/actions/productAction';
+import { toast } from "react-toastify";
 
 function Products() {
-    
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [products, setProducts] = useState()
   const [filter, setFilter] = useState('');
   useEffect(() => {
     dispatch(fetchProduct()).then((response) => setProducts(response.payload))
 
-  }, [dispatch])
-  
+  }, [])
+  console.log({"loop?":products})
   const columns = [
     { field: 'id', headerName: 'ID', width: 200 },
     {
@@ -52,7 +54,18 @@ function Products() {
       return (
         <div className='cellAction'>
           <div className="viewButton" > <Link to={`/admin/products/${row.id}`}>View</Link> </div>
-          <div className="deleteButton" onClick={()=>handleDeleteProduct(row.id)}>Delete</div>
+          <div className="deleteButton" onClick={() => {handleDeleteProduct(row.id) 
+          toast.warn("Producto Suspendido!", {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }) 
+          window.location.reload()}}>Delete</div>
         </div>
       )
     }
@@ -71,11 +84,11 @@ function Products() {
 
   return (
     <div className='products'>
-        <Sidebar/>
-        <div className="productsContainer">
-          <div className='createProduct'><NavLink className='create' to={'/admin/products/create'}>Create product</NavLink></div>
+      <Sidebar />
+      <div className="productsContainer">
+        <div className='createProduct'><NavLink className='create' to={'/admin/products/create'}>Create product</NavLink></div>
         <DataTable filteredRows={filteredRows} users={products} columns={columns} actionColumn={actionColumn} filter={filter} handleFilterChange={handleFilterChange} />
-        </div>
+      </div>
     </div>
   )
 }

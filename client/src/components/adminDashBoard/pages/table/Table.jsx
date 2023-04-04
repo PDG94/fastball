@@ -36,29 +36,25 @@ function List({products, customer}) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell">Tracking ID</TableCell>
+            {products[0].id ? <TableCell className="tableCell">Tracking ID</TableCell>: null}
             <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">Customer</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
+            {customer ? <TableCell className="tableCell">Customer</TableCell> : null}
+            {products[0].createdAt ? <TableCell className="tableCell">Date</TableCell>:null}
             <TableCell className="tableCell">Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products.map((row, i) => (
-            <TableRow
-              key={row.id}
-            >
-              <TableCell >
-                {row.id}
-              </TableCell>
+            <TableRow key={row.id}>
+              {row.id?<TableCell >{row.id}</TableCell>:null}
               <TableCell className="tableCell">
                 <div className="cellWrapper">
                   <img src={row.image} alt="" className="image" />
                   {row.name}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{customer ? customer.name : ""}</TableCell>
-              <TableCell className="tableCell">{row.createdAt}</TableCell>
+              {customer ? <TableCell className="tableCell">{customer ? customer.name : ""}</TableCell>:null}
+              {row.createdAt ? <TableCell className="tableCell">{row.createdAt}</TableCell>: null}
               <TableCell className="tableCell">{row.price}</TableCell>
             </TableRow>
           ))}

@@ -1,0 +1,27 @@
+.orderDetail{
+    display: flex;
+    margin-top: 80px;
+    width: 100%;
+    .orderContainer{
+        flex: 6;
+        
+    .infoOrder{
+        padding: 20px;
+        
+    }
+
+    .title {
+        font-size: 25px;
+        color: lightgray;
+        margin-bottom: 10px;
+    }
+
+    .bottom {
+        -webkit-box-shadow: 0px 1px 26px -19px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 1px 26px -19px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 1px 26px -19px rgba(0, 0, 0, 0.75);
+        padding: 20px;
+        margin: 10px 20px;
+    }
+    }
+}
