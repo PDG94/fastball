@@ -27,6 +27,9 @@ class reviewService {
                     model : User,
                     attributes : ['name',"profilePic"]
                 }
+            ],
+            order: [
+                ["id","DESC"]
             ]
         });
         return reviews;

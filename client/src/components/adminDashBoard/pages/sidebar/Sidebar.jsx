@@ -40,7 +40,7 @@ function Sidebar() {
 
                     <li>
                         <AssessmentOutlinedIcon className='icon'/>
-                        <span>Stats</span>
+                        <span> <Link to={'/admin/categories'}>Categories</Link> </span>
                     </li>
                     <li>
                         <DiscountOutlinedIcon className='icon'/>

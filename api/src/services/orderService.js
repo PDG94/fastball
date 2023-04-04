@@ -60,7 +60,14 @@ class orderService {
     }
 
     async getOneOrder(idOrder){
-        const order = await Order.findOne({where : {id : idOrder}});
+        const order = await Order.findOne({where : {id : idOrder},
+            include : [
+                {
+                    model : Product,
+                    attributes : ['name', 'description', "image", "price"]
+                }
+            ]
+        });
         if(!order){
             throw new Error("No se encontró la orden");
         };

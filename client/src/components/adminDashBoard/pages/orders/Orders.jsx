@@ -1,7 +1,7 @@
 import React from 'react'
 import { toast } from "react-toastify";
 import { useEffect, useState } from 'react';
-import {fetchOneOrder} from './../../../../reduxToolkit/actions/orderAction'
+import {fetchOrder} from './../../../../reduxToolkit/actions/orderAction'
 import { useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,10 @@ function Orders() {
     const navigate = useNavigate();
     const order = useSelector((state)=>state.order.allOrders)
     const [filter, setFilter] = useState('');
+
+    useEffect(()=>{
+        dispatch(fetchOrder())
+    },[])
     
     
     const columns = [

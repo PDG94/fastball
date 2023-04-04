@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { fetchOrder } from "../../reduxToolkit/actions/orderAction";
+import { fetchOrder } from "../../../reduxToolkit/actions/orderAction";
+import Sidebar from "../sidebar/UserSidebar";
+import "./home.scss";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,13 @@ const OrderHistory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const filteredOrders = orders.filter((order) => order.userID1 === userID1);
+  const filteredOrders = orders.filter((order) => order.UserId === userID1);
+
+  const info = () => {
+    console.log("111",orders)
+    console.log("222",filteredOrders)
+    console.log("333", userID1)
+  };
 
   const Clickk = (id) => {
 
@@ -25,30 +32,25 @@ const OrderHistory = () => {
   };
 
   return (
-    <div className="">
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>
-        {/* {filteredOrders.length === 0 ? (
-          <p className="emptyP2">No orders found</p>
-        ) : ( */}
-          <div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div>
+      <div className="home">
+        <Sidebar />
+        <div className="homeContainer">
+          
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3" onClick={info}>
                       index
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Date
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Order Amount
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Order ID
                     </th>
                   </tr>
@@ -73,7 +75,7 @@ const OrderHistory = () => {
                           {"$"}
                           {totalAmount}
                         </td>
-                        <td onClick={()=>{Clickk(orderNumber)}}  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td onClick={()=>{Clickk(orderNumber)}}  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
                           {orderNumber}
                         </td>
                       </tr>
@@ -81,14 +83,9 @@ const OrderHistory = () => {
                   );
                 })}
               </table>
-            </div>
-            <Link to="/profile">
-              <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded absolute right-5">
-                Back
-              </button>
-            </Link>
-          </div>
-        {/* )} */}
+            </div>    
+
+        </div>
       </div>
     </div>
   );
