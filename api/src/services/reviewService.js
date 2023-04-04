@@ -4,7 +4,7 @@ class reviewService {
     constructor(){
 
     }
-// ok
+
     async getReviewsByUsr(idUsr){
         const reviews = await Review.findAll({
             where: {
@@ -14,7 +14,7 @@ class reviewService {
         });
         return reviews;
     }
-// ok
+
     async getReviewsByProduct(idProduct){
         const reviews = await Review.findAll({
             where: {
@@ -34,7 +34,7 @@ class reviewService {
         });
         return reviews;
     }
-// Ok
+
     async getReviewsPending(idUsr, idProduct){
         let reviews
         if(idProduct){
@@ -57,7 +57,12 @@ class reviewService {
         }
         return reviews;
     }
-// ok
+
+    async getDetailReview(idReview){
+        const review = Review.findByPk(idReview)
+        return review
+    }
+
     async updateReview(idReview, changes){ 
         if(changes.status !== 'Done' && changes.status !== 'Declined')
             throw new Error("The status is wrong")
@@ -84,7 +89,7 @@ class reviewService {
         await reviewUpdated.update(changes);
         return reviewUpdated;
     }
-// ok
+
     async deleteReview(idReview){
         const reviewrDeleted = await Review.findOne({where : {id:idReview}});
         if(!reviewrDeleted){

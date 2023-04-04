@@ -37,6 +37,16 @@ class reviewHandler{
         }
     }
 
+    async getDetailReview(req,res,next){  
+        try {
+            const {idReview} = req.params;
+            const review = await service.getDetailReview(idReview);
+            res.status(200).send(review);
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
     async updateReview(req,res,next){
         try {
             const {idReview}=req.params;

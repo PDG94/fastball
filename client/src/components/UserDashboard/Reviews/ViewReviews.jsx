@@ -47,7 +47,7 @@ const ViewReviews = () => {
                   </tr>
                 </thead>
                 {reviews.map((review, index) => {
-                  const { id, date, productId } = review;
+                  const { id, date, ProductId } = review;
                   return (
                     <tbody  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <tr
@@ -63,7 +63,7 @@ const ViewReviews = () => {
                           {date}
                         </td>
                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {productId}
+                          {ProductId}
                         </td>
                         <td onClick={()=>{Clickk(id)}}  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
                           {id}
