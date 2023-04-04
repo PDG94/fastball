@@ -4,7 +4,7 @@ const productHandler = require('./../handlers/productsHandler')
 const {isAdmin} = require('./../middleware/authValidator');
 
 const {updateProductSchema, createProductSchema, getProductSchema, getProductStatsSchema, updateProductStatsSchema } = require('./../schemas/productSchema');
-const {getAllProducts, getProductById, getProductStatsById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
+const {getAllProducts,updateStockProduct, getProductById, getProductStatsById, createProduct, updateProduct, deleteProduct, reactivateProduct} = new productHandler()
 
 productRouter.get('/',getAllProducts);
 productRouter.post('/',  isAdmin,createProduct);
@@ -13,6 +13,7 @@ productRouter.get('/getProductById/:id', validatorHandler(getProductSchema, 'par
 productRouter.patch('/editProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, updateProduct);
 productRouter.delete('/deleteProduct/:id', validatorHandler(getProductSchema, 'params'), isAdmin, deleteProduct);
 productRouter.put('/reactiveProduct/:id', isAdmin, reactivateProduct);
+productRouter.put('/update/stock/',updateStockProduct);
 
 // productRouter.get('/',getAllProducts);
 // productRouter.post('/', createProduct);

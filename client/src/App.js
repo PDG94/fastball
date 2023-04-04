@@ -26,6 +26,7 @@ import Single from './components/adminDashBoard/pages/single/Single';
 import ProductDetail from './components/adminDashBoard/pages/productDetail/productDetail.jsx';
 import ProductCreate from './components/adminDashBoard/pages/productCreate/productCreate';
 
+import OrderDetails from './components/UserDashboard/OrderDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
   }, [dispatch])
   return (
     <>
-      <ToastContainer autoClose={1500} />
+      <ToastContainer autoClose={1000} />
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
@@ -80,6 +81,11 @@ function App() {
 
         {
           flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
 
