@@ -65,3 +65,27 @@ export const getAllUsers = createAsyncThunk('user/getAllUsers',
         const users = await axios.get("/users")
         return users.data
     })
+
+
+export const getUserById = createAsyncThunk('user/getUserById',
+    async (id) => {
+        const user = await axios.get(`/users/${id}`);
+        return user.data;
+    }
+)
+
+export const editUser = createAsyncThunk('user/editUser',
+    async (userr) => {
+        const {id, changes, isAdmin}= userr;
+        console.log({"Action":changes})
+        const user = await axios.patch(`/users/editUser/${id}`, {changes, isAdmin});
+        return user.data;
+    })
+
+export const deleteUser = createAsyncThunk('/user/deleteUser',
+
+    async (id)=>{
+        const userDeleted = await axios.delete(`/users/deleteUser/${id}`);
+        return userDeleted;
+    }
+)   

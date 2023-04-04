@@ -11,8 +11,8 @@ userRouter.post('/',  validatorHandler(createUserSchema, 'body'), createUser);
 userRouter.post('/registerUser', registerUser);
 userRouter.post('/loginUser', loginUser);
 userRouter.post('/loginAndRegisterGoogle', loginAndRegisterGoogle );
-userRouter.patch('/:id', validatorHandler(getUserSchema, 'params'), validatorHandler(updateUserSchema, 'body'), updateUser);
-userRouter.delete('/:id', validatorHandler(getUserSchema, 'params'), deleteUser);
+userRouter.patch('/editUser/:id', validatorHandler(getUserSchema, 'params'), validatorHandler(updateUserSchema, 'body'), updateUser);
+userRouter.delete('/deleteUser/:id', validatorHandler(getUserSchema, 'params'), deleteUser);
 
 
 // userRouter.get('/', getAllUsers);

@@ -1,0 +1,28 @@
+.products{
+    display: flex;
+    margin-top: 80px;
+    width: 100%;
+
+    .productsContainer{
+        flex: 6;
+        background-color: white;
+        position: relative;
+        .createProduct{
+            position: absolute;
+            right: 0;
+            margin: 20px;
+
+            .create{
+                border: 1px solid lightgray;
+                border-radius: 5px;
+                padding: 5px 5px 5px 5px;
+                
+            }
+            :hover{
+                background-color:#007afdcb;
+                color: white;
+            }
+        }
+    }
+    
+}

@@ -39,7 +39,8 @@ export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct',
    console.log(values)
 
     try {
-     const product = await axios.patch(`/product/editProduct/%${values.product._id}`, values , headers());
+      console.log({values})
+     const product = await axios.patch(`/product/editProduct/%${values.id}`, values , headers());
      return product.data
     } catch (error) {
      throw error;

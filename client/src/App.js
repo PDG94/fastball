@@ -21,10 +21,23 @@ import List from './components/adminDashBoard/pages/list/List';
 import UserDashboard from './components/UserDashboard/UserDashboard'
 
 
+
 import OrderHistory from './components/UserDashboard/orders/OrderHistory';
 import OrderDetails from './components/UserDashboard/orders/OrderDetails'
 import ViewReviews from './components/UserDashboard/Reviews/ViewReviews';
 import ReviewDetails from './components/UserDashboard/Reviews/ReviewDetails'
+
+import Products from './components/adminDashBoard/pages/products/Products'
+
+import Single from './components/adminDashBoard/pages/single/Single';
+import ProductDetail from './components/adminDashBoard/pages/productDetail/productDetail.jsx';
+import ProductCreate from './components/adminDashBoard/pages/productCreate/productCreate';
+
+
+import About from './components/About/About';
+import Footer from './components/Footer/Footer';
+
+
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -48,6 +61,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/about' element={<About />} />
         <Route exact path='/catalogue' element={<Catalogue />} />
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
@@ -55,6 +69,10 @@ function App() {
         <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
         <Route exact path='/admin' element={<DashBoard/>}/>
         <Route exact path='/admin/users' element={<List/>}/>
+        <Route exact path='/admin/users/:id' element={<Single/>}/>
+        <Route exact path='/admin/products' element={<Products/>}/>
+        <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
+        <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
         
         {
@@ -101,8 +119,8 @@ function App() {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }        
-        
       </Routes>
+        <Footer></Footer>
     </>
   );
 }
