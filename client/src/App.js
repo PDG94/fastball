@@ -37,7 +37,9 @@ import ProductCreate from './components/adminDashBoard/pages/productCreate/produ
 import About from './components/About/About';
 import Footer from './components/Footer/Footer';
 
-
+import OrderDetail from './components/adminDashBoard/pages/ordersDetail/orderDetails'
+import Orders from './components/adminDashBoard/pages/orders/Orders';
+import Categories from './components/adminDashBoard/pages/categories/Categories';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -73,6 +75,9 @@ function App() {
         <Route exact path='/admin/products' element={<Products/>}/>
         <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
         <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
+        <Route exact path='/admin/orders' element={<Orders/>}/>
+        <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
+        <Route exact path='/admin//categories' element={<Categories/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
         
         {

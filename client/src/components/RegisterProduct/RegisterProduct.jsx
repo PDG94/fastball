@@ -22,7 +22,8 @@ const Register = ({ changeCurrentImage }) => {
     setShowSizeField(value === "true");
   };
 
-  const colors = ["Azul", "Amarillo", "Rojo", "Negro", "Blanco", "Verde"]
+  const colors = useSelector((state) => state.color.allColors);
+
   const sizes = useSelector((state) => state.size.allSizes);
 
   const dispatch = useDispatch();
@@ -274,8 +275,8 @@ const Register = ({ changeCurrentImage }) => {
                   <option value=""></option>
                   {colors &&
                     colors?.map((cat, ind) => (
-                      <option key={ind} value={cat}>
-                        {cat}
+                      <option key={ind} value={cat.id}>
+                        {cat.name}
                       </option>
                     ))}
                 </Field>

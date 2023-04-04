@@ -17,7 +17,7 @@ function Home() {
     dispatch(fetchOrder()).then((res)=> setOrder(res.payload))
     
   }, [])
-  
+
   const products = order.flatMap((order) => {
     if (order.Products && order.Products.length > 0) {
       return order.Products.map((product) => {

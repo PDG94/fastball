@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchOrderById } from "../../../reduxToolkit/actions/orderAction";
+import { fetchOneOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeOrder.scss";
 
@@ -62,10 +62,10 @@ const OrderDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const orderNumber = "pm_1Mq7UYC4TeWDJRMMd1foU2Er";
+  const [order, setOrder] = useState({})
 
   useEffect(() => {
-    dispatch(fetchOrderById(orderNumber));
+    dispatch(fetchOneOrder(id)).then((res) => setOrder(res.payload.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -108,7 +108,7 @@ const OrderDetails = () => {
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Order Number:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{orderExample.orderNumber}</b>
+                    <b>{order.orderNumber}</b>
                   </dd>
                 </div>
 

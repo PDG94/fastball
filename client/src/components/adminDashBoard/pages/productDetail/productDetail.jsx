@@ -40,7 +40,7 @@ function ProductDetail() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    const {name, value } = e.target;  
+    const { name, value } = e.target;
     setChanges({
       ...changes,
       [name]: value
@@ -49,10 +49,10 @@ function ProductDetail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
-    changes.id= product.id
- 
-    dispatch(fetchUpdateProduct(changes)).then((res)=> toast.success("Product edited successfully!", {
+
+    changes.id = product.id
+
+    dispatch(fetchUpdateProduct(changes)).then((res) => toast.success("Product edited successfully!", {
       position: "bottom-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -61,7 +61,7 @@ function ProductDetail() {
       draggable: true,
       progress: undefined,
       theme: "light",
-  }))
+    }))
   }
 
   console.log({ product })
@@ -93,31 +93,41 @@ function ProductDetail() {
                   <div className='detailItem'>
                     <span className='itemKey'>Name: </span>
                     <input type="text"
-                    placeholder={product.name} 
-                    className='input' 
-                    name = "name"
-                    value={changes.name}
-                    onChange={handleChange}
+                      placeholder={product.name}
+                      className='input'
+                      name="name"
+                      value={changes.name}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className='detailItem'>
                     <span className='itemKey'>Description: </span>
-                    <input type="text" 
-                    placeholder={product.description} 
-                    className='input' 
-                    name = "description"
-                    value={changes.description}
-                    onChange={handleChange}
+                    <textarea type="text"
+                      placeholder={product.description}
+                      className='input'
+                      name="description"
+                      value={changes.description}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className='detailItem'>
+                    <span className='itemKey'>Active: </span>
+                    <input type="text"
+                      placeholder={product.active ? "True" : "False"}
+                      className='input'
+                      name="active"
+                      value={changes.active}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className='detailItem'>
                     <span className='itemKey'>Price: </span>
-                    <input type="text" 
-                    placeholder={product.price} 
-                    className='input' 
-                    name = "price"
-                    value={changes.price}
-                    onChange={handleChange}
+                    <input type="text"
+                      placeholder={product.price}
+                      className='input'
+                      name="price"
+                      value={changes.price}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className='detailItem'>
@@ -130,12 +140,12 @@ function ProductDetail() {
                   </div>
                   <div className='detailItem'>
                     <span className='itemKey'>Discount: </span>
-                    <input type="text" 
-                    placeholder={product.discount} 
-                    className='input' 
-                    name = "discount"
-                    value={changes.discount}
-                    onChange={handleChange}
+                    <input type="text"
+                      placeholder={product.discount}
+                      className='input'
+                      name="discount"
+                      value={changes.discount}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className='detailItem'>
