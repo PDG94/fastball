@@ -36,9 +36,8 @@ class ProductsHandler {
 
     async updateProduct(req, res, next ){
         try {
-            const {id} = req.params;
             const body = req.body;
-            const productUpdated = await service.updateProduct(id, body);
+            const productUpdated = await service.updateProduct(body.id, body);
             res.status(200).json(productUpdated);
         } catch (error) {
             next(error);

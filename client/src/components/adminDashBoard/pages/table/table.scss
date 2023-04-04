@@ -11,3 +11,18 @@
         }
     }
 }
+
+.notFound{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon{
+        color: gray;
+        font-size: 60px;
+        margin-bottom: 40px;
+    }
+    .text{
+        color: gray;
+        font-weight: bold;
+    }
+}

@@ -14,7 +14,7 @@ export const createOrderAction = createAsyncThunk('order/createOrderAction', asy
 
 export const fetchOrder = createAsyncThunk('order/fetchOrder', async ()=> {
     try {
-     const orders = await axios.get('/order/')
+     const orders = await axios.get('/order')
      return orders.data
     } catch (error) {
      throw error;

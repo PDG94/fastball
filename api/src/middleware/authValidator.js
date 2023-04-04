@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
     const token = req.headers['authorization'];
+   
+    // const authHeaderArray = bearer.split(' ');
+    // const token = authHeaderArray[1];
+    // console.log(bearer)
     if (!token) {
         return res.status(401).json({ messaje: "No se proporcionó un token de autenticación" })
     }

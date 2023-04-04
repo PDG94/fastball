@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { uploadImage } from "../../utils";
 import { getAllColors } from "../../reduxToolkit/actions/colorAction";
 import { getAllSizes } from "../../reduxToolkit/actions/sizeAction";
+import { toast } from "react-toastify";
 
 const Register = ({ changeCurrentImage }) => {
   const [submitedForm, setSubmitedForm] = useState(false);
@@ -21,11 +22,12 @@ const Register = ({ changeCurrentImage }) => {
     setShowSizeField(value === "true");
   };
 
-  const colors = useSelector((state) => state.color.allColors);
+  const colors = ["Azul", "Amarillo", "Rojo", "Negro", "Blanco", "Verde"]
   const sizes = useSelector((state) => state.size.allSizes);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchCategory());
     dispatch(getAllColors());
@@ -33,6 +35,10 @@ const Register = ({ changeCurrentImage }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const habldeBack=()=>{
+    navigate(-1)
+  }
 
   return (
     <Formik
@@ -71,9 +77,7 @@ const Register = ({ changeCurrentImage }) => {
         if (!values.stock) {
           errors.stock = "Please, input a stock";
         }
-        if (!values.colors) {
-          errors.colors = "Please, input a stock";
-        }
+        
         // if( !values.categories ){
         //     errors.categories = 'Please, select a category'
         // }
@@ -87,7 +91,8 @@ const Register = ({ changeCurrentImage }) => {
           values = { ...values, image: newURL, isClothing: isClothing };
           dispatch(fetchCreateProduct(values)).then(
             () => console.log("entró al .then"),
-            navigate("/catalogue")
+            navigate("/catalogue"),
+            toast.success("Product Created Succesfully!")
           );
           console.log("anduvooooooooooooooooooooooooo");
           setTimeout(() => setSubmitedForm(false), 2000);
@@ -97,6 +102,7 @@ const Register = ({ changeCurrentImage }) => {
     >
       {({ errors }) => (
         <Form className="space-y-1">
+          
           <div className="grid grid-cols-1 lg:gap-3 pt-8">
             <div>
               <label
@@ -265,10 +271,11 @@ const Register = ({ changeCurrentImage }) => {
                   id="colors"
                   className="text-sm font-medium text-gray-700 mt-2 shadow border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                 >
+                  <option value=""></option>
                   {colors &&
                     colors?.map((cat, ind) => (
-                      <option key={ind} value={cat.id}>
-                        {cat.name}
+                      <option key={ind} value={cat}>
+                        {cat}
                       </option>
                     ))}
                 </Field>

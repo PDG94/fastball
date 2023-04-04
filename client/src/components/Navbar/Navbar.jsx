@@ -86,7 +86,9 @@ const Navbar = () => {
                             Pay
                         </Link>
                     </button> */}
+
         </div>
+
 
         {/* && user.name */}
         {user.name && user.name ? (
@@ -120,17 +122,11 @@ const Navbar = () => {
                     {user.name}
                   </p>
                   <Link
-                    to="/profile"
+                    to="/userdashboard"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Profile
-                  </Link>
-                  <Link
-                    to="/profile/update"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Settings
-                  </Link>
+                    User Dashboard
+                  </Link>                  
                   <div className="border-t border-gray-100"></div>
                   <button
                     onClick={logOutt}
