@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { fetchOrder } from "../../reduxToolkit/actions/orderAction";
+import { fetchOrder } from "../../../reduxToolkit/actions/orderAction";
+import Sidebar from "../sidebar/UserSidebar";
+import "./home.scss";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();
@@ -25,16 +26,11 @@ const OrderHistory = () => {
   };
 
   return (
-    <div className="">
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>
-        {/* {filteredOrders.length === 0 ? (
-          <p className="emptyP2">No orders found</p>
-        ) : ( */}
-          <div>
+    <div>
+      <div className="home">
+        <Sidebar />
+        <div className="homeContainer">
+          
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -81,14 +77,9 @@ const OrderHistory = () => {
                   );
                 })}
               </table>
-            </div>
-            <Link to="/profile">
-              <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded absolute right-5">
-                Back
-              </button>
-            </Link>
-          </div>
-        {/* )} */}
+            </div>    
+
+        </div>
       </div>
     </div>
   );

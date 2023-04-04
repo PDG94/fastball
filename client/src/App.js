@@ -7,8 +7,8 @@ import UserConnection from './components/UserConnection/UserConnection'
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Detail from './components/Detail/Detail';
-import Profile from './components/UserDashboard/Profile'
-import UpdateProfile from './components/UserDashboard/UpdateProfile'
+import Profile from './components/UserDashboard/profile/Profile'
+import UpdateProfile from './components/UserDashboard/profile/UpdateProfile'
 import Payment from './components/PasarelaStripe/PasarelaStripe'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
@@ -18,10 +18,16 @@ import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 import DashBoard from './components/adminDashBoard/DashBoard'
 import List from './components/adminDashBoard/pages/list/List';
+import UserDashboard from './components/UserDashboard/UserDashboard'
 
+
+
+import OrderHistory from './components/UserDashboard/orders/OrderHistory';
+import OrderDetails from './components/UserDashboard/orders/OrderDetails'
+import ViewReviews from './components/UserDashboard/Reviews/ViewReviews';
+import ReviewDetails from './components/UserDashboard/Reviews/ReviewDetails'
 
 import Products from './components/adminDashBoard/pages/products/Products'
-import OrderHistory from './components/UserDashboard/OrderHistory';
 
 import Single from './components/adminDashBoard/pages/single/Single';
 import ProductDetail from './components/adminDashBoard/pages/productDetail/productDetail.jsx';
@@ -31,7 +37,7 @@ import ProductCreate from './components/adminDashBoard/pages/productCreate/produ
 import About from './components/About/About';
 import Footer from './components/Footer/Footer';
 
-import OrderDetails from './components/UserDashboard/OrderDetails'
+
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -68,13 +74,12 @@ function App() {
         <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
         <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
-
-
-        {/* <Route exact path='/profile' element={<Profile />} /> 
-        <Route exact path='/profile/update' element={<UpdateProfile />} />
-        <Route exact path='/payment' element={<Payment />} />
-        <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
+        {
+          flag&&flag?<Route exact path='/userdashboard' element={<UserDashboard />} />          
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
         {
           flag&&flag?<Route exact path='/profile' element={<Profile />} />          
           :<Route path= '*' element= { <Error404 /> } /> 
@@ -92,6 +97,16 @@ function App() {
 
         {
           flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/reviews' element={<ViewReviews />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/reviews/:id' element={<ReviewDetails />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
 
