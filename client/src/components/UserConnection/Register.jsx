@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link } from 'react-router-dom'
-import logGoogle from './../../images/google.svg';
 import { registerUserAction } from './../../reduxToolkit/actions/userActions';
 import { useNavigate } from 'react-router-dom';
 import { uploadImage } from '../../utils';
@@ -10,7 +8,7 @@ import GoogleButton from 'react-google-button';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { useState } from 'react';
-const { loginUserAction, loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
+const { loginUserGoogleAction } = require('./../../reduxToolkit/actions/userActions');
 
 
 const Register = ({ image }) => {
@@ -23,9 +21,9 @@ const Register = ({ image }) => {
     const options = async () => {
         const list = []
         const option = await axios.get("https://restcountries.com/v3.1/all");
-        option.data && option.data.map((prod, i) => {
+        option.data && option.data.map((prod, i) =>
             list.push(prod.name.common)
-        })
+        )
         function comparar(a, b) {
             if (a < b) return -1;
             if (a > b) return 1;
@@ -87,7 +85,7 @@ const Register = ({ image }) => {
                     // } else if( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.password) ){
                     //     errors.password = 'The password not is valid'
                 }
-                if (values.password != values.rePassword) {
+                if (values.password !== values.rePassword) {
                     errors.password = 'Passwords do not match'
                     errors.rePassword = 'Passwords do not match'
                 }

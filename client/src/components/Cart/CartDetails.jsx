@@ -89,7 +89,7 @@ const CartDetails = () => {
           return (
             <div
               key={"key_" + product.id}
-              className="mb-4 bg-white shadow rounded-lg overflow-hidden cart-comp flex items-center"
+              className="mb-4 bg-white shad  overflow-hidden cart-comp flex items-center"
               >
               <div className="p-4 pz4">
                 {
@@ -118,7 +118,7 @@ const CartDetails = () => {
                   name= {product.id}
                   onChange={updateTotalMount}
                 />
-                <p className='text-slate-300 w-fit'>of {product.stock} availabe</p>
+                <p className='text-slate-400 w-fit'>of {product.stock} availabe</p>
                 {/* <label className="font-semibold text-lg mb-2">{product.Cart.stock}</label> */}
                 {/* <button name='disminuir'
                 onClick={()=>updateTotalMountRes(user._id,product.id,product.Cart.stock-1)}
@@ -147,7 +147,7 @@ const CartDetails = () => {
           );
         })
       ) : (
-        <div className="mb-4 bg-white shadow rounded-lg overflow-hidden cart-comp flex items-center">
+        <div className="mb-4 bg-white shad   overflow-hidden cart-comp flex items-center">
           <div className="p-4 w-[59.8vw]">
             <h3 className="font-semibold text-lg mb-2">
             Still haven't added products to cart? Let's get to it! 
@@ -160,7 +160,7 @@ const CartDetails = () => {
       )}
     </div>
     <div className="summary-container flex-0 md:w-1/3 p-3">
-      <div className="bg-white shadow rounded-lg overflow-hidden p-4">
+      <div className="bg-white shad   overflow-hidden p-4">
         <h3 className="font-semibold text-lg mb-2">
           Resumen
         </h3>
