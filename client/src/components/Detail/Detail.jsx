@@ -8,6 +8,7 @@ import ImageViewer from "../imageViewer/ImageViewer";
 // import Stars from "../Stars/Stars"
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
+import RandomCarousel from "../categoryButtons.jsx/RandomCarousel";
 import { fetchReviewsByProductId, fetchReviewsPending } from "../../reduxToolkit/actions/reviewAction";
 import ResumeReviews from "../Reviews/ResumeReviews";
 const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
@@ -158,6 +159,7 @@ const Detail = () => {
             </div>
             {(reviewsProduct.length > 0) && reviewsProduct.map(rev => <Review key={rev.id} rev={rev} />)}
           </div>
+          <RandomCarousel></RandomCarousel>
         </div>
       }
     </>

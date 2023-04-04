@@ -22,9 +22,11 @@ const ContainerRegiterPRoduct = () => {
       }
 
     return (
+
         <div className='container mx-auto mt-22 min-height-full flex p-20 bg-white'>
             <div className='flex w-4/5 h-[100vh] items-center justify-center mb-8 drop-shadow-lg bg-white '>
                 {!currentImage ? <h1 className='w-fit bg-blue-600 px-5 py-3 font-bold text-white'>Product image</h1> : <img src={currentImage} alt="loginImage" className='object-cover h-full' />}
+
             </div>
             <div className='flex-1 flex flex-col'>
                 <div className='ml-8 w-full max-w-sm lg:max-w-lg lg:w-[100rem]'>
