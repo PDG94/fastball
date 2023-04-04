@@ -31,7 +31,8 @@ import ProductCreate from './components/adminDashBoard/pages/productCreate/produ
 import About from './components/About/About';
 import Footer from './components/Footer/Footer';
 
-import OrderDetails from './components/UserDashboard/OrderDetails'
+import OrderDetails from './components/adminDashBoard/pages/ordersDetail/orderDetails'
+import Orders from './components/adminDashBoard/pages/orders/Orders';
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -67,6 +68,8 @@ function App() {
         <Route exact path='/admin/products' element={<Products/>}/>
         <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
         <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
+        <Route exact path='/admin/orders' element={<Orders/>}/>
+        <Route exact path='/admin/orders/:id' element={<OrderDetails/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
 
 

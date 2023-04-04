@@ -34,7 +34,7 @@ function Sidebar() {
                     </li>
                     <li>
                         <CreditCardIcon className='icon'/>
-                        <span>Orders</span>
+                        <span> <Link to={'/admin/orders'}>Orders</Link> </span>
                     </li>
                     <p className='title'>USEFUL</p>
 

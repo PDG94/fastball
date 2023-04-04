@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllUsers } from '../../../../reduxToolkit/actions/userActions';
 import { deleteUser } from './../../../../reduxToolkit/actions/userActions';
+import { toast } from "react-toastify";
 
 function List() {
   const dispatch = useDispatch();
@@ -53,7 +54,18 @@ function List() {
       return (
         <div className='cellAction'>
           <div className="viewButton" > <Link to={`/admin/users/${row.id}`}>View</Link> </div>
-          <div className="deleteButton" onClick={()=>handleDeleteUser(row.id)}>Delete</div>
+          <div className="deleteButton" onClick={()=>{handleDeleteUser(row.id)
+          toast.warn("User Suspendido!", {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }) 
+          window.location.reload()}}>Delete</div>
         </div>
       )
     }
