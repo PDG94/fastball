@@ -22,9 +22,14 @@ import List from './components/adminDashBoard/pages/list/List';
 
 import Products from './components/adminDashBoard/pages/products/Products'
 import OrderHistory from './components/UserDashboard/OrderHistory';
+
 import Single from './components/adminDashBoard/pages/single/Single';
 import ProductDetail from './components/adminDashBoard/pages/productDetail/productDetail.jsx';
 import ProductCreate from './components/adminDashBoard/pages/productCreate/productCreate';
+
+
+import About from './components/About/About';
+import Footer from './components/Footer/Footer';
 
 import OrderDetails from './components/UserDashboard/OrderDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
@@ -50,6 +55,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/about' element={<About />} />
         <Route exact path='/catalogue' element={<Catalogue />} />
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
@@ -98,8 +104,8 @@ function App() {
           flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }        
-        
       </Routes>
+        <Footer></Footer>
     </>
   );
 }

@@ -5,7 +5,7 @@ const Card = (props) => {
   const formatImage = `${props.image.slice(0,50)}c_limit,f_auto,h_400,q_auto,w_400/${props.image.slice(50)}`
 
   return ( 
-    <div className="border max-w-sm bg-gray-100 overflow-hidden rounded-lg drop-shadow-lg hov-cart pb-1.5"
+    <div className="shad max-w-sm bg-white-100 overflow-hidden  shad hov-cart pb-1.5"
     style={{height: '390px', padding: '5 px'}}
     title="Banner to product"
     >
