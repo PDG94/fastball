@@ -14,18 +14,18 @@ export const createOrderAction = createAsyncThunk('order/createOrderAction', asy
 
 export const fetchOrder = createAsyncThunk('order/fetchOrder', async ()=> {
     try {
-     const orders = await axios.get('/order/')
+     const orders = await axios.get('/order')
      return orders.data
     } catch (error) {
      throw error;
     }
  });
 
- export const fetchOrderById = createAsyncThunk('product/fetchOrderById', async ({orderId, userId})=> {
+ export const fetchOrderById = createAsyncThunk('product/fetchOrderById', async (orderId)=> {
     try {
       console.log("orderId", orderId);
-      console.log("userId", userId);
-     const order = await axios.get(`/order/getOrderById/${orderId}${userId?'?userId='+ userId : ''}`);
+    
+     const order = await axios.get(`/order//${orderId}`);
      return order.data
     } catch (error) {
      throw error;

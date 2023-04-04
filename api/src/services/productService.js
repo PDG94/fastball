@@ -86,7 +86,8 @@ class ProductService {
     }
 
     async updateProduct(id, changes) {
-        const prod = await Product.findByPk(id);
+        console.log({id,changes})
+        const prod = await Product.findOne({where : {id: id}});
         const rta = await prod.update(changes);
         return rta;
     }

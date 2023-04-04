@@ -1,10 +1,9 @@
 const Joi = require('joi');
 
-const id = Joi.any();
+const id = Joi.string()
 const name = Joi.string().min(3);
 const email = Joi.string().email();
 const password = Joi.string().min(8);
-const isAdminData = Joi.any();
 
 const createUserSchema = Joi.object({
     name: name.required(),
@@ -14,9 +13,9 @@ const createUserSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-    email: email,
-    isAdmin: isAdminData
-});
+    isAdmin: Joi.boolean().truthy().required(),
+    changes : Joi.object()
+  });
 
 const getUserSchema = Joi.object({
     id: id.required(),

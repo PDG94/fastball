@@ -38,11 +38,11 @@ class UsersHandler {
     async updateUser(req, res, next) {
         try {
             const { id } = req.params;
-            const body = req.body;
-            const userUpdated = await service.updateUser(id, body);
+            const {changes} = req.body;
+            const userUpdated = await service.updateUser(id, changes);
             res.status(200).json(userUpdated);
         } catch (error) {
-            next(error);
+            res.json(error)
         }
     }
 
@@ -52,7 +52,8 @@ class UsersHandler {
             await service.updateUser(id, { active: false });
             res.status(201).json({ id });
         } catch (error) {
-            next(error);
+            console.log(error)
+            res.json(error)
         }
     }
     async registerUser(req, res, next) {

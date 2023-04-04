@@ -93,6 +93,7 @@ class UserService {
 
     async updateUser(id, changes) {
         const user = await User.findByPk(id);
+       console.log(user)
         const rta = await user.update(changes);
         return rta;
     }

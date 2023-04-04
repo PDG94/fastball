@@ -1,12 +1,21 @@
 .datatable{
-    height: 600px;
+    height: 700px;
     color: black;
     padding: 20px;
+   
     .grid{
         font-weight: bold;
         
     }
-
+    .search{
+        margin-bottom: 20px;
+        .searchInput{
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            padding-left: 4px;
+        }
+        
+    }
     .cellWithImg{
         display: flex;
         align-items: center;
