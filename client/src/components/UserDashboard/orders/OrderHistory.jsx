@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeOrder.scss";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();

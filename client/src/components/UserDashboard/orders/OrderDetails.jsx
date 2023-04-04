@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchOrderById } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeOrder.scss";
 
 const orderExample = {
   id: 3,
@@ -100,7 +100,7 @@ const OrderDetails = () => {
               </h3>
 
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Details and informations about this specific order.
+                Details and Information about this specific order.
               </p>
             </div>
             <div className="border-t border-gray-200">
@@ -139,7 +139,8 @@ const OrderDetails = () => {
                   {orderExample.Products.map((product) => {
                     return (
                       <div>
-                        <h3>{product.name}</h3>
+                        <h3>Product Name: {product.name}</h3>
+                        <h2>Price: {"$"}{product.price}</h2>
                         <div className="p-4 pz4">
                           <img src={product.image} alt="" />
                         </div>
