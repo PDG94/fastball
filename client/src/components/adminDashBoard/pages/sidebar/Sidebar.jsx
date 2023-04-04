@@ -9,8 +9,10 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import DiscountOutlinedIcon from '@mui/icons-material/DiscountOutlined';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Sidebar() {
+    const user = useSelector((state)=> state.user)
     return (
         <div className='sidebar'>
             <div className='top'><spam className="logo">Admin</spam></div>
@@ -42,19 +44,12 @@ function Sidebar() {
                         <AssessmentOutlinedIcon className='icon'/>
                         <span> <Link to={'/admin/categories'}>Categories</Link> </span>
                     </li>
-                    <li>
-                        <DiscountOutlinedIcon className='icon'/>
-                        <span>Discounts</span>
-                    </li>
-                    <li>
-                        <NotificationsOutlinedIcon className='icon'/>
-                        <span>Notifications</span>
-                    </li>
+                    
                     <p className='title'>USER</p>
 
                     <li>
                         <AccountCircleOutlinedIcon className='icon'/>
-                        <span>Profile</span></li>
+                        <span> <Link to={`/admin/users/${user._id}`}>Profile</Link> </span></li>
 
                 </ul>
             </div>

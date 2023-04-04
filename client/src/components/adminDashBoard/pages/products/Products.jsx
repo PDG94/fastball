@@ -55,7 +55,7 @@ function Products() {
         <div className='cellAction'>
           <div className="viewButton" > <Link to={`/admin/products/${row.id}`}>View</Link> </div>
           <div className="deleteButton" onClick={() => {handleDeleteProduct(row.id) 
-          toast.warn("Producto Suspendido!", {
+          toast.warn("Paused product!", {
             position: "bottom-center",
             autoClose: 2000,
             hideProgressBar: false,
