@@ -39,7 +39,7 @@ const orderingProducts = (order, products)=>{
             break
         }
         default:{
-            typeOrder = 'price'
+            typeOrder = 'name'
             dirOrder = 'asc'
         }
     }

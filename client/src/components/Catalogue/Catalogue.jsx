@@ -26,6 +26,7 @@ const Catalogue = () => {
     }
 
     useEffect(() => {
+        window.scroll(0,0)
         setIsLoading(true);
         dispatch(fetchCategory())
             .then(() => {

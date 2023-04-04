@@ -17,7 +17,8 @@ const initialState = {
     contry: "",
     city: "",
     isAdmin: false,
-    status: ""
+    status: "",
+    allUsers: []
 }
 
 
@@ -25,6 +26,9 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
+        getAllusers(state, action) {
+            state.allUsers = action.payload
+        },
         loadUser(state, action) {
        
             if (state.token) {
