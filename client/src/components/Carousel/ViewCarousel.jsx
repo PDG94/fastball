@@ -14,7 +14,7 @@ export const ViewCarousel = ({ children: slides, coment }) => {
     }, [])
 
     return (
-    <div className='left-[1.5%] mt-28 w-[97%] overflow-hidden relative rounded-lg drop-shadow-lg'>
+    <div className='mx-2 left-[-3.5%] h-[72vh] mt-28 w-[106%] bg-green-200 overflow-hidden relative rounded-lg drop-shadow-lg'>
         <div className='flex max-h-64 transition-transform ease-out duration-500' style={{transform: `translateX(-${curr * 100}%)`}}>
             {slides}
         </div>

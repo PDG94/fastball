@@ -155,7 +155,7 @@ const CheckOutForm = () => {
                   </div>
                 </div>
               </div> */}
-              <CardElement className="bg-white border rounded-md mx-6 my-2 py-2 px-2 w-[900px]" />
+              <CardElement className="bg-white border rounded-md mx-6 my-2 py-2 px-2 w-[46.4vw]" />
               <hr />
               <div className="flex justify-center">
                 <button
