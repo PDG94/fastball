@@ -59,6 +59,21 @@ class orderService {
         return orders;
     }
 
+    async getOneOrder(idOrder){
+        const order = await Order.findOne({where : {id : idOrder},
+            include : [
+                {
+                    model : Product,
+                    attributes : ['name', 'description', "image", "price"]
+                }
+            ]
+        });
+        if(!order){
+            throw new Error("No se encontró la orden");
+        };
+        return order;
+    }
+
     async updateOrder(id, orderNumber, totalAmount){ //id es el id de la orden a actualizar
         const orderUpdated = await  Order.findOne({where : {id}});
         if(orderUpdated){
