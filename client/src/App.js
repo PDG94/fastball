@@ -23,6 +23,8 @@ import UserDashboard from './components/UserDashboard/UserDashboard'
 
 import OrderHistory from './components/UserDashboard/orders/OrderHistory';
 import OrderDetails from './components/UserDashboard/orders/OrderDetails'
+import ViewReviews from './components/UserDashboard/Reviews/ViewReviews';
+import ReviewDetails from './components/UserDashboard/Reviews/ReviewDetails'
 const {loadUser} = require('./reduxToolkit/slices/userSlice').userActions;
 
 function App() {
@@ -54,12 +56,6 @@ function App() {
         <Route exact path='/admin' element={<DashBoard/>}/>
         <Route exact path='/admin/users' element={<List/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
-
-
-        {/* <Route exact path='/profile' element={<Profile />} /> 
-        <Route exact path='/profile/update' element={<UpdateProfile />} />
-        <Route exact path='/payment' element={<Payment />} />
-        <Route path='/cartDetail' element={<CartDetail/>} /> */}
         
         {
           flag&&flag?<Route exact path='/userdashboard' element={<UserDashboard />} />          
@@ -83,6 +79,16 @@ function App() {
 
         {
           flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/reviews' element={<ViewReviews />} />
+          :<Route path= '*' element= { <Error404 /> } /> 
+        }
+
+        {
+          flag&&flag?<Route exact path='/profile/reviews/:id' element={<ReviewDetails />} />
           :<Route path= '*' element= { <Error404 /> } /> 
         }
 
