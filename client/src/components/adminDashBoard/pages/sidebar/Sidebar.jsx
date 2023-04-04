@@ -8,6 +8,7 @@ import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import DiscountOutlinedIcon from '@mui/icons-material/DiscountOutlined';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
     return (
@@ -19,17 +20,17 @@ function Sidebar() {
                     <p className='title'>MAIN</p>
                     <li>
                         <DashboardIcon className='icon' />
-                        <span>Dashboard</span>
+                        <span> <Link to={'/admin'}>Dashboard</Link> </span>
                     </li>
                     <p className='title'>LISTS</p>
 
                     <li>
                         <PersonOutlineOutlinedIcon className='icon' />
-                        <span>Users</span>
+                        <span ><Link to={'/admin/users'}>Users</Link></span>
                     </li>
                     <li>
                         <StoreMallDirectoryOutlinedIcon className='icon'/>
-                        <span>Products</span>
+                        <span> <Link to={'/admin/products'}>Products</Link> </span>
                     </li>
                     <li>
                         <CreditCardIcon className='icon'/>
