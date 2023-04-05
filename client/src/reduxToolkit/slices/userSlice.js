@@ -16,7 +16,8 @@ const initialState = {
     address: "",
     contry: "",
     city: "",
-    isAdmin: false,
+    active: '',
+    isAdmin: '',
     status: "",
     allUsers: [],
     singleUser:{},
@@ -46,6 +47,7 @@ const userSlice = createSlice({
                     city: user.city,
                     contry: user.contry,
                     address: user.address,
+                    active: user.active,
                     isAdmin: user.isAdmin
                 };
             }else return {...state}
@@ -61,7 +63,8 @@ const userSlice = createSlice({
                 city: "",
                 address: "",
                 contry: "",
-                isAdmin: ""
+                active: '',
+                isAdmin: '',
             }
         }
 
@@ -83,8 +86,9 @@ const userSlice = createSlice({
                     address: user.address,
                     city: user.city,
                     contry: user.contry,
-                    isAdmin: user.isAdmin,
                     profilePic: user.profilePic,
+                    active: user.active,
+                    isAdmin: user.isAdmin,
                     status: "fullfilled"
                 }
             } else {
@@ -113,6 +117,7 @@ const userSlice = createSlice({
                     address: user.address,
                     city: user.city,
                     contry: user.contry,
+                    active: user.active,
                     isAdmin: user.isAdmin,
                     status: 'fullfilled'
                 }
@@ -137,7 +142,8 @@ const userSlice = createSlice({
             state.city= "";
             state.address= "";
             state.contry= "";
-            state.isAdmin= "";
+            state.active= '';
+            state.isAdmin= '';
             
           });
         builder.addCase(logoutUserAction.rejected, (state, action) => {
@@ -162,6 +168,7 @@ const userSlice = createSlice({
                     address : user.address,
                     contry : user.contry,
                     city : user.city,
+                    active: user.active,
                     isAdmin : user.isAdmin,
                     status : "fullfilled"
                 }

@@ -8,6 +8,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { fetchProduct } from '../../../../reduxToolkit/actions/productAction';
 import { fetchDeleteProduct } from './../../../../reduxToolkit/actions/productAction';
 import { toast } from "react-toastify";
+import axios from 'axios';
 
 function Products() {
 
@@ -54,8 +55,9 @@ function Products() {
       return (
         <div className='cellAction'>
           <div className="viewButton" > <Link to={`/admin/products/${row.id}`}>View</Link> </div>
-          <div className="deleteButton" onClick={() => {handleDeleteProduct(row.id) 
-          toast.warn("Producto Suspendido!", {
+          <div className="deleteButton" onClick={() => {handleDeleteProduct(row.id)
+          
+          toast.warn("Paused product!", {
             position: "bottom-center",
             autoClose: 2000,
             hideProgressBar: false,

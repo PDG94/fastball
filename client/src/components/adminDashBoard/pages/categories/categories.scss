@@ -1,0 +1,48 @@
+.categories{
+    display: flex;
+    width: 100%;
+    margin-top: 80px;
+    .categoriesContainer{
+        flex: 6;
+        position: relative;
+        .createCategory{
+            position: absolute;
+            right: 0;
+            margin: 20px;
+
+            .create{
+                border: 1px solid lightgray;
+                border-radius: 5px;
+                padding: 5px 5px 5px 5px;
+                
+            }
+            :hover{
+                background-color:#007afdcb;
+                color: white;
+            }
+        }
+        .createContainer{
+            margin: 50px 20px;
+            .createTitle{
+                font-size: 20px;
+                font-weight: bold;
+                color: lightgray;
+            }
+            .createImput{
+                margin-top: 20px;
+                .input{
+                    border: 1px solid lightgray;
+                    border-radius: 5px;
+                    margin-right: 10px;
+                }
+                .buttonCreate{
+                    border: 1px solid lightgray;
+                    padding: 1px;
+                    border-radius: 5px;
+                    
+                }
+                
+            }
+        }
+    }
+}

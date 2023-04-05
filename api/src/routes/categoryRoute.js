@@ -8,9 +8,9 @@ const validatorHandler = require('./../middleware/validatorHandler');
 const {updateCategorySchema, createCategorySchema, getCategorySchema } = require('./../schemas/categoryShema');
 
 router.get('/', getAllCategories);
-router.post('/',  createCategory);
+router.post('/create',  createCategory);
 router.get('/:id', validatorHandler(getCategorySchema, 'params'), getCategoryById);
-router.delete('/:id', validatorHandler(getCategorySchema, 'params'), isAdmin, deleteCategory);
+router.delete('/delete/:id', validatorHandler(getCategorySchema, 'params'), isAdmin, deleteCategory);
 router.put('/:id',validatorHandler(getCategorySchema, 'params'), isAdmin, reactivateCategory);
 
 // router.get('/', getAllCategories);

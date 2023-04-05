@@ -1,7 +1,5 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-import juan from "../Images/Juan.jpg";
-import olivio from "../Images/Olivio.jpg";
 import Linkedin from "../Images/Linkedin.png";
 const TeamMember = ({ name, title, imageSrc, link }) => {
   return (
@@ -35,27 +33,27 @@ const TeamSection = () => {
     {
       name: "Juan David Diaz Orozco",
       title: "Description",
-      imageSrc: juan,
+      imageSrc: 'https://res.cloudinary.com/dviri5ov1/image/upload/v1680651255/fastball/system/Juan_xbnm7u.jpg',
       link: "https://www.linkedin.com/in/juan-david-diaz-orozco-8b850a1a7",
     },
     {
       name: "Jorge Kerk ",
       title: "Description",
       imageSrc:
-        "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+        "https://res.cloudinary.com/dviri5ov1/image/upload/v1680651469/fastball/system/WIN_20221029_15_26_16_Pro_gtw5ey.jpg",
       link: "https://www.linkedin.com/",
     },
     {
       name: "Pedro David Gonzalez",
       title: "Description",
       imageSrc:
-        "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+        "https://res.cloudinary.com/dviri5ov1/image/upload/v1680659239/fastball/system/Pedro_mqnxob.jpg",
       link: "https://www.linkedin.com/in/pedro-gonzalez-4468ba24a/",
     },
     {
       name: "Olivio Subelza Cabezas",
       title: "Description",
-      imageSrc: olivio,
+      imageSrc: 'https://res.cloudinary.com/dviri5ov1/image/upload/v1680651255/fastball/system/Olivio_jqoa0k.jpg',
       link: "https://www.linkedin.com/in/olivio-subelza-b646a2249/",
     },
   ];

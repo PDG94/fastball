@@ -72,20 +72,15 @@ const Navbar = () => {
           <NavLink className="btn btn-primary" to="/catalogue">
             Catalogue
           </NavLink>
-          <NavLink className="btn btn-primary" to="/create">
-            Create
-          </NavLink>
-          <NavLink className="btn btn-primary" to="/admin">
-            Andmin
-          </NavLink>
+          {
+            user.isAdmin &&
+            <NavLink className="btn btn-primary" to="/admin">
+              Admin
+            </NavLink>
+          }
           <NavLink className="btn btn-primary" to="/about">
             About
           </NavLink>
-          {/* <button className='btn btn-primary     '>
-                        <Link to="/payment">
-                            Pay
-                        </Link>
-                    </button> */}
 
         </div>
 

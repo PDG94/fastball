@@ -45,7 +45,7 @@ function List({products, customer}) {
         </TableHead>
         <TableBody>
           {products.map((row, i) => (
-            <TableRow key={row.id}>
+            <TableRow key={i}>
               {row.id?<TableCell >{row.id}</TableCell>:null}
               <TableCell className="tableCell">
                 <div className="cellWrapper">

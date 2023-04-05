@@ -17,16 +17,11 @@ class ProductService {
         const cat = await Category.findByPk(categories);
         await newProduct.setCategory(cat)
         if (colors) {
-            console.log("color id") 
             const colorD = await Color.findByPk(colors);
             await newProduct.addColor(colorD.id);
           }
         if (isClothing) {
-          console.log("is cloting ")
-
           if (size) {
-          console.log("sized")
-
             const sizeD = await Size.findByPk(size);
             await newProduct.addSize(sizeD.id);
           }

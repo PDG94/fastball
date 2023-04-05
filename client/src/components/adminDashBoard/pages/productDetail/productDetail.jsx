@@ -5,6 +5,7 @@ import { fetchProductById, fetchUpdateProduct } from '../../../../reduxToolkit/a
 import Sidebar from '../sidebar/Sidebar';
 import './productDetail.scss';
 import { toast } from "react-toastify";
+import Loading from '../loading/Loading';
 
 const initialForm = {
 }
@@ -68,7 +69,9 @@ function ProductDetail() {
   if (!product.name) {
     return <div className='productDetail'>
       <Sidebar />
-      <div className="singleContainer">Loading...</div>
+      <div className="singleContainer">
+        <Loading/>
+      </div>
     </div>
   }
   return (
