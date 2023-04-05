@@ -26,7 +26,6 @@ class CartService {
         } else {
             await user.addProduct(product, { through: { stock } });
         }
-        
         const products = await user.getProducts();
         return products;
     }
