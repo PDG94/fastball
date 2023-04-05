@@ -8,11 +8,11 @@ import { useSelector } from "react-redux";
 import { Link} from "react-router-dom";
 
 function Sidebar() {
-    const { name } =
-    useSelector((state) => state.user);
+    const uuser =
+    useSelector((state) => state.user.singleUser);
     return (
         <div className='sidebarr'>
-            <div className='topp'><spam className="logoo">{name}</spam></div>
+            <div className='topp'><spam className="logoo">{uuser.name}</spam></div>
             <hr />
             <div className='centerr'>
                 <ul>                    

@@ -1,24 +1,28 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import { getServiceUser } from "../../../redux/actions/usersActions";
 // import { Link, useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeProfile.scss";
+import {getUserById} from "../../../reduxToolkit/actions/userActions";
 import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 export default function DashboardUser() {
-  // const dispatch = useDispatch();
-  // const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const userID = useSelector((state) => state.user._id);
+
 
   const { name, lastName, email, profilePic, address, contry, city } = useSelector(
-    (state) => state.user
+    (state) => state.user.singleUser
+
   );
 
-  // useEffect(() => {
-  // dispatch(getServiceUser(_id, token));
-  // }, [dispatch, id, token]);
+  useEffect(()=>{
+    dispatch(getUserById(userID))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
     if(!name){
       return <div className="homee">
       <Sidebar />
@@ -33,6 +37,8 @@ export default function DashboardUser() {
         <Sidebar />
         <div className="homeContainerr">
 
+
+
           <div className="flex justify-center min-h-screen bg-gray-100 pt-10 bg-white">
             <div className="bg-white w-full max-w-5xl h-full p-8 border border-gray-200 rounded-lg shadow-lg">
               <div className="flex items-center">
@@ -46,6 +52,7 @@ export default function DashboardUser() {
                   <p className="mt-1 text-sm text-gray-500">
                     Details and Information about this user.
                   </p>
+
                 </div>
               </div>
               <div className="mt-6 border-t border-gray-200 pt-6">
