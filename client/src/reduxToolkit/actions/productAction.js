@@ -49,7 +49,7 @@ export const fetchUpdateProduct = createAsyncThunk('product/fetchUpdateProduct',
 
 export const fetchDeleteProduct = createAsyncThunk('product/fetchDeleteProduct', async (productId)=> {
     try {
-     const product = await axios.delete(`/product/editProduct/%${productId}`, headers() );
+     const product = await axios.delete(`/product/deleteProduct/${productId}`, headers() );
      return product.data
     } catch (error) {
      throw error;

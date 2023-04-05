@@ -34,13 +34,13 @@ function Sidebar() {
                     </li>
                     <li>
                         <CreditCardIcon className='icon'/>
-                        <span>Orders</span>
+                        <span> <Link to={'/admin/orders'}>Orders</Link> </span>
                     </li>
                     <p className='title'>USEFUL</p>
 
                     <li>
                         <AssessmentOutlinedIcon className='icon'/>
-                        <span>Stats</span>
+                        <span> <Link to={'/admin/categories'}>Categories</Link> </span>
                     </li>
                     <li>
                         <DiscountOutlinedIcon className='icon'/>

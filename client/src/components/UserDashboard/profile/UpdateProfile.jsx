@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -261,6 +261,10 @@ const countries = [
 ];
 
 export default function UpdateInfoUser() {
+  const reference = useRef()
+  const [image, setImage] = useState(null)
+  const [prevImage, setprevImage] = useState('')
+
   const navigate = useNavigate();
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
@@ -348,27 +352,53 @@ export default function UpdateInfoUser() {
     }
   };
 
+  useEffect(()=>{
+    if(image){
+        const reader = new FileReader()
+        reader.onloadend = ()=> {
+            setprevImage(reader.result.toString())
+        }
+        reader.readAsDataURL(image)
+    }
+  }, [image])
+
+  const uploadFile = ()=> {
+    reference.current.click()
+  }
+
+  const handleChangeUserImage = (event)=> {
+    const file = event.target.files[0]
+    if(file && file.type.substring(0,5)==='image'){
+      console.log('');
+      setImage(file)
+    } else {
+      setImage(null)
+    }
+  }
+
   return (
     <div>
       <div className="home">
         <Sidebar />
         <div className="homeContainer">
         <form onSubmit={submitHandler}>
+          <div className="grid grid-cols-2">
+
           <div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
                 Update My Info
               </h3>
 
-              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              <p className="mt-1 max-w-2xl text-sm text-gray-500">
                 Update Details and informations about user.
               </p>
             </div>
-            <div class="border-t border-gray-200">
+            <div className="border-t border-gray-200">
               <dl>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">Name</dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Name</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <input
                       className=""
                       type="text"
@@ -380,9 +410,9 @@ export default function UpdateInfoUser() {
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">Surname</dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Surname</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <input
                       className=""
                       type="text"
@@ -394,9 +424,9 @@ export default function UpdateInfoUser() {
                   </dd>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">Address</dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Address</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <input
                       className=""
                       type="text"
@@ -408,9 +438,9 @@ export default function UpdateInfoUser() {
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">City</dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">City</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <input
                       className=""
                       type="text"
@@ -422,9 +452,9 @@ export default function UpdateInfoUser() {
                   </dd>
                 </div>
 
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">Country</dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Country</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <select
                       name="contry"
                       onChange={(e) => handlerChange(e)}
@@ -441,14 +471,22 @@ export default function UpdateInfoUser() {
                   </dd>
                 </div>
 
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt class="text-sm font-medium text-gray-500">
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
                     Profile Picture
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <input 
+                        type="file" 
+                        accept='image/*' 
+                        className='hidden' 
+                        ref={reference} 
+                        onChange={handleChangeUserImage}
+                    />
                     <button
                       type="submit"
                       className="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 border-b-4 border-blue-500 hover:border-blue-300 rounded"
+                      onClick={uploadFile}
                     >
                       Upload new Profile Picture
                     </button>
@@ -463,6 +501,9 @@ export default function UpdateInfoUser() {
                 SUBMIT
               </button>
             </div>
+          </div>
+
+          {image && <img src={prevImage} alt="profileImg" className="p-2 border border-solid"/>}
           </div>
         </form>
       </div>

@@ -37,9 +37,6 @@ class ProductService {
 
     async getAllProducts() {
         const Products = await Product.findAll({
-            where: {
-                active: true
-            },
             include: [
                 {
                   model: Color
@@ -93,7 +90,9 @@ class ProductService {
     }
 
     async deleteProduct(id) {
-        const prod = await this.findByPk(id);
+        console.log({id})
+        const prod = await Product.findByPk(id);
+        console.log(prod)
         await prod.update({active:false});
         return { id };
     }

@@ -72,20 +72,15 @@ const Navbar = () => {
           <NavLink className="btn btn-primary" to="/catalogue">
             Catalogue
           </NavLink>
-          <NavLink className="btn btn-primary" to="/create">
-            Create
-          </NavLink>
-          <NavLink className="btn btn-primary" to="/admin">
-            Andmin
-          </NavLink>
+          {
+            user.isAdmin &&
+            <NavLink className="btn btn-primary" to="/admin">
+              Admin
+            </NavLink>
+          }
           <NavLink className="btn btn-primary" to="/about">
             About
           </NavLink>
-          {/* <button className='btn btn-primary     '>
-                        <Link to="/payment">
-                            Pay
-                        </Link>
-                    </button> */}
 
         </div>
 
@@ -122,7 +117,7 @@ const Navbar = () => {
                     {user.name}
                   </p>
                   <Link
-                    to="/userdashboard"
+                    to="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     User Dashboard

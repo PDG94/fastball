@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeOrder.scss";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const OrderHistory = () => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-6 py-3" onClick={info}>
-                      index
+                      ID
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Date
@@ -51,7 +51,7 @@ const OrderHistory = () => {
                       Order Amount
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Order ID
+                      Order Number
                     </th>
                   </tr>
                 </thead>
@@ -63,8 +63,8 @@ const OrderHistory = () => {
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         key={id}                        
                       >
-                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {index + 1}
+                        <td onClick={()=>{Clickk(id)}} className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
+                          {id}
                         </td>
                         <td
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"                          
@@ -75,7 +75,7 @@ const OrderHistory = () => {
                           {"$"}
                           {totalAmount}
                         </td>
-                        <td onClick={()=>{Clickk(orderNumber)}}  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
                           {orderNumber}
                         </td>
                       </tr>
