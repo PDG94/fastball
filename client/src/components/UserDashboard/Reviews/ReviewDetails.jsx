@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchDetailReview } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeReviews.scss";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 // const reviewExample = {
 //     id: 5,
@@ -25,10 +26,21 @@ const ReviewDetails = () => {
     dispatch(fetchDetailReview({reviewId:id}))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+  
   // const info = () => {
   //   console.log("id", id);
   //   console.log("111", reviewsss)
   // };
+
+  if(!reviewsss || !reviewsss.id){
+    return <div className="homee">
+    <Sidebar />
+    <div className="homeContainerr">
+      <Loading />
+    </div>
+  </div>
+  }
+  
   return (
     <div>
       <div className="home">
