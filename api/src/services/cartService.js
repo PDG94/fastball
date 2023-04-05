@@ -13,8 +13,20 @@ class CartService {
         if (!user || !product) {
             return !user ? "user not found" : "Product not found";
         };
-        const obj = product.dataValues;
-        await user.addProduct(obj.id, { through: { stock } });
+        const cartItem =await Cart.findOne({
+            where: {
+              ProductId: idProduct,
+              UserId: idUser
+            }
+          });
+        if (cartItem) {
+            await cartItem.update({
+              stock: cartItem.dataValues.stock + stock
+            });
+        } else {
+            await user.addProduct(product, { through: { stock } });
+        }
+        
         const products = await user.getProducts();
         return products;
     }
