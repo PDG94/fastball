@@ -13,7 +13,6 @@ import Payment from './components/PasarelaStripe/PasarelaStripe'
 // import RegisterProduct from './components/RegisterProduct/RegisterProduct'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ContainerRegiterPRoduct from './components/RegisterProduct/ContainerRegiterPRoduct';
 import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 import DashBoard from './components/adminDashBoard/DashBoard'
@@ -47,7 +46,7 @@ function App() {
   
   const dispatch = useDispatch();
 
-  const { email } = useSelector((state) => state.user);
+  const { email, isAdmin } = useSelector((state) => state.user);
 
   const token = localStorage.getItem('tokenAuth')  
 
@@ -68,61 +67,35 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        <Route exact path='/create' element={<ContainerRegiterPRoduct />} />
-        <Route exact path='/admin' element={<DashBoard/>}/>
-        <Route exact path='/admin/users' element={<List/>}/>
-        <Route exact path='/admin/users/:id' element={<Single/>}/>
-        <Route exact path='/admin/products' element={<Products/>}/>
-        <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
-        <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
-        <Route exact path='/admin/orders' element={<Orders/>}/>
-        <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
-        <Route exact path='/admin//categories' element={<Categories/>}/>
         <Route path= '*' element= { <Error404 /> } /> 
         
-        {
-          flag&&flag?<Route exact path='/userdashboard' element={<UserDashboard />} />          
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/profile' element={<Profile />} />          
-          :<Route path= '*' element= { <Error404 /> } /> 
+        { isAdmin &&
+          <>
+            <Route exact path='/admin' element={<DashBoard/>}/>
+            <Route exact path='/admin/users' element={<List/>}/>
+            <Route exact path='/admin/users/:id' element={<Single/>}/>
+            <Route exact path='/admin/products' element={<Products/>}/>
+            <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
+            <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
+            <Route exact path='/admin/orders' element={<Orders/>}/>
+            <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
+            <Route exact path='/admin//categories' element={<Categories/>}/>
+          </>
         }
         
         {
-          flag&&flag?<Route exact path='/profile/update' element={<UpdateProfile />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/profile/orders' element={<OrderHistory />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/profile/orders/:id' element={<OrderDetails />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/profile/reviews' element={<ViewReviews />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/profile/reviews/:id' element={<ReviewDetails />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route exact path='/payment' element={<Payment />} />
-          :<Route path= '*' element= { <Error404 /> } /> 
-        }
-
-        {
-          flag&&flag?<Route path='/cartDetail' element={<CartDetail/>} />
-          :<Route path= '*' element= { <Error404 /> } /> 
+          flag &&
+          <>
+            <Route exact path='/userdashboard' element={<UserDashboard />} />          
+            <Route exact path='/profile' element={<Profile />} />          
+            <Route exact path='/profile/update' element={<UpdateProfile />} />
+            <Route exact path='/profile/orders' element={<OrderHistory />} />
+            <Route exact path='/profile/orders/:id' element={<OrderDetails />} />
+            <Route exact path='/profile/reviews' element={<ViewReviews />} />
+            <Route exact path='/profile/reviews/:id' element={<ReviewDetails />} />
+            <Route exact path='/payment' element={<Payment />} />
+            <Route path='/cartDetail' element={<CartDetail/>} /> 
+          </>
         }        
       </Routes>
         <Footer></Footer>
