@@ -10,6 +10,7 @@ const singToken = (user) => {
         email: user.email,
         profilePic:user.profilePic,
         city: user.city,
+        active: user.active,
         contry: user.contry,
         address: user.address,
         isAdmin: user.isAdmin

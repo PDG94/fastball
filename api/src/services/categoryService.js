@@ -29,9 +29,9 @@ class CategoryService {
         }
     }
     async deleteCategory(id) {
-        const category = await this.findByPk(id);
+        const category = await Category.findByPk(id);
         await category.update({active:false});
-        return { id };
+        return {id};
     }
     async reactivateCategory(id) {
         const category = await this.findByPk(id);

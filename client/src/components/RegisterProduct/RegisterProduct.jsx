@@ -23,7 +23,6 @@ const Register = ({ changeCurrentImage, currentImage, localImageURL }) => {
   };
 
   const colors = useSelector((state) => state.color.allColors);
-
   const sizes = useSelector((state) => state.size.allSizes);
 
   const dispatch = useDispatch();

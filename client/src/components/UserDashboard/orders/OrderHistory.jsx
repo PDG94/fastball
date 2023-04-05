@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeOrder.scss";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 const OrderHistory = () => {
   const dispatch = useDispatch();
@@ -30,12 +31,19 @@ const OrderHistory = () => {
 
     navigate(`/profile/orders/${id}`);
   };
-
+  if(!filteredOrders || !filteredOrders[0]){
+    return <div className="homee">
+    <Sidebar />
+    <div className="homeContainerr">
+      <Loading />
+    </div>
+  </div>
+  }
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
+        <div className="homeContainerr">
           
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

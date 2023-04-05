@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { getAllUsers } from '../../../../reduxToolkit/actions/userActions';
 import { deleteUser } from './../../../../reduxToolkit/actions/userActions';
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function List() {
   const dispatch = useDispatch();
@@ -54,7 +55,8 @@ function List() {
       return (
         <div className='cellAction'>
           <div className="viewButton" > <Link to={`/admin/users/${row.id}`}>View</Link> </div>
-          <div className="deleteButton" onClick={()=>{handleDeleteUser(row.id)
+          <div className="deleteButton" onClick={async()=>{handleDeleteUser(row.id)
+          await axios.post('/baja', {name:row.name, email:row.email});
           toast.warn("User Suspendido!", {
             position: "bottom-center",
             autoClose: 2000,

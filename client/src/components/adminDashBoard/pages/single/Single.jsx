@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Chart from '../chart/Chart';
 import List from '../table/Table';
 import { toast } from "react-toastify";
+import Loading from '../loading/Loading';
 
 const initialForm = {
 }
@@ -21,7 +22,7 @@ function Single() {
   let [changes, setChanges] = useState(initialForm);
 
   useEffect(() => {
-    dispatch(getUserById(id)).then((response) => { setUser(response.payload) });
+    dispatch(getUserById(id)).then((response) => { setUser(response.payload); console.log(response) });
     dispatch(fetchOrderById(id)).then((response) => setOrders(response.payload));
 
   }, [])
@@ -75,11 +76,34 @@ function Single() {
       return [];
     }
   });
-  
-  if (!user.name) {
+
+
+  const ordersByMonth = orders.reduce((acc, order) => {
+    // Obtener el mes de la fecha de creación de la orden
+    const month = new Date(order.createdAt).toLocaleString('default', { month: 'short' });
+    // Incrementar el contador del mes correspondiente
+    if (acc[month]) {
+      acc[month] += 1;
+    } else {
+      acc[month] = 1;
+    }
+    return acc;
+  }, {});
+
+  // Crear un array de objetos con los datos para el gráfico
+  const data = Object.keys(ordersByMonth).map(month => {
+    return {
+      name: month,
+      total: ordersByMonth[month]
+    }
+  });
+  console.log({user,id})
+  if (!user) {
     return (<div className='single'>
     <Sidebar />
-    <div className="singleContainer">Loading...</div>
+    <div className="singleContainer">
+      <Loading/>
+    </div>
   </div>)
   }
   return (
@@ -162,7 +186,7 @@ function Single() {
             </div>
           </div>
           <div className="right">
-            <Chart aspect={1.5 / 1} title='User Spending (Last 6 months)' />
+            <Chart aspect={1.5 / 1} title='User Spending (Last 6 months)' data={data} />
           </div>
         </div>
         <div className="bottom">

@@ -17,7 +17,7 @@ import CartDetail from './components/Cart/CartDetails';
 import Error404 from './components/Error404/Error404';
 import DashBoard from './components/adminDashBoard/DashBoard'
 import List from './components/adminDashBoard/pages/list/List';
-import UserDashboard from './components/UserDashboard/UserDashboard'
+// import UserDashboard from './components/UserDashboard/UserDashboard'
 
 
 
@@ -67,26 +67,10 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        <Route path= '*' element= { <Error404 /> } /> 
-        
-        { isAdmin &&
-          <>
-            <Route exact path='/admin' element={<DashBoard/>}/>
-            <Route exact path='/admin/users' element={<List/>}/>
-            <Route exact path='/admin/users/:id' element={<Single/>}/>
-            <Route exact path='/admin/products' element={<Products/>}/>
-            <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
-            <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
-            <Route exact path='/admin/orders' element={<Orders/>}/>
-            <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
-            <Route exact path='/admin//categories' element={<Categories/>}/>
-          </>
-        }
-        
         {
           flag &&
           <>
-            <Route exact path='/userdashboard' element={<UserDashboard />} />          
+            {/* <Route exact path='/userdashboard' element={<UserDashboard />} />           */}
             <Route exact path='/profile' element={<Profile />} />          
             <Route exact path='/profile/update' element={<UpdateProfile />} />
             <Route exact path='/profile/orders' element={<OrderHistory />} />
@@ -97,6 +81,22 @@ function App() {
             <Route path='/cartDetail' element={<CartDetail/>} /> 
           </>
         }        
+        { isAdmin &&
+          <>
+            <Route exact path='/admin' element={<DashBoard/>}/>
+            <Route exact path='/admin/users' element={<List/>}/>
+            <Route exact path='/admin/users/:id' element={<Single/>}/>
+            <Route exact path='/admin/products' element={<Products/>}/>
+            <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
+            <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
+            <Route exact path='/admin/orders' element={<Orders/>}/>
+            <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
+            <Route exact path='/admin/categories' element={<Categories/>}/>
+          </>
+        }
+        
+        
+        <Route path= '*' element= { <Error404 /> } /> 
       </Routes>
         <Footer></Footer>
     </>

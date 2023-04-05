@@ -111,8 +111,7 @@ const RandomCarousel = () => {
                 className="carousel-item text-center relative w-64 h-64 shad snap-start"
               >
                 <Link to={`/details/${resource.id}`}>
-                <a
-                  href={resource.name}
+                <label
                   className="h-full w-full aspect-square block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0"
                   style={{ backgroundImage: `url(${resource.image || ''})` }}
                   >
@@ -121,16 +120,16 @@ const RandomCarousel = () => {
                     alt={resource.name}
                     className="w-full aspect-square hidden"
                     />
-                </a>
+                </label>
                 </Link>
                 <Link to={`/details/${resource.id}`}>
-                <p
+                <label
                   className="h-full w-full aspect-square block absolute top-0 left-0 transition-opacity duration-300 opacity-0 hover:opacity-100 bg-blue-800/75 z-10"
                 >
                   <h3 className="text-white py-6 px-3 mx-auto text-xl">
                     {resource.name}
                   </h3>
-                </p>
+                </label>
                 </Link>
               </div>
             );

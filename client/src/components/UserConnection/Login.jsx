@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import GoogleButton from 'react-google-button';
 // import {logOut} from './../../Auth/firebase';
 import { toast } from "react-toastify";
@@ -11,23 +11,41 @@ const { loginUserAction, loginUserGoogleAction } = require('./../../reduxToolkit
 const Login = () => {
     const dispatch = useDispatch()
     // const [submitedForm, setSubmitedForm] = useState(false)
-    // const user =useSelector((state)=> state.user)
+    const { active } =useSelector((state)=> state.user)
     const navigate = useNavigate();
 
-    const handleGoogle = async () => {
-        dispatch(loginUserGoogleAction()).then(() => {navigate('/').then(()=> toast.success("Welcome!", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        }))
-         });
-        
+    const handleGoogle = () => {
+        dispatch(loginUserGoogleAction())   
     }
+    useEffect(()=>{
+        if(active !== ''){
+            if(active){
+                navigate('/')
+                toast.success("Welcome !!!", {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+            } else {
+                toast.error("User disabled !!!", {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+                return
+            } 
+        }
+    }, [active, navigate])
     return (
         <Formik
             initialValues={{
@@ -57,8 +75,8 @@ const Login = () => {
                 const user = { email: values.email, password: values.password };
 
                 dispatch(loginUserAction(user)).then((response) => {
-                    if (!response.error) {
-                        navigate("/"); toast.success("Welcome!", {
+                    if (response.error) {
+                        toast.error("The username or password is incorrect", {
                             position: "bottom-center",
                             autoClose: 2000,
                             hideProgressBar: false,
@@ -67,19 +85,10 @@ const Login = () => {
                             draggable: true,
                             progress: undefined,
                             theme: "light",
-                        });
-                    } else toast.error("The username or password is incorrect", {
-                        position: "bottom-center",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
+                        })
+                        return
+                    }
                 })
-
             }}
         >
             {({ errors }) => (

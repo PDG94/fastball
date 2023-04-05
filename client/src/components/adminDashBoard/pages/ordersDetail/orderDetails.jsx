@@ -6,6 +6,7 @@ import OrderDetail from './../../../UserDashboard/orders/OrderDetails'
 import Sidebar from '../sidebar/Sidebar';
 import './orderDetails.scss'
 import List from '../table/Table';
+import Loading from '../loading/Loading';
 
 
 function OrderDetails() {
@@ -20,6 +21,15 @@ function OrderDetails() {
 
     
     console.log({ order })
+    if(!order){
+        return <div className='orderDetail'>
+        <Sidebar />
+        <div className="orderContainer">
+          <Loading/>
+        </div>
+      </div>
+    }
+
     return (
         <div className='orderDetail'>
             <Sidebar />
