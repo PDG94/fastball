@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchOneOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeOrder.scss";
@@ -20,11 +20,12 @@ const OrderDetails = () => {
   }, [dispatch]);
 
 
-  const info = () => {
-    console.log("id", id);
-    console.log("111", singleorder.Products)
-    // console.log("222", singleorder)
-  };
+  // const info = () => {
+  //   console.log("id", id);
+  //   console.log("111", singleorder.Products)
+  //   // console.log("222", singleorder)
+  // };
+
   if (!singleorder || !singleorder.id) {
     return <div className="homee">
       <Sidebar />

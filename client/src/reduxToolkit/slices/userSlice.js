@@ -2,7 +2,7 @@ const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
 // const jwt = require('jwt-simple');
 
-const { registerUserAction, loginUserAction,logoutUserAction, loginUserGoogleAction, getUserById } = require('./../actions/userActions')
+const { registerUserAction, loginUserAction,logoutUserAction, loginUserGoogleAction, getUserById, editUser } = require('./../actions/userActions')
 
 
 
@@ -186,6 +186,25 @@ const userSlice = createSlice({
             state.status = 'success';
         })
         builder.addCase(getUserById.rejected, (state,action)=> {
+            state.status = 'rejected'
+        })
+        builder.addCase(editUser.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(editUser.fulfilled, (state,action)=> {
+            // console.log('1111111111111', action);
+            return {
+                ...state,
+                name: action.payload.name,
+                lastName: action.payload.Lastname,
+                profilePic:action.payload.profilePic,
+                address: action.payload.address,
+                city: action.payload.city,
+                contry: action.payload.contry,
+                status: 'fullfilled'
+            }
+        })
+        builder.addCase(editUser.rejected, (state,action)=> {
             state.status = 'rejected'
         })
     }
