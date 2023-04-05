@@ -21,6 +21,16 @@ export const fetchOrder = createAsyncThunk('order/fetchOrder', async ()=> {
     }
  });
 
+ export const fetchOneOrder = createAsyncThunk('order/fetchOneOrder',  async (id)=> {
+    try{
+        const order = await axios.get(`/order/getOneOrder/${id}`, )
+        return order.data
+    } catch (error) {
+        throw error;
+    }
+    
+})
+
  export const fetchOrderById = createAsyncThunk('order/fetchOrderById', async (orderNumber)=> {
     try {
       console.log("orderId", orderNumber);

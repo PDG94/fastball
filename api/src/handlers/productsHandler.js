@@ -47,10 +47,11 @@ class ProductsHandler {
     async deleteProduct(req, res, next ){
         try {
             const {id} = req.params;
+            console.log(id)
             const productDeactivated = await service.deleteProduct(id);
             res.status(200).json(productDeactivated);
         } catch (error) {
-            next(error);
+            res.json(error.message);
         }
     }
 

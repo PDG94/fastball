@@ -1,10 +1,11 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const { fetchReviewsByUsrId, fetchReviewsByProductId, fetchReviewsPending, updateReview, deleteReview } = require('./../actions/reviewAction')
+const { fetchReviewsByUsrId, fetchReviewsByProductId, fetchReviewsPending, updateReview, deleteReview, fetchDetailReview } = require('./../actions/reviewAction')
 
 const initialState = {
     reviewsUsr: [],
     reviewsProduct: [],
-    reviewsPending : []
+    reviewsPending : [],
+    singleRevew:{},
 }
 
 const reviewSlice = createSlice({
@@ -81,6 +82,17 @@ const reviewSlice = createSlice({
         })
         builder.addCase(deleteReview.rejected, (state,action)=> {
             state.status = 'rejected'
+        })
+
+        builder.addCase(fetchDetailReview.pending, (state, action)=>{
+            state.status = 'pending';
+        })
+        builder.addCase(fetchDetailReview.fulfilled, (state, action)=>{
+            state.singleRevew=action.payload;
+            state.status = 'success';
+        })
+        builder.addCase(fetchDetailReview.rejected, (state, action)=>{
+            state.status = 'rejected';
         })
 
     }

@@ -61,8 +61,10 @@
                         }
 
                         .detailItem {
+                            display: flex;
                             margin-bottom: 10px;
-
+                            align-items: center;
+                            
                             .itemKey {
                                 font-weight: bold;
                                 color: gray;

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 // import { Link, useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeProfile.scss";
 
 export default function DashboardUser() {
   // const dispatch = useDispatch();
@@ -21,23 +21,27 @@ export default function DashboardUser() {
 
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
-          <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
-            <div className="px-4 py-5 sm:px-6">
+        <div className="homeContainerr">
+
+          <div className="bg-white max-w-2xl border-all overflow-hidden sm:rounded-lg">
+            <div className="px-4 py-5 sm:px-6 flex align-center">
               <img
                 className="object-cover h-11 w-11 rounded-full border-gray"
                 src={profilePic}
                 alt="Profile"
               />
+              <div className="px-2">
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 My Info
-              </h3>
+              </h3>             
 
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Details and informations about user.
+                Details and Information about this user.
               </p>
+              </div>
+
             </div>
             <div className="border-t border-gray-200">
               <dl>
@@ -78,6 +82,8 @@ export default function DashboardUser() {
               </dl>
             </div>
           </div>
+
+
           <br />
           <br />
         </div>

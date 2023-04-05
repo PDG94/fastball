@@ -21,6 +21,16 @@ class orderHandler{
             res.send(error.message);
         }
     }
+
+    async getOneOrder(req, res, next){
+        try {
+            const {id} = req.params;
+            const order = await service.getOneOrder(id);
+            res.status(200).json(order);
+        } catch (error) {
+            res.send(error);
+        }
+    }
     async createOrder(req,res,next){
         try {
             const orderCreated = await service.createOrder(req.body) // debe venir por body orderNumber, totalAmount, products, userId, quantity en ese orden

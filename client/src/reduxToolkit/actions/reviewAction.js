@@ -3,7 +3,7 @@ const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk;
 
 export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId', async (userId)=> {
     try {
-     const reviews = await axios.get(`/review//getReviewsByUsr/${userId}`)
+     const reviews = await axios.get(`/review/getReviewsByUsr/${userId}`)
      return reviews.data
     } catch (error) {
      throw error;
@@ -28,10 +28,23 @@ export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId'
     }
  });
 
+
+ export const fetchDetailReview = createAsyncThunk('review/fetchDetailReview', async ({reviewId})=> {
+    try {
+      
+     const review = await axios.get(`/review/getDetailReview/${reviewId}`)
+     return review.data
+    } catch (error) {
+     throw error;
+    }
+ });
+
  export const updateReview = createAsyncThunk('review/updateReview', async ({reviewId, changes, user})=> {
     try {
-     const review = await axios.patch(`/review//updateReview/${reviewId}`, changes)
-     review.data.User = user
+     const review = await axios.patch(`/review/updateReview/${reviewId}`, changes)
+     
+     if(user) review.data.User = user
+     
      return review.data
     } catch (error) {
      throw error;
@@ -40,7 +53,7 @@ export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId'
 
  export const deleteReview = createAsyncThunk('review/deleteReview', async (reviewId)=> {
     try {
-     const review = await axios.delete(`/review//deleteReview/${reviewId}`)
+     const review = await axios.delete(`/review/deleteReview/${reviewId}`)
      return review.data
     } catch (error) {
      throw error;
