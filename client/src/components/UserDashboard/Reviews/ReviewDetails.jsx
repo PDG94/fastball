@@ -18,8 +18,6 @@ const ReviewDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  // const reviewNumber = "123"
-  const [review, setReview] = useState({})
 
   const reviewsss = useSelector((state) => state.review.singleRevew);
 
@@ -62,42 +60,42 @@ const ReviewDetails = () => {
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Review Id:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.id}</b>
+                    <b>{reviewsss.id}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Review Date:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.date}</b>
+                    <b>{reviewsss.date}</b>
                   </dd>
                 </div>
 
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Score:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.score}</b>
+                    <b>{reviewsss.score}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Status:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.status}</b>
+                    <b>{reviewsss.status}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Description:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.description}</b>
+                    <b>{reviewsss.description}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">ProductId:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{reviewExample.ProductId}</b>
+                    <b>{reviewsss.ProductId}</b>
                   </dd>
                 </div>
 
