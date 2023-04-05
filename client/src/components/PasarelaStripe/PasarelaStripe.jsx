@@ -155,11 +155,12 @@ const CheckOutForm = () => {
               <div className="w-full h-full justify-center flex">
                 <div className="flex w-full h-[93%] flex-col items-center">
 
-                  <div className="h-full w-full text-center flex items-center">
-                    <h1>Resumen de lo comprado, que compro, cuantos, que tanto sale (cantidad*cuantos) y una sumatoria total</h1>
-                  </div>
-                  <div className="w-full">
-                    {/* <div className="bg-gray-100">
+            <div className="h-full w-full text-center flex items-center">
+              {/* <h1>Resumen de lo comprado, que compro, cuantos, que tanto sale (cantidad*cuantos) y una sumatoria total</h1> */}
+              <img className="border border-solid " src="https://res.cloudinary.com/dviri5ov1/image/upload/e_art:incognito,f_auto,q_auto,c_fill,h_330,w_1500/v1680677230/fastball/system/tarjetas_wq263l.jpg" alt="tarjatas" />
+            </div>
+            <div className="w-full">
+              {/* <div className="bg-gray-100">
                 <div className="px-4 py-4 flex justify-center" >
                   <div className="flex items-center mr-4">
                     <p className="mr-2">Number Card</p>
