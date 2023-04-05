@@ -47,7 +47,7 @@ const TeamSection = () => {
       name: "Pedro David Gonzalez",
       title: "Description",
       imageSrc:
-        "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+        "https://res.cloudinary.com/dviri5ov1/image/upload/v1680659239/fastball/system/Pedro_mqnxob.jpg",
       link: "https://www.linkedin.com/in/pedro-gonzalez-4468ba24a/",
     },
     {
