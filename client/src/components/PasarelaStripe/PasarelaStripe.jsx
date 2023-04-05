@@ -58,7 +58,7 @@ const CheckOutForm = () => {
     console.log('En Clear AND bACK');
 
     setIsLoading(true)
-    setTimeout(clearCart, 3000);    
+    setTimeout(clearCart,500);    
   };
 
   const handleSubmit = async (e) => {

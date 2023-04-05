@@ -124,6 +124,16 @@ function ProductDetail() {
                     />
                   </div>
                   <div className='detailItem'>
+                    <span className='itemKey'>Stock: </span>
+                    <input type="text"
+                      placeholder={product.stock}
+                      className='input'
+                      name="stock"
+                      value={changes.stock}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className='detailItem'>
                     <span className='itemKey'>Price: </span>
                     <input type="text"
                       placeholder={product.price}
