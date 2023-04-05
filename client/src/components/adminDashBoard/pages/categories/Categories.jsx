@@ -34,7 +34,7 @@ function Categories() {
             }
             return (
                 <div className='cellAction'>
-                    <div className="deleteButton" onClick={() => {
+                    {/* <div className="deleteButton" onClick={() => {
                         hanldeDeleteCategory(row.id)
                         toast.warn("Category Removed!", {
                             position: "bottom-center",
@@ -47,7 +47,7 @@ function Categories() {
                             theme: "light",
                         })
                         window.location.reload()
-                    }}>Delete</div>
+                    }}>Delete</div> */}
                 </div>
             )
         }
