@@ -7,7 +7,13 @@
 .home {
     margin-top: 80px;
     display: flex;
-
+    position: relative;
+    .loadingContainer{
+        width: 100%;
+        flex: 6;
+        align-items: center;
+        justify-content: center;
+    }
     .homeContainer {
         background-color: white;
         flex: 6;

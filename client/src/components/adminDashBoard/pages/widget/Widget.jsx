@@ -5,21 +5,22 @@ import './widget.scss';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import BalanceOutlinedIcon from '@mui/icons-material/BalanceOutlined';
+import { Link, NavLink } from 'react-router-dom';
 
-function Widget({ type }) {
+function Widget({ type, earnings, users, order, balance}) {
     let data;
 
 
     //temporaly
-    const diff= "20%";
-    const percentage = 100;
+    const diff= "";
+   
 
     switch (type) {
         case "user":
             data = {
                 title: "USERS",
                 isMoney: false,
-                link: "see all users",
+                link: <NavLink to={'/admin/users'}>See all users</NavLink>,
                 icon: (
                     <PersonOutlineOutlinedIcon className='icon' style={{
                         color : "crimson",
@@ -32,7 +33,7 @@ function Widget({ type }) {
             data = {
                 title: "ORDERS",
                 isMoney: false,
-                link: "View all orders",
+                link: <NavLink to={'/admin/orders'}>View all orders</NavLink>,
                 icon: (
                     <ShoppingCartOutlinedIcon className='icon' style={{
                         color : "goldenrod",
@@ -45,7 +46,6 @@ function Widget({ type }) {
             data = {
                 title: "BALANCE",
                 isMoney: true,
-                link: "See details",
                 icon: (
                     <BalanceOutlinedIcon className='icon' style={{
                         color : "green",
@@ -58,7 +58,6 @@ function Widget({ type }) {
             data = {
                 title: "EARNINGS",
                 isMoney: true,
-                link: "View all earnigns",
                 icon: (
                     <PaidOutlinedIcon className='icon' style={{
                         color : "purple",
@@ -74,14 +73,14 @@ function Widget({ type }) {
         <div className='widget'>
             <div className='left'>
                 <span className='title'>{data.title}</span>
-                <span className="counter">{data.isMoney && "$"}{percentage}</span>
+                <span className="counter">{data.isMoney && "$"}{type === "earnings" ? earnings : type === "user" ? users : type === "order" ? order : type === "balance" ? balance : null}</span>
                 <span className="link">{data.link}</span>
             </div>
             <div className='right'>
-                <div className="percentage positive">
+                {/* <div className="percentage positive">
                     <ExpandLessOutlinedIcon />
                     {diff}
-                </div>
+                </div> */}
                 {data.icon}
             </div>
         </div>
