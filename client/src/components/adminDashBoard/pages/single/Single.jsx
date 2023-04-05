@@ -22,7 +22,7 @@ function Single() {
   let [changes, setChanges] = useState(initialForm);
 
   useEffect(() => {
-    dispatch(getUserById(id)).then((response) => { setUser(response.payload) });
+    dispatch(getUserById(id)).then((response) => { setUser(response.payload); console.log(response) });
     dispatch(fetchOrderById(id)).then((response) => setOrders(response.payload));
 
   }, [])
@@ -97,8 +97,8 @@ function Single() {
       total: ordersByMonth[month]
     }
   });
-  
-  if (!user || !user.name) {
+  console.log({user,id})
+  if (!user) {
     return (<div className='single'>
     <Sidebar />
     <div className="singleContainer">

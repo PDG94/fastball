@@ -79,7 +79,7 @@ function App() {
             <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
             <Route exact path='/admin/orders' element={<Orders/>}/>
             <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
-            <Route exact path='/admin//categories' element={<Categories/>}/>
+            <Route exact path='/admin/categories' element={<Categories/>}/>
           </>
         }
         
