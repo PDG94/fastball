@@ -1,11 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeProfile.scss";
+import {
+  getUserById,
+  editUser,
+} from "../../../reduxToolkit/actions/userActions";
 
 const countries = [
   "Afghanistan",
@@ -260,254 +263,241 @@ const countries = [
   "Zimbabwe",
 ];
 
+const initialForm = {};
+
 export default function UpdateInfoUser() {
-  const reference = useRef()
-  const [image, setImage] = useState(null)
-  const [prevImage, setprevImage] = useState('')
+  const dispatch = useDispatch();
+  let [changes, setChanges] = useState(initialForm);
+
+  const reference = useRef();
+  const [image, setImage] = useState(null);
+  const [prevImage, setprevImage] = useState("");
 
   const navigate = useNavigate();
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
-  const token = localStorage.getItem("token");
   const userID = useSelector((state) => state.user._id);
 
-  const [form, setForm] = useState({
-    name: "",
-    lastName: "",
-    address: "",
-    contry: "",
-    city: "",
-  });
-
-  //   const [file, setFile] = useState("");
-
-  function handlerChange(e) {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  const updateValidator = async () => {
-    const finalForm = {};
-    if (form.name.length > 0) {
-      finalForm.name = form.name;
-    }
-    if (form.lastName.length > 0) {
-      finalForm.lastName = form.lastName;
-    }
-    if (form.address.length > 0) {
-      finalForm.address = form.address;
-    }
-    if (form.contry.length > 0) {
-      finalForm.contry = form.contry;
-    }
-    if (form.city.length > 0) {
-      finalForm.city = form.city;
-    }
-
-    // if (file && !isObjectEmpty(file)) {
-    //   finalForm.profilepic = await uploadFile(file, userID);
-    // }
-    return finalForm;
-  };
-
-  //   const isObjectEmpty = (objectName) => {
-  //     return (
-  //       objectName &&
-  //       Object.keys(objectName).length === 0 &&
-  //       objectName.constructor === Object
-  //     );
-  //   };
-
-  //   function changing(e) {
-  //     var pdrs = document.getElementById("file-up").files[0].name;
-  //     document.getElementById("infoUp").innerHTML = pdrs;
-  //     setFile(e.target.files[0]);
-  //     setForm({
-  //       ...form,
-  //       filename: e.target.files[0].name,
-  //     });
-  //   }
-
-  const submitHandler = async (event) => {
-    event.preventDefault();
-
-    const info = await updateValidator();
-
-    try {
-      await axios.patch(`/users/${userID}`, info, {
-        headers: { Authorization: "Bearer " + token },
-      });
-
-      await axios.post("/dato", {
-        name: customerName,
-        email: customerEmail,
-      });
-
-      toast.success("User update successfully!");
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const uuser = useSelector((state) => state.user.singleUser);
 
   useEffect(()=>{
-    if(image){
-        const reader = new FileReader()
-        reader.onloadend = ()=> {
-            setprevImage(reader.result.toString())
-        }
-        reader.readAsDataURL(image)
+    dispatch(getUserById(userID))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+
+    setChanges({
+      ...changes,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    console.log("llegue a submit 1", uuser);
+    e.preventDefault();
+    const userr = {
+      // email: uuser.email,
+      isAdmin: uuser.isAdmin,
+      id: userID,
+      changes: changes,
+    };
+    console.log("llegue a submit 2", userr);
+    dispatch(editUser(userr)).then((res) =>
+      toast.success("User edited successfully!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+    );
+    console.log("llegue a submit 3", userr);
+
+    await axios.post("/data", {
+      name: customerName,
+      email: customerEmail,
+    });
+    console.log("llegue a submit 4")
+    navigate("/profile")
+  };
+
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setprevImage(reader.result.toString());
+      };
+      reader.readAsDataURL(image);
     }
-  }, [image])
+  }, [image]);
 
-  const uploadFile = ()=> {
-    reference.current.click()
-  }
+  const uploadFile = () => {
+    reference.current.click();
+  };
 
-  const handleChangeUserImage = (event)=> {
-    const file = event.target.files[0]
-    if(file && file.type.substring(0,5)==='image'){
-      console.log('');
-      setImage(file)
+  const handleChangeUserImage = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.substring(0, 5) === "image") {
+      console.log("");
+      setImage(file);
     } else {
-      setImage(null)
+      setImage(null);
     }
-  }
+  };
 
   return (
     <div>
       <div className="homee">
         <Sidebar />
         <div className="homeContainerr">
-        <form onSubmit={submitHandler}>
-          <div className="grid grid-cols-2">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2">
+              <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
+                <div className="px-4 py-5 sm:px-6">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Update My Info
+                  </h3>
 
-          <div class="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
-            <div class="px-4 py-5 sm:px-6">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Update My Info
-              </h3>
+                  <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                    Update Details and informations about user.
+                  </p>
+                </div>
+                <div className="border-t border-gray-200">
+                  <dl>
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Name
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <input
+                          className=""
+                          type="text"
+                          placeholder={uuser.name}
+                          value={changes.name}
+                          name="name"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </dd>
+                    </div>
 
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Update Details and informations about user.
-              </p>
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Surname
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <input
+                          className=""
+                          type="text"
+                          placeholder={uuser.lastName}
+                          value={changes.lastName}
+                          name="lastName"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </dd>
+                    </div>
+
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Address
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <input
+                          className=""
+                          type="text"
+                          placeholder={uuser.address}
+                          value={changes.address}
+                          name="address"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </dd>
+                    </div>
+
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        City
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <input
+                          className=""
+                          type="text"
+                          placeholder={uuser.city}
+                          value={changes.city}
+                          name="city"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </dd>
+                    </div>
+
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Country
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <select
+                          name="contry"
+                          onChange={(e) => handleChange(e)}
+                          className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                        >
+                          {countries.map((e, i) => {
+                            return (
+                              <option value={e} key={i}>
+                                {e}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </dd>
+                    </div>
+
+                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Profile Picture
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          ref={reference}
+                          onChange={handleChangeUserImage}
+                        />
+                        <button
+                          type="submit"
+                          className="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 border-b-4 border-blue-500 hover:border-blue-300 rounded"
+                          onClick={uploadFile}
+                        >
+                          Upload new Profile Picture
+                        </button>
+                      </dd>
+                    </div>
+                  </dl>
+                  <br />
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                  >
+                    SUBMIT
+                  </button>
+                </div>
+              </div>
+
+              {image && (
+                <img
+                  src={prevImage}
+                  alt="profileImg"
+                  className="p-2 border border-solid"
+                />
+              )}
             </div>
-            <div className="border-t border-gray-200">
-              <dl>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Name</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <input
-                      className=""
-                      type="text"
-                      placeholder="New Surname"
-                      value={form.lastName}
-                      name="lastName"
-                      onChange={(e) => handlerChange(e)}
-                    />
-                  </dd>
-                </div>
-
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Surname</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <input
-                      className=""
-                      type="text"
-                      placeholder="New Surname"
-                      value={form.lastName}
-                      name="lastName"
-                      onChange={(e) => handlerChange(e)}
-                    />
-                  </dd>
-                </div>
-
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Address</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <input
-                      className=""
-                      type="text"
-                      placeholder="New Address"
-                      value={form.address}
-                      name="address"
-                      onChange={(e) => handlerChange(e)}
-                    />
-                  </dd>
-                </div>
-
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">City</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <input
-                      className=""
-                      type="text"
-                      placeholder="New City"
-                      value={form.city}
-                      name="city"
-                      onChange={(e) => handlerChange(e)}
-                    />
-                  </dd>
-                </div>
-
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Country</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <select
-                      name="contry"
-                      onChange={(e) => handlerChange(e)}
-                      className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-                    >
-                      {countries.map((e, i) => {
-                        return (
-                          <option value={e} key={i}>
-                            {e}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </dd>
-                </div>
-
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Profile Picture
-                  </dt>
-                  <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <input 
-                        type="file" 
-                        accept='image/*' 
-                        className='hidden' 
-                        ref={reference} 
-                        onChange={handleChangeUserImage}
-                    />
-                    <button
-                      type="submit"
-                      className="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 border-b-4 border-blue-500 hover:border-blue-300 rounded"
-                      onClick={uploadFile}
-                    >
-                      Upload new Profile Picture
-                    </button>
-                  </dd>
-                </div>
-              </dl>
-              <br />
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-              >
-                SUBMIT
-              </button>
-            </div>
-          </div>
-
-          {image && <img src={prevImage} alt="profileImg" className="p-2 border border-solid"/>}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

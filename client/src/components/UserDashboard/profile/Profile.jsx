@@ -1,23 +1,25 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import { getServiceUser } from "../../../redux/actions/usersActions";
 // import { Link, useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeProfile.scss";
+import {getUserById} from "../../../reduxToolkit/actions/userActions";
 
 export default function DashboardUser() {
-  // const dispatch = useDispatch();
-  // const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const userID = useSelector((state) => state.user._id);
 
   const { name, email, profilePic, address, contry, city } = useSelector(
-    (state) => state.user
+    (state) => state.user.singleUser
   );
 
-  // useEffect(() => {
-  // dispatch(getServiceUser(_id, token));
-  // }, [dispatch, id, token]);
+  useEffect(()=>{
+    dispatch(getUserById(userID))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div>
@@ -54,7 +56,7 @@ export default function DashboardUser() {
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">E-Mail</dt>
-                  <dd claclassNamess="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <b>{email}</b>
                   </dd>
                 </div>

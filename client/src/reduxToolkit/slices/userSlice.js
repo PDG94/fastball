@@ -2,7 +2,7 @@ const { decode } = require('./../../Auth/jwt')
 const createSlice = require('@reduxjs/toolkit').createSlice
 // const jwt = require('jwt-simple');
 
-const { registerUserAction, loginUserAction,logoutUserAction, loginUserGoogleAction } = require('./../actions/userActions')
+const { registerUserAction, loginUserAction,logoutUserAction, loginUserGoogleAction, getUserById } = require('./../actions/userActions')
 
 
 
@@ -18,7 +18,8 @@ const initialState = {
     city: "",
     isAdmin: false,
     status: "",
-    allUsers: []
+    allUsers: [],
+    singleUser:{},
 }
 
 
@@ -168,6 +169,17 @@ const userSlice = createSlice({
         });
         builder.addCase(loginUserGoogleAction.rejected, (state,action)=>{
             state.status = "rejected"
+        })
+
+        builder.addCase(getUserById.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(getUserById.fulfilled, (state,action)=> {
+            state.singleUser = action.payload
+            state.status = 'success';
+        })
+        builder.addCase(getUserById.rejected, (state,action)=> {
+            state.status = 'rejected'
         })
     }
 });
