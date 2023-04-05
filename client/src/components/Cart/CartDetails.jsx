@@ -172,9 +172,12 @@ const CartDetails = () => {
               <div className="flex flex-row items-center gap-2">
                 {
                   products.totalPrice > 0
-                    ? <button className="px-4 py-2 text-white bg-green-600 hover:bg-green-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
-                      <Link to={'/payment'}>Buy</Link>
-                    </button>
+                  ? 
+                      <Link to={'/payment'}>
+                        <button className="px-4 py-2 text-white bg-green-600 hover:bg-green-500 rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm">
+                          Buy
+                        </button>
+                        </Link>
                     : <p className="px-4 py-2 text-white bg-gray-500 rounded-md font-medium text-sm">Buy</p>
                 }
               </div>

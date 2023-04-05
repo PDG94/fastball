@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { deleteCart } from "../../reduxToolkit/actions/cartAction";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Loader from "../Loader/Loader";
 import { updateStockProduct } from "../../reduxToolkit/actions/productAction";
 const stripePromise = loadStripe(
@@ -24,6 +24,7 @@ const stripePromise = loadStripe(
 );
 
 const CheckOutForm = () => {
+  const btnComprarRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();  
@@ -56,7 +57,7 @@ const CheckOutForm = () => {
 
   const clearAndBack = () => {
     console.log('En Clear AND bACK');
-
+    btnComprarRef.current.disabled = false;
     setIsLoading(true)
     setTimeout(clearCart, 3000);    
   };
@@ -64,7 +65,7 @@ const CheckOutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('En SUBMIT');
-
+    btnComprarRef.current.disabled = true;
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       // esto es para configurar el recuadro donde se pone la tarjeta de credito y los datos
       type: "card",
@@ -98,14 +99,15 @@ const CheckOutForm = () => {
         //Recibe por body orderNumber, totalAmount, products, userId, quantity
         //Hay que ver cómo se le manda el stock de cada producto
         const order = {orderNumber : id, totalAmount: cartTotalAmount, products:cartItems1, userId:userID1 }
-        const orderCreated = await axios.post('/order/create', order);
-        console.log(orderCreated)
+        await axios.post('/order/create', order);
         
         clearAndBack();
         
       } catch (error) {
         console.log(error);
       }
+    }else{
+      btnComprarRef.current.disabled = false;
     }
   };
   return (
@@ -159,6 +161,7 @@ const CheckOutForm = () => {
               <hr />
               <div className="flex justify-center">
                 <button
+                  ref={btnComprarRef}
                   className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
                   >
                   Pay
