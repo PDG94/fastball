@@ -58,14 +58,14 @@ const Navbar = () => {
   }, [menuRef, user, perfil, setPerfil]);
 
   return (
-    <nav className="fixed z-50 w-full top-0 border-dashed  flex items-center justify-between flex-wrap bg-white p-6">
-      <div className="text-sm lg:flex-grow">
+    <nav className="fixed z-50 w-full top-0 border-dashed  flex items-center justify-between flex-wrap bg-white p-6 h-22">
+      <div className="text-sm lg:flex items-center">
         <Link to="/">
-          <div className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-            <img className="logo-1" src={logo1} alt="cartIcon" width="55" />
+          <div className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 ">
+            <img className="w-28 " src={logo1} alt="cartIcon" width="55" />
           </div>
         </Link>
-        <div className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4 font-bold absolute left-40">
+        <div className="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-white mr-4 font-bold absolute left-40 ">
           <NavLink className="btn btn-primary" to="/">
             Home
           </NavLink>
