@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeProfile.scss";
 
 const countries = [
   "Afghanistan",

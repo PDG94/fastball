@@ -6,12 +6,15 @@
 
 .home {
     margin-top: 80px;
-    display: flex;
-
-    .homeContainer {
-        background-color: white;
+    
+    
+    .homeContainerrr {
+        // background-color: white;
         flex: 6;
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
         .widgets,
         .charts {
             display: flex;

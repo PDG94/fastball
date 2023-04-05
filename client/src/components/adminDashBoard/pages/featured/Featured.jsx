@@ -6,7 +6,11 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import 'react-circular-progressbar/dist/styles.css'
 function Featured({total}) {
 
- 
+  console.log(total.porcentajeCrecimientoDecrecimiento)
+  const porcentaje = total.porcentajeCrecimientoDecrecimiento;
+  let decimales = 2; // Cantidad de decimales a redondear
+
+let numeroRedondeado = Math.round(porcentaje)
   return (
     <div className="featured">
       <div className="top">
@@ -15,7 +19,7 @@ function Featured({total}) {
       </div>
       <div className="bottom">
         <div className="featuredChart">
-          <CircularProgressbar value={70} text={total.porcentajeCrecimientoDecrecimiento + "%"} strokeWidth={5}/>
+          <CircularProgressbar value={70} text={numeroRedondeado + "%"} strokeWidth={5}/>
         </div>
         <p className="title">Total amount made this month</p>
         <p className="amount">$ {total.sumaTotalUltimoMes}</p>

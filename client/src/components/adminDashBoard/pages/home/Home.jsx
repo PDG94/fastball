@@ -124,7 +124,7 @@ function Home() {
     return (
       <div className='home'>
         <Sidebar />
-        <div className="loadingContainer">
+        <div className="homeContainer">
             <Loading/>
         </div>
       </div>

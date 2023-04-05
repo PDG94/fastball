@@ -1,4 +1,4 @@
-import './home.scss';
+import './homeUser.scss';
 import Sidebar from '../sidebar/UserSidebar';
 
 function Home() {

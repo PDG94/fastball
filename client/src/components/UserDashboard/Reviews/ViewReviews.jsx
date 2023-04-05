@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchReviewsByUsrId } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeDetails.scss";
 
 const ViewReviews = () => {
   const dispatch = useDispatch();

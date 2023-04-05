@@ -98,7 +98,7 @@ function Single() {
     }
   });
   
-  if (!user.name) {
+  if (!user || !user.name) {
     return (<div className='single'>
     <Sidebar />
     <div className="singleContainer">
