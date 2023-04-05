@@ -8,10 +8,13 @@ import ImageViewer from "../imageViewer/ImageViewer";
 import Review from "../Reviews/Review";
 import AddReview from "../Reviews/AddReview";
 import RandomCarousel from "../categoryButtons.jsx/RandomCarousel";
-import { fetchReviewsByProductId, fetchReviewsPending } from "../../reduxToolkit/actions/reviewAction";
+import {
+  fetchReviewsByProductId,
+  fetchReviewsPending,
+} from "../../reduxToolkit/actions/reviewAction";
 import ResumeReviews from "../Reviews/ResumeReviews";
-const { clearProductDetail } = require('./../../reduxToolkit/slices/productSlice').productActions
-
+const { clearProductDetail } =
+  require("./../../reduxToolkit/slices/productSlice").productActions;
 
 const Detail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,32 +22,34 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { productDetail } = useSelector((state) => state.product);
   const { _id } = useSelector((state) => state.user);
-  const { reviewsProduct, reviewsPending } = useSelector((state) => state.review);
+  const { reviewsProduct, reviewsPending } = useSelector(
+    (state) => state.review
+  );
   const [showAddReview, setShowAddReview] = useState(false);
-  let startDetail = true
+  let startDetail = true;
 
   useEffect(() => {
     if (startDetail) {
-      window.scroll(0,0)
+      window.scroll(0, 0);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       startDetail = false;
-      dispatch(fetchProductById({ productId: id, userId: _id })).then(() =>{
-        dispatch(fetchReviewsByProductId(id)).then(() =>{
-          setIsLoading(false)
-        })
+      dispatch(fetchProductById({ productId: id, userId: _id })).then(() => {
+        dispatch(fetchReviewsByProductId(id)).then(() => {
+          setIsLoading(false);
+        });
       });
     }
 
     return () => {
-      dispatch(clearProductDetail())
-    }
+      dispatch(clearProductDetail());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
-  useEffect(()=> {
-    _id && id && dispatch(fetchReviewsPending({ productId: id, userId: _id }))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_id])
+  useEffect(() => {
+    _id && id && dispatch(fetchReviewsPending({ productId: id, userId: _id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id]);
 
   return (
     <>
@@ -52,19 +57,25 @@ const Detail = () => {
         <div className="flex justify-center items-center">
           <Loader />
         </div>
-      ) : showAddReview
-          ? <AddReview 
-              productDetail={productDetail}
-              reviewId={reviewsPending[0].id}
-              called={'Product'}
-              clickAcept={()=>{setShowAddReview(false); window.location.reload()}}
-              clickClose={()=>setShowAddReview(false)}
-            />
-          : <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
-            {/* {console.log('REviewes Pending',reviewsPending )} */}
+      ) : showAddReview ? (
+        <AddReview
+          productDetail={productDetail}
+          reviewId={reviewsPending[0].id}
+          called={"Product"}
+          clickAcept={() => {
+            setShowAddReview(false);
+            window.location.reload();
+          }}
+          clickClose={() => setShowAddReview(false)}
+        />
+      ) : (
+        <div className="mt-12 container mx-auto px-4 py-6 md:py-8 lg:py-12">
+          {/* {console.log('REviewes Pending',reviewsPending )} */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="cont-imageviewer">
-              {productDetail.image && <ImageViewer image={productDetail.image} />}
+              {productDetail.image && (
+                <ImageViewer image={productDetail.image} />
+              )}
             </div>
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -72,12 +83,14 @@ const Detail = () => {
               </h1>
               <div className="mb-4">
                 <span>
-                  {`have visited this product ${productDetail.usersVisits ? productDetail.usersVisits : 0
-                    } time${productDetail.usersVisits === 1 ? "" : "s"} `}
+                  {`have visited this product ${
+                    productDetail.usersVisits ? productDetail.usersVisits : 0
+                  } time${productDetail.usersVisits === 1 ? "" : "s"} `}
                 </span>
                 <span>
-                  {`( ${productDetail.soldAmount ? productDetail.soldAmount : 0
-                    } sold )`}
+                  {`( ${
+                    productDetail.soldAmount ? productDetail.soldAmount : 0
+                  } sold )`}
                 </span>
               </div>
 
@@ -109,7 +122,7 @@ const Detail = () => {
               <div className="mb-4">
                 <h2 className="text-lg md:text-xl font-medium mb-2">Details</h2>
                 <ul className="text-gray-600">
-                  {productDetail.Colors[0] ?
+                  {productDetail.Colors[0] ? (
                     <li>
                       Color
                       <div
@@ -121,52 +134,73 @@ const Detail = () => {
                           border: "none",
                         }}
                       />
-                    </li> : <li>{"No more details!"}</li>
-                  }
+                    </li>
+                  ) : (
+                    <li>{"No more details!"}</li>
+                  )}
                   {productDetail.Sizes[0] ? (
                     <li>
                       Talla
                       <div>{productDetail.Sizes[0].name}</div>
                     </li>
-                  ) : <li>{"No more details!"}</li>
-                  }
+                  ) : (
+                    <li>{"No more details!"}</li>
+                  )}
                 </ul>
               </div>
-              {productDetail.active ? <div>
-                <hr className="my-4 border border-slate-300" />
-                <AddCart productDetail={productDetail}></AddCart>
-              </div> : <div>
-                <hr class="my-4 border border-slate-300" />
-                <button class="inline-block px-4 py-2 text-white font-bold bg-orange-500 rounded">Publicación pausada</button>
-              </div>}
+              {productDetail.stock < 1 ? (
+                <div>
+                  <hr className="my-4 border border-slate-300" />
+                  <button
+                    className="inline-block px-4 py-2 text-white font-bold bg-red-500 rounded"
+                    disabled
+                  >
+                    Agotado
+                  </button>
+                </div>
+              ) : productDetail.active ? (
+                <div>
+                  <hr className="my-4 border border-slate-300" />
+                  <AddCart productDetail={productDetail}></AddCart>
+                </div>
+              ) : (
+                <div>
+                  <hr className="my-4 border border-slate-300" />
+                  <button
+                    className="inline-block px-4 py-2 text-white font-bold bg-orange-500 rounded"
+                    disabled
+                  >
+                    Publicación pausada
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-12">
             <div className="flex mb-4 gap-8 justify-center">
               <div>
-                <ResumeReviews
-                  reviewsProduct={reviewsProduct}
-                />
+                <ResumeReviews reviewsProduct={reviewsProduct} />
               </div>
             </div>
             <div>
-              {(reviewsPending.length > 0) &&
+              {reviewsPending.length > 0 && (
                 <button
                   type="button"
-                  className='mb-4 px-4 py-2 text-white bg-green-600 hover:bg-green-500 
-                  rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm'
+                  className="mb-4 px-4 py-2 text-white bg-green-600 hover:bg-green-500 
+                  rounded-md focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm"
                   onClick={() => setShowAddReview(true)}
                 >
                   Add review
                 </button>
-              }
+              )}
             </div>
             {console.log(reviewsProduct)}
-            {(reviewsProduct.length>0) && reviewsProduct.map( rev => <Review key={rev.id} rev={rev} />)}
+            {reviewsProduct.length > 0 &&
+              reviewsProduct.map((rev) => <Review key={rev.id} rev={rev} />)}
           </div>
           <RandomCarousel></RandomCarousel>
         </div>
-      }
+      )}
     </>
   );
 };
