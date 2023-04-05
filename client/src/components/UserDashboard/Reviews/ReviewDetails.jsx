@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchDetailReview } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeReviews.scss";
 
 const reviewExample = {
     id: 5,

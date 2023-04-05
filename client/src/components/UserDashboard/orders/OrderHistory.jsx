@@ -33,9 +33,9 @@ const OrderHistory = () => {
 
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
+        <div className="homeContainerr">
           
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
