@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchOrderById } from "../../../reduxToolkit/actions/orderAction";
+import { fetchDetailReview } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./home.scss";
 
@@ -18,14 +18,18 @@ const ReviewDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const reviewNumber = "123"
+  // const reviewNumber = "123"
+  const [review, setReview] = useState({})
+
+  const reviewsss = useSelector((state) => state.review.singleRevew);
 
   useEffect(() => {
-    dispatch(fetchOrderById(reviewNumber));
+    dispatch(fetchDetailReview({reviewId:id}))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
   const info = () => {
     console.log("id", id);
+    console.log("111", reviewsss)
   };
   return (
     <div>
@@ -34,7 +38,7 @@ const ReviewDetails = () => {
         <div className="homeContainer">
           <div>
             <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-              <Link to="/profile/orders"> Back to my Review List</Link>
+              <Link to="/profile/reviews"> Back to my Review List</Link>
             </button>
           </div>
 

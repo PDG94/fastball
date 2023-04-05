@@ -29,8 +29,9 @@ export const fetchReviewsByUsrId = createAsyncThunk('review/fetchReviewsByUsrId'
  });
 
 
- export const fetchDetailReview = createAsyncThunk('review/fetchDetailReview', async (reviewId)=> {
+ export const fetchDetailReview = createAsyncThunk('review/fetchDetailReview', async ({reviewId})=> {
     try {
+      
      const review = await axios.get(`/review/getDetailReview/${reviewId}`)
      return review.data
     } catch (error) {
