@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeProfile.scss";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 export default function DashboardUser() {
   // const dispatch = useDispatch();
@@ -18,7 +19,14 @@ export default function DashboardUser() {
   // useEffect(() => {
   // dispatch(getServiceUser(_id, token));
   // }, [dispatch, id, token]);
-
+    if(!name){
+      return <div className="homee">
+      <Sidebar />
+      <div className="homeContainerr">
+        <Loading />
+      </div>
+    </div>
+    }
   return (
     <div>
       <div className="homee">

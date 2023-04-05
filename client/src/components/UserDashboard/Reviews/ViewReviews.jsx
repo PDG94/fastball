@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchReviewsByUsrId } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeReviews.scss";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 const ViewReviews = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,14 @@ const ViewReviews = () => {
   const Clickk = (id) => {
     navigate(`/profile/reviews/${id}`);
   };
-
+  if(!reviews || !reviews[0]){
+    return <div className="homee">
+    <Sidebar />
+    <div className="homeContainerr">
+      <Loading />
+    </div>
+  </div>
+  }
   return (
     <div>
       <div className="homee">

@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchDetailReview } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeReviews.scss";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 const reviewExample = {
     id: 5,
@@ -29,6 +30,15 @@ const ReviewDetails = () => {
     console.log("id", id);
     console.log("111", reviewsss)
   };
+
+  if(!reviewsss || !reviewsss.id){
+    return <div className="homee">
+    <Sidebar />
+    <div className="homeContainerr">
+      <Loading />
+    </div>
+  </div>
+  }
   return (
     <div>
       <div className="home">
@@ -38,10 +48,6 @@ const ReviewDetails = () => {
             <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
               <Link to="/profile/reviews"> Back to my Review List</Link>
             </button>
-          </div>
-
-          <div>
-            <button onClick={info}>info</button>
           </div>
 
           <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
