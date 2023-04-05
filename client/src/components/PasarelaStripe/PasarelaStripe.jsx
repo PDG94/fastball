@@ -27,43 +27,55 @@ const CheckOutForm = () => {
   const btnComprarRef = useRef(null);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const stripe = useStripe();
-  const elements = useElements();  
+  const elements = useElements();
   const cartTotalAmount = useSelector((state) => state.cart.totalMount);
   const totalPayment = parseFloat(cartTotalAmount.toFixed(2), 0) * 100;
-  const cartItems1 = useSelector((state) => state.cart.allProductsCart); 
+  const cartItems1 = useSelector((state) => state.cart.allProductsCart);
   const userID1 = useSelector((state) => state.user._id);
   const customerEmail = useSelector((state) => state.user.email);
   const customerName = useSelector((state) => state.user.name);
   const items = cartItems1.map(element => element.name)
   const itemsDesc = JSON.stringify(items)
   const [isLoading, setIsLoading] = useState(false);
-  
-  const clearCart = async() => {
+  const [clase, setClase] = useState(false);
+
+  const clearCart = async () => {
     console.log('En Clear Cart');
-    await cartItems1.forEach(element=>{
-      dispatch(deleteCart({idUser:userID1, idProduct:element.id}))
+    await cartItems1.forEach(element => {
+      dispatch(deleteCart({ idUser: userID1, idProduct: element.id }))
       dispatch(updateStockProduct({
         ...element,
-        stock:element.stock-element.Cart.stock
+        stock: element.stock - element.Cart.stock
       }));
     })
 
     setIsLoading(false)
     navigate("/");
-    toast.success("Payment Succesful!");
+    toast.success("Payment Succesful!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   const clearAndBack = () => {
     console.log('En Clear AND bACK');
     btnComprarRef.current.disabled = false;
     setIsLoading(true)
-    setTimeout(clearCart, 3000);    
+    setTimeout(clearCart, 500);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setClase(true)
+    
     console.log('En SUBMIT');
     btnComprarRef.current.disabled = true;
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -72,11 +84,21 @@ const CheckOutForm = () => {
       // card: elements.getElement(CardNumberElement),
       card: elements.getElement(CardElement),
     });
+    toast.info("Processing payment!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
     if (!error) {
       const { id } = paymentMethod;
       console.log("esto es id de transaccion", id)
-      
+
       try {
         await axios.post(
           "https://fastball-production.up.railway.app/api/checkout",
@@ -98,43 +120,44 @@ const CheckOutForm = () => {
         );
         //Recibe por body orderNumber, totalAmount, products, userId, quantity
         //Hay que ver cómo se le manda el stock de cada producto
-        const order = {orderNumber : id, totalAmount: cartTotalAmount, products:cartItems1, userId:userID1 }
+        const order = { orderNumber: id, totalAmount: cartTotalAmount, products: cartItems1, userId: userID1 }
         await axios.post('/order/create', order);
-        
+
         clearAndBack();
-        
+
       } catch (error) {
         console.log(error);
       }
-    }else{
+    } else {
       btnComprarRef.current.disabled = false;
     }
   };
   return (
     <>
-    {!isLoading ? (
-    <div className="flex mt-12 justify-center h-screen mt-24">
-    <div className="container bg-white flex rounded-lg drop-shadow-lg w-[50%] h-[55%] ">
-      <form className="h-full w-full flex flex-col" onSubmit={handleSubmit}>
-        <div className="flex items-center">
-          <Link
-            className=""
-            to="/cartDetail"
-            style={{
-              textDecoration: "none",
-            }}>
-            <button 
-              type='button'
-              className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
-          </Link>
-          <h1 className="ml-8 text-3xl font-extrabold text-gray-900">Enter your payment method</h1>
-        </div>
-        <hr />
-        <div className="w-full h-full justify-center flex">           
-          <div className="flex w-full h-[93%] flex-col items-center">
+      {!isLoading ? (
+        <div className="flex mt-12 justify-center h-screen mt-24">
+          <div className="container bg-white flex rounded-lg drop-shadow-lg w-[50%] h-[55%] ">
+            <form className="h-full w-full flex flex-col" onSubmit={handleSubmit}>
+              <div className="flex items-center">
+                <Link
+                  className=""
+                  to="/cartDetail"
+                  style={{
+                    textDecoration: "none",
+                  }}>
+                  <button
+                    type='button'
+                    className="ml-4 my-4 px-4 py-2 rounded-l-xl m-0 bg-neutral-100 hover:bg-neutral-200 transition">Go Back</button>
+                </Link>
+                <h1 className="ml-8 text-3xl font-extrabold text-gray-900">Enter your payment method</h1>
+              </div>
+              <hr />
+              <div className="w-full h-full justify-center flex">
+                <div className="flex w-full h-[93%] flex-col items-center">
 
             <div className="h-full w-full text-center flex items-center">
-              <h1>Resumen de lo comprado, que compro, cuantos, que tanto sale (cantidad*cuantos) y una sumatoria total</h1>
+              {/* <h1>Resumen de lo comprado, que compro, cuantos, que tanto sale (cantidad*cuantos) y una sumatoria total</h1> */}
+              <img className="border border-solid " src="https://res.cloudinary.com/dviri5ov1/image/upload/e_art:incognito,f_auto,q_auto,c_fill,h_330,w_1500/v1680677230/fastball/system/tarjetas_wq263l.jpg" alt="tarjatas" />
             </div>
             <div className="w-full">
               {/* <div className="bg-gray-100">
@@ -157,29 +180,29 @@ const CheckOutForm = () => {
                   </div>
                 </div>
               </div> */}
-              <CardElement className="bg-white border rounded-md mx-6 my-2 py-2 px-2 w-[46.4vw]" />
-              <hr />
-              <div className="flex justify-center">
-                <button
-                  ref={btnComprarRef}
-                  className="mt-4 px-[40%] py-2 rounded-xl text-white bg-green-600 hover:bg-green-500 transition"
-                  >
-                  Pay
-                </button>              
+                    <CardElement className="bg-white border rounded-md mx-6 my-2 py-2 px-2 w-[46.4vw]" />
+                    <hr />
+                    <div className="flex justify-center">
+                      <button
+                        ref={btnComprarRef}
+                        className={`${clase ? "bg-slate-300" : "bg-green-600 hover:bg-green-500"}  mt-4 px-[40%] py-2 rounded-xl text-white  transition`}
+                      >
+                        Pay
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </form>
-    </div>
-  </div>
-  ) : (
-    <div className="flex justify-center items-cente mt-24">
-        <Loader />
-    </div>
-)}
-  </>
-   
+      ) : (
+        <div className="flex justify-center items-cente mt-24">
+          <Loader />
+        </div>
+      )}
+    </>
+
   );
 };
 function PasarelaStripe() {
