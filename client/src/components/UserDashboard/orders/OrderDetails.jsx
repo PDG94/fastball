@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchOneOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeOrder.scss";
@@ -19,27 +19,17 @@ const OrderDetails = () => {
   }, [dispatch]);
   
 
-  const info = () => {
-    console.log("id", id);
-    console.log("111", singleorder.Products)
-    // console.log("222", singleorder)
-  };
+  // const info = () => {
+  //   console.log("id", id);
+  //   console.log("111", singleorder.Products)
+  //   // console.log("222", singleorder)
+  // };
 
   return (
     <div>
       <div className="homee">
         <Sidebar />
         <div className="homeContainerr">
-          <div>
-            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-              <Link to="/profile/orders"> Back to my Order List</Link>
-            </button>
-          </div>
-
-          <div>
-            <button onClick={info}>info</button>
-          </div>
-
           <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
              
