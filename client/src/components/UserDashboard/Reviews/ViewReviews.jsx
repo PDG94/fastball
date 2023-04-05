@@ -23,7 +23,7 @@ const ViewReviews = () => {
   const Clickk = (id) => {
     navigate(`/profile/reviews/${id}`);
   };
-  if(!reviews || !reviews[0]){
+  if(!reviews || !reviews[0].id){
     return <div className="homee">
     <Sidebar />
     <div className="homeContainerr">

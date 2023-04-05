@@ -38,7 +38,7 @@ const OrderDetails = () => {
     <div>
       <div className="homee">
         <Sidebar />
-        <div className="homeContainerr">
+        <div className="homeContainerrrrr">
           <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
 
