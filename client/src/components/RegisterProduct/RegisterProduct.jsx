@@ -9,7 +9,7 @@ import { getAllColors } from "../../reduxToolkit/actions/colorAction";
 import { getAllSizes } from "../../reduxToolkit/actions/sizeAction";
 import { toast } from "react-toastify";
 
-const Register = ({ changeCurrentImage }) => {
+const Register = ({ changeCurrentImage, currentImage, localImageURL }) => {
   const [submitedForm, setSubmitedForm] = useState(false);
   const [isClothing, setisClothing] = useState(false);
   const [showSizeField, setShowSizeField] = useState(false);
@@ -37,10 +37,6 @@ const Register = ({ changeCurrentImage }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const habldeBack=()=>{
-    navigate(-1)
-  }
-
   return (
     <Formik
       initialValues={{
@@ -54,6 +50,7 @@ const Register = ({ changeCurrentImage }) => {
         size: "",
         isClothing: false,
       }}
+
       validate={(values) => {
         const errors = {};
 
@@ -61,11 +58,13 @@ const Register = ({ changeCurrentImage }) => {
           errors.name = "Please, input a name";
         }
 
-        if (!values.image) {
+        if(localImageURL) values.image = localImageURL
+
+        if (!localImageURL && !values.image) {
           errors.image = "Please, input a image";
         }
 
-        changeCurrentImage(values.image);
+        !localImageURL && changeCurrentImage(values.image);
 
         if (!values.description) {
           errors.description = "Please, input a description";
@@ -136,23 +135,37 @@ const Register = ({ changeCurrentImage }) => {
               >
                 Image URL
               </label>
-              <Field
-                type="text"
-                id="image"
-                name="image"
-                placeholder="Enter product URL image ..."
-                className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              <ErrorMessage
-                name="image"
-                component={() => (
-                  <div className="block text-sm font-medium text-red-700">
-                    {errors.image}
-                  </div>
-                )}
-              />
+              {
+                localImageURL
+                ? <Field
+                    type="text"
+                    id="image"
+                    name="image"
+                    value={localImageURL}
+                    disabled={true}
+                    placeholder="Enter product URL image ..."
+                    className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                : 
+                  <>
+                    <Field
+                      type="search"
+                      id="image"
+                      name="image"
+                      placeholder="Enter product URL image ..."
+                      className="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-sky-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                    <ErrorMessage
+                      name="image"
+                      component={() => (
+                        <div className="block text-sm font-medium text-red-700">
+                          {errors.image}
+                        </div>
+                      )}
+                    />
+                  </>
+              }
             </div>
-
             <div>
               <label
                 htmlFor="description"
