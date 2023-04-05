@@ -41,16 +41,10 @@ const ReviewDetails = () => {
   }
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
-          <div>
-            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-              <Link to="/profile/reviews"> Back to my Review List</Link>
-            </button>
-          </div>
-
-          <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
+        <div className="homeContainerrrr">
+          <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg ">
             <div className="px-4 py-5 sm:px-6">
              
               <h3 className="text-lg leading-6 font-medium text-gray-900">
