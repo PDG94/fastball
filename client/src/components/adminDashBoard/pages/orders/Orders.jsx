@@ -20,15 +20,15 @@ function Orders() {
     
     
     const columns = [
-        { field: 'id', headerName: 'ID', width: 200 },
-        { field: 'orderNumber', headerName: 'Order Number', width: 250 },
-        { field: 'totalAmount', headerName: 'Total Amount', width: 90 },
-        { field: 'UserId', headerName: 'Id user', width: 90 },
+        { field: 'id', headerName: 'ID', width: 100 },
+        { field: 'orderNumber', headerName: 'Order Number', width: 350 },
+        { field: 'totalAmount', headerName: 'Total Amount', width: 100 },
+        { field: 'UserId', headerName: 'Id user', width: 200 },
 
     ];
 
     const actionColumn = [{
-        field: "action", headerName: "Action", width: 200, renderCell: (row) => {
+        field: "action", headerName: "Action", width: 100, renderCell: (row) => {
             return (
                 <div className='cellAction'>
                     <div className="viewButton" > <Link to={`/admin/orders/${row.id}`}>View</Link> </div>

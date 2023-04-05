@@ -2,12 +2,15 @@ import './datatable.scss'
 import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Loading from '../loading/Loading';
 
 
 function DataTable({filteredRows, users, columns, actionColumn, filter, handleFilterChange}) {
 
-  if (!users) {
-    return <div>Loading...</div>
+  if (!users || !users[0]) {
+    return <div>
+      <Loading/>
+    </div>
   }
   return (
     <div className='datatable'>

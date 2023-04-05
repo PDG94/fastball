@@ -29,6 +29,7 @@ class CategoryHandler {
     }
     async deleteCategory (req,res,next){
         try {
+            console.log(req.params)
             const categorys = await service.deleteCategory(req.params.id);
             res.json(categorys);
         } catch (error) {
