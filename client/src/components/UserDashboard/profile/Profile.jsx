@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeProfile.scss";
 import {getUserById} from "../../../reduxToolkit/actions/userActions";
+import Loading from "../../adminDashBoard/pages/loading/Loading";
 
 export default function DashboardUser() {
   const dispatch = useDispatch();
   const userID = useSelector((state) => state.user._id);
 
 
-  const { name, email, profilePic, address, contry, city } = useSelector(
+  const { name, lastName, email, profilePic, address, contry, city } = useSelector(
     (state) => state.user.singleUser
 
   );
@@ -22,7 +23,14 @@ export default function DashboardUser() {
     dispatch(getUserById(userID))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-
+    if(!name){
+      return <div className="homee">
+      <Sidebar />
+      <div className="homeContainerr">
+        <Loading />
+      </div>
+    </div>
+    }
   return (
     <div>
       <div className="homee">
