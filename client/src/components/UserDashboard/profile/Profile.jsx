@@ -13,11 +13,12 @@ export default function DashboardUser() {
   const dispatch = useDispatch();
   const userID = useSelector((state) => state.user._id);
 
-
   const { name, lastName, email, profilePic, address, contry, city } = useSelector(
     (state) => state.user.singleUser
-
-  );
+    
+    );
+    
+  const formatImage = profilePic? `${profilePic.slice(0,50)}c_fill,f_auto,h_40,q_auto,w_40/${profilePic.slice(50)}`: ''
 
   useEffect(()=>{
     dispatch(getUserById(userID))
@@ -44,7 +45,7 @@ export default function DashboardUser() {
               <div className="flex items-center">
                 <img
                   className="w-25 h-25 object-cover rounded-full border-gray-500"
-                  src={profilePic}
+                  src={formatImage}
                   alt="Profile"
                 />
                 <div className="ml-4">

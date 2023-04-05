@@ -9,6 +9,7 @@ import {
   getUserById,
   editUser,
 } from "../../../reduxToolkit/actions/userActions";
+import { uploadImage } from "../../../utils";
 
 const countries = [
   "Afghanistan",
@@ -278,7 +279,7 @@ export default function UpdateInfoUser() {
   const customerName = useSelector((state) => state.user.name);
   const userID = useSelector((state) => state.user._id);
 
-  const uuser = useSelector((state) => state.user.singleUser);
+  const uuser = useSelector((state) => state.user);
 
   useEffect(()=>{
     dispatch(getUserById(userID))
@@ -295,9 +296,7 @@ export default function UpdateInfoUser() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    console.log("llegue a submit 1", uuser);
-    e.preventDefault();
+  const uploadUsrChanges = async ()=> {
     const userr = {
       // email: uuser.email,
       isAdmin: uuser.isAdmin,
@@ -325,6 +324,20 @@ export default function UpdateInfoUser() {
     });
     console.log("llegue a submit 4")
     navigate("/profile")
+  }
+  const handleSubmit = (e) => {
+    console.log("llegue a submit 1", uuser);
+    e.preventDefault();
+    if(prevImage){
+      uploadImage(prevImage, 'users').then(imageCloud=> {
+        console.log('IMAGE CLOUD', imageCloud);
+        changes.profilePic = imageCloud
+        uploadUsrChanges()
+      })
+    } else {
+      uploadUsrChanges()
+    }
+    
   };
 
   useEffect(() => {
@@ -468,7 +481,7 @@ export default function UpdateInfoUser() {
                           onChange={handleChangeUserImage}
                         />
                         <button
-                          type="submit"
+                          type="button"
                           className="bg-blue-400 hover:bg-blue-300 text-white font-bold py-2 px-4 border-b-4 border-blue-500 hover:border-blue-300 rounded"
                           onClick={uploadFile}
                         >

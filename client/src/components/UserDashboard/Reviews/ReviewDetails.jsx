@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchDetailReview } from "../../../reduxToolkit/actions/reviewAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeReviews.scss";
 import Loading from "../../adminDashBoard/pages/loading/Loading";
 
-const reviewExample = {
-    id: 5,
-    date: "2023-03-03",
-    score: 3,
-    description: "Prueba",
-    status: "Done",
-    ProductId: "1e2c7c43-a7e9-4c9b-b40a-9f94a5c8561c",
-}
+// const reviewExample = {
+//     id: 5,
+//     date: "2023-03-03",
+//     score: 3,
+//     description: "Prueba",
+//     status: "Done",
+//     ProductId: "1e2c7c43-a7e9-4c9b-b40a-9f94a5c8561c",
+// }
 
 const ReviewDetails = () => {
   const dispatch = useDispatch();
@@ -26,10 +26,11 @@ const ReviewDetails = () => {
     dispatch(fetchDetailReview({reviewId:id}))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-  const info = () => {
-    console.log("id", id);
-    console.log("111", reviewsss)
-  };
+  
+  // const info = () => {
+  //   console.log("id", id);
+  //   console.log("111", reviewsss)
+  // };
 
   if(!reviewsss || !reviewsss.id){
     return <div className="homee">
@@ -39,17 +40,12 @@ const ReviewDetails = () => {
     </div>
   </div>
   }
+  
   return (
     <div>
       <div className="home">
         <Sidebar />
         <div className="homeContainer">
-          <div>
-            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-              <Link to="/profile/reviews"> Back to my Review List</Link>
-            </button>
-          </div>
-
           <div className="bg-white max-w-2xl shadow overflow-hidden sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
              

@@ -67,25 +67,9 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        
-        { isAdmin 
-          ?<>
-            <Route exact path='/admin' element={<DashBoard/>}/>
-            <Route exact path='/admin/users' element={<List/>}/>
-            <Route exact path='/admin/users/:id' element={<Single/>}/>
-            <Route exact path='/admin/products' element={<Products/>}/>
-            <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
-            <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
-            <Route exact path='/admin/orders' element={<Orders/>}/>
-            <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
-            <Route exact path='/admin/categories' element={<Categories/>}/>
-          </>
-          : <Route path= '*' element= { <Error404 /> } /> 
-        }
-        
         {
-          flag
-          ? <>
+          flag &&
+          <>
             {/* <Route exact path='/userdashboard' element={<UserDashboard />} />           */}
             <Route exact path='/profile' element={<Profile />} />          
             <Route exact path='/profile/update' element={<UpdateProfile />} />
@@ -96,9 +80,23 @@ function App() {
             <Route exact path='/payment' element={<Payment />} />
             <Route path='/cartDetail' element={<CartDetail/>} /> 
           </>
-          : <Route path= '*' element= { <Error404 /> } /> 
         }        
-
+        { isAdmin &&
+          <>
+            <Route exact path='/admin' element={<DashBoard/>}/>
+            <Route exact path='/admin/users' element={<List/>}/>
+            <Route exact path='/admin/users/:id' element={<Single/>}/>
+            <Route exact path='/admin/products' element={<Products/>}/>
+            <Route exact path='/admin/products/create' element={<ProductCreate/>}/>
+            <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
+            <Route exact path='/admin/orders' element={<Orders/>}/>
+            <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
+            <Route exact path='/admin/categories' element={<Categories/>}/>
+          </>
+        }
+        
+        
+        <Route path= '*' element= { <Error404 /> } /> 
       </Routes>
         <Footer></Footer>
     </>
