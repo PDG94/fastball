@@ -1,11 +1,11 @@
-import './home.scss';
+import './homeUser.scss';
 import Sidebar from '../sidebar/UserSidebar';
 
 function Home() {
     return (
-      <div className='home'>
+      <div className='homee'>
         <Sidebar/>
-            <div className="homeContainer">            
+            <div className="homeContainerr">            
             </div>      
       </div>
     )

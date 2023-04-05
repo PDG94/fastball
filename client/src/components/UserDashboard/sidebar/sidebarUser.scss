@@ -1,16 +1,16 @@
-.sidebar{
+.sidebarr{
    
     flex: 1;
     border-right: 0.5px solid lightgray;
     min-height: 100vh;
     background-color: white;
-    .top{
+    .topp{
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .logo{
+        .logoo{
             font-size: 20px;
             font-weight: bold;
             color: 7451f8;
@@ -20,13 +20,13 @@
         height: 0;
         border: 0.5px solid lightgray;
     }
-    .center{
+    .centerr{
         padding-left: 10px;
         ul{
             list-style: none;
             margin: 0;
             padding: 0;
-            .title{
+            .titlee{
                 font-size: 10px;
                 font-weight: bold;
                 color: #998;
@@ -43,7 +43,7 @@
                     background-color: #ece8ff ;
                 }
             }
-            .icon{
+            .iconn{
                 font-size: 18px;
                 color: #7451f8;
             }

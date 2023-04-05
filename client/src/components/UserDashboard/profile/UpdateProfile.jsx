@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Sidebar from "../sidebar/UserSidebar";
-import "./home.scss";
+import "./homeProfile.scss";
 
 const countries = [
   "Afghanistan",
@@ -378,9 +378,9 @@ export default function UpdateInfoUser() {
 
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
+        <div className="homeContainerr">
         <form onSubmit={submitHandler}>
           <div className="grid grid-cols-2">
 
