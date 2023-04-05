@@ -1,80 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchOneOrder } from "../../../reduxToolkit/actions/orderAction";
 import Sidebar from "../sidebar/UserSidebar";
 import "./homeOrder.scss";
 
-const orderExample = {
-  id: 3,
-  orderNumber: "123",
-  totalAmount: 500,
-  createdAt: "2023-03-26T00:29:18.383Z",
-  updatedAt: "2023-03-26T00:29:18.476Z",
-  UserId: "f286901a-262c-4a28-af5a-ca5a73716496",
-  Products: [
-    {
-      name: "qwerty",
-      description: "Buen producto",
-      image:
-        "https://media.istockphoto.com/id/175005911/es/foto/pelotas-aislado-en-blanco.jpg?s=612x612&w=0&k=20&c=Iw-CwMf_Xm53_rpO0IKLeTOtKU0Bwn6NTTygy8NuSz0=",
-      price: 10,
-      OderProduct: {
-        quantity: 2,
-        createdAt: "2023-03-26T00:29:19.199Z",
-        updatedAt: "2023-03-26T00:29:19.199Z",
-        orderId: 3,
-        ProductId: "52636e7a-ed0b-4beb-a679-b6bcadc7994c",
-      },
-    },
-    {
-      name: "asd",
-      description: "Buen producto",
-      image:
-        "https://media.istockphoto.com/id/175005911/es/foto/pelotas-aislado-en-blanco.jpg?s=612x612&w=0&k=20&c=Iw-CwMf_Xm53_rpO0IKLeTOtKU0Bwn6NTTygy8NuSz0=",
-      price: 10,
-      OderProduct: {
-        quantity: 2,
-        createdAt: "2023-03-26T00:29:19.199Z",
-        updatedAt: "2023-03-26T00:29:19.199Z",
-        orderId: 3,
-        ProductId: "52636e7a-ed0b-4beb-a679-b6bcadc7994c",
-      },
-    },
-    {
-      name: "zxc",
-      description: "Buen producto",
-      image:
-        "https://media.istockphoto.com/id/175005911/es/foto/pelotas-aislado-en-blanco.jpg?s=612x612&w=0&k=20&c=Iw-CwMf_Xm53_rpO0IKLeTOtKU0Bwn6NTTygy8NuSz0=",
-      price: 10,
-      OderProduct: {
-        quantity: 2,
-        createdAt: "2023-03-26T00:29:19.199Z",
-        updatedAt: "2023-03-26T00:29:19.199Z",
-        orderId: 3,
-        ProductId: "52636e7a-ed0b-4beb-a679-b6bcadc7994c",
-      },
-    },
-  ],
-};
-
 const OrderDetails = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const [order, setOrder] = useState({})
+  // const [order, setOrder] = useState({})
+
+  const singleorder = useSelector((state) => state.order.singleOrder);
 
   useEffect(() => {
-    dispatch(fetchOneOrder(id)).then((res) => setOrder(res.payload.data));
+    dispatch(fetchOneOrder(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-
-  // const orderDetails = useSelector((state) => state.order.orderDetail);
-  // const userID1 = useSelector((state) => state.user._id);
-  // const allOrders = useSelector((state) => state.order.allOrders);
+  
 
   const info = () => {
     console.log("id", id);
+    console.log("111", singleorder.Products)
+    // console.log("222", singleorder)
   };
 
   return (
@@ -108,35 +56,36 @@ const OrderDetails = () => {
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Order Number:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{order.orderNumber}</b>
+                    <b>{singleorder.orderNumber}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Total Amount:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{orderExample.totalAmount}</b>
+                    <b>{singleorder.totalAmount}</b>
                   </dd>
                 </div>
 
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Created at:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{orderExample.createdAt}</b>
+                    <b>{singleorder.createdAt}</b>
                   </dd>
                 </div>
 
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">User Id:</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <b>{orderExample.UserId}</b>
+                    <b>{singleorder.UserId}</b>
                   </dd>
                 </div>
 
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Products Bought</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {orderExample.Products.map((product) => {
+                  
+                  {singleorder.Products&&singleorder.Products.map((product) => {
                     return (
                       <div>
                         <h3>Product Name: {product.name}</h3>
@@ -147,6 +96,7 @@ const OrderDetails = () => {
                       </div>
                     );
                   })}
+
                   </dd>
                 </div>
               </dl>

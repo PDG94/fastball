@@ -1,10 +1,11 @@
 const createSlice = require('@reduxjs/toolkit').createSlice
-const { fetchOrder, fetchOrderById } = require('./../actions/orderAction')
+const { fetchOrder, fetchOrderById, fetchOneOrder } = require('./../actions/orderAction')
 
 const initialState = {
     allOrders : [],
     orderDetail : {},
     status : null,
+    singleOrder:{},
 }
 
 const orderSlice = createSlice({
@@ -36,6 +37,19 @@ const orderSlice = createSlice({
         builder.addCase(fetchOrderById.rejected, (state,action)=> {
             state.status = 'rejected'
         })
+
+        builder.addCase(fetchOneOrder.pending, (state, action)=> {
+            state.status = 'pending';
+        })
+        builder.addCase(fetchOneOrder.fulfilled, (state,action)=> {
+            state.singleOrder = action.payload
+            state.status = 'success';
+        })
+        builder.addCase(fetchOneOrder.rejected, (state,action)=> {
+            state.status = 'rejected'
+        })
+
+
 
     }
 })
