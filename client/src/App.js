@@ -67,7 +67,7 @@ function App() {
         <Route exact path='/login' element={<UserConnection />} />
         <Route exact path='/register' element={<UserConnection isLogin={false} />} />
         <Route exact path='/details/:id' element={<Detail />} />
-        
+        <Route path= '*' element= { <Error404 /> } /> 
         
         { isAdmin &&
           <>
@@ -79,7 +79,7 @@ function App() {
             <Route exact path='/admin/products/:id' element={<ProductDetail/>}/>
             <Route exact path='/admin/orders' element={<Orders/>}/>
             <Route exact path='/admin/orders/:id' element={<OrderDetail/>}/>
-            <Route exact path='/admin/categories' element={<Categories/>}/>
+            <Route exact path='/admin//categories' element={<Categories/>}/>
           </>
         }
         
@@ -96,8 +96,7 @@ function App() {
             <Route exact path='/payment' element={<Payment />} />
             <Route path='/cartDetail' element={<CartDetail/>} /> 
           </>
-        } 
-        <Route path= '*' element= { <Error404 /> } />        
+        }        
       </Routes>
         <Footer></Footer>
     </>

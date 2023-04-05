@@ -378,9 +378,9 @@ export default function UpdateInfoUser() {
 
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
+        <div className="homeContainerr">
         <form onSubmit={submitHandler}>
           <div className="grid grid-cols-2">
 

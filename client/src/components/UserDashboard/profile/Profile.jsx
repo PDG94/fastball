@@ -21,9 +21,9 @@ export default function DashboardUser() {
 
   return (
     <div>
-      <div className="home">
+      <div className="homee">
         <Sidebar />
-        <div className="homeContainer">
+        <div className="homeContainerr">
 
           <div className="bg-white max-w-2xl border-all overflow-hidden sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6 flex align-center">
